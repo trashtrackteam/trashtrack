@@ -1,61 +1,119 @@
 {
-  "name": "api",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/api/src",
-  "projectType": "application",
-  "targets": {
-    "build": {
-      "executor": "@nx/webpack:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "defaultConfiguration": "production",
-      "options": {
-        "target": "node",
-        "compiler": "tsc",
-        "outputPath": "dist/apps/api",
-        "main": "apps/api/src/main.ts",
-        "tsConfig": "apps/api/tsconfig.app.json",
-        "assets": [
-          "apps/api/src/assets"
-        ],
-        "webpackConfig": "apps/api/webpack.config.js"
-      },
-      "configurations": {
-        "development": {},
-        "production": {}
-      }
-    },
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "api:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "api:build:development"
+    "name": "api",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/api/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nx/webpack:webpack",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "target": "node",
+                "compiler": "tsc",
+                "outputPath": "dist/apps/api",
+                "main": "apps/api/src/main.ts",
+                "tsConfig": "apps/api/tsconfig.app.json",
+                "assets": ["apps/api/src/assets"],
+                "webpackConfig": "apps/api/webpack.config.js"
+            },
+            "configurations": {
+                "development": {},
+                "production": {}
+            }
         },
-        "production": {
-          "buildTarget": "api:build:production"
+        "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "api:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "api:build:development"
+                },
+                "production": {
+                    "buildTarget": "api:build:production"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/api/jest.config.ts"
+            }
+        },
+        "prisma-generate": {
+            "executor": "@nx-tools/nx-prisma:generate",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-migrate": {
+            "executor": "@nx-tools/nx-prisma:migrate",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-pull": {
+            "executor": "@nx-tools/nx-prisma:pull",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-push": {
+            "executor": "@nx-tools/nx-prisma:push",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-deploy": {
+            "executor": "@nx-tools/nx-prisma:deploy",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-status": {
+            "executor": "@nx-tools/nx-prisma:status",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-studio": {
+            "executor": "@nx-tools/nx-prisma:studio",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-reset": {
+            "executor": "@nx-tools/nx-prisma:reset",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-resolve": {
+            "executor": "@nx-tools/nx-prisma:resolve",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-seed": {
+            "executor": "@nx-tools/nx-prisma:seed",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
+        },
+        "prisma-validate": {
+            "executor": "@nx-tools/nx-prisma:validate",
+            "options": {
+                "schema": "apps/api/prisma/schema.prisma"
+            }
         }
-      }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ]
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
-      "options": {
-        "jestConfig": "apps/api/jest.config.ts"
-      }
-    }
-  },
-  "tags": []
+    "tags": []
 }
