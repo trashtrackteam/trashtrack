@@ -30,6 +30,10 @@
           "codeCoverage": true
         }
       }
+    },
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -46,5 +50,22 @@
     ],
     "sharedGlobals": []
   },
-  "nxCloudAccessToken": "NDVjYmE4YjctZTZlOC00YTAyLWEyZmYtNjU5YWNmYjQ5ZmQxfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NDVjYmE4YjctZTZlOC00YTAyLWEyZmYtNjU5YWNmYjQ5ZmQxfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "none",
+        "linter": "eslint",
+        "bundler": "vite",
+        "babel": true
+      },
+      "component": {
+        "style": "none"
+      },
+      "library": {
+        "style": "none",
+        "linter": "eslint"
+      }
+    }
+  }
 }
