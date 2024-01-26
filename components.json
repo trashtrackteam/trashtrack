@@ -1,0 +1,15 @@
+{
+    "$schema": "https://ui.shadcn.com/schema.json",
+    "style": "default",
+    "rsc": false,
+    "tailwind": {
+        "config": "apps/app/tailwind.config.js",
+        "css": "apps/app/src/global.css",
+        "baseColor": "neutral",
+        "cssVariables": true
+    },
+    "aliases": {
+        "components": "@trashtrack/ui",
+        "utils": "@trashtrack/utils"
+    }
+}

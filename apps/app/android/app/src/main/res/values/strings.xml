@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">BioTrack</string>
-    <string name="title_activity_main">BioTrack</string>
-    <string name="package_name">com.biotrack.app</string>
-    <string name="custom_url_scheme">com.biotrack.app</string>
-</resources>

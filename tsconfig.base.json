@@ -14,7 +14,12 @@
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "@trashtrack/ui": ["libs/ui/src/index.ts"],
+            "@trashtrack/ui/*": ["libs/libs/ui/src/*"],
+            "@trashtrack/utils": ["libs/utils/src/index.ts"],
+            "@trashtrack/utils/*": ["libs/libs/utils/src/*"]
+        }
     },
     "exclude": ["node_modules", "tmp"]
 }
