@@ -1,22 +1,28 @@
-import { buttonVariants } from "@trashtrack/ui";
-import { cn } from "@trashtrack/utils";
+import React from "react";
+import { IonApp, IonPage, IonRouterOutlet } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Redirect, Route } from "react-router-dom";
 
-export function App() {
+import "@ionic/react/css/core.css";
+import Home from "../pages/home";
+import Onboard from "../pages/onboard";
+import Test from "../pages/test";
+
+const App: React.FC = () => {
     return (
-        <div className="dark flex justify-center items-center h-screen">
-            <div className="flex flex-col">
-                <h1 className="text-center">TrashTrack</h1>
-                <div className="pt-4">
-                    <a
-                        href="#contact"
-                        className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "px-4 mt-8")}
-                    >
-                        Continue
-                    </a>
-                </div>
-            </div>
-        </div>
+        <IonApp>
+            <IonPage>
+                <IonReactRouter>
+                    <IonRouterOutlet>
+                        <Route path="/onboard" component={Onboard} />
+                        <Route path="/home" component={Home} />
+                        <Route path="/test" component={Test} />
+                        <Redirect exact from="/" to="/onboard" />
+                    </IonRouterOutlet>
+                </IonReactRouter>
+            </IonPage>
+        </IonApp>
     );
-}
+};
 
 export default App;

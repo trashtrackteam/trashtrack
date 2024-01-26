@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"@radix-ui/react-progress": "^1.0.3"
+	}
+}
