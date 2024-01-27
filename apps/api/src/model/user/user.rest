@@ -1,0 +1,33 @@
+GET http://localhost:3001/api/user
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/user/2
+Content-Type: application/json
+
+###
+
+POST http://localhost:3001/api/user
+Content-Type: application/json
+
+{
+    "username": "Username 1",
+    "password": "Password 1"
+}
+
+###
+
+PUT http://localhost:3001/api/user/2
+Content-Type: application/json
+
+{
+    "username": "Username 123",
+    "password": "Password 123"
+}
+
+###
+
+DELETE http://localhost:3001/api/user/2
+
+###
