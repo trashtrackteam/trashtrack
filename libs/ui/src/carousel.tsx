@@ -225,4 +225,24 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 );
 CarouselNext.displayName = "CarouselNext";
 
-export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };
+interface CarouselDotProps extends React.ComponentProps<typeof Button> {
+    isSelected?: boolean;
+}
+
+const CarouselDot = React.forwardRef<HTMLButtonElement, CarouselDotProps>(
+    ({ className, variant = "default", size = "icon", onClick, isSelected, ...props }, ref) => {
+        return (
+            <Button
+                ref={ref}
+                variant={variant}
+                size={size}
+                className={cn("h-4 w-4 rounded-full", className, isSelected ? "bg-slate-800" : "bg-slate-600")}
+                onClick={onClick}
+                {...props}
+            />
+        );
+    }
+);
+CarouselDot.displayName = "CarouselDot";
+
+export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDot };
