@@ -1,27 +1,10 @@
 import { IonPage, IonContent, useIonRouter } from "@ionic/react";
-import { Button, Carousel, CarouselContent, CarouselItem, type CarouselApi, CarouselDot } from "@trashtrack/ui";
+import { Button, Carousel, CarouselContent, CarouselItem } from "@trashtrack/ui";
+import Autoplay from "embla-carousel-autoplay";
 import IMAGES from "../assets";
-import { useCallback, useEffect, useState } from "react";
 
 export function Onboarding() {
     const router = useIonRouter();
-    const [api, setApi] = useState<CarouselApi>();
-    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-    const [selectedIndex, setSelectedIndex] = useState<number>(0);
-
-    const scrollTo = useCallback((index: number) => api && api.scrollTo(index), [api]);
-
-    const onSelect = useCallback(() => {
-        if (!api) return;
-        setSelectedIndex(api.selectedScrollSnap());
-    }, [api]);
-
-    useEffect(() => {
-        if (!api) return;
-        onSelect();
-        setScrollSnaps(api.scrollSnapList());
-        api.on("select", onSelect);
-    }, [api, setScrollSnaps, onSelect]);
 
     return (
         <IonPage>
@@ -30,7 +13,11 @@ export function Onboarding() {
                     <h1 className="font-bold text-center text-xl">TrashTrack</h1>
                 </div>
                 <Carousel
-                    setApi={setApi}
+                    plugins={[
+                        Autoplay({
+                            delay: 2000,
+                        }),
+                    ]}
                     opts={{
                         loop: true,
                     }}
@@ -86,14 +73,6 @@ export function Onboarding() {
                         </CarouselItem>
                     </CarouselContent>
                 </Carousel>
-
-                <div className="flex justify-center items-center pt-8 pb-40">
-                    <div className="flex justify-center items-center gap-4">
-                        {scrollSnaps.map((_, i) => (
-                            <CarouselDot key={i} isSelected={i === selectedIndex} onClick={() => scrollTo(i)} />
-                        ))}
-                    </div>
-                </div>
 
                 <div className="flex flex-col justify-center items-center px-12">
                     <Button

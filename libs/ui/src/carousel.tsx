@@ -1,5 +1,6 @@
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
+import { EmblaCarouselType } from "embla-carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@trashtrack/utils";
@@ -49,12 +50,21 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
         );
         const [canScrollPrev, setCanScrollPrev] = React.useState(false);
         const [canScrollNext, setCanScrollNext] = React.useState(false);
+        const [selectedIndex, setSelectedIndex] = React.useState(0);
+        const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
+
+        const scrollTo = React.useCallback((index: number) => api && api.scrollTo(index), [api]);
+
+        const onInit = React.useCallback((emblaApi: EmblaCarouselType) => {
+            setScrollSnaps(emblaApi.scrollSnapList());
+        }, []);
 
         const onSelect = React.useCallback((api: CarouselApi) => {
             if (!api) {
                 return;
             }
 
+            setSelectedIndex(api.selectedScrollSnap());
             setCanScrollPrev(api.canScrollPrev());
             setCanScrollNext(api.canScrollNext());
         }, []);
@@ -94,13 +104,14 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
             }
 
             onSelect(api);
+            api.on("reInit", onInit);
             api.on("reInit", onSelect);
             api.on("select", onSelect);
 
             return () => {
                 api?.off("select", onSelect);
             };
-        }, [api, onSelect]);
+        }, [api, onInit, onSelect]);
 
         return (
             <CarouselContext.Provider
@@ -124,6 +135,17 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
                     {...props}
                 >
                     {children}
+                </div>
+                <div>
+                    <div className="flex justify-center items-center gap-2 pt-8 pb-40">
+                        {scrollSnaps.map((_, index) => (
+                            <CarouselDot
+                                key={index}
+                                isSelected={index === selectedIndex}
+                                onClick={() => scrollTo(index)}
+                            />
+                        ))}
+                    </div>
                 </div>
             </CarouselContext.Provider>
         );
