@@ -5,6 +5,8 @@
 @layer base {
     :root {
         --font-sans: "Plus Jakarta Sans", sans-serif;
+        --ion-font-family: "Plus Jakarta Sans", sans-serif;
+
         --background: 0 0% 100%;
         --foreground: 222.2 47.4% 11.2%;
 
@@ -79,4 +81,24 @@
         @apply bg-background text-foreground;
         font-feature-settings: "rlig" 1, "calt" 1;
     }
+}
+
+ion-content.onboarding {
+    --background: linear-gradient(#60ecb100, #34a16094);
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 55% 0%;
+    }
+    50% {
+        background-position: 46% 100%;
+    }
+    100% {
+        background-position: 55% 0%;
+    }
+}
+
+ion-content.home {
+    --background: white;
 }

@@ -1,30 +1,19 @@
-import { IonPage, useIonRouter } from "@ionic/react";
-import { buttonVariants } from "@trashtrack/ui";
-import { cn, setIsUserOnboarded } from "@trashtrack/utils";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { Button } from "@trashtrack/ui";
 
 export function Home() {
     const router = useIonRouter();
 
-    const handleButtonClick = async () => {
-        setIsUserOnboarded(false);
-        router.push("/onboard");
-    };
-
     return (
         <IonPage>
-            <div className="dark flex justify-center items-center h-screen">
-                <div className="flex flex-col">
-                    <h1 className="text-center">TrashTrack</h1>
-                    <div className="pt-4">
-                        <button
-                            onClick={handleButtonClick}
-                            className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "px-4 mt-8")}
-                        >
-                            Test Onboarding
-                        </button>
-                    </div>
+            <IonContent className="home ion-padding h-screen flex justify-center items-center" fullscreen>
+                <div className="pt-12 flex flex-col justify-center items-center">
+                    <h1 className="pb-12">Hello, world!</h1>
+                    <Button className="font-bold text-xs" onClick={() => router.push("/onboarding", "back")}>
+                        [DEV] Go Back to Onboarding
+                    </Button>
                 </div>
-            </div>
+            </IonContent>
         </IonPage>
     );
 }
