@@ -1,5 +1,6 @@
 {
 	"dependencies": {
-		"@radix-ui/react-progress": "^1.0.3"
+		"@radix-ui/react-progress": "^1.0.3",
+		"embla-carousel-react": "8.0.0-rc21"
 	}
 }
