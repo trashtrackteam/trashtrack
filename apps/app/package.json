@@ -4,6 +4,7 @@
         "@capacitor/cli": "^5.0.3",
         "@capacitor/ios": "../../node_modules/@capacitor/ios",
         "@capacitor/android": "../../node_modules/@capacitor/android",
-        "@capacitor/preferences": "../../node_modules/@capacitor/preferences"
+        "@capacitor/preferences": "../../node_modules/@capacitor/preferences",
+        "@capacitor/app": "../../node_modules/@capacitor/app"
     }
 }

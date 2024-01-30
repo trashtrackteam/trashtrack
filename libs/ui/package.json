@@ -1,6 +1,8 @@
 {
 	"dependencies": {
+		"@radix-ui/react-label": "^2.0.2",
 		"@radix-ui/react-progress": "^1.0.3",
+		"@radix-ui/react-select": "^2.0.0",
 		"embla-carousel-react": "8.0.0-rc21"
 	}
 }

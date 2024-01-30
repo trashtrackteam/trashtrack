@@ -77,7 +77,7 @@ export function Onboarding() {
                 <div className="flex flex-col justify-center items-center px-12">
                     <Button
                         className="w-full h-[46px] font-bold text-xs"
-                        onClick={() => router.push("/home", "forward")}
+                        onClick={() => router.push("/tabs/home", "forward")}
                     >
                         Lanjut Sekarang
                     </Button>

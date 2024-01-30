@@ -8,6 +8,9 @@ devDependencies:
   '@capacitor/android':
     specifier: ../../node_modules/@capacitor/android
     version: link:../../node_modules/@capacitor/android
+  '@capacitor/app':
+    specifier: ../../node_modules/@capacitor/app
+    version: link:../../node_modules/@capacitor/app
   '@capacitor/cli':
     specifier: ^5.0.3
     version: 5.6.0
