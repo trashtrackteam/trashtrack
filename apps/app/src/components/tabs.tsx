@@ -1,14 +1,14 @@
 import { Redirect, Route } from "react-router-dom";
 import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel } from "@ionic/react";
+import { Icons } from "@trashtrack/ui";
 
 import Home from "../pages/home";
 import Preferences from "../pages/preferences";
-import { Icons } from "@trashtrack/ui";
 
 const Tabs: React.FC = () => {
     return (
         <IonTabs>
-            <IonRouterOutlet>
+            <IonRouterOutlet animated={false} mode="ios">
                 <Route path="/tabs/home" render={() => <Home />} exact={true} />
                 <Route path="/tabs/preferences" render={() => <Preferences />} exact={true} />
                 <Route path="/tabs" render={() => <Redirect to="//tabs/home" />} exact={true} />

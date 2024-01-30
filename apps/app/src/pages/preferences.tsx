@@ -25,16 +25,21 @@ export function Preferences() {
                         <div className="flex flex-col gap-4">
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Bahasa Aplikasi</CardTitle>
-                                    <CardDescription>Pilih bahasa yang akan digunakan oleh aplikasi.</CardDescription>
+                                    <CardTitle className="text-sm">Bahasa Aplikasi</CardTitle>
+                                    <CardDescription className="text-xs">
+                                        Pilih bahasa yang akan digunakan oleh aplikasi.
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <form>
                                         <div className="grid w-full items-center gap-4">
                                             <div className="flex flex-col space-y-1.5">
                                                 <Label htmlFor="language">Bahasa</Label>
-                                                <Select>
-                                                    <SelectTrigger id="language">
+                                                <Select defaultValue="bahasa-indonesia">
+                                                    <SelectTrigger
+                                                        id="language"
+                                                        className="border-input border rounded-md "
+                                                    >
                                                         <SelectValue placeholder="Pilih bahasa" />
                                                     </SelectTrigger>
                                                     <SelectContent position="popper">
@@ -53,14 +58,14 @@ export function Preferences() {
                             </Card>
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Development Settings</CardTitle>
-                                    <CardDescription>
+                                    <CardTitle className="text-sm">Development Settings</CardTitle>
+                                    <CardDescription className="text-xs">
                                         Pengaturan ini hanya digunakan untuk pengembangan aplikasi.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <Button
-                                        className="font-bold text-xs"
+                                        className="font-bold text-xs w-full"
                                         onClick={() => router.push("/onboarding", "root", "replace")}
                                     >
                                         Restart Onboarding
