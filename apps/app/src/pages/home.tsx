@@ -1,7 +1,9 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { Card, CardDescription, CardHeader, CardContent, CardTitle, Icons } from "@trashtrack/ui";
+import { useHistory } from "react-router-dom";
 
 export function Home() {
+    const history = useHistory();
     return (
         <IonPage>
             <IonContent className="home ion-padding" fullscreen>
@@ -9,7 +11,7 @@ export function Home() {
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                 </div>
                 <div className="flex flex-col pt-8 gap-4">
-                    <Card className="flex flex-row">
+                    <Card className="flex flex-row" onClick={() => history.push("/complain")}>
                         <CardHeader className="w-56">
                             <CardTitle className="text-base">Sampaikan Keluhan</CardTitle>
                             <CardDescription className="text-xs">

@@ -1,9 +1,9 @@
 import { IonContent, IonPage } from "@ionic/react";
 
-export function Complain() {
+export function ComplainFormTempatSampah() {
     return (
         <IonPage>
-            <IonContent className="complain ion-padding" fullscreen>
+            <IonContent className="complain-form-tempat-sampah ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                 </div>
@@ -12,4 +12,4 @@ export function Complain() {
     );
 }
 
-export default Complain;
+export default ComplainFormTempatSampah;

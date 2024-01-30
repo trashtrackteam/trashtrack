@@ -1,9 +1,9 @@
 import { IonContent, IonPage } from "@ionic/react";
 
-export function ListSelect() {
+export function ComplainFormPersonalDetails() {
     return (
         <IonPage>
-            <IonContent className="list-select ion-padding" fullscreen>
+            <IonContent className="complain-form-personal-details ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                 </div>
@@ -12,4 +12,4 @@ export function ListSelect() {
     );
 }
 
-export default ListSelect;
+export default ComplainFormPersonalDetails;

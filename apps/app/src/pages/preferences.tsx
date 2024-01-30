@@ -1,4 +1,4 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import {
     Button,
     Card,
@@ -13,9 +13,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@trashtrack/ui";
+import { useHistory } from "react-router-dom";
 
 export function Preferences() {
-    const router = useIonRouter();
+    const history = useHistory();
+
     return (
         <IonPage>
             <IonContent className="preferences ion-padding" fullscreen>
@@ -66,7 +68,7 @@ export function Preferences() {
                                 <CardContent>
                                     <Button
                                         className="font-bold text-xs w-full"
-                                        onClick={() => router.push("/onboarding", "root", "replace")}
+                                        onClick={() => history.replace("/onboarding")}
                                     >
                                         Restart Onboarding
                                     </Button>

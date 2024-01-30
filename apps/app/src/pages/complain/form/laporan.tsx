@@ -1,9 +1,9 @@
 import { IonContent, IonPage } from "@ionic/react";
 
-export function PersonalDetails() {
+export function ComplainFormLaporan() {
     return (
         <IonPage>
-            <IonContent className="personal-details ion-padding" fullscreen>
+            <IonContent className="complain-form-laporan ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                 </div>
@@ -12,4 +12,4 @@ export function PersonalDetails() {
     );
 }
 
-export default PersonalDetails;
+export default ComplainFormLaporan;

@@ -1,10 +1,11 @@
-import { IonPage, IonContent, useIonRouter } from "@ionic/react";
+import { IonPage, IonContent } from "@ionic/react";
 import { Button, Carousel, CarouselContent, CarouselItem } from "@trashtrack/ui";
+import { useHistory } from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay";
 import IMAGES from "../assets";
 
 export function Onboarding() {
-    const router = useIonRouter();
+    const history = useHistory();
 
     return (
         <IonPage>
@@ -75,10 +76,7 @@ export function Onboarding() {
                 </Carousel>
 
                 <div className="flex flex-col justify-center items-center px-12">
-                    <Button
-                        className="w-full h-[46px] font-bold text-xs"
-                        onClick={() => router.push("/tabs/home", "forward")}
-                    >
+                    <Button className="w-full h-[46px] font-bold text-xs" onClick={() => history.push("/tabs/home")}>
                         Lanjut Sekarang
                     </Button>
                 </div>

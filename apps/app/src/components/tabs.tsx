@@ -11,7 +11,7 @@ const Tabs: React.FC = () => {
             <IonRouterOutlet animated={false} mode="ios">
                 <Route path="/tabs/home" render={() => <Home />} exact={true} />
                 <Route path="/tabs/preferences" render={() => <Preferences />} exact={true} />
-                <Route path="/tabs" render={() => <Redirect to="//tabs/home" />} exact={true} />
+                <Route path="/tabs" render={() => <Redirect to="/tabs/home" />} exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom" mode="ios" translucent className="pb-4">
                 <IonTabButton tab="tab1" href="/tabs/home">
