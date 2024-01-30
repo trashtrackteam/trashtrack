@@ -59,8 +59,8 @@ dependencies:
     specifier: 8.0.0-rc21
     version: 8.0.0-rc21(embla-carousel@8.0.0-rc21)
   lucide-react:
-    specifier: ^0.312.0
-    version: 0.312.0(react@18.2.0)
+    specifier: ^0.92.0
+    version: 0.92.0(prop-types@15.8.1)(react@18.2.0)
   nestjs:
     specifier: ^0.0.1
     version: 0.0.1
@@ -9497,6 +9497,17 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: true
+
+  /lucide-react@0.92.0(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-rKnAxjhDPvvmKvvij+oeA+qJicQwXf+4hfANIrMPlDiBKJfrDv1HGF496ZiTBevcrRJ/8/C3rrnUb77EAhHHlA==}
+    peerDependencies:
+      prop-types: ^15.7.2
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
 
   /lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}

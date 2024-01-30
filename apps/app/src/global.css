@@ -84,19 +84,8 @@
 }
 
 ion-content.onboarding {
-    --background: linear-gradient(#60ecb100, #34a16094);
-}
-
-@keyframes AnimationName {
-    0% {
-        background-position: 55% 0%;
-    }
-    50% {
-        background-position: 46% 100%;
-    }
-    100% {
-        background-position: 55% 0%;
-    }
+    /* --background: linear-gradient(#60ecb100, #34a16094); */
+    --background: white;
 }
 
 ion-content.home {
