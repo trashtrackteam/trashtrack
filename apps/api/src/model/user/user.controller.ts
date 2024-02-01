@@ -1,7 +1,7 @@
 import { Get, Post, Put, Delete, Body, Param, Controller, ParseIntPipe } from "@nestjs/common";
 import { UserModel } from "./user.model";
 import { UserService } from "./user.service";
-import { UserDTOInterface } from "./user.interface";
+import { UserCreateDTOInterface } from "./user.interface";
 
 @Controller("user")
 export class UserController {
@@ -18,12 +18,12 @@ export class UserController {
     }
 
     @Post()
-    async add(@Body() payload: UserDTOInterface): Promise<UserModel> {
+    async add(@Body() payload: UserCreateDTOInterface): Promise<UserModel> {
         return await this.userService.add(payload);
     }
 
     @Put(":id")
-    async change(@Param("id", ParseIntPipe) id: number, @Body() payload: UserDTOInterface): Promise<UserModel> {
+    async change(@Param("id", ParseIntPipe) id: number, @Body() payload: UserCreateDTOInterface): Promise<UserModel> {
         return await this.userService.change(id, payload);
     }
 
