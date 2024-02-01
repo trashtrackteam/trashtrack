@@ -4,7 +4,7 @@ import {
     ResponseFormatInterceptor,
     ResponseFormatInterface,
     formatResponse,
-} from "../../interceptor/responseFormat.interceptor";
+} from "../../interceptor/response-format.interceptor";
 
 import { LoggerService } from "../../provider/logger.service";
 
