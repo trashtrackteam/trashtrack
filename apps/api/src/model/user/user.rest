@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/api/user/2
+GET http://localhost:3001/api/user/5
 Content-Type: application/json
 
 ###
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/user/4
+PUT http://localhost:3001/api/user/5
 Content-Type: application/json
 
 {
@@ -28,6 +28,6 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/user/4
+DELETE http://localhost:3001/api/user/5
 
 ###
