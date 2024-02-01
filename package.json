@@ -88,8 +88,7 @@
     "typescript": "~5.2.2",
     "url-loader": "^4.1.1",
     "vite": "^5.0.0",
-    "vite-plugin-dts": "~2.3.0",
-    "vitest": "^1.2.1"
+    "vite-plugin-dts": "~2.3.0"
   },
   "pnpm": {
     "patchedDependencies": {
