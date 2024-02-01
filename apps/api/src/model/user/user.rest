@@ -12,13 +12,13 @@ POST http://localhost:3001/api/user
 Content-Type: application/json
 
 {
-    "username": "Username 1",
-    "password": "Password 1"
+    "username": "Username 3",
+    "password": "Password 3"
 }
 
 ###
 
-PUT http://localhost:3001/api/user/2
+PUT http://localhost:3001/api/user/3
 Content-Type: application/json
 
 {
@@ -28,6 +28,6 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/user/2
+DELETE http://localhost:3001/api/user/3
 
 ###
