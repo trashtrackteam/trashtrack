@@ -3,9 +3,11 @@ import { ConfigModule as NestConfigModule, ConfigService as NestConfigService } 
 
 import config from "./config";
 import { validate } from "./config.validation";
-
 import { ConfigService } from "./config.service";
 
+/**
+ * Module for configuring the application.
+ */
 @Module({
     imports: [
         NestConfigModule.forRoot({

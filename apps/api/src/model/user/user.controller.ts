@@ -24,6 +24,9 @@ import { UserModel } from "./user.model";
 import { UserService } from "./user.service";
 import { UserCreateDTO, UserUpdateDTO } from "./user.dto";
 
+/**
+ * Controller for handling user-related operations.
+ */
 @Controller("user")
 @UseInterceptors(ResponseFormatInterceptor)
 export class UserController {
@@ -31,6 +34,10 @@ export class UserController {
 
     constructor(private readonly userService: UserService) {}
 
+    /**
+     * Get all users.
+     * @returns A promise that resolves to an array of UserModel.
+     */
     @Get()
     public async find(): Promise<ResponseFormatInterface<UserModel[]>> {
         try {
@@ -50,6 +57,11 @@ export class UserController {
         }
     }
 
+    /**
+     * Get a user by ID.
+     * @param id - The ID of the user.
+     * @returns A promise that resolves to a UserModel.
+     */
     @Get(":id")
     public async findId(@Param("id", ParseIntPipe) id: number): Promise<ResponseFormatInterface<UserModel>> {
         try {
@@ -74,6 +86,11 @@ export class UserController {
         }
     }
 
+    /**
+     * Add a new user.
+     * @param payload - The user data to be added.
+     * @returns A promise that resolves to a UserModel.
+     */
     @Post()
     public async add(@Body() payload: UserCreateDTO): Promise<ResponseFormatInterface<UserModel>> {
         try {
@@ -93,6 +110,12 @@ export class UserController {
         }
     }
 
+    /**
+     * Update a user by ID.
+     * @param id - The ID of the user to be updated.
+     * @param payload - The updated user data.
+     * @returns A promise that resolves to a UserModel.
+     */
     @Put(":id")
     public async change(
         @Param("id", ParseIntPipe) id: number,
@@ -120,6 +143,11 @@ export class UserController {
         }
     }
 
+    /**
+     * Delete a user by ID.
+     * @param id - The ID of the user to be deleted.
+     * @returns A promise that resolves to a UserModel.
+     */
     @Delete(":id")
     public async remove(@Param("id", ParseIntPipe) id: number): Promise<ResponseFormatInterface<UserModel>> {
         try {

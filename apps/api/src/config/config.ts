@@ -1,3 +1,7 @@
+/**
+ * Retrieves the configuration options for the application.
+ * @returns An object containing the port number and database URL.
+ */
 export default (): {
     port: number;
     databaseURL: string;
