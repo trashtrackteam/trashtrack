@@ -19,7 +19,11 @@ const Complain: React.FC = () => {
                     exact={true}
                 />
                 <Route path="/complain/form/tempat-sampah" render={() => <ComplainFormTempatSampah />} exact={true} />
-                <Route path="/complain/form/laporan" render={() => <ComplainFormLaporan />} exact={true} />
+                <Route
+                    path="/complain/form/laporan/:tempat_sampah_id"
+                    render={() => <ComplainFormLaporan />}
+                    exact={true}
+                />
                 <Route path="/complain" render={() => <Redirect to="/complain/index" />} exact={true} />
             </IonRouterOutlet>
         </IonPage>
