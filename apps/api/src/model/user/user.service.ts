@@ -8,9 +8,9 @@ import { UserCreateDTO, UserUpdateDTO } from "./user.dto";
 
 @Injectable()
 export class UserService {
-    constructor(private readonly loggerService: LoggerService, private readonly prismaService: PrismaService) {
-        this.loggerService.setContext(UserService.name);
-    }
+    private readonly loggerService: LoggerService = new LoggerService(UserService.name);
+
+    constructor(private readonly prismaService: PrismaService) {}
 
     public async find(): Promise<UserModel[]> {
         const models: UserModel[] = await this.prismaService.user.findMany();

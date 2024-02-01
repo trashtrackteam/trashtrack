@@ -15,9 +15,9 @@ import { UserCreateDTO, UserUpdateDTO } from "./user.dto";
 @Controller("user")
 @UseInterceptors(ResponseFormatInterceptor)
 export class UserController {
-    constructor(private readonly loggerService: LoggerService, private readonly userService: UserService) {
-        this.loggerService.setContext(UserController.name);
-    }
+    private readonly loggerService: LoggerService = new LoggerService(UserController.name);
+
+    constructor(private readonly userService: UserService) {}
 
     @Get()
     public async find(): Promise<ResponseFormatInterface<UserModel[]>> {
