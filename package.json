@@ -13,6 +13,7 @@
     "@ionic/react": "^7.6.6",
     "@ionic/react-router": "^7.6.6",
     "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "@prisma/client": "^5.1.1",

@@ -7,16 +7,18 @@ import { INestApplication, Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 
 import { AppModule } from "./app.module";
+import { ConfigService } from "./config/config.service";
 
 async function bootstrap(): Promise<void> {
     const app: INestApplication<AppModule> = await NestFactory.create<INestApplication<AppModule>>(AppModule);
-    const port: number = parseInt(process.env.PORT) || 3001;
+    const configService: ConfigService = app.get(ConfigService);
     const globalPrefix: string = "api";
 
     app.setGlobalPrefix(globalPrefix);
-    await app.listen(port);
 
-    Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
+    await app.listen(configService.getPort());
+
+    Logger.log(`🚀 Application is running on: http://localhost:${configService.getPort()}/${globalPrefix}`);
 }
 
 bootstrap();
