@@ -19,7 +19,13 @@ export function ComplainIndex() {
                                 Halaman ini sedang dalam pengembangan. Silahkan kembali lagi nanti.
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="pt-6">
+                        <CardContent className="pt-6 flex flex-col gap-4">
+                            <Button
+                                className="font-bold text-xs w-full"
+                                onClick={() => history.replace("/complain/form/personal-details")}
+                            >
+                                Test Login Personal Details
+                            </Button>
                             <Button className="font-bold text-xs w-full" onClick={() => history.replace("/tabs/home")}>
                                 Kembali
                             </Button>

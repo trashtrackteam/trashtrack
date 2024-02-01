@@ -15,8 +15,8 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@trashtrack/ui": ["libs/ui/src/index.ts"],
-            "@trashtrack/ui/*": ["libs/libs/ui/src/*"],
+            "@trashtrack/ui": ["libs/components/src/index.ts"],
+            "@trashtrack/ui/*": ["libs/libs/components/src/*"],
             "@trashtrack/utils": ["libs/utils/src/index.ts"],
             "@trashtrack/utils/*": ["libs/libs/utils/src/*"]
         }

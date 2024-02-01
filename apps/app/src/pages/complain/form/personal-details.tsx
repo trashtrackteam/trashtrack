@@ -1,4 +1,5 @@
 import { IonContent, IonPage } from "@ionic/react";
+import { PersonalDetailsForm } from "@trashtrack/ui";
 
 export function ComplainFormPersonalDetails() {
     return (
@@ -6,6 +7,10 @@ export function ComplainFormPersonalDetails() {
             <IonContent className="complain-form-personal-details ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
+                </div>
+                <div className="flex flex-col pt-8 gap-4">
+                    <h1 className="font-bold text-lg">Personal Details</h1>
+                    <PersonalDetailsForm />
                 </div>
             </IonContent>
         </IonPage>
