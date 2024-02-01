@@ -10,7 +10,7 @@
 
 <div align="center">
   <h2 align="center"> <strong>TrashTrack</strong> </h2>
-  <p align="center"> <em>Sistem tempat sampah pintar yang menggunakan teknologi Internet of Things (IoT) dan analisis data untuk memonitor dan memilah sampah secara efisien dan real-time.</em> </p>
+  <p align="center"> <em>Sistem tempat pembuangan sampah pintar yang menggunakan teknologi Internet of Things (IoT) dan analisis data untuk memonitor dan memilah sampah secara efisien dan real-time.</em> </p>
 
 ![Arduino](https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white)
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
