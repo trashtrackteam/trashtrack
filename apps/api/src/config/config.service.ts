@@ -5,11 +5,11 @@ import { ConfigService as NestConfigService } from "@nestjs/config";
 export class ConfigService {
     constructor(private readonly nestConfigService: NestConfigService) {}
 
-    getPort(): number {
+    public getPort(): number {
         return this.nestConfigService.get<number>("port");
     }
 
-    getDatabaseURL(): string {
+    public getDatabaseURL(): string {
         return this.nestConfigService.get<string>("databaseURL");
     }
 }

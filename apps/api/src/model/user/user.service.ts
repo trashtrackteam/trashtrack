@@ -5,31 +5,31 @@ import { UserCreateDTO, UserUpdateDTO } from "./user.dto";
 
 @Injectable()
 export class UserService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prismaService: PrismaService) {}
 
-    async find(): Promise<UserModel[]> {
-        return await this.prisma.user.findMany();
+    public async find(): Promise<UserModel[]> {
+        return await this.prismaService.user.findMany();
     }
 
-    async findId(id: number): Promise<UserModel> {
-        return await this.prisma.user.findUnique({
+    public async findId(id: number): Promise<UserModel> {
+        return await this.prismaService.user.findUnique({
             where: { id },
         });
     }
 
-    async add(payload: UserCreateDTO): Promise<UserModel> {
-        return await this.prisma.user.create({ data: payload });
+    public async add(payload: UserCreateDTO): Promise<UserModel> {
+        return await this.prismaService.user.create({ data: payload });
     }
 
-    async change(id: number, payload: UserUpdateDTO): Promise<UserModel> {
-        return await this.prisma.user.update({
+    public async change(id: number, payload: UserUpdateDTO): Promise<UserModel> {
+        return await this.prismaService.user.update({
             where: { id },
             data: payload,
         });
     }
 
-    async remove(id: number): Promise<UserModel> {
-        return await this.prisma.user.delete({
+    public async remove(id: number): Promise<UserModel> {
+        return await this.prismaService.user.delete({
             where: { id },
         });
     }
