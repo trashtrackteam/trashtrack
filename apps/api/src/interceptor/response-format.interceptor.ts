@@ -22,20 +22,11 @@ export function formatResponse<T>(
 export class ResponseFormatInterceptor<T> implements NestInterceptor<T, ResponseFormatInterface<T>> {
     intercept(context: ExecutionContext, next: CallHandler): Observable<ResponseFormatInterface<T>> {
         return next.handle().pipe(
-            map(
-                (
-                    response: ResponseFormatInterface<T>
-                ): { success: boolean; status: number; message: string; data: T } => {
-                    context.switchToHttp().getResponse().status(response.status);
+            map((response: ResponseFormatInterface<T>): ResponseFormatInterface<T> => {
+                context.switchToHttp().getResponse().status(response.status);
 
-                    return {
-                        success: response.success,
-                        status: response.status,
-                        message: response.message,
-                        data: response.data,
-                    };
-                }
-            )
+                return response;
+            })
         );
     }
 }
