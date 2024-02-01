@@ -38,7 +38,7 @@ export class UserController {
         const response: ResponseFormatInterface<UserModel> = formatResponse<UserModel>(
             true,
             200,
-            "Found",
+            "Id Found",
             await this.userService.findId(id)
         );
 
