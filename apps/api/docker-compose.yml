@@ -1,0 +1,16 @@
+services:
+    postgres:
+        image: postgres
+        container_name: postgres
+        ports:
+            - "5432:5432"
+        env_file:
+            - ./.env
+        environment:
+            POSTGRES_USER: ${DOCKER_DATABASE_USER}
+            POSTGRES_PASSWORD: ${DOCKER_DATABASE_PASSWORD}
+            POSTGRES_DB: ${DOCKER_DATABASE_NAME}
+        volumes:
+            - postgres:/var/lib/postgresql/data
+volumes:
+    postgres:

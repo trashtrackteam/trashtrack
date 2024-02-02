@@ -104,7 +104,19 @@
         "prisma-validate": {
             "executor": "@nx-tools/nx-prisma:validate",
             "options": {
-                "schema": "apps/api/prisma/schema.prisma"
+                "schema": "appdocker-compose up -ds/api/prisma/schema.prisma"
+            }
+        },
+        "docker-compose-up": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": ["docker-compose --env-file .env up -d"]
+            }
+        },
+        "docker-compose-down": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": ["docker-compose down"]
             }
         }
     },
