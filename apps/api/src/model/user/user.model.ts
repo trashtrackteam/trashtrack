@@ -1,6 +1,6 @@
 import { $Enums, Prisma } from "@prisma/client";
 import { Role } from "../../common/enum/role.enum";
-import { IsBoolean, IsDate, IsEnum, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 
 /**
  * Represents a user in the system.
@@ -27,6 +27,7 @@ export class UserModel implements Prisma.UserCreateInput {
     @IsBoolean()
     active: boolean;
 
+    @IsOptional()
     @IsString()
     description?: string;
 
