@@ -6,7 +6,7 @@ import * as bcrypt from "bcrypt";
  * @returns A promise that resolves to the hashed text.
  */
 export const hash = async (text: string): Promise<string> => {
-    return await bcrypt.hash(text, await bcrypt.genSalt(10));
+    return await bcrypt.hash(text, await bcrypt.genSalt(4));
 };
 
 /**
