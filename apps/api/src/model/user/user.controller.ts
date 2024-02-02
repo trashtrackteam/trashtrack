@@ -59,12 +59,12 @@ export class UserController {
     }
 
     /**
-     * Get a user by ID.
-     * @param id - The ID of the user.
+     * Get a user by Id.
+     * @param id - The Id of the user to be found.
      * @returns A promise that resolves to a UserModel.
      */
-    @Get(":id")
-    public async findId(@Param("id", ParseIntPipe) id: number): Promise<ResponseFormatInterface<UserModel>> {
+    @Get("id/:id")
+    public async findId(@Param("id", ParseIntPipe) id: number) {
         try {
             const response: ResponseFormatInterface<UserModel> = formatResponse<UserModel>(
                 true,
@@ -73,16 +73,45 @@ export class UserController {
                 await this.userService.findId(id)
             );
 
-            this.loggerService.log(`FindId: ${JSON.stringify(response)}`);
+            this.loggerService.log(`Find Id: ${JSON.stringify(response)}`);
 
             return response;
         } catch (error) {
             if (error instanceof NotFoundException) {
-                this.loggerService.error(`FindId: ${error.message}`);
+                this.loggerService.error(`Find Id: ${error.message}`);
                 return formatResponse<null>(false, 404, error.message, null);
             }
 
-            this.loggerService.error(`FindId: ${error.message}`);
+            this.loggerService.error(`Find Id: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
+    /**
+     * Get a user by username.
+     * @param username - The username of the user to be found.
+     * @returns A promise that resolves to a UserModel.
+     */
+    @Get("username/:username")
+    public async findUsername(@Param("username") username: string): Promise<ResponseFormatInterface<UserModel>> {
+        try {
+            const response: ResponseFormatInterface<UserModel> = formatResponse<UserModel>(
+                true,
+                200,
+                "Username Found",
+                await this.userService.findUsername(username)
+            );
+
+            this.loggerService.log(`Find Username: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find Username: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Find Username: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }

@@ -68,6 +68,35 @@ export class UserService {
     }
 
     /**
+     * Retrieves a user by their username.
+     * @param username The username of the user to retrieve.
+     * @returns A promise that resolves to a UserModel object representing the user.
+     * @throws NotFoundException if the user with the specified username is not found.
+     * @throws InternalServerErrorException if there is an error retrieving the user.
+     */
+    public async findUsername(username: string) {
+        try {
+            const model: UserModel = await this.prismaService.user.findUnique({ where: { username } });
+
+            if (!model) {
+                throw new NotFoundException(`Username ${username} Not Found`);
+            }
+
+            this.loggerService.log(`Find Username: ${JSON.stringify(model)}`);
+
+            return model;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find Username: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Find Username: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
+    /**
      * Adds a new user to the database.
      * @param payload The data for the new user.
      * @returns A promise that resolves to a UserModel object representing the newly created user.

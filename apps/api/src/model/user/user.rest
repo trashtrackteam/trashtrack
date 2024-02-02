@@ -3,7 +3,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/api/user/5
+GET http://localhost:3001/api/user/id/1
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/user/username/Username%207
 Content-Type: application/json
 
 ###
@@ -12,13 +17,13 @@ POST http://localhost:3001/api/user
 Content-Type: application/json
 
 {
-    "name": "Name 6",
-    "username": "Username 6",
-    "password": "Password 6",
+    "name": "Name 7",
+    "username": "Username 7",
+    "password": "Password 7",
     "phoneNumber": "6281234567896",
     "role": "operator",
     "active" : true,
-    "description": "Description 6"
+    "description": "Description 7"
 }
 
 ###
