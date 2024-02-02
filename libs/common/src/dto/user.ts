@@ -1,9 +1,6 @@
 import { IsBoolean, IsEnum, IsOptional, IsString } from "class-validator";
-import { Role } from "../../common/enum/role.enum";
+import { Role } from "../enum/role";
 
-/**
- * Data transfer object for creating a user.
- */
 export class UserCreateDTO {
     @IsString()
     name: string;

@@ -6,7 +6,7 @@ import { LoggerService } from "../../provider/logger.service";
 import { PrismaService } from "../../provider/prisma.service";
 
 import { UserModel } from "./user.model";
-import { UserCreateDTO, UserUpdateActiveDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
+import { UserCreateDTO, UserUpdateActiveDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "@trashtrack/common";
 
 /**
  * Service for handling user-related operations.

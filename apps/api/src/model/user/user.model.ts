@@ -1,5 +1,5 @@
 import { $Enums, Prisma } from "@prisma/client";
-import { Role } from "../../common/enum/role.enum";
+import { Role } from "@trashtrack/common";
 import { IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 
 /**

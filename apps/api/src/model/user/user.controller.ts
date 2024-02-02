@@ -23,7 +23,7 @@ import { LoggerService } from "../../provider/logger.service";
 
 import { UserModel } from "./user.model";
 import { UserService } from "./user.service";
-import { UserCreateDTO, UserUpdateActiveDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
+import { UserCreateDTO, UserUpdateActiveDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "@trashtrack/common";
 
 /**
  * Controller for handling user-related operations.
