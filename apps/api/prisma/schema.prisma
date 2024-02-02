@@ -9,6 +9,18 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
+  name String
   username String
   password String
+  phoneNumber String
+  role Role
+  active Boolean
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  operator
+  admin
 }
