@@ -1,17 +1,7 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from "@nestjs/common";
+import { ResponseFormatInterface } from "@trashtrack/common";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-
-/**
- * Interface for defining the response format.
- * @template T - The type of the data in the response.
- */
-export interface ResponseFormatInterface<T> {
-    success: boolean;
-    status: number;
-    message: string;
-    data: T;
-}
 
 /**
  * Formats the response with the specified parameters.

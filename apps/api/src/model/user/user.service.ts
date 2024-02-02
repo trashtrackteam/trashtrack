@@ -1,10 +1,6 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import * as utils from "@trashtrack/utils";
-
-import { LoggerService } from "../../provider/logger.service";
-import { PrismaService } from "../../provider/prisma.service";
-
 import {
     UserModel,
     UserCreateDTO,
@@ -12,6 +8,9 @@ import {
     UserUpdateDTO,
     UserUpdatePasswordDTO,
 } from "@trashtrack/common";
+
+import { LoggerService } from "../../provider/logger.service";
+import { PrismaService } from "../../provider/prisma.service";
 
 /**
  * Service for handling user-related operations.

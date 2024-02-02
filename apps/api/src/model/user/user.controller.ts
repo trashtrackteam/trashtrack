@@ -12,23 +12,20 @@ import {
     BadRequestException,
 } from "@nestjs/common";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-
-import {
-    ResponseFormatInterceptor,
-    ResponseFormatInterface,
-    formatResponse,
-} from "../../interceptor/response-format.interceptor";
-
-import { LoggerService } from "../../provider/logger.service";
-
-import { UserService } from "./user.service";
 import {
     UserModel,
     UserCreateDTO,
     UserUpdateActiveDTO,
     UserUpdateDTO,
     UserUpdatePasswordDTO,
+    ResponseFormatInterface,
 } from "@trashtrack/common";
+
+import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
+
+import { LoggerService } from "../../provider/logger.service";
+
+import { UserService } from "./user.service";
 
 /**
  * Controller for handling user-related operations.
