@@ -17,10 +17,10 @@ POST http://localhost:3001/api/user
 Content-Type: application/json
 
 {
-    "name": "Name 7",
-    "username": "Username_9",
-    "password": "Password",
-    "phoneNumber": "6281234567896",
+    "name": "Name 20",
+    "username": "username_20",
+    "password": "username_20",
+    "phoneNumber": "62812345678920",
     "role": "operator",
     "active" : true,
     "description": null
@@ -41,13 +41,13 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/user/1/password
+PUT http://localhost:3001/api/user/6/password
 Content-Type: application/json
 
 {
-    "oldPassword": "Password 123456",
-    "newPassword": "Password 123456",
-    "confirmPassword": "Password 123456"
+    "oldPassword": "username_20",
+    "newPassword": "Username20",
+    "confirmPassword": "Username20"
 }
 
 ###
@@ -60,7 +60,6 @@ Content-Type: application/json
 }
 
 ###
-
 
 DELETE http://localhost:3001/api/user/1
 

@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import * as utils from "@trashtrack/utils";
 
 import { LoggerService } from "../../provider/logger.service";
 import { PrismaService } from "../../provider/prisma.service";
@@ -124,6 +125,8 @@ export class UserService {
                 throw new BadRequestException(`Password Must Be At Least 8 Characters Long`);
             }
 
+            payload.password = await utils.hash(payload.password);
+
             const model: UserModel = await this.prismaService.user.create({ data: payload });
 
             this.loggerService.log(`Add: ${JSON.stringify(model)}`);
@@ -218,7 +221,7 @@ export class UserService {
                 throw new NotFoundException(`Id ${id} Not Found`);
             }
 
-            if (validationModel.password !== payload.oldPassword) {
+            if (!(await utils.compare(payload.oldPassword, validationModel.password))) {
                 throw new BadRequestException(`Old Password Does Not Match With Current Password`);
             }
 
@@ -227,7 +230,7 @@ export class UserService {
             }
 
             const model: UserModel = await this.prismaService.user.update({
-                where: { id, password: payload.oldPassword },
+                where: { id },
                 data: { password: payload.newPassword },
             });
 
