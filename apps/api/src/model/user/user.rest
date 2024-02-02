@@ -47,6 +47,15 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:3001/api/user/2/active
+Content-Type: application/json
+
+{
+    "active": true
+}
+
+###
+
 
 DELETE http://localhost:3001/api/user/1
 

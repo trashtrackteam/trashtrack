@@ -23,7 +23,7 @@ import { LoggerService } from "../../provider/logger.service";
 
 import { UserModel } from "./user.model";
 import { UserService } from "./user.service";
-import { UserCreateDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
+import { UserCreateDTO, UserUpdateActiveDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
 
 /**
  * Controller for handling user-related operations.
@@ -178,6 +178,36 @@ export class UserController {
             }
 
             this.loggerService.error(`Change Password: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
+    /**
+     * Update a user's active status by ID.
+     * @param id - The ID of the user to be updated.
+     * @param payload - The updated user active status data.
+     * @returns A promise that resolves to a UserModel.
+     */
+    @Put(":id/active")
+    public async changeActive(@Param("id", ParseIntPipe) id: number, @Body() payload: UserUpdateActiveDTO) {
+        try {
+            const response: ResponseFormatInterface<UserModel> = formatResponse<UserModel>(
+                true,
+                200,
+                "Active Changed",
+                await this.userService.changeActive(id, payload)
+            );
+
+            this.loggerService.log(`Change Active: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException || error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`Change Active: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Change Active: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }

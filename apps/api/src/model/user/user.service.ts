@@ -5,7 +5,7 @@ import { LoggerService } from "../../provider/logger.service";
 import { PrismaService } from "../../provider/prisma.service";
 
 import { UserModel } from "./user.model";
-import { UserCreateDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
+import { UserCreateDTO, UserUpdateActiveDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
 
 /**
  * Service for handling user-related operations.
@@ -157,20 +157,58 @@ export class UserService {
                 data: { password: payload.newPassword },
             });
 
-            this.loggerService.log(`ChangePassword: ${JSON.stringify(model)}`);
+            this.loggerService.log(`Change Password: ${JSON.stringify(model)}`);
             return model;
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError) {
-                this.loggerService.error(`ChangePassword: Id ${id} Not Found`);
+                this.loggerService.error(`Change Password: Id ${id} Not Found`);
                 throw new NotFoundException(`Id ${id} Not Found`);
             }
 
             if (error instanceof NotFoundException || error instanceof BadRequestException) {
-                this.loggerService.error(`ChangePassword: ${error.message}`);
+                this.loggerService.error(`Change Password: ${error.message}`);
                 throw error;
             }
 
-            this.loggerService.error(`ChangePassword: ${error.message}`);
+            this.loggerService.error(`Change Password: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
+    /**
+     * Updates a user's active status in the database.
+     * @param id The ID of the user to update.
+     * @param payload The updated active status data for the user.
+     * @returns A promise that resolves to a UserModel object representing the updated user.
+     * @throws NotFoundException if the user with the specified ID is not found.
+     * @throws InternalServerErrorException if there is an error updating the user's active status.
+     */
+    public async changeActive(id: number, payload: UserUpdateActiveDTO): Promise<UserModel> {
+        try {
+            const model: UserModel = await this.prismaService.user.update({
+                where: { id },
+                data: { active: payload.active },
+            });
+
+            if (!model) {
+                throw new NotFoundException(`Id ${id} Not Found`);
+            }
+
+            this.loggerService.log(`Change Active: ${JSON.stringify(model)}`);
+
+            return model;
+        } catch (error) {
+            if (error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`Change Active: Id ${id} Not Found`);
+                throw new NotFoundException(`Id ${id} Not Found`);
+            }
+
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Change Active: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Change Active: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }
