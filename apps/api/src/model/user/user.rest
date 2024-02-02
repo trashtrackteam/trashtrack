@@ -18,12 +18,12 @@ Content-Type: application/json
 
 {
     "name": "Name 7",
-    "username": "Username 7",
-    "password": "Password 7",
+    "username": "Username_9",
+    "password": "Password",
     "phoneNumber": "6281234567896",
     "role": "operator",
     "active" : true,
-    "description": "Description 7"
+    "description": null
 }
 
 ###
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 {
     "name": "Name 1234",
-    "username": "Username 1234",
+    "username": "Us",
     "phoneNumber": "6281234567891234",
     "role": "admin",
     "description": null
@@ -41,13 +41,13 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/user/2/password
+PUT http://localhost:3001/api/user/1/password
 Content-Type: application/json
 
 {
-    "oldPassword": "Password 7",
-    "newPassword": "Password 12345",
-    "confirmPassword": "Password 12345"
+    "oldPassword": "Password 123456",
+    "newPassword": "Password 123456",
+    "confirmPassword": "Password 123456"
 }
 
 ###

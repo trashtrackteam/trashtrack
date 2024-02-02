@@ -135,6 +135,11 @@ export class UserController {
 
             return response;
         } catch (error) {
+            if (error instanceof BadRequestException) {
+                this.loggerService.error(`Add: ${error.message}`);
+                return formatResponse<null>(false, 400, error.message, null);
+            }
+
             this.loggerService.error(`Add: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
@@ -163,6 +168,11 @@ export class UserController {
 
             return response;
         } catch (error) {
+            if (error instanceof BadRequestException) {
+                this.loggerService.error(`Change: ${error.message}`);
+                return formatResponse<null>(false, 400, error.message, null);
+            }
+
             if (error instanceof NotFoundException || error instanceof PrismaClientKnownRequestError) {
                 this.loggerService.error(`Change: ${error.message}`);
                 return formatResponse<null>(false, 404, error.message, null);

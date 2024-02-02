@@ -53,16 +53,16 @@ export class UserService {
                 throw new NotFoundException(`Id ${id} Not Found`);
             }
 
-            this.loggerService.log(`FindId: ${JSON.stringify(model)}`);
+            this.loggerService.log(`Find Id: ${JSON.stringify(model)}`);
 
             return model;
         } catch (error) {
             if (error instanceof NotFoundException) {
-                this.loggerService.error(`FindId: ${error.message}`);
+                this.loggerService.error(`Find Id: ${error.message}`);
                 throw error;
             }
 
-            this.loggerService.error(`FindId: ${error.message}`);
+            this.loggerService.error(`Find Id: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }
@@ -104,12 +104,37 @@ export class UserService {
      */
     public async add(payload: UserCreateDTO): Promise<UserModel> {
         try {
+            if (!/^[a-zA-Z0-9_]+$/.test(payload.username)) {
+                throw new BadRequestException(`Username Must Contain Only Letters, Numbers, and Underscores`);
+            }
+
+            if (payload.username.length < 3) {
+                throw new BadRequestException(`Username Must Be At Least 3 Characters Long`);
+            }
+
+            const validationModel: UserModel = await this.prismaService.user.findUnique({
+                where: { username: payload.username },
+            });
+
+            if (validationModel) {
+                throw new BadRequestException(`Username Already Exists`);
+            }
+
+            if (payload.password.length < 8) {
+                throw new BadRequestException(`Password Must Be At Least 8 Characters Long`);
+            }
+
             const model: UserModel = await this.prismaService.user.create({ data: payload });
 
             this.loggerService.log(`Add: ${JSON.stringify(model)}`);
 
             return model;
         } catch (error) {
+            if (error instanceof BadRequestException) {
+                this.loggerService.error(`Add: ${error.message}`);
+                throw error;
+            }
+
             this.loggerService.error(`Add: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
@@ -125,6 +150,22 @@ export class UserService {
      */
     public async change(id: number, payload: UserUpdateDTO): Promise<UserModel> {
         try {
+            if (!/^[a-zA-Z0-9_]+$/.test(payload.username)) {
+                throw new BadRequestException(`Username Must Contain Only Letters, Numbers, and Underscores`);
+            }
+
+            if (payload.username.length < 3) {
+                throw new BadRequestException(`Username Must Be At Least 3 Characters Long`);
+            }
+
+            const validationModel: UserModel = await this.prismaService.user.findUnique({
+                where: { username: payload.username },
+            });
+
+            if (validationModel) {
+                throw new BadRequestException(`Username Already Exists`);
+            }
+
             const model: UserModel = await this.prismaService.user.update({
                 where: { id },
                 data: payload,
@@ -143,7 +184,7 @@ export class UserService {
                 throw new NotFoundException(`Id ${id} Not Found`);
             }
 
-            if (error instanceof NotFoundException) {
+            if (error instanceof NotFoundException || error instanceof BadRequestException) {
                 this.loggerService.error(`Change: ${error.message}`);
                 throw error;
             }
@@ -164,6 +205,10 @@ export class UserService {
      */
     public async changePassword(id: number, payload: UserUpdatePasswordDTO): Promise<UserModel> {
         try {
+            if (payload.newPassword.length < 8) {
+                throw new BadRequestException(`New Password Must Be At Least 8 Characters Long`);
+            }
+
             const validationModel: { password: string } = await this.prismaService.user.findUnique({
                 where: { id },
                 select: { password: true },
