@@ -9,6 +9,7 @@ import {
     ParseIntPipe,
     UseInterceptors,
     NotFoundException,
+    BadRequestException,
 } from "@nestjs/common";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
@@ -22,7 +23,7 @@ import { LoggerService } from "../../provider/logger.service";
 
 import { UserModel } from "./user.model";
 import { UserService } from "./user.service";
-import { UserCreateDTO, UserUpdateDTO } from "./user.dto";
+import { UserCreateDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
 
 /**
  * Controller for handling user-related operations.
@@ -139,6 +140,44 @@ export class UserController {
             }
 
             this.loggerService.error(`Change: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
+    /**
+     * Update a user's password by ID.
+     * @param id - The ID of the user to be updated.
+     * @param payload - The updated user password data.
+     * @returns A promise that resolves to a UserModel.
+     */
+    @Put(":id/password")
+    public async changePassword(
+        @Param("id", ParseIntPipe) id: number,
+        @Body() payload: UserUpdatePasswordDTO
+    ): Promise<ResponseFormatInterface<UserModel>> {
+        try {
+            const response: ResponseFormatInterface<UserModel> = formatResponse<UserModel>(
+                true,
+                200,
+                "Password Changed",
+                await this.userService.changePassword(id, payload)
+            );
+
+            this.loggerService.log(`Change Password: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof BadRequestException) {
+                this.loggerService.error(`Change Password: ${error.message}`);
+                return formatResponse<null>(false, 400, error.message, null);
+            }
+
+            if (error instanceof NotFoundException || error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`Change Password: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Change Password: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }

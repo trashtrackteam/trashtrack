@@ -36,6 +36,18 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:3001/api/user/2/password
+Content-Type: application/json
+
+{
+    "oldPassword": "Password 7",
+    "newPassword": "Password 12345",
+    "confirmPassword": "Password 12345"
+}
+
+###
+
+
 DELETE http://localhost:3001/api/user/1
 
 ###

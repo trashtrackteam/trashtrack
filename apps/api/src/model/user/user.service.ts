@@ -1,11 +1,11 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 import { LoggerService } from "../../provider/logger.service";
 import { PrismaService } from "../../provider/prisma.service";
 
 import { UserModel } from "./user.model";
-import { UserCreateDTO, UserUpdateDTO } from "./user.dto";
+import { UserCreateDTO, UserUpdateDTO, UserUpdatePasswordDTO } from "./user.dto";
 
 /**
  * Service for handling user-related operations.
@@ -120,6 +120,57 @@ export class UserService {
             }
 
             this.loggerService.error(`Change: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
+    /**
+     * Updates a user's password in the database.
+     * @param id The ID of the user to update.
+     * @param payload The updated password data for the user.
+     * @returns A promise that resolves to a UserModel object representing the updated user.
+     * @throws NotFoundException if the user with the specified ID is not found.
+     * @throws BadRequestException if the old password does not match the current password or if the new password does not match the confirmation password.
+     * @throws InternalServerErrorException if there is an error updating the user's password.
+     */
+    public async changePassword(id: number, payload: UserUpdatePasswordDTO): Promise<UserModel> {
+        try {
+            const validationModel: { password: string } = await this.prismaService.user.findUnique({
+                where: { id },
+                select: { password: true },
+            });
+
+            if (!validationModel) {
+                throw new NotFoundException(`Id ${id} Not Found`);
+            }
+
+            if (validationModel.password !== payload.oldPassword) {
+                throw new BadRequestException(`Old Password Does Not Match With Current Password`);
+            }
+
+            if (payload.newPassword !== payload.confirmPassword) {
+                throw new BadRequestException(`New Password Does Not Match Confirmation Password`);
+            }
+
+            const model: UserModel = await this.prismaService.user.update({
+                where: { id, password: payload.oldPassword },
+                data: { password: payload.newPassword },
+            });
+
+            this.loggerService.log(`ChangePassword: ${JSON.stringify(model)}`);
+            return model;
+        } catch (error) {
+            if (error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`ChangePassword: Id ${id} Not Found`);
+                throw new NotFoundException(`Id ${id} Not Found`);
+            }
+
+            if (error instanceof NotFoundException || error instanceof BadRequestException) {
+                this.loggerService.error(`ChangePassword: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`ChangePassword: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }
