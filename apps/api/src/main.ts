@@ -1,4 +1,4 @@
-import { INestApplication, Logger } from "@nestjs/common";
+import { INestApplication, Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 
 import { AppModule } from "./app.module";
@@ -13,6 +13,7 @@ async function bootstrap(): Promise<void> {
     const globalPrefix: string = "api";
 
     app.setGlobalPrefix(globalPrefix);
+    app.useGlobalPipes(new ValidationPipe());
 
     await app.listen(configService.getPort());
 
