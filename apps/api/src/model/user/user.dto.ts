@@ -1,4 +1,4 @@
-import { IsBoolean, IsEnum, IsString } from "class-validator";
+import { IsBoolean, IsEnum, IsOptional, IsString } from "class-validator";
 import { Role } from "../../common/enum/role.enum";
 
 /**
@@ -23,6 +23,7 @@ export class UserCreateDTO {
     @IsBoolean()
     active: boolean;
 
+    @IsOptional()
     @IsString()
     description?: string;
 }
@@ -43,6 +44,7 @@ export class UserUpdateDTO {
     @IsEnum(Role)
     role: Role;
 
+    @IsOptional()
     @IsString()
     description?: string;
 }
