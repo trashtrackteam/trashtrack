@@ -17,10 +17,10 @@ POST http://localhost:3001/api/user
 Content-Type: application/json
 
 {
-    "name": "Name 20",
-    "username": "username_20",
-    "password": "username_20",
-    "phoneNumber": "62812345678920",
+    "name": "Name 1",
+    "username": "username_1",
+    "password": "username_1",
+    "phoneNumber": "6281234567891",
     "role": "operator",
     "active" : true,
     "description": null
