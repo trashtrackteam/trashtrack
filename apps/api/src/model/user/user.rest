@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/api/user/id/1
+GET http://localhost:3001/api/user/id/100
 Content-Type: application/json
 
 ###
