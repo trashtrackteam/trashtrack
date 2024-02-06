@@ -24,3 +24,14 @@ enum Role {
   operator
   admin
 }
+
+model TrashBin {
+  id Int @id @default(autoincrement())
+  name String
+  latitude Float
+  longitude Float
+  description String?
+  openCount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
