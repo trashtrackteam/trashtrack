@@ -24,8 +24,14 @@ import { UserService } from "./user.service";
 import { formatResponse } from "../../interceptor/response-format.interceptor";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
+interface UserControllerInterface {
+    findUsername(username: string): Promise<ResponseFormatInterface<UserModel>>;
+    changePassword(id: number, payload: UserUpdatePasswordDTO): Promise<ResponseFormatInterface<UserModel>>;
+    changeActive(id: number, payload: UserUpdateActiveDTO): Promise<ResponseFormatInterface<UserModel>>;
+}
+
 @Controller("user")
-export class UserController extends BaseController<UserModel, UserCreateDTO, UserUpdateDTO, UserService>{
+export class UserController extends BaseController<UserModel, UserCreateDTO, UserUpdateDTO, UserService> implements UserControllerInterface{
     constructor(modelService: UserService) {
         super(UserController.name, modelService);
     }

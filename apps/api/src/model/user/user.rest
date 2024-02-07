@@ -17,50 +17,50 @@ POST http://localhost:3001/api/user
 Content-Type: application/json
 
 {
-    "name": "Name 1",
-    "username": "username_2",
-    "password": "username_1",
-    "phoneNumber": "6281234567891",
-    "role": "operator",
-    "active" : true,
-    "description": null
-}
-
-###
-
-PUT http://localhost:3001/api/user/1
-Content-Type: application/json
-
-{
-    "name": "Name 1234",
-    "username": "Us",
-    "phoneNumber": "6281234567891234",
+    "name": "Name 3",
+    "username": "username_3",
+    "password": "password_3",
+    "phoneNumber": "6281234567893",
     "role": "admin",
+    "active" : true,
+    "description": "Description 3"
+}
+
+###
+
+PUT http://localhost:3001/api/user/3
+Content-Type: application/json
+
+{
+    "name": "Name 345",
+    "username": "username_345",
+    "phoneNumber": "628123456789345",
+    "role": "operator",
     "description": null
 }
 
 ###
 
-PUT http://localhost:3001/api/user/6/password
+PUT http://localhost:3001/api/user/3/password
 Content-Type: application/json
 
 {
-    "oldPassword": "username_20",
-    "newPassword": "Username20",
-    "confirmPassword": "Username20"
+    "oldPassword": "password_3",
+    "newPassword": "password_345",
+    "confirmPassword": "password_345"
 }
 
 ###
 
-PUT http://localhost:3001/api/user/2/active
+PUT http://localhost:3001/api/user/3/active
 Content-Type: application/json
 
 {
-    "active": true
+    "active": false
 }
 
 ###
 
-DELETE http://localhost:3001/api/user/1
+DELETE http://localhost:3001/api/user/3
 
 ###
