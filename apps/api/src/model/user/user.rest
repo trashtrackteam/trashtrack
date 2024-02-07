@@ -3,12 +3,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/api/user/id/100
+GET http://localhost:3001/api/user/id/1
 Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/api/user/username/Username%207
+GET http://localhost:3001/api/user/username/username_1
 Content-Type: application/json
 
 ###
