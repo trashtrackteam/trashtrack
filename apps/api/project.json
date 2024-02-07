@@ -112,13 +112,13 @@
         "docker-compose-up": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": ["docker-compose --env-file .env up -d"]
+                "commands": ["docker-compose -f apps/api/docker-compose.yml up -d"]
             }
         },
         "docker-compose-down": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": ["docker-compose down"]
+                "commands": ["docker-compose -f apps/api/docker-compose.yml down"]
             }
         }
     },
