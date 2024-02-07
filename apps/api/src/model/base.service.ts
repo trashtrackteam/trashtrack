@@ -1,10 +1,9 @@
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { BadRequestException, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 import { LoggerService } from "../provider/logger.service";
 import { PrismaService } from "../provider/prisma.service";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
-@Injectable()
 export class BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO> {
     protected readonly loggerService: LoggerService;
     protected readonly modelName: string;
