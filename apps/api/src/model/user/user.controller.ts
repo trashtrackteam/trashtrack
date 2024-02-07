@@ -7,6 +7,7 @@ import {
     Param,
     ParseIntPipe,
     Put,
+    UseInterceptors,
 } from "@nestjs/common";
 import {
     UserModel,
@@ -16,13 +17,13 @@ import {
     UserUpdateActiveDTO,
     UserUpdatePasswordDTO,
 } from "@trashtrack/common";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
+import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
 
 import { BaseController } from "../base.controller";
 
 import { UserService } from "./user.service";
-import { formatResponse } from "../../interceptor/response-format.interceptor";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 interface UserControllerInterface {
     findUsername(username: string): Promise<ResponseFormatInterface<UserModel>>;
@@ -31,6 +32,7 @@ interface UserControllerInterface {
 }
 
 @Controller("user")
+@UseInterceptors(ResponseFormatInterceptor)
 export class UserController extends BaseController<UserModel, UserCreateDTO, UserUpdateDTO, UserService> implements UserControllerInterface{
     constructor(modelService: UserService) {
         super(UserController.name, modelService);

@@ -1,13 +1,12 @@
-import { BadRequestException, Body, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, Body, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { ResponseFormatInterface } from "@trashtrack/common";
 
-import { ResponseFormatInterceptor, formatResponse } from "../interceptor/response-format.interceptor";
+import { formatResponse } from "../interceptor/response-format.interceptor";
 
 import { LoggerService } from "../provider/logger.service";
 import { BaseService } from "./base.service";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
-@UseInterceptors(ResponseFormatInterceptor)
 export class BaseController<ModelType, ModelCreateDTO, ModelUpdateDTO, ModelService extends BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO>> {
     protected readonly loggerService: LoggerService;
     protected readonly modelName: string;
