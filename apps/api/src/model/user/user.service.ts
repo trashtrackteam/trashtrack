@@ -15,9 +15,14 @@ import { BaseService } from "../base.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 
+interface UserServiceInterface {
+    findUsername(username: string): Promise<UserModel>;
+    changePassword(id: number, payload: UserUpdatePasswordDTO): Promise<UserModel>;
+    changeActive(id: number, payload: UserUpdateActiveDTO): Promise<UserModel>;
+}
 
 @Injectable()
-export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdateDTO> {
+export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdateDTO> implements UserServiceInterface {
     constructor(prismaService: PrismaService) {
         super(UserService.name, prismaService)
     }
