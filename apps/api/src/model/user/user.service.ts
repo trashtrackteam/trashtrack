@@ -6,83 +6,25 @@ import {
     UserUpdateActiveDTO,
     UserUpdateDTO,
     UserUpdatePasswordDTO,
+    Override,
 } from "@trashtrack/common";
 
 import * as encryption from "../../util/encryption";
 
-import { LoggerService } from "../../provider/logger.service";
+import { BaseService } from "../base.service";
+
 import { PrismaService } from "../../provider/prisma.service";
 
-/**
- * Service for handling user-related operations.
- */
+
 @Injectable()
-export class UserService {
-    private readonly loggerService: LoggerService = new LoggerService(UserService.name);
-
-    /**
-     * Constructs a new instance of the UserService class.
-     * @param prismaService The PrismaService instance used for database operations.
-     */
-    constructor(private readonly prismaService: PrismaService) {}
-
-    /**
-     * Retrieves all users from the database.
-     * @returns A promise that resolves to an array of UserModel objects representing the users.
-     * @throws InternalServerErrorException if there is an error retrieving the users.
-     */
-    public async find(): Promise<UserModel[]> {
-        try {
-            const models: UserModel[] = await this.prismaService.user.findMany();
-
-            this.loggerService.log(`Find: ${JSON.stringify(models)}`);
-
-            return models;
-        } catch (error) {
-            this.loggerService.error(`Find: ${error.message}`);
-            throw new InternalServerErrorException("Internal Server Error");
-        }
+export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdateDTO> {
+    constructor(prismaService: PrismaService) {
+        super(UserService.name, prismaService)
     }
 
-    /**
-     * Retrieves a user by their ID.
-     * @param id The ID of the user to retrieve.
-     * @returns A promise that resolves to a UserModel object representing the user.
-     * @throws NotFoundException if the user with the specified ID is not found.
-     * @throws InternalServerErrorException if there is an error retrieving the user.
-     */
-    public async findId(id: number): Promise<UserModel> {
+    public async findUsername(username: string): Promise<UserModel> {
         try {
-            const model: UserModel = await this.prismaService.user.findUnique({ where: { id } });
-
-            if (!model) {
-                throw new NotFoundException(`Id ${id} Not Found`);
-            }
-
-            this.loggerService.log(`Find Id: ${JSON.stringify(model)}`);
-
-            return model;
-        } catch (error) {
-            if (error instanceof NotFoundException) {
-                this.loggerService.error(`Find Id: ${error.message}`);
-                throw error;
-            }
-
-            this.loggerService.error(`Find Id: ${error.message}`);
-            throw new InternalServerErrorException("Internal Server Error");
-        }
-    }
-
-    /**
-     * Retrieves a user by their username.
-     * @param username The username of the user to retrieve.
-     * @returns A promise that resolves to a UserModel object representing the user.
-     * @throws NotFoundException if the user with the specified username is not found.
-     * @throws InternalServerErrorException if there is an error retrieving the user.
-     */
-    public async findUsername(username: string) {
-        try {
-            const model: UserModel = await this.prismaService.user.findUnique({ where: { username } });
+            const model: UserModel = await this.prismaService[this.modelName].findUnique({ where: { username } });
 
             if (!model) {
                 throw new NotFoundException(`Username ${username} Not Found`);
@@ -102,12 +44,7 @@ export class UserService {
         }
     }
 
-    /**
-     * Adds a new user to the database.
-     * @param payload The data for the new user.
-     * @returns A promise that resolves to a UserModel object representing the newly created user.
-     * @throws InternalServerErrorException if there is an error adding the user.
-     */
+    @Override
     public async add(payload: UserCreateDTO): Promise<UserModel> {
         try {
             if (!/^[a-zA-Z0-9_]+$/.test(payload.username)) {
@@ -118,7 +55,7 @@ export class UserService {
                 throw new BadRequestException(`Username Must Be At Least 3 Characters Long`);
             }
 
-            const validationModel: UserModel = await this.prismaService.user.findUnique({
+            const validationModel: UserModel = await this.prismaService[this.modelName].findUnique({
                 where: { username: payload.username },
             });
 
@@ -131,12 +68,6 @@ export class UserService {
             }
 
             payload.password = await encryption.hash(payload.password);
-
-            const model: UserModel = await this.prismaService.user.create({ data: payload });
-
-            this.loggerService.log(`Add: ${JSON.stringify(model)}`);
-
-            return model;
         } catch (error) {
             if (error instanceof BadRequestException) {
                 this.loggerService.error(`Add: ${error.message}`);
@@ -146,16 +77,11 @@ export class UserService {
             this.loggerService.error(`Add: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
+
+        return super.add(payload);
     }
 
-    /**
-     * Updates a user in the database.
-     * @param id The ID of the user to update.
-     * @param payload The updated data for the user.
-     * @returns A promise that resolves to a UserModel object representing the updated user.
-     * @throws NotFoundException if the user with the specified ID is not found.
-     * @throws InternalServerErrorException if there is an error updating the user.
-     */
+    @Override
     public async change(id: number, payload: UserUpdateDTO): Promise<UserModel> {
         try {
             if (!/^[a-zA-Z0-9_]+$/.test(payload.username)) {
@@ -166,26 +92,13 @@ export class UserService {
                 throw new BadRequestException(`Username Must Be At Least 3 Characters Long`);
             }
 
-            const validationModel: UserModel = await this.prismaService.user.findUnique({
+            const validationModel: UserModel = await this.prismaService[this.modelName].findUnique({
                 where: { username: payload.username },
             });
 
             if (validationModel) {
                 throw new BadRequestException(`Username Already Exists`);
             }
-
-            const model: UserModel = await this.prismaService.user.update({
-                where: { id },
-                data: payload,
-            });
-
-            if (!model) {
-                throw new NotFoundException(`Id ${id} Not Found`);
-            }
-
-            this.loggerService.log(`Change: ${JSON.stringify(model)}`);
-
-            return model;
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError) {
                 this.loggerService.error(`Change: Id ${id} Not Found`);
@@ -200,24 +113,17 @@ export class UserService {
             this.loggerService.error(`Change: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
+
+        return super.change(id, payload);
     }
 
-    /**
-     * Updates a user's password in the database.
-     * @param id The ID of the user to update.
-     * @param payload The updated password data for the user.
-     * @returns A promise that resolves to a UserModel object representing the updated user.
-     * @throws NotFoundException if the user with the specified ID is not found.
-     * @throws BadRequestException if the old password does not match the current password or if the new password does not match the confirmation password.
-     * @throws InternalServerErrorException if there is an error updating the user's password.
-     */
     public async changePassword(id: number, payload: UserUpdatePasswordDTO): Promise<UserModel> {
         try {
             if (payload.newPassword.length < 8) {
                 throw new BadRequestException(`New Password Must Be At Least 8 Characters Long`);
             }
 
-            const validationModel: { password: string } = await this.prismaService.user.findUnique({
+            const validationModel: { password: string } = await this.prismaService[this.modelName].findUnique({
                 where: { id },
                 select: { password: true },
             });
@@ -234,7 +140,7 @@ export class UserService {
                 throw new BadRequestException(`New Password Does Not Match Confirmation Password`);
             }
 
-            const model: UserModel = await this.prismaService.user.update({
+            const model: UserModel = await this.prismaService[this.modelName].update({
                 where: { id },
                 data: { password: payload.newPassword },
             });
@@ -257,17 +163,9 @@ export class UserService {
         }
     }
 
-    /**
-     * Updates a user's active status in the database.
-     * @param id The ID of the user to update.
-     * @param payload The updated active status data for the user.
-     * @returns A promise that resolves to a UserModel object representing the updated user.
-     * @throws NotFoundException if the user with the specified ID is not found.
-     * @throws InternalServerErrorException if there is an error updating the user's active status.
-     */
     public async changeActive(id: number, payload: UserUpdateActiveDTO): Promise<UserModel> {
         try {
-            const model: UserModel = await this.prismaService.user.update({
+            const model: UserModel = await this.prismaService[this.modelName].update({
                 where: { id },
                 data: { active: payload.active },
             });
@@ -291,40 +189,6 @@ export class UserService {
             }
 
             this.loggerService.error(`Change Active: ${error.message}`);
-            throw new InternalServerErrorException("Internal Server Error");
-        }
-    }
-
-    /**
-     * Removes a user from the database.
-     * @param id The ID of the user to remove.
-     * @returns A promise that resolves to a UserModel object representing the removed user.
-     * @throws NotFoundException if the user with the specified ID is not found.
-     * @throws InternalServerErrorException if there is an error removing the user.
-     */
-    public async remove(id: number): Promise<UserModel> {
-        try {
-            const model: UserModel = await this.prismaService.user.delete({ where: { id } });
-
-            if (!model) {
-                throw new NotFoundException(`Id ${id} Not Found`);
-            }
-
-            this.loggerService.log(`Remove: ${JSON.stringify(model)}`);
-
-            return model;
-        } catch (error) {
-            if (error instanceof PrismaClientKnownRequestError) {
-                this.loggerService.error(`Remove: Id ${id} Not Found`);
-                throw new NotFoundException(`Id ${id} Not Found`);
-            }
-
-            if (error instanceof NotFoundException) {
-                this.loggerService.error(`Remove: ${error.message}`);
-                throw error;
-            }
-
-            this.loggerService.error(`Remove: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }

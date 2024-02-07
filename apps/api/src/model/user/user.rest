@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "name": "Name 1",
-    "username": "username_1",
+    "username": "username_2",
     "password": "username_1",
     "phoneNumber": "6281234567891",
     "role": "operator",
