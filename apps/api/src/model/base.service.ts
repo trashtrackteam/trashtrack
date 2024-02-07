@@ -10,7 +10,9 @@ export class BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO> {
 
     constructor(serviceName: string, protected readonly prismaService: PrismaService) {
         this.loggerService = new LoggerService(serviceName)
-        this.modelName = serviceName.slice(0, -"Service".length).toLowerCase();
+
+        const rawServiceName: string = serviceName.slice(0, -"Service".length)
+        this.modelName = rawServiceName.charAt(0).toLowerCase() + rawServiceName.slice(1);
     }
 
     public async find(): Promise<ModelType[]> {
