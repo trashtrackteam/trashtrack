@@ -32,7 +32,8 @@ jobs:
             - name: Install Node.js dependencies
               run: pnpm install
             - name: Build app
-              run: pnpm nx run app:build
+              # Temporarily using development build since production build is broken
+              run: pnpm nx run app:build:development
             - name: Update Capacitor
               run: pnpm nx run app:update:android
             - name: Copy Capacitor files
