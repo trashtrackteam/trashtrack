@@ -37,6 +37,8 @@ jobs:
               run: pnpm nx run app:build:development
             - name: Copy Capacitor files
               run: pnpm nx run app:copy:android
+            - name: Sync Capacitor files
+              run: pnpm nx run app:sync:android
             - name: Build app bundle
               run: cd apps/app/android && ./gradlew bundle && ./gradlew assembleDebug
             - name: Extract Android signing key from repository secrets
