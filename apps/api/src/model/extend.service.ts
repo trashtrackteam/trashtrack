@@ -13,7 +13,7 @@ export class ExtendService<ModelType, ModelCreateDTO, ModelUpdateDTO> extends Ba
     ModelCreateDTO,
     ModelUpdateDTO
 > {
-    protected readonly extend: { [key: string]: boolean };
+    protected readonly extend: ExtendInterface;
 
     constructor(serviceName: string, prismaService: PrismaService, extend: ExtendInterface) {
         super(serviceName, prismaService);
