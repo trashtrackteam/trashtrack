@@ -16,8 +16,6 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
-            - name: Setup hub
-              uses: geertvdc/setup-hub@master
             - name: Setup Java
               uses: actions/setup-java@v3
               with:
@@ -54,6 +52,9 @@ jobs:
             - name: Set Tag
               id: current-datetime
               run: echo "CURRENT_DATETIME=$(date +'%Y-%m-%d-%H_%M_%S%z')" >> "$GITHUB_OUTPUT"
+            - name: Install hub
+              run: |
+                  sudo apt-get update && sudo apt-get install -y hub
             - name: Build Release
               shell: bash
               run: |
