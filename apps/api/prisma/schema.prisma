@@ -45,6 +45,7 @@ model SubTrashBin {
   maxCapacity     Float
   currentCapacity Float
   trash           Trash[]
+  history         History[]
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 }
@@ -54,4 +55,13 @@ model Trash {
   subTrashBinId Int
   subTrashBin   SubTrashBin? @relation(fields: [subTrashBinId], references: [id])
   createdAt     DateTime     @default(now())
+}
+
+model History {
+  id              Int          @id @default(autoincrement())
+  subTrashBinId   Int
+  subTrashBin     SubTrashBin? @relation(fields: [subTrashBinId], references: [id])
+  maxCapacity     Float
+  currentCapacity Float
+  createdAt       DateTime     @default(now())
 }
