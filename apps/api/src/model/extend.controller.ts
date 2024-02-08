@@ -17,7 +17,7 @@ export class ExtendController<
     }
 
     @Get("extend")
-    public async find(): Promise<ResponseFormatInterface<ModelType[]>> {
+    public async findExtend(): Promise<ResponseFormatInterface<ModelType[]>> {
         try {
             const response: ResponseFormatInterface<ModelType[]> = formatResponse<ModelType[]>(
                 true,
@@ -36,7 +36,7 @@ export class ExtendController<
     }
 
     @Get("id/:id/extend")
-    public async findId(@Param("id", ParseIntPipe) id: number) {
+    public async findIdExtend(@Param("id", ParseIntPipe) id: number) {
         try {
             const response: ResponseFormatInterface<ModelType> = formatResponse<ModelType>(
                 true,
