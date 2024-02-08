@@ -16,7 +16,7 @@ export class TrashBinService
     implements TrashBinServiceInterface
 {
     constructor(prismaService: PrismaService) {
-        super(TrashBinService.name, prismaService, { subTrashBin: true });
+        super(TrashBinService.name, prismaService, { subTrashBin: { include: { trash: true, history: true } } });
     }
 
     public async increaseOpenCount(id: number): Promise<TrashBinModel> {
