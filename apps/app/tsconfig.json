@@ -4,6 +4,8 @@
         "allowJs": false,
         "esModuleInterop": false,
         "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "strictNullChecks": true,
         "strict": true,
         "types": ["vite/client"]
     },

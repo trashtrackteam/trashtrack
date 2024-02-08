@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 
 import "./global.css";
 import App from "./components/app";
+import "./i18n";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(

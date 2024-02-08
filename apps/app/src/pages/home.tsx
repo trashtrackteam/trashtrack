@@ -1,9 +1,12 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { Card, CardDescription, CardHeader, CardContent, CardTitle, Icons } from "@trashtrack/ui";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 
 export function Home() {
     const history = useHistory();
+    const { t } = useTranslation();
+
     return (
         <IonPage>
             <IonContent className="home ion-padding" fullscreen>
@@ -13,10 +16,8 @@ export function Home() {
                 <div className="flex flex-col pt-8 gap-4">
                     <Card className="flex flex-row" onClick={() => history.push("/complain")}>
                         <CardHeader className="w-56">
-                            <CardTitle className="text-base">Sampaikan Keluhan</CardTitle>
-                            <CardDescription className="text-xs">
-                                Submit keluhan mengenai tempat sampah yang penuh, rusak, atau tidak ada.
-                            </CardDescription>
+                            <CardTitle className="text-base">{t("home.complain.title")}</CardTitle>
+                            <CardDescription className="text-xs">{t("home.complain.description")}</CardDescription>
                         </CardHeader>
                         <CardContent className="pt-6">
                             <Icons.complain strokeWidth={1} className="w-[78px] h-[74px]" />
@@ -24,10 +25,8 @@ export function Home() {
                     </Card>
                     <Card className="flex flex-row">
                         <CardHeader className="w-56">
-                            <CardTitle className="text-base">Operator Login</CardTitle>
-                            <CardDescription className="text-xs">
-                                Operator dapat login untuk melihat keluhan dan menyelesaikannya.
-                            </CardDescription>
+                            <CardTitle className="text-base">{t("home.operator.title")}</CardTitle>
+                            <CardDescription className="text-xs">{t("home.operator.description")}</CardDescription>
                         </CardHeader>
                         <CardContent className="pt-6">
                             <Icons.login strokeWidth={1} className="w-[78px] h-[74px]" />

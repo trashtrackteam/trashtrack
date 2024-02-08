@@ -1,0 +1,20 @@
+{
+    "translation": {
+        "home": {
+            "complain": {
+                "title": "Submit Complaint",
+                "description": "Submit a complaint about full, broken, or missing trash cans."
+            },
+            "operator": {
+                "title": "Operator Login",
+                "description": "Operators can log in to view complaints and resolutions."
+            }
+        },
+        "preferences": {
+            "language": {
+                "title": "Change Language",
+                "description": "Select the language you want to use for the application."
+            }
+        }
+    }
+}

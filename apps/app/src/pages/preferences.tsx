@@ -1,6 +1,5 @@
 import { IonContent, IonPage } from "@ionic/react";
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
@@ -13,10 +12,20 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@trashtrack/ui";
-import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function Preferences() {
-    const history = useHistory();
+    const {
+        t,
+        i18n: { changeLanguage, language },
+    } = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(language);
+
+    const handleChangeLanguage = (newLanguage: string) => {
+        setCurrentLanguage(newLanguage);
+        changeLanguage(newLanguage);
+    };
 
     return (
         <IonPage>
@@ -27,9 +36,9 @@ export function Preferences() {
                         <div className="flex flex-col gap-4">
                             <Card>
                                 <CardHeader>
-                                    <CardTitle className="text-sm">Bahasa Aplikasi</CardTitle>
+                                    <CardTitle className="text-sm">{t("preferences.language.title")}</CardTitle>
                                     <CardDescription className="text-xs">
-                                        Pilih bahasa yang akan digunakan oleh aplikasi.
+                                        {t("preferences.language.description")} <br />
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -37,7 +46,14 @@ export function Preferences() {
                                         <div className="grid w-full items-center gap-4">
                                             <div className="flex flex-col space-y-1.5">
                                                 <Label htmlFor="language">Bahasa</Label>
-                                                <Select defaultValue="bahasa-indonesia">
+                                                <Select
+                                                    defaultValue={currentLanguage}
+                                                    onValueChange={(value) => {
+                                                        if (value) {
+                                                            handleChangeLanguage(value);
+                                                        }
+                                                    }}
+                                                >
                                                     <SelectTrigger
                                                         id="language"
                                                         className="border-input border rounded-md "
@@ -45,33 +61,13 @@ export function Preferences() {
                                                         <SelectValue placeholder="Pilih bahasa" />
                                                     </SelectTrigger>
                                                     <SelectContent position="popper">
-                                                        <SelectItem value="bahasa-indonesia">
-                                                            Bahasa Indonesia
-                                                        </SelectItem>
-                                                        <SelectItem value="american-english">
-                                                            American English
-                                                        </SelectItem>
+                                                        <SelectItem value="id">Bahasa Indonesia</SelectItem>
+                                                        <SelectItem value="en">English</SelectItem>
                                                     </SelectContent>
                                                 </Select>
                                             </div>
                                         </div>
                                     </form>
-                                </CardContent>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle className="text-sm">Development Settings</CardTitle>
-                                    <CardDescription className="text-xs">
-                                        Pengaturan ini hanya digunakan untuk pengembangan aplikasi.
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <Button
-                                        className="font-bold text-xs w-full"
-                                        onClick={() => history.replace("/onboarding")}
-                                    >
-                                        Restart Onboarding
-                                    </Button>
                                 </CardContent>
                             </Card>
                         </div>
