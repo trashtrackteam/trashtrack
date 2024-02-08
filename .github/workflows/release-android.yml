@@ -30,7 +30,7 @@ jobs:
                   node-version: 21.1.0
                   cache: "pnpm"
             - name: Install Node.js dependencies
-              run: pnpm install
+              run: pnpm install --no-frozen-lockfile
             - name: Build app
               # Temporarily using development build since production build is broken
               run: pnpm nx run app:build:development
