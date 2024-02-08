@@ -7,6 +7,13 @@
     "targets": {
         "add": {
             "executor": "@nx-extend/shadcn-ui:add"
+        },
+        "install-dep": {
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "libs/components",
+                "commands": ["pnpm install"]
+            }
         }
     }
 }
