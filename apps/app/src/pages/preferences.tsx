@@ -48,7 +48,7 @@ export function Preferences() {
                                                 <Label htmlFor="language">Bahasa</Label>
                                                 <Select
                                                     defaultValue={currentLanguage}
-                                                    onValueChange={(value) => {
+                                                    onValueChange={(value: string) => {
                                                         if (value) {
                                                             handleChangeLanguage(value);
                                                         }
