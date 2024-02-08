@@ -28,7 +28,6 @@ git clone https://github.com/trashtrack-team/trashtrack
 
 -   Instal dependensi menggunakan `pnpm install`.
 -   Salin `.env.example` ke `.env` atau `.env.local` dan isi nilainya di dalam [apps/api](apps/api).
--   
 
 ## Menjalankan Proyek
 

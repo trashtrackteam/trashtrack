@@ -1,14 +1,12 @@
  [![Build Android](https://github.com/trashtrack-team/trashtrack/actions/workflows/release-android.yml/badge.svg)](https://github.com/trashtrack-team/trashtrack/actions/workflows/release-android.yml)
 
-<br>
-
 ## TrashTrack
 
 > TrashTrack sedang dalam pengembangan aktif sebagai minimum viable product (MVP) untuk lomba "IoT & Analytic Data Smart City" oleh Diskominfo Kota Balikpapan dan bukan aplikasi produksi.
 
 TrashTrack adalah sistem tempat pembuangan sampah pintar yang menggunakan teknologi Internet of Things (IoT) dan analisis data untuk memonitor dan memilah sampah secara efisien dan real-time. 
 
-TrashTrack memungkinkan pengguna untuk menyampaikan keluhan dan masukan terkait tempat pembuangan sampah, serta jika sebagai operator dapat memantau dan mengelola keluhan dan masukan tersebut dan melihat analisis data sampah yang terkumpul melalui dashboard. TrashTrack tidak tersedia di Google Play Store. Anda dapat mengunduh dan menginstal aplikasi ini secara manual melalui file APK yang tersedia di riwayat rilis di [sini](https://github.com/trashtrack-team/trashtrack/releases/latest).
+TrashTrack memungkinkan pengguna untuk menyampaikan keluhan dan masukan terkait tempat pembuangan sampah, serta jika sebagai operator dapat memantau dan mengelola keluhan dan masukan tersebut dan melihat analisis data sampah yang terkumpul melalui dashboard. TrashTrack tidak tersedia di Google Play Store. Anda dapat mengunduh dan menginstal aplikasi ini secara manual melalui file APK yang tersedia di riwayat rilis di **[sini](https://github.com/trashtrack-team/trashtrack/releases/latest)**.
 
 Lihat **[CONTRIBUTING.md](CONTRIBUTING.md)** untuk informasi lebih lanjut tentang menjalankan proyek ini secara lokal dan berkontribusi jika anda mau.
 
