@@ -1,5 +1,5 @@
-import { Controller, UseInterceptors } from "@nestjs/common";
-import { TrashCreateDTO, TrashModel, TrashUpdateDTO } from "@trashtrack/common";
+import { Body, Controller, ForbiddenException, Param, ParseIntPipe, UseInterceptors } from "@nestjs/common";
+import { ResponseFormatInterface, TrashCreateDTO, TrashModel, TrashUpdateDTO } from "@trashtrack/common";
 
 import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
 
@@ -17,5 +17,15 @@ export class TrashController
 {
     constructor(modelService: TrashService) {
         super(TrashController.name, modelService);
+    }
+
+    public async change(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        @Param("id", ParseIntPipe) id: number,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        @Body() payload: TrashUpdateDTO
+    ): Promise<ResponseFormatInterface<TrashModel>> {
+        this.loggerService.error(`Change: Method Is Disabled`);
+        throw new ForbiddenException("Method Is Disabled");
     }
 }
