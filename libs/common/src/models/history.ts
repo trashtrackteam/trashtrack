@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { IsDate, IsNumber, IsOptional } from "class-validator";
 
-export class TrashModel implements Prisma.TrashCreateInput {
+export class HistoryModel implements Prisma.HistoryCreateInput {
     @IsNumber()
     id: number;
 
@@ -9,7 +9,7 @@ export class TrashModel implements Prisma.TrashCreateInput {
     subTrashBinId: number;
 
     @IsOptional()
-    subTrashBin?: Prisma.SubTrashBinCreateNestedOneWithoutTrashInput | undefined;
+    subTrashBin?: Prisma.SubTrashBinCreateNestedOneWithoutHistoryInput | undefined;
 
     @IsNumber()
     maxCapacity: number;
