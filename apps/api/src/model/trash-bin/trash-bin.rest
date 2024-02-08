@@ -8,6 +8,16 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:3001/api/trash-bin/extend
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/trash-bin/id/2/extend
+Content-Type: application/json
+
+###
+
 POST http://localhost:3001/api/trash-bin
 Content-Type: application/json
 
