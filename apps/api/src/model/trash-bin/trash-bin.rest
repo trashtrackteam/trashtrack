@@ -20,14 +20,14 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/trash-bin/1
+PUT http://localhost:3001/api/trash-bin/2
 Content-Type: application/json
 
 {
     "name": "Trash Bin 345",
     "latitude": 103.45,
     "longitude": 153.45,
-    "description": "Description 345"
+    "description": null
 }
 
 ###
