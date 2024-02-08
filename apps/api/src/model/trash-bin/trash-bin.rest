@@ -42,6 +42,10 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:3001/api/trash-bin/2/open-count/increase
+
+###
+
 DELETE http://localhost:3001/api/trash-bin/1
 
 ###
