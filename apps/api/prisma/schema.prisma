@@ -42,8 +42,8 @@ model SubTrashBin {
   trashBinId      Int
   trashBin        TrashBin? @relation(fields: [trashBinId], references: [id])
   name            String
-  maxCapacity     Float
-  currentCapacity Float
+  maxCapacity     Float     @default(0)
+  currentCapacity Float     @default(0)
   trash           Trash[]
   history         History[]
   createdAt       DateTime  @default(now())
