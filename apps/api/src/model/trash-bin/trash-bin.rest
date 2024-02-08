@@ -8,6 +8,16 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:3001/api/trash-bin/extend
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/trash-bin/id/2/extend
+Content-Type: application/json
+
+###
+
 POST http://localhost:3001/api/trash-bin
 Content-Type: application/json
 
@@ -20,15 +30,19 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/trash-bin/1
+PUT http://localhost:3001/api/trash-bin/2
 Content-Type: application/json
 
 {
     "name": "Trash Bin 345",
     "latitude": 103.45,
     "longitude": 153.45,
-    "description": "Description 345"
+    "description": null
 }
+
+###
+
+PUT http://localhost:3001/api/trash-bin/2/open-count/increase
 
 ###
 

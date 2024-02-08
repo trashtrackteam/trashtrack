@@ -24,7 +24,7 @@ interface UserServiceInterface {
 @Injectable()
 export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdateDTO> implements UserServiceInterface {
     constructor(prismaService: PrismaService) {
-        super(UserService.name, prismaService)
+        super(UserService.name, prismaService);
     }
 
     public async findUsername(username: string): Promise<UserModel> {

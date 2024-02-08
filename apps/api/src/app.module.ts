@@ -4,12 +4,11 @@ import { ConfigModule } from "./config/config.module";
 
 import { UserModule } from "./model/user/user.module";
 import { TrashBinModule } from "./model/trash-bin/trash-bin.module";
+import { SubTrashBinModule } from "./model/sub-trash-bin/sub-trash-bin.module";
+import { TrashModule } from "./model/trash/trash.module";
+import { HistoryModule } from "./model/history/history.module";
 
-/**
- * The main module of the application.
- * It imports the necessary modules for the application to run.
- */
 @Module({
-    imports: [ConfigModule, UserModule, TrashBinModule],
+    imports: [ConfigModule, UserModule, TrashBinModule, SubTrashBinModule, TrashModule, HistoryModule],
 })
 export class AppModule {}

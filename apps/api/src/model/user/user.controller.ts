@@ -33,7 +33,10 @@ interface UserControllerInterface {
 
 @Controller("user")
 @UseInterceptors(ResponseFormatInterceptor)
-export class UserController extends BaseController<UserModel, UserCreateDTO, UserUpdateDTO, UserService> implements UserControllerInterface{
+export class UserController
+    extends BaseController<UserModel, UserCreateDTO, UserUpdateDTO, UserService>
+    implements UserControllerInterface
+{
     constructor(modelService: UserService) {
         super(UserController.name, modelService);
     }

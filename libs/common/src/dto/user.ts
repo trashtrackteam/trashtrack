@@ -1,9 +1,6 @@
 import { IsBoolean, IsEnum, IsOptional, IsString } from "class-validator";
 import { Role } from "../enum/role";
 
-/**
- * Data transfer object for creating a user.
- */
 export class UserCreateDTO {
     @IsString()
     name: string;
@@ -28,9 +25,6 @@ export class UserCreateDTO {
     description?: string;
 }
 
-/**
- * Data transfer object for updating a user.
- */
 export class UserUpdateDTO {
     @IsString()
     name: string;
@@ -49,9 +43,6 @@ export class UserUpdateDTO {
     description?: string;
 }
 
-/**
- * Data transfer object for updating a user's password.
- */
 export class UserUpdatePasswordDTO {
     @IsString()
     oldPassword: string;
@@ -63,9 +54,6 @@ export class UserUpdatePasswordDTO {
     confirmPassword: string;
 }
 
-/**
- * Data transfer object for updating a user's active status.
- */
 export class UserUpdateActiveDTO {
     @IsBoolean()
     active: boolean;

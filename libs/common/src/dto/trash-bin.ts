@@ -1,9 +1,6 @@
 import { IsNumber, IsOptional, IsString } from "class-validator";
 
-/**
- * Data transfer object for creating a trash bin.
- */
-export class TrashBinCreateDTO { 
+export class TrashBinCreateDTO {
     @IsString()
     name: string;
 
@@ -18,9 +15,6 @@ export class TrashBinCreateDTO {
     description?: string;
 }
 
-/**
- * Data transfer object for updating a trash bin.
- */
 export class TrashBinUpdateDTO {
     @IsString()
     name: string;

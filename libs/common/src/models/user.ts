@@ -2,9 +2,6 @@ import { $Enums, Prisma } from "@prisma/client";
 import { IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 import { Role } from "../enum/role";
 
-/**
- * Represents a user in the system.
- */
 export class UserModel implements Prisma.UserCreateInput {
     @IsNumber()
     id: number;

@@ -9,9 +9,9 @@ export class BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO> {
     protected readonly modelName: string;
 
     constructor(serviceName: string, protected readonly prismaService: PrismaService) {
-        this.loggerService = new LoggerService(serviceName)
+        this.loggerService = new LoggerService(serviceName);
 
-        const rawServiceName: string = serviceName.slice(0, -"Service".length)
+        const rawServiceName: string = serviceName.slice(0, -"Service".length);
         this.modelName = rawServiceName.charAt(0).toLowerCase() + rawServiceName.slice(1);
     }
 
