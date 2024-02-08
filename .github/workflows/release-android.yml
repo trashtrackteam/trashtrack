@@ -1,0 +1,61 @@
+name: Build Android
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Build APK
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                  distribution: "adopt"
+                  java-version: "17"
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 21.1.0
+                  cache: "pnpm"
+            - name: Install Node.js dependencies
+              run: pnpm install
+            - name: Build app
+              run: pnpm nx run app:build
+            - name: Update Capacitor
+              run: pnpm nx run app:update:android
+            - name: Copy Capacitor files
+              run: pnpm nx run app:copy:android
+            - name: Build app bundle
+              run: cd apps/app/android && ./gradlew bundle && ./gradlew assembleDebug
+            - name: Extract Android signing key from repository secrets
+              run: |
+                  echo "${{ secrets.RELEASE_KEYSTORE }}" > apps/app/android/release.jks.base64
+                  base64 -d apps/app/android/release.jks.base64 > apps/app/android/release.decrypted.jks
+            - name: Sign development build
+              run: jarsigner -keystore apps/app/android/release.decrypted.jks -storepass "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" -signedjar ./apps/app/android/app/build/outputs/bundle/release/app-release-signed.aab ./apps/app/android/app/build/outputs/bundle/release/app-release.aab release
+            - name: Check folder content of android output
+              run: ls ./apps/app/android/app/build/outputs/bundle/release
+            - name: Set Tag
+              id: current-datetime
+              run: echo "CURRENT_DATETIME=$(date +'%Y-%m-%d-%H_%M_%S%z')" >> "$GITHUB_OUTPUT"
+            - name: Build Release
+              shell: bash
+              run: |
+                  hub release create ${{ steps.current-datetime.outputs.CURRENT_DATETIME }} \
+                  -m ${{ steps.current-datetime.outputs.CURRENT_DATETIME }} \
+                  -a ./apps/app/android/app/build/outputs/bundle/release/app-release-signed.aab \
+                  -a ./apps/app/android/app/build/outputs/apk/debug/app-debug.apk
+              env:
+                  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

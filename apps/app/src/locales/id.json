@@ -1,0 +1,20 @@
+{
+    "translation": {
+        "home": {
+            "complain": {
+                "title": "Sampaikan Keluhan",
+                "description": "Submit keluhan mengenai tempat sampah yang penuh, rusak, atau tidak ada."
+            },
+            "operator": {
+                "title": "Operator Login",
+                "description": "Operator dapat login untuk melihat keluhan dan menyelesaikannya."
+            }
+        },
+        "preferences": {
+            "language": {
+                "title": "Ganti Bahasa",
+                "description": "Pilih bahasa yang ingin Anda gunakan untuk aplikasi."
+            }
+        }
+    }
+}
