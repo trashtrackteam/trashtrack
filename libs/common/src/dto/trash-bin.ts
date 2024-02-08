@@ -3,7 +3,7 @@ import { IsNumber, IsOptional, IsString } from "class-validator";
 /**
  * Data transfer object for creating a trash bin.
  */
-export class TrashBinCreateDTO { 
+export class TrashBinCreateDTO {
     @IsString()
     name: string;
 

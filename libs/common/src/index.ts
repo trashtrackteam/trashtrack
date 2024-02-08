@@ -1,4 +1,4 @@
-export * from "./decorator/override"
+export * from "./decorator/override";
 export * from "./dto/user";
 export * from "./dto/trash-bin";
 export * from "./enum/role";

@@ -8,4 +8,3 @@ export interface ResponseFormatInterface<T> {
     message: string;
     data: T;
 }
-

@@ -6,7 +6,7 @@ import { IsDate, IsNumber, IsOptional, IsString } from "class-validator";
  */
 export class TrashBinModel implements Prisma.TrashBinCreateInput {
     @IsNumber()
-    id: number
+    id: number;
 
     @IsString()
     name: string;
@@ -29,5 +29,4 @@ export class TrashBinModel implements Prisma.TrashBinCreateInput {
 
     @IsDate()
     updatedAt: Date;
-    
 }

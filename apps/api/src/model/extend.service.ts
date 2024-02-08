@@ -5,14 +5,18 @@ import { BaseService } from "./base.service";
 import { PrismaService } from "../provider/prisma.service";
 
 interface ExtendInterface {
-    [key: string]: boolean
+    [key: string]: boolean;
 }
 
-export class ExtendService<ModelType, ModelCreateDTO, ModelUpdateDTO> extends BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO> {
-    protected readonly extend: {[key: string]: boolean};
+export class ExtendService<ModelType, ModelCreateDTO, ModelUpdateDTO> extends BaseService<
+    ModelType,
+    ModelCreateDTO,
+    ModelUpdateDTO
+> {
+    protected readonly extend: { [key: string]: boolean };
 
     constructor(serviceName: string, prismaService: PrismaService, extend: ExtendInterface) {
-        super(serviceName, prismaService)
+        super(serviceName, prismaService);
 
         this.extend = extend;
     }
@@ -32,7 +36,10 @@ export class ExtendService<ModelType, ModelCreateDTO, ModelUpdateDTO> extends Ba
 
     public async findIdExtend(id: number): Promise<ModelType> {
         try {
-            const model: ModelType = await this.prismaService[this.modelName].findUnique({ where: { id }, include: this.extend });
+            const model: ModelType = await this.prismaService[this.modelName].findUnique({
+                where: { id },
+                include: this.extend,
+            });
 
             if (!model) {
                 throw new NotFoundException(`Id ${id} Not Found`);
