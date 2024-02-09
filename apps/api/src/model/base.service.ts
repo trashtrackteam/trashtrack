@@ -63,6 +63,11 @@ export class BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO> {
                 throw error;
             }
 
+            if (error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error("Add: Invalid Payload");
+                throw new BadRequestException("Invalid Payload");
+            }
+
             this.loggerService.error(`Add: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }

@@ -18,7 +18,7 @@ POST http://localhost:3001/api/sub-trash-bin
 Content-Type: application/json
 
 {
-    "trashBinId": 2,
+    "trashBinId": 21,
     "name": "Sub Trash Bin 3"
 }
 
