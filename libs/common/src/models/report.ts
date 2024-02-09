@@ -29,7 +29,9 @@ export class ReportModel implements Prisma.ReportCreateInput {
     phoneNumber: string;
 
     @IsString()
-    imagePath: string;
+    imageName: string;
+
+    imageData: Buffer;
 
     @IsString()
     description: string;

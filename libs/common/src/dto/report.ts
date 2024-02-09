@@ -15,7 +15,9 @@ export class ReportCreateDTO {
     phoneNumber: string;
 
     @IsString()
-    imagePath: string;
+    imageName: string;
+
+    imageData: Buffer;
 
     @IsString()
     description: string;

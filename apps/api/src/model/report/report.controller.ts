@@ -1,4 +1,5 @@
 import {
+    Post,
     BadRequestException,
     Body,
     Controller,
@@ -9,8 +10,13 @@ import {
     ParseIntPipe,
     Put,
     UseInterceptors,
+    UploadedFile,
 } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import "multer";
+import { Express } from "express";
 import {
+    Override,
     ReportCreateDTO,
     ReportModel,
     ReportUpdateDTO,
@@ -83,6 +89,35 @@ export class ReportController
             this.loggerService.error(`Find NIK Extend: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
+    }
+
+    public async add(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        @Body() payload: ReportCreateDTO
+    ): Promise<ResponseFormatInterface<ReportModel>> {
+        this.loggerService.error(`Add: Method Is Disabled`);
+        throw new ForbiddenException("Method Is Disabled");
+    }
+
+    @Override
+    @Post()
+    @UseInterceptors(FileInterceptor("image"))
+    public async addWithUpload(
+        @Body()
+        payload: {
+            trashBinId: number;
+            nik: string;
+            name: string;
+            phoneNumber: string;
+            description: string;
+        },
+        @UploadedFile() file: Express.Multer.File
+    ): Promise<ResponseFormatInterface<ReportModel>> {
+        return super.add({
+            ...payload,
+            imageName: file.originalname,
+            imageData: file.buffer,
+        });
     }
 
     public async change(

@@ -28,9 +28,8 @@ Content-Type: application/json
 {
     "trashBinId": 2,
     "nik": "6471109230192341",
-    "name": "Bud",
-    "phoneNumber": "6281234",
-    "imagePath": "imagepath1",
+    "name": "Budi",
+    "phoneNumber": "6281234567891",
     "description": "Tempat sampah rusak"
 }
 

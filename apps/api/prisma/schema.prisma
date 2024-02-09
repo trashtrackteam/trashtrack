@@ -77,7 +77,8 @@ model Report {
   nik         String
   name        String
   phoneNumber String
-  imagePath   String
+  imageName   String
+  imageData   Bytes
   description String
   status      Status     @default(notResponded)
   feedback    Feedback[]
