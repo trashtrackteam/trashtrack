@@ -1,5 +1,5 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
-import { ReportCreateDTO, ReportModel, ReportUpdateDTO, ReportUpdateStatusDTO } from "@trashtrack/common";
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { Override, ReportCreateDTO, ReportModel, ReportUpdateDTO, ReportUpdateStatusDTO } from "@trashtrack/common";
 
 import { ExtendService } from "../extend.service";
 
@@ -58,6 +58,33 @@ export class ReportService
             this.loggerService.error(`Find NIK Extend: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
+    }
+
+    @Override
+    public async add(payload: ReportCreateDTO): Promise<ReportModel> {
+        try {
+            if (payload.nik.length != 16) {
+                throw new BadRequestException(`NIK Must Be 16 Digits long`);
+            }
+
+            if (payload.name.length < 3) {
+                throw new BadRequestException(`Name Must Be At Least 3 Characters Long`);
+            }
+
+            if (payload.phoneNumber.length < 10) {
+                throw new BadRequestException(`Phone Number Must Be At Least 10 Characters Long`);
+            }
+        } catch (error) {
+            if (error instanceof BadRequestException) {
+                this.loggerService.error(`Add: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Add: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+
+        return super.add(payload);
     }
 
     public async changeStatus(id: number, payload: ReportUpdateStatusDTO): Promise<ReportModel> {

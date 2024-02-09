@@ -26,10 +26,10 @@ POST http://localhost:3001/api/report
 Content-Type: application/json
 
 {
-    "trashBinId": 12,
-    "nik": "64711092301923",
-    "name": "Budi Santoso",
-    "phoneNumber": "6281234567891",
+    "trashBinId": 2,
+    "nik": "6471109230192341",
+    "name": "Bud",
+    "phoneNumber": "6281234",
     "imagePath": "imagepath1",
     "description": "Tempat sampah rusak"
 }
