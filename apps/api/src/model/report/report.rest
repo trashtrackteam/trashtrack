@@ -1,0 +1,46 @@
+GET http://localhost:3001/api/report
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/report/id/1
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/report/extend
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/report/id/2/extend
+Content-Type: application/json
+
+###
+
+POST http://localhost:3001/api/report
+Content-Type: application/json
+
+{
+    "trashBinId": 2,
+    "nik": "64711092301923",
+    "name": "Budi Santoso",
+    "phoneNumber": "6281234567891",
+    "imagePath": "imagepath1",
+    "description": "Tempat sampah rusak"
+}
+
+###
+
+PUT http://localhost:3001/api/report/2/status
+Content-Type: application/json
+
+{
+    "status": 1
+}
+
+###
+
+DELETE http://localhost:3001/api/report/1
+
+###
