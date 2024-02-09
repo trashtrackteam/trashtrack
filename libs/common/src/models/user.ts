@@ -1,5 +1,5 @@
 import { $Enums, Prisma } from "@prisma/client";
-import { IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 import { Role } from "../enum/role";
 
 export class UserModel implements Prisma.UserCreateInput {
@@ -27,6 +27,10 @@ export class UserModel implements Prisma.UserCreateInput {
     @IsOptional()
     @IsString()
     description?: string;
+
+    @IsOptional()
+    @IsArray()
+    report?: Prisma.ReportCreateNestedManyWithoutUserInput | undefined;
 
     @IsDate()
     createdAt: Date;

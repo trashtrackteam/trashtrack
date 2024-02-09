@@ -25,6 +25,10 @@ export class TrashBinModel implements Prisma.TrashBinCreateInput {
     @IsArray()
     subTrashBin?: Prisma.SubTrashBinCreateNestedManyWithoutTrashBinInput | undefined;
 
+    @IsOptional()
+    @IsArray()
+    report?: Prisma.ReportCreateNestedManyWithoutTrashBinInput | undefined;
+
     @IsDate()
     createdAt: Date;
 
