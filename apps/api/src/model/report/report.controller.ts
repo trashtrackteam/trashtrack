@@ -1,11 +1,28 @@
-import { Body, Controller, ForbiddenException, Param, ParseIntPipe, UseInterceptors } from "@nestjs/common";
-import { ReportCreateDTO, ReportModel, ReportUpdateDTO, ResponseFormatInterface } from "@trashtrack/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    ForbiddenException,
+    NotFoundException,
+    Param,
+    ParseIntPipe,
+    Put,
+    UseInterceptors,
+} from "@nestjs/common";
+import {
+    ReportCreateDTO,
+    ReportModel,
+    ReportUpdateDTO,
+    ReportUpdateStatusDTO,
+    ResponseFormatInterface,
+} from "@trashtrack/common";
 
-import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
+import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
 
 import { ExtendController } from "../extend.controller";
 
 import { ReportService } from "./report.service";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 interface ReportControllerInterface {}
 
@@ -27,5 +44,37 @@ export class ReportController
     ): Promise<ResponseFormatInterface<ReportModel>> {
         this.loggerService.error(`Change: Method Is Disabled`);
         throw new ForbiddenException("Method Is Disabled");
+    }
+
+    @Put(":id/status")
+    public async changeStatus(
+        @Param("id", ParseIntPipe) id: number,
+        @Body() payload: ReportUpdateStatusDTO
+    ): Promise<ResponseFormatInterface<ReportModel>> {
+        try {
+            const response: ResponseFormatInterface<ReportModel> = formatResponse<ReportModel>(
+                true,
+                200,
+                "Status Changed",
+                await this.modelService.change(id, payload)
+            );
+
+            this.loggerService.log(`Change Status: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof BadRequestException) {
+                this.loggerService.error(`Change Status: ${error.message}`);
+                return formatResponse<null>(false, 400, error.message, null);
+            }
+
+            if (error instanceof NotFoundException || error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`Change Status: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Change Status: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
     }
 }

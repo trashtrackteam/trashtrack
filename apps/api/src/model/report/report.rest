@@ -32,7 +32,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/report/2/status
+PUT http://localhost:3001/api/report/1/status
 Content-Type: application/json
 
 {

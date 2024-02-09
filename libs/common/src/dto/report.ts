@@ -20,7 +20,9 @@ export class ReportCreateDTO {
     description: string;
 }
 
-export class ReportUpdateDTO {
+export class ReportUpdateDTO {}
+
+export class ReportUpdateStatusDTO {
     @IsNumber()
     status: number;
 }
