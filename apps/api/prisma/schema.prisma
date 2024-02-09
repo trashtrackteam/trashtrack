@@ -78,8 +78,8 @@ model Report {
   name        String
   phoneNumber String
   imagePath   String
-  description String?
-  status      Int
+  description String
+  status      Int        @default(0)
   feedback    Feedback[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
