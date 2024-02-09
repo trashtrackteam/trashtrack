@@ -16,6 +16,7 @@ model User {
   role        Role
   active      Boolean
   description String?
+  report      Report[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -33,6 +34,7 @@ model TrashBin {
   description String?
   openCount   Int           @default(0)
   subTrashBin SubTrashBin[]
+  report      Report[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 }
@@ -64,4 +66,30 @@ model History {
   maxCapacity     Float
   currentCapacity Float
   createdAt       DateTime     @default(now())
+}
+
+model Report {
+  id          Int        @id @default(autoincrement())
+  trashBinId  Int
+  trashBin    TrashBin?  @relation(fields: [trashBinId], references: [id])
+  userId      Int?
+  user        User?      @relation(fields: [userId], references: [id])
+  nik         String
+  name        String
+  phoneNumber String
+  imagePath   String
+  description String?
+  status      Int
+  feedback    Feedback[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Feedback {
+  id          Int      @id @default(autoincrement())
+  reportId    Int
+  report      Report?  @relation(fields: [reportId], references: [id])
+  title       String
+  description String
+  createdAt   DateTime @default(now())
 }
