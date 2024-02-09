@@ -5,7 +5,7 @@ import { BaseService } from "./base.service";
 import { PrismaService } from "../provider/prisma.service";
 
 interface ExtendInterface {
-    [key: string]: ExtendInterface | boolean;
+    [key: string]: { include: ExtendInterface } | boolean;
 }
 
 export class ExtendService<ModelType, ModelCreateDTO, ModelUpdateDTO> extends BaseService<

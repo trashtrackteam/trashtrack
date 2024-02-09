@@ -14,7 +14,11 @@ export class ReportService
     implements ReportServiceInterface
 {
     constructor(prismaService: PrismaService) {
-        super(ReportService.name, prismaService, { user: true, feedback: true });
+        super(ReportService.name, prismaService, {
+            trashBin: true,
+            user: true,
+            feedback: true,
+        });
     }
 
     public async findNIK(nik: string): Promise<ReportModel[]> {
