@@ -30,9 +30,8 @@ export class ReportModel implements Prisma.ReportCreateInput {
     @IsString()
     imagePath: string;
 
-    @IsOptional()
     @IsString()
-    description?: string;
+    description: string;
 
     @IsNumber()
     status: number;
