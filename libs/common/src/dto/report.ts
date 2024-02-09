@@ -24,6 +24,9 @@ export class ReportCreateDTO {
 export class ReportUpdateDTO {}
 
 export class ReportUpdateStatusDTO {
+    @IsNumber()
+    userId: number;
+
     @IsEnum(Status)
     status: $Enums.Status;
 }

@@ -10,7 +10,7 @@ POST http://localhost:3001/api/history
 Content-Type: application/json
 
 {
-    "subTrashBinId": 2,
+    "subTrashBinId": 21,
     "maxCapacity": 150.00,
     "currentCapacity": 100.00
 }

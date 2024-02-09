@@ -10,7 +10,7 @@ POST http://localhost:3001/api/trash
 Content-Type: application/json
 
 {
-    "subTrashBinId": 2
+    "subTrashBinId": 23
 }
 
 ###
