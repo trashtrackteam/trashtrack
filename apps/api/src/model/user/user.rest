@@ -1,15 +1,12 @@
 GET http://localhost:3001/api/user
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/user/id/1
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/user/username/username_1
-Content-Type: application/json
 
 ###
 

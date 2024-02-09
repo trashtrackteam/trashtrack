@@ -1,10 +1,8 @@
 GET http://localhost:3001/api/history
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/history/id/2
-Content-Type: application/json
 
 ###
 

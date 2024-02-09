@@ -1,20 +1,16 @@
 GET http://localhost:3001/api/sub-trash-bin
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/sub-trash-bin/id/1
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/sub-trash-bin/extend
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/sub-trash-bin/id/2/extend
-Content-Type: application/json
 
 ###
 
