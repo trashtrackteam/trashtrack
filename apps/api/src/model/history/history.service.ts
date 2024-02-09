@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
+import { Cron, CronExpression } from "@nestjs/schedule";
+import { Prisma } from "@prisma/client";
 import { HistoryCreateDTO, HistoryModel, HistoryUpdateDTO, SubTrashBinModel } from "@trashtrack/common";
 
 import { BaseService } from "../base.service";
 
 import { PrismaService } from "../../provider/prisma.service";
-import { Cron, CronExpression } from "@nestjs/schedule";
 
 interface HistoryServiceInterface {}
 
@@ -20,7 +21,7 @@ export class HistoryService
     @Cron(CronExpression.EVERY_5_MINUTES)
     public async record(): Promise<void> {
         try {
-            const models = await this.prismaService.history.createMany({
+            const models: Prisma.BatchPayload = await this.prismaService[this.modelName].createMany({
                 data: (
                     await this.prismaService.subTrashBin.findMany()
                 ).map((model: SubTrashBinModel): HistoryCreateDTO => {
