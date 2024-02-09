@@ -1,0 +1,22 @@
+GET http://localhost:3001/api/feedback
+
+###
+
+GET http://localhost:3001/api/feedback/id/1
+
+###
+
+POST http://localhost:3001/api/feedback
+Content-Type: application/json
+
+{
+    "reportId": 1,
+    "title": "First Response",
+    "description": "First Description"
+}
+
+###
+
+DELETE http://localhost:3001/api/feedback/1
+
+###

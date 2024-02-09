@@ -8,8 +8,18 @@ import { SubTrashBinModule } from "./model/sub-trash-bin/sub-trash-bin.module";
 import { TrashModule } from "./model/trash/trash.module";
 import { HistoryModule } from "./model/history/history.module";
 import { ReportModule } from "./model/report/report.module";
+import { FeedbackModule } from "./model/feedback/feedback.module";
 
 @Module({
-    imports: [ConfigModule, UserModule, TrashBinModule, SubTrashBinModule, TrashModule, HistoryModule, ReportModule],
+    imports: [
+        ConfigModule,
+        UserModule,
+        TrashBinModule,
+        SubTrashBinModule,
+        TrashModule,
+        HistoryModule,
+        ReportModule,
+        FeedbackModule,
+    ],
 })
 export class AppModule {}
