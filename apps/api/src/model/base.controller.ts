@@ -50,7 +50,7 @@ export class BaseController<
     }
 
     @Get("id/:id")
-    public async findId(@Param("id", ParseIntPipe) id: number) {
+    public async findId(@Param("id", ParseIntPipe) id: number): Promise<ResponseFormatInterface<ModelType>> {
         try {
             const response: ResponseFormatInterface<ModelType> = formatResponse<ModelType>(
                 true,

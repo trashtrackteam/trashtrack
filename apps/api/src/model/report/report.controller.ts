@@ -3,6 +3,7 @@ import {
     Body,
     Controller,
     ForbiddenException,
+    Get,
     NotFoundException,
     Param,
     ParseIntPipe,
@@ -34,6 +35,54 @@ export class ReportController
 {
     constructor(modelService: ReportService) {
         super(ReportController.name, modelService);
+    }
+
+    @Get("nik/:nik")
+    public async findNIK(@Param("nik") nik: string): Promise<ResponseFormatInterface<ReportModel[]>> {
+        try {
+            const response: ResponseFormatInterface<ReportModel[]> = formatResponse<ReportModel[]>(
+                true,
+                200,
+                "NIK Found",
+                await this.modelService.findNIK(nik)
+            );
+
+            this.loggerService.log(`Find NIK: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find NIK: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Find NIK: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
+    @Get("nik/:nik/extend")
+    public async findNIKExtend(@Param("nik") nik: string): Promise<ResponseFormatInterface<ReportModel[]>> {
+        try {
+            const response: ResponseFormatInterface<ReportModel[]> = formatResponse<ReportModel[]>(
+                true,
+                200,
+                "Extend NIK Found",
+                await this.modelService.findNIKExtend(nik)
+            );
+
+            this.loggerService.log(`Find NIK Extend: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find NIK Extend: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Find NIK Extend: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
     }
 
     public async change(

@@ -17,6 +17,45 @@ export class ReportService
         super(ReportService.name, prismaService, { user: true, feedback: true });
     }
 
+    public async findNIK(nik: string): Promise<ReportModel[]> {
+        try {
+            const models: ReportModel[] = await this.prismaService[this.modelName].findMany({ where: { nik } });
+
+            this.loggerService.log(`Find NIK: ${JSON.stringify(models)}`);
+
+            return models;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find NIK: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Find NIK: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
+    public async findNIKExtend(nik: string): Promise<ReportModel[]> {
+        try {
+            const models: ReportModel[] = await this.prismaService[this.modelName].findMany({
+                where: { nik },
+                include: this.extend,
+            });
+
+            this.loggerService.log(`Find NIK Extend: ${JSON.stringify(models)}`);
+
+            return models;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find NIK Extend: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Find NIK Extend: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
     public async changeStatus(id: number, payload: ReportUpdateStatusDTO): Promise<ReportModel> {
         try {
             const model: ReportModel = await this.prismaService[this.modelName].update({

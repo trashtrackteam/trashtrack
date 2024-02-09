@@ -1,20 +1,24 @@
 GET http://localhost:3001/api/report
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/report/id/1
-Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/report/nik/64711092301923
 
 ###
 
 GET http://localhost:3001/api/report/extend
-Content-Type: application/json
 
 ###
 
 GET http://localhost:3001/api/report/id/2/extend
-Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/report/nik/64711092301923/extend
 
 ###
 
