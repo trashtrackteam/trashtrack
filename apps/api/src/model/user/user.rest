@@ -21,7 +21,7 @@ Content-Type: application/json
     "username": "username_3",
     "password": "password_3",
     "phoneNumber": "6281234567893",
-    "role": "admin",
+    "role": "admin1",
     "active" : true,
     "description": "Description 3"
 }

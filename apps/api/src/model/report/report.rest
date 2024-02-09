@@ -36,7 +36,7 @@ PUT http://localhost:3001/api/report/1/status
 Content-Type: application/json
 
 {
-    "status": 1
+    "status": "notResponded"
 }
 
 ###

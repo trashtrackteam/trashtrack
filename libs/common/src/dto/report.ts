@@ -1,4 +1,5 @@
-import { IsNumber, IsString } from "class-validator";
+import { $Enums, Status } from "@prisma/client";
+import { IsEnum, IsNumber, IsString } from "class-validator";
 
 export class ReportCreateDTO {
     @IsNumber()
@@ -23,6 +24,6 @@ export class ReportCreateDTO {
 export class ReportUpdateDTO {}
 
 export class ReportUpdateStatusDTO {
-    @IsNumber()
-    status: number;
+    @IsEnum(Status)
+    status: $Enums.Status;
 }

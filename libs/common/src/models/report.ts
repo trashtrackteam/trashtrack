@@ -1,5 +1,6 @@
-import { Prisma } from "@prisma/client";
-import { IsArray, IsDate, IsNumber, IsOptional, IsString } from "class-validator";
+import { $Enums, Prisma } from "@prisma/client";
+import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import { Status } from "../enum/status";
 
 export class ReportModel implements Prisma.ReportCreateInput {
     @IsNumber()
@@ -33,8 +34,8 @@ export class ReportModel implements Prisma.ReportCreateInput {
     @IsString()
     description: string;
 
-    @IsNumber()
-    status: number;
+    @IsEnum(Status)
+    status: $Enums.Status;
 
     @IsOptional()
     @IsArray()
