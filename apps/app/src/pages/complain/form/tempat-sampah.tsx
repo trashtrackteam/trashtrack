@@ -1,11 +1,20 @@
 import { IonContent, IonPage } from "@ionic/react";
-import { Card, CardHeader, CardContent, CardTitle, Button } from "@trashtrack/ui";
+import { Card, CardHeader, CardContent, CardTitle, Button, Input } from "@trashtrack/ui";
 import { useTrashBinQuery } from "../../../queries/get-trash-bin-query";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
 export function ComplainFormTempatSampah() {
     const { data, isLoading } = useTrashBinQuery();
     const history = useHistory();
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const filteredData = !isLoading
+        ? data.data.filter(
+              (trashBin: { id: number; name: string; description: string; latitude: number; longitude: number }) =>
+                  trashBin.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : [];
 
     return (
         <IonPage>
@@ -14,10 +23,16 @@ export function ComplainFormTempatSampah() {
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                 </div>
                 <div className="flex flex-col pt-8 gap-4">
+                    <Input
+                        type="text"
+                        placeholder="Search tempat sampah"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
                     {isLoading ? (
                         <div>Loading...</div>
                     ) : (
-                        data.data.map(
+                        filteredData.map(
                             (trashBin: {
                                 id: number;
                                 name: string;
