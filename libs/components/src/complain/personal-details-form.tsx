@@ -6,18 +6,9 @@ import { z } from "zod";
 
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "../ui/alert-dialog";
 import { Input } from "../ui/input";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
+import { setUserNIK } from "@trashtrack/utils";
 
 const formSchema = z.object({
     nik: z.coerce.number().min(16, {
@@ -31,31 +22,8 @@ const formSchema = z.object({
     }),
 });
 
-const DialogOnSubmit = ({ isOpen }: { isOpen: boolean }) => {
-    const history = useHistory();
-
-    return (
-        <AlertDialog open={isOpen}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Lorem ipsum!</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi veniam nemo voluptatibus totam
-                        laudantium. Aliquam non ullam suscipit.
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogAction onClick={() => history.replace("/complain/dashboard")}>
-                        Lanjutkan
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
-    );
-};
-
 export function PersonalDetailsForm() {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const history = useHistory();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -67,7 +35,8 @@ export function PersonalDetailsForm() {
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsDialogOpen(true);
+        setUserNIK(values.nik);
+        history.replace("/complain/dashboard");
     }
 
     return (
@@ -116,8 +85,6 @@ export function PersonalDetailsForm() {
                     Lanjutkan
                 </Button>
             </form>
-
-            <DialogOnSubmit isOpen={isDialogOpen} />
         </Form>
     );
 }

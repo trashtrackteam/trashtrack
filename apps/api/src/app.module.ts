@@ -9,10 +9,12 @@ import { TrashModule } from "./model/trash/trash.module";
 import { HistoryModule } from "./model/history/history.module";
 import { ReportModule } from "./model/report/report.module";
 import { FeedbackModule } from "./model/feedback/feedback.module";
+import { MiscModule } from "./model/misc/misc.module";
 
 @Module({
     imports: [
         ConfigModule,
+        MiscModule,
         UserModule,
         TrashBinModule,
         SubTrashBinModule,
