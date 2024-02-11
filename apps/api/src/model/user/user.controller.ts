@@ -6,6 +6,7 @@ import {
     NotFoundException,
     Param,
     ParseIntPipe,
+    Post,
     Put,
     UseInterceptors,
 } from "@nestjs/common";
@@ -61,6 +62,38 @@ export class UserController
             }
 
             this.loggerService.error(`Find Username: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
+    @Post("compare-password/:username")
+    public async comparePassword(
+        @Param("username") username: string,
+        @Body() payload: { password: string }
+    ): Promise<ResponseFormatInterface<boolean>> {
+        try {
+            this.loggerService.log(`Username: ${username}`);
+            this.loggerService.log(`Payload: ${JSON.stringify(payload)}`);
+
+            const isPasswordMatched: boolean = await this.modelService.comparePassword(username, payload.password);
+
+            const response: ResponseFormatInterface<boolean> = formatResponse<boolean>(
+                true,
+                200,
+                "Password Compared",
+                isPasswordMatched ? true : false
+            );
+
+            this.loggerService.log(`Compare Password: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException || error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`Compare Password: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Compare Password: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }

@@ -22,6 +22,8 @@ export function ComplainIndex() {
 
         fetchNik();
     }, [history]);
+
+    return <div></div>;
 }
 
 export default ComplainIndex;

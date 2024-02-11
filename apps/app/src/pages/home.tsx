@@ -23,7 +23,7 @@ export function Home() {
                             <Icons.complain strokeWidth={1} className="w-[78px] h-[74px]" />
                         </CardContent>
                     </Card>
-                    <Card className="flex flex-row">
+                    <Card className="flex flex-row" onClick={() => history.push("/operator")}>
                         <CardHeader className="w-56">
                             <CardTitle className="text-base">{t("home.operator.title")}</CardTitle>
                             <CardDescription className="text-xs">{t("home.operator.description")}</CardDescription>

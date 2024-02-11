@@ -45,6 +45,8 @@ export class ReportController
 
     @Get("nik/:nik")
     public async findNIK(@Param("nik") nik: string): Promise<ResponseFormatInterface<ReportModel[]>> {
+        this.loggerService.log(`NIK: ${nik}`);
+
         try {
             const response: ResponseFormatInterface<ReportModel[]> = formatResponse<ReportModel[]>(
                 true,

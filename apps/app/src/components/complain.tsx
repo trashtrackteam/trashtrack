@@ -6,6 +6,7 @@ import ComplainDashboard from "../pages/complain/dashboard";
 import ComplainFormPersonalDetails from "../pages/complain/form/personal-details";
 import ComplainFormTempatSampah from "../pages/complain/form/tempat-sampah";
 import ComplainFormLaporan from "../pages/complain/form/laporan";
+import { ComplainReportHistory } from "../pages/complain/form/report-history";
 
 const Complain: React.FC = () => {
     return (
@@ -18,6 +19,7 @@ const Complain: React.FC = () => {
                     render={() => <ComplainFormPersonalDetails />}
                     exact={true}
                 />
+                <Route path="/complain/form/report-history" render={() => <ComplainReportHistory />} exact={true} />
                 <Route path="/complain/form/tempat-sampah" render={() => <ComplainFormTempatSampah />} exact={true} />
                 <Route
                     path="/complain/form/laporan/:tempat_sampah_id"
