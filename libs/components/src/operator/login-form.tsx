@@ -87,7 +87,7 @@ export function LoginForm() {
         onSuccess: (data) => {
             if (data.data === true) {
                 setOperator(form.getValues("username"));
-                history.push("/operator/dashboard");
+                history.push("/operator/tabs/dashboard");
             } else {
                 setIsOpen(true);
             }

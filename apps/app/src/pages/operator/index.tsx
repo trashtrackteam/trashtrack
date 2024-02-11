@@ -8,7 +8,7 @@ export function OperatorIndex() {
 
     useEffect(() => {
         if (operator.operator) {
-            history.push("/operator/dashboard");
+            history.push("/operator/tabs/dashboard");
         } else {
             history.push("/operator/form/login");
         }
