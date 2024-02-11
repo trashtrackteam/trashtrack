@@ -33,7 +33,44 @@ async function main() {
         });
     });
 
-    console.log({ operators, admin });
+    const trash = [];
+    const subTrashBin = [];
+    const trashBin = [];
+    [1, 2, 3, 4, 5].forEach(async (trashBinId) => {
+        const tempTrashBin = await prisma.trashBin.create({
+            data: {
+                name: `Tempat Sampah ${trashBinId}`,
+                latitude: trashBinId * 100,
+                longitude: trashBinId * 150,
+                description: `Deskripsi ${trashBinId}`,
+            },
+        });
+
+        ["Organik", "Anorganik", "Logam"].forEach(async (subTrashBinName) => {
+            const tempSubTrashBin = await prisma.subTrashBin.create({
+                data: {
+                    trashBinId: tempTrashBin.id,
+                    name: subTrashBinName,
+                },
+            });
+
+            subTrashBin.push(tempSubTrashBin);
+
+            for (let i = 0; i < 5; i++) {
+                const tempTrash = await prisma.trash.create({
+                    data: {
+                        subTrashBinId: tempSubTrashBin.id,
+                    },
+                });
+
+                trash.push(tempTrash);
+            }
+        });
+
+        return tempTrashBin;
+    });
+
+    console.log({ operators, admin, trashBin, subTrashBin, trash });
 }
 
 main()
