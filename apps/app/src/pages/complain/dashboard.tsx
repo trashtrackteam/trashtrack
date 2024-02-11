@@ -41,11 +41,12 @@ export function ComplainDashboard() {
                     </div>
                     <Card className="flex flex-col">
                         <CardHeader className="text-center">
-                            <CardTitle className="text-base">Lihat riwayat laporan kamu</CardTitle>
+                            <CardTitle className="text-lg">Lihat riwayat laporan kamu</CardTitle>
                         </CardHeader>
-                        <CardContent className="pt-6">
+                        <CardContent className="pt-2">
                             <Button
                                 className="font-bold text-xs w-full"
+                                variant={"secondary"}
                                 onClick={() => history.replace("/complain/form/report-history")}
                             >
                                 Riwayat Laporan
@@ -54,11 +55,12 @@ export function ComplainDashboard() {
                     </Card>
                     <Card className="flex flex-col">
                         <CardHeader className="text-center">
-                            <CardTitle className="text-base">Sampaikan keluhan atau laporan baru kamu</CardTitle>
+                            <CardTitle className="text-lg">Sampaikan keluhan atau laporan baru kamu</CardTitle>
                         </CardHeader>
-                        <CardContent className="pt-6">
+                        <CardContent className="pt-2">
                             <Button
                                 className="font-bold text-xs w-full"
+                                variant={"secondary"}
                                 onClick={() => history.replace("/complain/form/tempat-sampah")}
                             >
                                 Lapor Sekarang
