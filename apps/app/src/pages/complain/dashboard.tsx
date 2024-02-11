@@ -37,7 +37,9 @@ export function ComplainDashboard() {
                     <Card className="flex flex-col">
                         <CardHeader className="text-center">
                             <CardTitle className="text-base">Halaman sedang dalam pengembangan</CardTitle>
-                            <CardDescription className="text-xs">NIK: {nik}</CardDescription>
+                            <CardDescription className="text-xs">
+                                NIK: {nik} <br />
+                            </CardDescription>
                         </CardHeader>
                         <CardContent className="pt-6">
                             <Button className="font-bold text-xs w-full" onClick={() => history.replace("/tabs/home")}>

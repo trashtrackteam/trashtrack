@@ -1,0 +1,74 @@
+diff --git a/src/executors/seed/executor.js b/src/executors/seed/executor.js
+index 554abf7a8a8e19752522a2e52c021706366766a4..495d9485330d7c779c5840855b8934c544d56d61 100644
+--- a/src/executors/seed/executor.js
++++ b/src/executors/seed/executor.js
+@@ -5,30 +5,47 @@ const core_1 = require("@nx-tools/core");
+ const devkit_1 = require("@nx/devkit");
+ const node_path_1 = require("node:path");
+ function run(options, ctx) {
+-    return tslib_1.__awaiter(this, void 0, void 0, function* () {
+-        if (!options.script) {
+-            throw new Error('You must specify a seed script file.');
+-        }
+-        const command = `${(0, devkit_1.getPackageManagerCommand)().exec} ts-node`;
+-        const args = getArgs(options, ctx);
+-        yield core_1.logger.group('Seeding Database', () => tslib_1.__awaiter(this, void 0, void 0, function* () {
+-            yield (0, core_1.getExecOutput)(command, args, { ignoreReturnCode: true }).then((res) => {
+-                var _a;
+-                if (res.stderr.length > 0 && res.exitCode != 0) {
+-                    throw new Error(`${(_a = res.stderr.trim()) !== null && _a !== void 0 ? _a : 'unknown error'}`);
+-                }
+-            });
+-        }));
+-        return { success: true };
+-    });
++  return tslib_1.__awaiter(this, void 0, void 0, function* () {
++    if (!options.script) {
++      throw new Error("You must specify a seed script file.");
++    }
++    const command = `${
++      (0, devkit_1.getPackageManagerCommand)().exec
++    } ts-node --transpileOnly`;
++    const args = getArgs(options, ctx);
++    yield core_1.logger.group("Seeding Database", () =>
++      tslib_1.__awaiter(this, void 0, void 0, function* () {
++        yield (0, core_1.getExecOutput)(command, args, {
++          ignoreReturnCode: true,
++        }).then((res) => {
++          var _a;
++          if (res.stderr.length > 0 && res.exitCode != 0) {
++            throw new Error(
++              `${
++                (_a = res.stderr.trim()) !== null && _a !== void 0
++                  ? _a
++                  : "unknown error"
++              }`
++            );
++          }
++        });
++      })
++    );
++    return { success: true };
++  });
+ }
+ exports.default = run;
+ const getArgs = (options, ctx) => {
+-    var _a;
+-    const args = [];
+-    const tsConfig = (_a = options === null || options === void 0 ? void 0 : options.tsConfig) !== null && _a !== void 0 ? _a : (0, node_path_1.join)((0, core_1.getProjectRoot)(ctx), 'tsconfig.json');
+-    args.push(`--project=${tsConfig}`);
+-    args.push(options.script);
+-    return args;
++  var _a;
++  const args = [];
++  const tsConfig =
++    (_a =
++      options === null || options === void 0 ? void 0 : options.tsConfig) !==
++      null && _a !== void 0
++      ? _a
++      : (0, node_path_1.join)((0, core_1.getProjectRoot)(ctx), "tsconfig.json");
++  args.push(`--project=${tsConfig}`);
++  args.push(options.script);
++  return args;
+ };
+ //# sourceMappingURL=executor.js.map

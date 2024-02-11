@@ -103,7 +103,8 @@
             "executor": "@nx-tools/nx-prisma:seed",
             "options": {
                 "schema": "apps/api/prisma/schema.prisma",
-                "script": "apps/api/src/seed.ts"
+                "script": "apps/api/prisma/seed.ts",
+                "tsConfig": "apps/api/tsconfig.app.json"
             }
         },
         "prisma-validate": {

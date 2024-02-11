@@ -101,7 +101,8 @@
     },
     "pnpm": {
         "patchedDependencies": {
-            "@nx-extend/shadcn-ui@0.2.2": "patches/@nx-extend__shadcn-ui@0.2.2.patch"
+            "@nx-extend/shadcn-ui@0.2.2": "patches/@nx-extend__shadcn-ui@0.2.2.patch",
+            "@nx-tools/nx-prisma@5.1.0": "patches/@nx-tools__nx-prisma@5.1.0.patch"
         }
     }
 }
