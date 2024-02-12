@@ -1,20 +1,32 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { Card, CardHeader, CardContent, CardTitle, Button, Input } from "@trashtrack/ui";
-import { useTrashBinQuery } from "../../../queries/get-trash-bin-query";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import Fuse from "fuse.js";
+
+import { useTrashBinQuery } from "../../../queries/get-trash-bin-query";
+
+interface TrashBin {
+    id: number;
+    name: string;
+    description: string;
+    latitude: number;
+    longitude: number;
+}
 
 export function ComplainFormTempatSampah() {
     const { data, isLoading } = useTrashBinQuery();
     const history = useHistory();
     const [searchTerm, setSearchTerm] = useState("");
 
-    const filteredData = !isLoading
-        ? data.data.filter(
-              (trashBin: { id: number; name: string; description: string; latitude: number; longitude: number }) =>
-                  trashBin.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        : [];
+    const fuseOptions = {
+        keys: ["name"],
+        threshold: 0.4,
+    };
+
+    const fuse = new Fuse(!isLoading ? (data.data as TrashBin[]) : [], fuseOptions);
+
+    const filteredData = !isLoading ? fuse.search(searchTerm).map((result) => result.item) : [];
 
     return (
         <IonPage>
