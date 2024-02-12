@@ -5,6 +5,7 @@
         "@capacitor/android": "../../node_modules/@capacitor/android",
         "@capacitor/preferences": "../../node_modules/@capacitor/preferences",
         "@capacitor/network": "../../node_modules/@capacitor/network",
+        "@capacitor/camera": "../../node_modules/@capacitor/camera",
         "@capacitor/app": "../../node_modules/@capacitor/app"
     }
 }

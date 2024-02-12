@@ -22,6 +22,9 @@ dependencies:
   '@capacitor/app':
     specifier: ^5.0.7
     version: 5.0.7(@capacitor/core@5.6.0)
+  '@capacitor/camera':
+    specifier: ^5.0.9
+    version: 5.0.9(@capacitor/core@5.6.0)
   '@capacitor/core':
     specifier: ^5.6.0
     version: 5.6.0
@@ -70,6 +73,9 @@ dependencies:
   axios:
     specifier: ^1.0.0
     version: 1.6.7
+  base64-arraybuffer:
+    specifier: ^1.0.2
+    version: 1.0.2
   bcrypt:
     specifier: ^5.1.1
     version: 5.1.1
@@ -1769,6 +1775,14 @@ packages:
 
   /@capacitor/app@5.0.7(@capacitor/core@5.6.0):
     resolution: {integrity: sha512-oad0jwQu+vgQDukeS9UV56yG10dlxkAGGl26IQpZlTmg3dTI9qSJtvhmlLfkF0nEtoj5IsVQUPE+NLH1oZkgGQ==}
+    peerDependencies:
+      '@capacitor/core': ^5.0.0
+    dependencies:
+      '@capacitor/core': 5.6.0
+    dev: false
+
+  /@capacitor/camera@5.0.9(@capacitor/core@5.6.0):
+    resolution: {integrity: sha512-ibuctDzQWVABnJCtIuiFdVYvLbiQNln9gKMZGNN0bZ6oSqoxzDlN7etueJwyFaaRZZlVrXc/sMWuhOkeVJEHcQ==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
@@ -6088,6 +6102,11 @@ packages:
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  /base64-arraybuffer@1.0.2:
+    resolution: {integrity: sha512-I3yl4r9QB5ZRY3XuJVEPfc2XhZO6YweFPI+UovAzn+8/hb3oJ6lnysaFcjVpkCPfVWFUDvoZ8kmVDP7WyRtYtQ==}
+    engines: {node: '>= 0.6.0'}
+    dev: false
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}

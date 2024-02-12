@@ -11,6 +11,9 @@ devDependencies:
   '@capacitor/app':
     specifier: ../../node_modules/@capacitor/app
     version: link:../../node_modules/@capacitor/app
+  '@capacitor/camera':
+    specifier: ../../node_modules/@capacitor/camera
+    version: link:../../node_modules/@capacitor/camera
   '@capacitor/cli':
     specifier: ^5.0.3
     version: 5.6.0
