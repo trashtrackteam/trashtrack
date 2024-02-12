@@ -6,10 +6,12 @@ export function fallbackRender({
 }) {
     return (
         <div className="pt-24 px-6 text-left">
-            <h1 className="text-lg mb-4">Something went wrong.</h1>
-            <p className="text-base">
-                <pre>{error.message}</pre>
-            </p>
+            <div className="container">
+                <h1 className="text-lg mb-4">Something went wrong.</h1>
+                <p className="text-xs">
+                    <pre style={{ textWrap: "balance" }}>{error.message}</pre>
+                </p>
+            </div>
         </div>
     );
 }

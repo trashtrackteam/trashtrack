@@ -10,11 +10,10 @@ export function ComplainFormLaporan() {
             <IonContent className="complain-form-laporan ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
+                    <p className="text-xs text-left text-slate-600">Laporan Tempah Sampah</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-4">
-                    <h1 className="font-bold text-lg">Laporan</h1>
-                    <div>Tempat Sampah ID: {tempat_sampah_id}</div>
-                    <ComplainLaporanForm />
+                    <ComplainLaporanForm tempah_sampah_id={tempat_sampah_id} />
                 </div>
             </IonContent>
         </IonPage>

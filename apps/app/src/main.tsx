@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./global.css";
 import App from "./components/app";
 import { fallbackRender } from "./errror-boundary";
+import APIBoundary from "./api-boundary";
 import "./i18n";
 
 export const queryClient = new QueryClient();
@@ -15,7 +16,9 @@ root.render(
     <StrictMode>
         <ErrorBoundary FallbackComponent={fallbackRender}>
             <QueryClientProvider client={queryClient}>
-                <App />
+                <APIBoundary>
+                    <App />
+                </APIBoundary>
             </QueryClientProvider>
         </ErrorBoundary>
     </StrictMode>
