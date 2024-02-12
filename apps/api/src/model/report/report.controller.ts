@@ -10,11 +10,8 @@ import {
     ParseIntPipe,
     Put,
     UseInterceptors,
-    UploadedFile,
 } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
 import "multer";
-import { Express } from "express";
 import {
     Override,
     ReportCreateDTO,
@@ -103,22 +100,31 @@ export class ReportController
 
     @Override
     @Post()
-    @UseInterceptors(FileInterceptor("image"))
     public async addWithUpload(
         @Body()
         payload: {
-            trashBinId: number;
+            trashBinId: string;
             nik: string;
             name: string;
             phoneNumber: string;
             description: string;
-        },
-        @UploadedFile() file: Express.Multer.File
+            image: string;
+        }
     ): Promise<ResponseFormatInterface<ReportModel>> {
+        this.loggerService.log(`Trash Bin: ${payload.trashBinId}`);
+
+        const trashBinId = parseInt(payload.trashBinId, 10);
+        const imageBuffer = Buffer.from(payload.image, "base64");
+
+        const hasBuffer = typeof imageBuffer === "object" && imageBuffer instanceof Buffer;
+
+        this.loggerService.log(`Has Buffer: ${hasBuffer}`);
+
         return super.add({
             ...payload,
-            imageName: file.originalname,
-            imageData: file.buffer,
+            trashBinId,
+            imageName: "image.jpg",
+            imageData: imageBuffer,
         });
     }
 

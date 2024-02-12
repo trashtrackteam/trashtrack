@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,16 +20,35 @@ import {
 } from "../../../ui/alert-dialog";
 import { pickImage } from "./pick-image";
 import { Textarea } from "../../../ui/textarea";
+import { API_URL } from "@trashtrack/utils";
+import { useMutation } from "@tanstack/react-query";
+
+import { CapacitorHttp } from "@capacitor/core";
+
+function fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
 
 function OnSubmitModal({
     isOpen,
     setIsOpen,
-    values,
+    isError,
+    error,
+    isPending,
+    isSuccess,
     image,
 }: {
     isOpen: boolean;
     setIsOpen: (value: boolean) => void;
-    values: z.infer<typeof formSchema>;
+    isError?: boolean;
+    error: Error | null;
+    isPending?: boolean;
+    isSuccess?: boolean;
     image: File | undefined;
 }) {
     return (
@@ -36,8 +56,17 @@ function OnSubmitModal({
             <AlertDialogContent className="min-w-full container">
                 <AlertDialogHeader>Laporan Form</AlertDialogHeader>
                 <AlertDialogDescription className="text-xs">
-                    <pre style={{ textWrap: "wrap" }}>{JSON.stringify(values.gambarFile)}</pre>
-                    <pre style={{ textWrap: "wrap" }}>{image?.name}</pre>
+                    {isPending && "Sedang mengirim laporan..."}
+                    {isError && (
+                        <>
+                            Gagal mengirim laporan.
+                            <br />
+                            {error?.name} - {error?.message}
+                            <br />
+                            {error?.stack}
+                        </>
+                    )}
+                    {isSuccess && "Laporan berhasil dikirim."}
                 </AlertDialogDescription>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -59,10 +88,6 @@ const formSchema = z.object({
 export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: string }) {
     const [pickedImage, setPickedImage] = useState<File>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [values, setValues] = useState<z.infer<typeof formSchema>>({
-        deskripsi: "",
-        gambarFile: "",
-    });
 
     const history = useHistory();
 
@@ -74,8 +99,36 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        setValues(values);
+    const { mutateAsync, isError, isPending, isSuccess, error } = useMutation({
+        mutationKey: ["postReport"],
+        mutationFn: (formData: FormData) => {
+            return CapacitorHttp.post({
+                url: API_URL + `/report`,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "*/*",
+                },
+                data: JSON.parse(JSON.stringify(Object.fromEntries(formData.entries()))),
+            }).then((res) => res.data);
+        },
+        onError: (error) => {
+            setIsOpen(true);
+        },
+    });
+
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        const file = await fileToBase64(pickedImage as File);
+
+        const formData = new FormData();
+
+        formData.append("trashBinId", tempah_sampah_id);
+        formData.append("nik", "3602041211870001");
+        formData.append("name", "Yehezkiel Dio Sinolungan");
+        formData.append("description", values.deskripsi);
+        formData.append("phoneNumber", "081234567890");
+        formData.append("image", file);
+
+        await mutateAsync(formData);
         setIsOpen(true);
     }
 
@@ -127,7 +180,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                                             className="w-full h- object-cover"
                                         />
                                     )}
-                                    <Input readOnly type="text" {...field} />
+                                    <Input type="text" {...field} />
                                 </>
                             </FormControl>
                             <FormMessage />
@@ -144,7 +197,15 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                     </Button>
                 </div>
             </form>
-            <OnSubmitModal isOpen={isOpen} setIsOpen={setIsOpen} values={values} image={pickedImage && pickedImage} />
+            <OnSubmitModal
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                isError={isError}
+                error={error}
+                isPending={isPending}
+                isSuccess={isSuccess}
+                image={pickedImage && pickedImage}
+            />
         </Form>
     );
 }
