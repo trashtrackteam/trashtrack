@@ -54,8 +54,8 @@ function OnSubmitModal({
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent className="min-w-full container">
-                <AlertDialogHeader>Laporan Form</AlertDialogHeader>
-                <AlertDialogDescription className="text-xs">
+                <AlertDialogHeader className="text-sm text-center">Laporan Form</AlertDialogHeader>
+                <AlertDialogDescription className="text-xs text-center">
                     {isPending && "Sedang mengirim laporan..."}
                     {isError && (
                         <>

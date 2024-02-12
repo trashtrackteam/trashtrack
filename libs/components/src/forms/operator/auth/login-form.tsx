@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-import { Button } from "../ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { Input } from "../ui/input";
+import { Button } from "../../../ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
+import { Input } from "../../../ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { API_URL } from "@trashtrack/utils";
 
@@ -17,33 +17,26 @@ import {
     AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
-} from "../ui/alert-dialog";
+} from "../../../ui/alert-dialog";
 import { useHistory } from "react-router-dom";
-import { OperatorContext } from "../api/operator-context";
+import { OperatorContext } from "../../../api/operator-context";
 import { useContext, useState } from "react";
-export function SubmitModal({
-    isOpen,
-    setIsOpen,
-    onClose,
-    isFailed,
-    isLoading,
-    data,
-}: {
-    isOpen: boolean;
-    setIsOpen: (value: boolean) => void;
-    onClose: () => void;
-    isFailed: boolean;
-    isLoading: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any;
-}) {
+import { useTranslation } from "react-i18next";
+
+export function ErrorSubmitDialog({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (value: boolean) => void }) {
+    const { t } = useTranslation();
+
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-            <AlertDialogContent>
-                <AlertDialogHeader>Login Account</AlertDialogHeader>
-                <AlertDialogDescription>Error trying to login. Please try again.</AlertDialogDescription>
+            <AlertDialogContent className="min-w-full container">
+                <AlertDialogHeader className="text-sm text-center">
+                    {t("operator.form.login.error.title")}
+                </AlertDialogHeader>
+                <AlertDialogDescription className="text-xs text-center">
+                    {t("operator.form.login.error.description")}
+                </AlertDialogDescription>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>{t("operator.form.login.error.cancel")}</AlertDialogCancel>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
@@ -51,11 +44,11 @@ export function SubmitModal({
 }
 
 const formSchema = z.object({
-    username: z.coerce.string().min(2, {
-        message: "Username harus terdiri dari minimal 2 karakter.",
+    username: z.coerce.string().min(4, {
+        message: "Username harus terdiri dari minimal 4 karakter.",
     }),
-    password: z.string().min(2, {
-        message: "Password harus terdiri dari minimal 2 karakter.",
+    password: z.string().min(4, {
+        message: "Password harus terdiri dari minimal 4 karakter.",
     }),
 });
 
@@ -63,6 +56,7 @@ export function LoginForm() {
     const history = useHistory();
     const { setOperator } = useContext(OperatorContext);
     const [isOpen, setIsOpen] = useState(false);
+    const { t } = useTranslation();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -72,7 +66,7 @@ export function LoginForm() {
         },
     });
 
-    const { mutateAsync, data, isError, isPending } = useMutation({
+    const { mutateAsync } = useMutation({
         mutationKey: ["comparePassword"],
         mutationFn: (values: { username: string; password: string }) => {
             return fetch(API_URL + `/user/compare-password/${values.username}`, {
@@ -131,19 +125,17 @@ export function LoginForm() {
                     )}
                 />
 
-                <Button className="w-full" type="submit">
-                    Lanjutkan
-                </Button>
+                <div className="flex flex-col gap-4">
+                    <Button className="w-full" type="submit">
+                        {t("operator.form.login.submit")}
+                    </Button>
+                    <Button className="w-full" variant="secondary" onClick={() => history.replace("/tabs/home")}>
+                        {t("operator.form.login.back")}
+                    </Button>
+                </div>
             </form>
 
-            <SubmitModal
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                onClose={() => setIsOpen(false)}
-                isFailed={isError}
-                isLoading={isPending}
-                data={data}
-            />
+            <ErrorSubmitDialog isOpen={isOpen} setIsOpen={setIsOpen} />
         </Form>
     );
 }

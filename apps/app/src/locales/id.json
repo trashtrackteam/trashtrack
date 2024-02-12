@@ -15,6 +15,19 @@
                 "title": "Ganti Bahasa",
                 "description": "Pilih bahasa yang ingin Anda gunakan untuk aplikasi."
             }
+        },
+        "operator": {
+            "form": {
+                "login": {
+                    "title": "Selamat datang, silakan login",
+                    "submit": "Login",
+                    "back": "Kembali",
+                    "error": {
+                        "title": "Operator Login",
+                        "description": "Username atau password salah, silakan coba lagi."
+                    }
+                }
+            }
         }
     }
 }

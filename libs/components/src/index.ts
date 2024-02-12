@@ -15,7 +15,7 @@ export * from "./ui/use-toast";
 export * from "./ui/textarea";
 
 export * from "./complain/personal-details-form";
-export * from "./operator/login-form";
 export * from "./api/operator-context";
 
+export * from "./forms/operator/auth/login-form";
 export * from "./forms/complain/laporan/laporan-form";
