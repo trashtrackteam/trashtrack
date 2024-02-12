@@ -26,7 +26,8 @@ export function ComplainFormTempatSampah() {
 
     const fuse = new Fuse(!isLoading ? (data.data as TrashBin[]) : [], fuseOptions);
 
-    const filteredData = !isLoading ? fuse.search(searchTerm).map((result) => result.item) : [];
+    const filteredData =
+        !isLoading && searchTerm === "" ? data.data : fuse.search(searchTerm).map((result) => result.item);
 
     return (
         <IonPage>
@@ -61,7 +62,7 @@ export function ComplainFormTempatSampah() {
                                         <Button
                                             className="font-bold text-xs w-full"
                                             variant={"secondary"}
-                                            onClick={() => history.replace(`/complain/form/laporan/${trashBin.id}`)}
+                                            onClick={() => history.push(`/complain/form/laporan/${trashBin.id}`)}
                                         >
                                             Laporkan
                                         </Button>
