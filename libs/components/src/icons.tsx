@@ -7,6 +7,7 @@ import {
     type Icon as LucideIcon,
     LayoutDashboard,
     Trash,
+    Plus,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -19,4 +20,5 @@ export const Icons = {
     dashboard: LayoutDashboard,
     user: UserCog,
     trash: Trash,
+    add: Plus,
 };
