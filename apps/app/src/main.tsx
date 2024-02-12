@@ -1,3 +1,10 @@
+/**
+ * Notes from the lead developer of this codebase:
+ * "Never gonna touch Capacitor again, after this competition is over. Such a mess.
+ * I'll be considering moving to Expo, or Flutter, or just plain old web."
+ * - @elizielx
+ */
+
 import { StrictMode } from "react";
 import * as ReactDOM from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
