@@ -81,9 +81,15 @@ export function PersonalDetailsForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full" type="submit">
-                    Lanjutkan
-                </Button>
+
+                <div className="flex flex-col gap-4">
+                    <Button className="w-full" type="submit">
+                        Lanjutkan
+                    </Button>
+                    <Button className="w-full" variant="secondary" onClick={() => history.replace("/tabs/home")}>
+                        Kembali
+                    </Button>
+                </div>
             </form>
         </Form>
     );

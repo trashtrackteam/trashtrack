@@ -17,7 +17,12 @@ export default defineConfig({
         host: "localhost",
     },
 
-    plugins: [react(), nxViteTsPaths()],
+    plugins: [
+        react({
+            include: ["**/*.tsx"],
+        }),
+        nxViteTsPaths(),
+    ],
 
     // Uncomment this if you are using workers.
     // worker: {
@@ -28,6 +33,7 @@ export default defineConfig({
         outDir: "../../dist/apps/app",
         reportCompressedSize: true,
         emptyOutDir: false,
+        manifest: true,
         commonjsOptions: {
             transformMixedEsModules: true,
         },
