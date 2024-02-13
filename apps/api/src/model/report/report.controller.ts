@@ -1,5 +1,4 @@
 import {
-    Post,
     BadRequestException,
     Body,
     Controller,
@@ -90,44 +89,7 @@ export class ReportController
         }
     }
 
-    public async add(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        @Body() payload: ReportCreateDTO
-    ): Promise<ResponseFormatInterface<ReportModel>> {
-        this.loggerService.error(`Add: Method Is Disabled`);
-        throw new ForbiddenException("Method Is Disabled");
-    }
-
     @Override
-    @Post()
-    public async addWithUpload(
-        @Body()
-        payload: {
-            trashBinId: string;
-            nik: string;
-            name: string;
-            phoneNumber: string;
-            description: string;
-            image: string;
-        }
-    ): Promise<ResponseFormatInterface<ReportModel>> {
-        this.loggerService.log(`Trash Bin: ${payload.trashBinId}`);
-
-        const trashBinId = parseInt(payload.trashBinId, 10);
-        const imageBuffer = Buffer.from(payload.image, "base64");
-
-        const hasBuffer = typeof imageBuffer === "object" && imageBuffer instanceof Buffer;
-
-        this.loggerService.log(`Has Buffer: ${hasBuffer}`);
-
-        return super.add({
-            ...payload,
-            trashBinId,
-            imageName: "image.jpg",
-            imageData: imageBuffer,
-        });
-    }
-
     public async change(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         @Param("id", ParseIntPipe) id: number,

@@ -22,16 +22,18 @@ GET http://localhost:3001/api/report/nik/64711092301923/extend
 
 ###
 
-POST http://localhost:3001/api/report
-Content-Type: application/json
+# POST http://localhost:3001/api/report
+# Content-Type: application/json
 
-{
-    "trashBinId": 2,
-    "nik": "6471109230192341",
-    "name": "Budi",
-    "phoneNumber": "6281234567891",
-    "description": "Tempat sampah rusak"
-}
+# {
+#     "trashBinId": 2,
+#     "nik": "6471109230192341",
+#     "name": "Budi",
+#     "phoneNumber": "6281234567891",
+#     "imageName": "Test 123",
+#     "imageData": "",
+#     "description": "Tempat sampah rusak"
+# }
 
 ###
 
