@@ -91,3 +91,18 @@ ion-content.onboarding {
 ion-content.home {
     --background: white;
 }
+
+ion-fab-button::part(native) {
+    --background: black;
+    background-color: black;
+}
+
+ion-fab-button::part(native):hover::after {
+    --background: black;
+    background-color: black;
+}
+
+ion-fab-button::part(native):active::after {
+    --background: black;
+    background-color: black;
+}
