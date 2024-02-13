@@ -24,7 +24,8 @@
                     "back": "Back",
                     "error": {
                         "title": "Operator Login",
-                        "description": "Invalid username or password, please try again."
+                        "description": "Invalid username or password, please try again.",
+                        "cancel": "Cancel"
                     }
                 }
             }

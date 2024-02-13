@@ -24,7 +24,8 @@
                     "back": "Kembali",
                     "error": {
                         "title": "Operator Login",
-                        "description": "Username atau password salah, silakan coba lagi."
+                        "description": "Username atau password salah, silakan coba lagi.",
+                        "cancel": "Batal"
                     }
                 }
             }

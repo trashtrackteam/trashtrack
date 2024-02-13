@@ -70,6 +70,7 @@ export function LoginForm() {
         queryKey: ["getUserDataLoginForm"],
         queryFn: () => fetch(API_URL + `/user/username/${form.getValues("username")}`).then((res) => res.json()),
         enabled: false,
+        staleTime: 5000,
     });
 
     const { mutateAsync, isPending } = useMutation({
@@ -97,6 +98,9 @@ export function LoginForm() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setOperator(null);
+        setRole(null);
+
         refetch();
         await mutateAsync({
             username: values.username,
