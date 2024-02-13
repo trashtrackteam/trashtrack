@@ -21,6 +21,7 @@ import Complain from "./complain";
 import Operator from "./operator";
 import { useState } from "react";
 import { OperatorContext } from "@trashtrack/ui";
+import Trashbin from "./trashbin";
 
 setupIonicReact();
 
@@ -49,6 +50,9 @@ const App: React.FC = () => {
                         </Route>
                         <Route path="/operator">
                             <Operator />
+                        </Route>
+                        <Route path="/trash-bin">
+                            <Trashbin />
                         </Route>
                         <Route path="/" render={() => <Redirect to="/onboarding" />} exact={true} />
                     </OperatorContext.Provider>

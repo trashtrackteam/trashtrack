@@ -4,9 +4,12 @@ import {
     UserPlus,
     Settings2,
     UserCog,
+    Trash,
+    Trash2,
+    ClipboardSignature,
+    ChevronLeft,
     type Icon as LucideIcon,
     LayoutDashboard,
-    Trash,
     Plus,
 } from "lucide-react";
 
@@ -21,4 +24,7 @@ export const Icons = {
     user: UserCog,
     trash: Trash,
     add: Plus,
+    subTrashbin: Trash2,
+    report: ClipboardSignature,
+    back: ChevronLeft,
 };

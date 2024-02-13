@@ -14,13 +14,13 @@ const Tabs: React.FC = () => {
                 <Route path="/tabs" render={() => <Redirect to="/tabs/home" />} exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom" mode="ios" translucent className="pb-4">
-                <IonTabButton tab="tab1" href="/tabs/home">
+                <IonTabButton tab="homeTab" href="/tabs/home">
                     <Icons.home strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2">Home</IonLabel>
+                    <IonLabel className="pt-2 pb-2">Home</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="tab2" href="/tabs/preferences">
+                <IonTabButton tab="preferencesTabs" href="/tabs/preferences">
                     <Icons.settings strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2">Preferences</IonLabel>
+                    <IonLabel className="pt-2 pb-2">Preferences</IonLabel>
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>
