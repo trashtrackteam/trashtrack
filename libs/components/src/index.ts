@@ -13,6 +13,7 @@ export * from "./ui/toast";
 export * from "./ui/toaster";
 export * from "./ui/use-toast";
 export * from "./ui/textarea";
+export * from "./ui/sheet";
 
 export * from "./complain/personal-details-form";
 export * from "./api/operator-context";

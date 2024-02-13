@@ -28,7 +28,11 @@ import { CapacitorHttp } from "@capacitor/core";
 function fileToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
+        reader.onloadend = () => {
+            // Extract the base64-encoded data without the data URL prefix
+            const base64String = (reader.result as string).split(",")[1];
+            resolve(base64String);
+        };
         reader.onerror = reject;
         reader.readAsDataURL(file);
     });
@@ -41,7 +45,6 @@ function OnSubmitModal({
     error,
     isPending,
     isSuccess,
-    image,
 }: {
     isOpen: boolean;
     setIsOpen: (value: boolean) => void;
@@ -49,7 +52,6 @@ function OnSubmitModal({
     error: Error | null;
     isPending?: boolean;
     isSuccess?: boolean;
-    image: File | undefined;
 }) {
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -101,15 +103,34 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
 
     const { mutateAsync, isError, isPending, isSuccess, error } = useMutation({
         mutationKey: ["postReport"],
-        mutationFn: (formData: FormData) => {
+        mutationFn: (formData: {
+            trashBinId: string;
+            nik: string;
+            name: string;
+            description: string;
+            phoneNumber: string;
+            imageName: string;
+            imageData: string;
+        }) => {
             return CapacitorHttp.post({
                 url: API_URL + `/report`,
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "*/*",
                 },
-                data: JSON.parse(JSON.stringify(Object.fromEntries(formData.entries()))),
+                data: {
+                    trashBinId: parseInt(formData.trashBinId),
+                    nik: formData.nik,
+                    name: formData.name,
+                    description: formData.description,
+                    phoneNumber: formData.phoneNumber,
+                    imageName: formData.imageName,
+                    imageData: formData.imageData,
+                },
             }).then((res) => res.data);
+        },
+        onSuccess: () => {
+            setIsOpen(true);
         },
         onError: (error) => {
             setIsOpen(true);
@@ -119,16 +140,15 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const file = await fileToBase64(pickedImage as File);
 
-        const formData = new FormData();
-
-        formData.append("trashBinId", tempah_sampah_id);
-        formData.append("nik", "3602041211870001");
-        formData.append("name", "Yehezkiel Dio Sinolungan");
-        formData.append("description", values.deskripsi);
-        formData.append("phoneNumber", "081234567890");
-        formData.append("image", file);
-
-        await mutateAsync(formData);
+        await mutateAsync({
+            trashBinId: tempah_sampah_id,
+            nik: "3602041211870001",
+            name: "Yehezkiel Dio Sinolungan",
+            description: values.deskripsi,
+            phoneNumber: "081234567890",
+            imageName: values.gambarFile,
+            imageData: file,
+        });
         setIsOpen(true);
     }
 
@@ -155,7 +175,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                         <FormItem>
                             <FormLabel>Laporan</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Deskripsi laporan" {...field} />
+                                <Textarea disabled={isPending} placeholder="Deskripsi laporan" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -180,7 +200,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                                             className="w-full h- object-cover"
                                         />
                                     )}
-                                    <Input type="text" {...field} />
+                                    <Input hidden disabled={isPending} type="text" {...field} />
                                 </>
                             </FormControl>
                             <FormMessage />
@@ -189,8 +209,8 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                 />
 
                 <div className="flex flex-col gap-4">
-                    <Button className="w-full" type="submit">
-                        Lanjutkan
+                    <Button className="w-full" type="submit" disabled={isPending}>
+                        {isPending ? "Sedang mengirim laporan..." : "Kirim Laporan"}
                     </Button>
                     <Button className="w-full" variant="secondary" onClick={() => history.replace("/tabs/home")}>
                         Kembali
@@ -204,7 +224,6 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                 error={error}
                 isPending={isPending}
                 isSuccess={isSuccess}
-                image={pickedImage && pickedImage}
             />
         </Form>
     );

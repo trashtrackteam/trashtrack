@@ -28,7 +28,9 @@ export function OperatorUserDisplay() {
                                     <p className="text-xs text-slate-600">Level: {user.role}</p>
                                 </CardHeader>
                                 <CardContent className="pt-6 flex flex-col gap-2">
-                                    <Button className="font-bold text-xs w-full">Update</Button>
+                                    <Button variant="default" className="font-bold text-xs w-full">
+                                        Edit
+                                    </Button>
                                     <Button variant="destructive" className="font-bold text-xs w-full">
                                         Delete
                                     </Button>

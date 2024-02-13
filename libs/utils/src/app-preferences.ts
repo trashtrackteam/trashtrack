@@ -18,3 +18,12 @@ export const getUserNIK = async (): Promise<number | undefined> => {
 export const setUserNIK = async (userNIK: number): Promise<void> => {
     await Preferences.set({ key: "userNIK", value: userNIK.toString() });
 };
+
+export const setPelaporObject = async (pelaporObject: { nik: string; name: string; phoneNo: string }) => {
+    await Preferences.set({ key: "pelaporObject", value: JSON.stringify(pelaporObject) });
+};
+
+export const getPelaporObject = async () => {
+    const { value } = await Preferences.get({ key: "pelaporObject" });
+    return value ? JSON.parse(value) : undefined;
+};
