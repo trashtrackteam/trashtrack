@@ -3,7 +3,7 @@ import { Cron, CronExpression } from "@nestjs/schedule";
 import { Prisma } from "@prisma/client";
 import { HistoryCreateDTO, HistoryModel, HistoryUpdateDTO, SubTrashBinModel } from "@trashtrack/common";
 
-import { BaseService } from "../base.service";
+import { BaseService } from "../global/base.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 

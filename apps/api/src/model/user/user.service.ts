@@ -11,7 +11,7 @@ import {
 
 import * as encryption from "../../util/encryption";
 
-import { BaseService } from "../base.service";
+import { BaseService } from "../global/base.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 

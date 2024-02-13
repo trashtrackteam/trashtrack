@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { TrashCreateDTO, TrashModel, TrashUpdateDTO } from "@trashtrack/common";
 
-import { BaseService } from "../base.service";
+import { BaseService } from "../global/base.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 

@@ -3,7 +3,7 @@ import { HistoryCreateDTO, HistoryModel, HistoryUpdateDTO, ResponseFormatInterfa
 
 import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
 
-import { BaseController } from "../base.controller";
+import { BaseController } from "../global/base.controller";
 
 import { HistoryService } from "./history.service";
 

@@ -3,7 +3,7 @@ import { ResponseFormatInterface, TrashBinCreateDTO, TrashBinModel, TrashBinUpda
 
 import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
 
-import { ExtendController } from "../extend.controller";
+import { ExtendController } from "../global/extend.controller";
 
 import { TrashBinService } from "./trash-bin.service";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";

@@ -22,7 +22,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
 
-import { BaseController } from "../base.controller";
+import { BaseController } from "../global/base.controller";
 
 import { UserService } from "./user.service";
 
