@@ -83,7 +83,7 @@ export class BaseController<
                 await this.modelService.add(payload)
             );
 
-            this.loggerService.log(`Add: Added`);
+            this.loggerService.log(`Add: ${JSON.stringify(response)}`);
 
             return response;
         } catch (error) {

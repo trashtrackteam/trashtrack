@@ -49,6 +49,29 @@ export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdat
         }
     }
 
+    public async comparePassword(username: string, password: string): Promise<boolean> {
+        try {
+            const model: { password: string } = await this.prismaService[this.modelName].findUnique({
+                where: { username },
+                select: { password: true },
+            });
+
+            if (!model) {
+                throw new NotFoundException(`Username ${username} Not Found`);
+            }
+
+            return await encryption.compare(password, model.password);
+        } catch (error) {
+            if (error instanceof PrismaClientKnownRequestError) {
+                this.loggerService.error(`Compare Password: Username ${username} Not Found`);
+                throw new NotFoundException(`Id ${username} Not Found`);
+            }
+
+            this.loggerService.error(`Compare Password: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
     @Override
     public async add(payload: UserCreateDTO): Promise<UserModel> {
         try {
@@ -120,29 +143,6 @@ export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdat
         }
 
         return super.change(id, payload);
-    }
-
-    public async comparePassword(username: string, password: string): Promise<boolean> {
-        try {
-            const model: { password: string } = await this.prismaService[this.modelName].findUnique({
-                where: { username },
-                select: { password: true },
-            });
-
-            if (!model) {
-                throw new NotFoundException(`Username ${username} Not Found`);
-            }
-
-            return await encryption.compare(password, model.password);
-        } catch (error) {
-            if (error instanceof PrismaClientKnownRequestError) {
-                this.loggerService.error(`Compare Password: Username ${username} Not Found`);
-                throw new NotFoundException(`Id ${username} Not Found`);
-            }
-
-            this.loggerService.error(`Compare Password: ${error.message}`);
-            throw new InternalServerErrorException("Internal Server Error");
-        }
     }
 
     public async changePassword(id: number, payload: UserUpdatePasswordDTO): Promise<UserModel> {

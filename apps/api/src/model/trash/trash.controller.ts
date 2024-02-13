@@ -1,5 +1,5 @@
 import { Body, Controller, ForbiddenException, Param, ParseIntPipe, UseInterceptors } from "@nestjs/common";
-import { ResponseFormatInterface, TrashCreateDTO, TrashModel, TrashUpdateDTO } from "@trashtrack/common";
+import { Override, ResponseFormatInterface, TrashCreateDTO, TrashModel, TrashUpdateDTO } from "@trashtrack/common";
 
 import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
 
@@ -19,6 +19,7 @@ export class TrashController
         super(TrashController.name, modelService);
     }
 
+    @Override
     public async change(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         @Param("id", ParseIntPipe) id: number,
