@@ -20,7 +20,7 @@ import {
 } from "../../../ui/alert-dialog";
 import { pickImage } from "./pick-image";
 import { Textarea } from "../../../ui/textarea";
-import { API_URL } from "@trashtrack/utils";
+import { API_URL, getPelaporObject } from "@trashtrack/utils";
 import { useMutation } from "@tanstack/react-query";
 
 import { CapacitorHttp } from "@capacitor/core";
@@ -53,6 +53,8 @@ function OnSubmitModal({
     isPending?: boolean;
     isSuccess?: boolean;
 }) {
+    const history = useHistory();
+
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent className="min-w-full container">
@@ -71,7 +73,13 @@ function OnSubmitModal({
                     {isSuccess && "Laporan berhasil dikirim."}
                 </AlertDialogDescription>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel
+                        onClick={() => {
+                            history.goBack();
+                        }}
+                    >
+                        Cancel
+                    </AlertDialogCancel>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
@@ -130,6 +138,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
             }).then((res) => res.data);
         },
         onSuccess: () => {
+            form.reset();
             setIsOpen(true);
         },
         onError: (error) => {
@@ -139,13 +148,14 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const file = await fileToBase64(pickedImage as File);
+        const personalDetails = await getPelaporObject();
 
         await mutateAsync({
             trashBinId: tempah_sampah_id,
-            nik: "3602041211870001",
-            name: "Yehezkiel Dio Sinolungan",
+            nik: personalDetails?.nik as string,
+            name: personalDetails?.name as string,
             description: values.deskripsi,
-            phoneNumber: "081234567890",
+            phoneNumber: personalDetails?.phoneNo as string,
             imageName: values.gambarFile,
             imageData: file,
         });
@@ -157,7 +167,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
 
         if (image) {
             const currentDateTime = new Date().toISOString().replace(/[-:.]/g, "");
-            const fileName = `image_${currentDateTime}.jpg`;
+            const fileName = `laporan_${tempah_sampah_id}_${currentDateTime}.jpg`;
             const file = new File([image], fileName, { type: "image/jpeg" });
 
             setPickedImage(file);

@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { useHistory } from "react-router-dom";
-import { setUserNIK } from "@trashtrack/utils";
+import { setUserNIK, setPelaporObject } from "@trashtrack/utils";
 
 const formSchema = z.object({
     nik: z.coerce.number().min(16, {
@@ -36,6 +36,12 @@ export function PersonalDetailsForm() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setUserNIK(values.nik);
+        setPelaporObject({
+            nik: values.nik.toString(),
+            name: values.nama_lengkap,
+            phoneNo: values.no_telpon_wa.toString(),
+        });
+
         history.replace("/complain/dashboard");
     }
 

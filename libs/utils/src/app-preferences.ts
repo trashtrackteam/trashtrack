@@ -23,7 +23,9 @@ export const setPelaporObject = async (pelaporObject: { nik: string; name: strin
     await Preferences.set({ key: "pelaporObject", value: JSON.stringify(pelaporObject) });
 };
 
-export const getPelaporObject = async () => {
+export const getPelaporObject: {
+    (): Promise<{ nik: string; name: string; phoneNo: string } | undefined>;
+} = async () => {
     const { value } = await Preferences.get({ key: "pelaporObject" });
     return value ? JSON.parse(value) : undefined;
 };
