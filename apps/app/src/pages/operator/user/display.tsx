@@ -3,11 +3,12 @@ import { Button, Card, CardContent, CardHeader, Icons } from "@trashtrack/ui";
 import { useGetUsersQuery } from "../../../queries/get-users-query";
 import { IonFab, IonFabButton } from "@ionic/react";
 import { useState } from "react";
-import { UserCreationSheet } from "@trashtrack/ui";
+import { UserCreationSheet, UserDeleteConfirmationDialog } from "@trashtrack/ui";
 
 export function OperatorUserDisplay() {
     const { data, isLoading, refetch } = useGetUsersQuery();
     const [isUserCreationSheetOpen, setIsUserCreationSheetOpen] = useState(false);
+    const [isUserDeleteConfirmationOpen, setIsUserDeleteConfirmationOpen] = useState(false);
 
     return (
         <IonPage>
@@ -24,7 +25,7 @@ export function OperatorUserDisplay() {
                             </CardContent>
                         </Card>
                     ) : (
-                        data.data?.map((user: { username: string; role: string }) => (
+                        data.data?.map((user: { id: number; username: string; role: string }) => (
                             <Card className="flex flex-row" key={user.username}>
                                 <CardHeader className="w-56">
                                     <h2 className="text-sm font-bold">Username: {user.username}</h2>
@@ -34,14 +35,26 @@ export function OperatorUserDisplay() {
                                     <Button variant="default" className="font-bold text-xs w-full">
                                         Edit
                                     </Button>
-                                    <Button variant="destructive" className="font-bold text-xs w-full">
+                                    <Button
+                                        onClick={() => setIsUserDeleteConfirmationOpen(true)}
+                                        variant="destructive"
+                                        className="font-bold text-xs w-full"
+                                    >
                                         Delete
                                     </Button>
                                 </CardContent>
+
+                                <UserDeleteConfirmationDialog
+                                    id={user.id.toString()}
+                                    refetchUser={refetch}
+                                    isOpen={isUserDeleteConfirmationOpen}
+                                    setIsOpen={setIsUserDeleteConfirmationOpen}
+                                />
                             </Card>
                         ))
                     )}
                 </div>
+
                 <UserCreationSheet
                     refetchUser={refetch}
                     isOpen={isUserCreationSheetOpen}

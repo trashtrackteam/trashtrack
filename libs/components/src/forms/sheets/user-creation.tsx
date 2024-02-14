@@ -79,7 +79,7 @@ export function UserCreationSheet({
         isSuccess,
         reset: resetMutation,
     } = useMutation({
-        mutationKey: ["comparePassword"],
+        mutationKey: ["createUser"],
         mutationFn: (formData: {
             name?: string;
             username?: string;
