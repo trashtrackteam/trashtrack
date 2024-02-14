@@ -3,12 +3,13 @@ import { Button, Card, CardContent, CardHeader, Icons } from "@trashtrack/ui";
 import { useGetUsersQuery } from "../../../queries/get-users-query";
 import { IonFab, IonFabButton } from "@ionic/react";
 import { useState } from "react";
-import { UserCreationSheet, UserDeleteConfirmationDialog } from "@trashtrack/ui";
+import { UserCreationSheet, UserDeleteConfirmationDialog, UserDetailsShet } from "@trashtrack/ui";
 
 export function OperatorUserDisplay() {
     const { data, isLoading, refetch } = useGetUsersQuery();
     const [isUserCreationSheetOpen, setIsUserCreationSheetOpen] = useState(false);
     const [isUserDeleteConfirmationOpen, setIsUserDeleteConfirmationOpen] = useState(false);
+    const [isUserDetailsSheetOpen, setIsUserDetailsSheetOpen] = useState(false);
 
     return (
         <IonPage>
@@ -28,8 +29,10 @@ export function OperatorUserDisplay() {
                         data.data?.map((user: { id: number; username: string; role: string }) => (
                             <Card className="flex flex-row" key={user.username}>
                                 <CardHeader className="w-56">
-                                    <h2 className="text-sm font-bold">Username: {user.username}</h2>
-                                    <p className="text-xs text-slate-600">Level: {user.role}</p>
+                                    <div onClick={() => setIsUserDetailsSheetOpen(true)}>
+                                        <h2 className="text-sm font-bold">Username: {user.username}</h2>
+                                        <p className="text-xs text-slate-600">Level: {user.role}</p>
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="pt-6 flex flex-col gap-2">
                                     <Button variant="default" className="font-bold text-xs w-full">
@@ -43,6 +46,12 @@ export function OperatorUserDisplay() {
                                         Delete
                                     </Button>
                                 </CardContent>
+
+                                <UserDetailsShet
+                                    id={user.id.toString()}
+                                    isOpen={isUserDetailsSheetOpen}
+                                    setIsOpen={setIsUserDetailsSheetOpen}
+                                />
 
                                 <UserDeleteConfirmationDialog
                                     id={user.id.toString()}
