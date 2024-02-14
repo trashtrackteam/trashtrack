@@ -8,7 +8,7 @@
             "executor": "@nx/webpack:webpack",
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "production",
-            "dependsOn": [ "api:prisma-generate", "common:build"],
+            "dependsOn": [ "common:build"],
             "options": {
                 "target": "node",
                 "compiler": "tsc",
