@@ -16,6 +16,27 @@
                 "description": "Pilih bahasa yang ingin Anda gunakan untuk aplikasi."
             }
         },
+        "complain": {
+            "dashboard": {
+                "title": "Selamat datang di pusat pelaporan sampah.",
+                "description": "Silakan pilih menu yang tersedia di bawah ini untuk melaporkan tempat sampah, atau melihat riwayat laporan sampah."
+            },
+            "button": {
+                "register": "Isi ulang informasi pribadi",
+                "cancel": "Kembali ke halaman utama"
+            },
+            "form": {
+                "tempat-sampah": {
+                    "title": "Pilih tempat sampah",
+                    "search": "Cari tempat sampah",
+                    "search-input": "Masukkan nama tempat sampah",
+                    "no-results": "Tidak ada tong sampah yang ditemukan untuk istilah pencarian itu",
+                    "button": {
+                        "report": "Laporkan"
+                    }
+                }
+            }
+        },
         "operator": {
             "form": {
                 "login": {

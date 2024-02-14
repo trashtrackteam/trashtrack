@@ -16,6 +16,27 @@
                 "description": "Select the language you want to use for the application."
             }
         },
+        "complain": {
+            "dashboard": {
+                "title": "Welcome to the trash reporting center.",
+                "description": "Please select the menu provided below to report a rubbish bin, or view trash report history.",
+                "button": {
+                    "register": "Refill personal information",
+                    "cancel": "Return to main page"
+                }
+            },
+            "form": {
+                "tempat-sampah": {
+                    "title": "Select trash bin",
+                    "search": "Search trash bin",
+                    "search-input": "Enter the name of the trash bin",
+                    "no-results": "No trash cans found for the search term",
+                    "button": {
+                        "report": "Report"
+                    }
+                }
+            }
+        },
         "operator": {
             "form": {
                 "login": {

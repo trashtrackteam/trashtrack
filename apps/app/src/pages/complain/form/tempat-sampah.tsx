@@ -5,6 +5,7 @@ import { useState } from "react";
 import Fuse from "fuse.js";
 
 import { useTrashBinQuery } from "../../../queries/get-trash-bin-query";
+import { useTranslation } from "react-i18next";
 
 interface TrashBin {
     id: number;
@@ -18,6 +19,7 @@ export function ComplainFormTempatSampah() {
     const { data, isLoading } = useTrashBinQuery();
     const history = useHistory();
     const [searchTerm, setSearchTerm] = useState("");
+    const { t } = useTranslation();
 
     const fuseOptions = {
         keys: ["name"],
@@ -35,17 +37,17 @@ export function ComplainFormTempatSampah() {
             <IonContent className="complain-form-tempat-sampah ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Pilih tempah sampah.</p>
+                    <p className="text-xs text-left text-slate-600">{t("complain.form.tempat-sampah.title")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-4">
                     <div className="flex flex-col">
                         <Label className="mb-2" htmlFor="search">
-                            Cari tempat sampah
+                            {t("complain.form.tempat-sampah.search")}
                         </Label>
                         <Input
                             id="search"
                             type="text"
-                            placeholder="Cari tempat sampah..."
+                            placeholder={t("complain.form.tempat-sampah.search-input")}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -65,10 +67,7 @@ export function ComplainFormTempatSampah() {
                     ) : filteredData.length === 0 && searchTerm !== "" ? (
                         <Card className="flex flex-col">
                             <CardHeader className="text-left">
-                                <CardTitle className="text-lg">
-                                    Tidak ditemukan tempat sampah dengan nama{" "}
-                                    <span className="font-bold">{searchTerm}</span>
-                                </CardTitle>
+                                <CardTitle className="text-lg">{t("complain.form.tempat-sampah.no-results")}</CardTitle>
                             </CardHeader>
                         </Card>
                     ) : (
@@ -85,7 +84,7 @@ export function ComplainFormTempatSampah() {
                                             variant={"secondary"}
                                             onClick={() => history.push(`/complain/tabs/form/laporan/${trashBin.id}`)}
                                         >
-                                            Laporkan
+                                            {t("complain.form.tempat-sampah.button.report")}
                                         </Button>
                                     </div>
                                 </CardContent>
