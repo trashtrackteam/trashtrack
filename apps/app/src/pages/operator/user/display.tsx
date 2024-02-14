@@ -3,7 +3,7 @@ import { Button, Card, CardContent, CardHeader, Icons } from "@trashtrack/ui";
 import { useGetUsersQuery } from "../../../queries/get-users-query";
 import { IonFab, IonFabButton } from "@ionic/react";
 import { useState } from "react";
-import { UserCreationSheet, UserDeleteConfirmationDialog, UserDetailsShet } from "@trashtrack/ui";
+import { UserCreationSheet, UserDeleteConfirmationDialog, UserDetailsSheet } from "@trashtrack/ui";
 
 export function OperatorUserDisplay() {
     const { data, isLoading, refetch } = useGetUsersQuery();
@@ -47,7 +47,7 @@ export function OperatorUserDisplay() {
                                     </Button>
                                 </CardContent>
 
-                                <UserDetailsShet
+                                <UserDetailsSheet
                                     id={user.id.toString()}
                                     isOpen={isUserDetailsSheetOpen}
                                     setIsOpen={setIsUserDetailsSheetOpen}

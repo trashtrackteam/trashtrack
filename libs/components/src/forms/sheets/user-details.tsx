@@ -12,7 +12,7 @@ import {
 } from "../../index";
 import { API_URL } from "@trashtrack/utils";
 
-export function UserDetailsShet({
+export function UserDetailsSheet({
     id,
     isOpen,
     setIsOpen,
