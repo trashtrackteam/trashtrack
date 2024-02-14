@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { SubTrashBinCreateDTO, SubTrashBinModel, SubTrashBinUpdateDTO } from "@trashtrack/common";
 
-import { ExtendService } from "../global/extend.service";
+import { ExtendService } from "../../global/extend.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 

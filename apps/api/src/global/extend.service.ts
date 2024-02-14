@@ -2,7 +2,7 @@ import { InternalServerErrorException, NotFoundException } from "@nestjs/common"
 
 import { BaseService } from "./base.service";
 
-import { PrismaService } from "../../provider/prisma.service";
+import { PrismaService } from "../provider/prisma.service";
 
 interface ExtendInterface {
     [key: string]: { include: ExtendInterface } | boolean;

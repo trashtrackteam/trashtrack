@@ -22,7 +22,7 @@ import {
 
 import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
 
-import { ExtendController } from "../global/extend.controller";
+import { ExtendController } from "../../global/extend.controller";
 
 import { ReportService } from "./report.service";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";

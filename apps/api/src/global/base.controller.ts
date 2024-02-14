@@ -12,9 +12,9 @@ import {
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { ResponseFormatInterface } from "@trashtrack/common";
 
-import { formatResponse } from "../../interceptor/response-format.interceptor";
+import { formatResponse } from "../interceptor/response-format.interceptor";
 
-import { LoggerService } from "../../provider/logger.service";
+import { LoggerService } from "../provider/logger.service";
 import { BaseService } from "./base.service";
 
 export class BaseController<

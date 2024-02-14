@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { TrashBinCreateDTO, TrashBinModel, TrashBinUpdateDTO } from "@trashtrack/common";
 
-import { ExtendService } from "../global/extend.service";
+import { ExtendService } from "../../global/extend.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
