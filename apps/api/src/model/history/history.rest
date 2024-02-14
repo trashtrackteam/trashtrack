@@ -1,12 +1,15 @@
-GET http://localhost:3001/api/history
+@base_url = {{$dotenv URL}}/api
+@url={{base_url}}/history
+
+GET {{url}}
 
 ###
 
-GET http://localhost:3001/api/history/id/2
+GET {{url}}/id/1
 
 ###
 
-POST http://localhost:3001/api/history
+POST {{url}}
 Content-Type: application/json
 
 {
@@ -17,6 +20,6 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/history/1
+DELETE {{url}}/1
 
 ###

@@ -1,28 +1,31 @@
-GET http://localhost:3001/api/report
+@base_url = {{$dotenv URL}}/api
+@url={{base_url}}/report
+
+GET {{url}}
 
 ###
 
-GET http://localhost:3001/api/report/id/1
+GET {{url}}/id/1
 
 ###
 
-GET http://localhost:3001/api/report/nik/64711092301923
+GET {{url}}/nik/64711092301923
 
 ###
 
-GET http://localhost:3001/api/report/extend
+GET {{url}}/extend
 
 ###
 
-GET http://localhost:3001/api/report/id/2/extend
+GET {{url}}/id/2/extend
 
 ###
 
-GET http://localhost:3001/api/report/nik/64711092301923/extend
+GET {{url}}/nik/64711092301923/extend
 
 ###
 
-# POST http://localhost:3001/api/report
+# POST {{url}}
 # Content-Type: application/json
 
 # {
@@ -37,7 +40,7 @@ GET http://localhost:3001/api/report/nik/64711092301923/extend
 
 ###
 
-PUT http://localhost:3001/api/report/1/status
+PUT {{url}}/1/status
 Content-Type: application/json
 
 {
@@ -47,6 +50,6 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/report/1
+DELETE {{url}}/1
 
 ###
