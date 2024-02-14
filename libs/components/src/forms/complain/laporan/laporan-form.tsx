@@ -210,7 +210,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                                             className="w-full h- object-cover"
                                         />
                                     )}
-                                    <Input hidden disabled={isPending} type="text" {...field} />
+                                    <Input type="text" {...field} readOnly={!!pickedImage} />
                                 </>
                             </FormControl>
                             <FormMessage />
