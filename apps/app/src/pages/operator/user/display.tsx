@@ -2,9 +2,12 @@ import { IonContent, IonPage } from "@ionic/react";
 import { Button, Card, CardContent, CardHeader, Icons } from "@trashtrack/ui";
 import { useGetUsersQuery } from "../../../queries/get-users-query";
 import { IonFab, IonFabButton } from "@ionic/react";
+import { useState } from "react";
+import { UserCreationSheet } from "@trashtrack/ui";
 
 export function OperatorUserDisplay() {
-    const { data, isLoading } = useGetUsersQuery();
+    const { data, isLoading, refetch } = useGetUsersQuery();
+    const [isUserCreationSheetOpen, setIsUserCreationSheetOpen] = useState(false);
 
     return (
         <IonPage>
@@ -39,9 +42,14 @@ export function OperatorUserDisplay() {
                         ))
                     )}
                 </div>
+                <UserCreationSheet
+                    refetchUser={refetch}
+                    isOpen={isUserCreationSheetOpen}
+                    setIsOpen={setIsUserCreationSheetOpen}
+                />
             </IonContent>
             <IonFab slot="fixed" vertical="bottom" horizontal="start">
-                <IonFabButton>
+                <IonFabButton onClick={() => setIsUserCreationSheetOpen(true)}>
                     <Icons.add strokeWidth={1} className="w-[32px] h-[30px]" />
                 </IonFabButton>
             </IonFab>

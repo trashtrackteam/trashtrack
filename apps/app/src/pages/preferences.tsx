@@ -56,9 +56,12 @@ export function Preferences() {
                                                 >
                                                     <SelectTrigger
                                                         id="language"
-                                                        className="border-input border rounded-md "
+                                                        className="rounded-md border-4 border-black"
                                                     >
-                                                        <SelectValue placeholder="Pilih bahasa" />
+                                                        <SelectValue
+                                                            className="border-4 border-black"
+                                                            placeholder="Pilih bahasa"
+                                                        />
                                                     </SelectTrigger>
                                                     <SelectContent position="popper">
                                                         <SelectItem value="id">Bahasa Indonesia</SelectItem>
