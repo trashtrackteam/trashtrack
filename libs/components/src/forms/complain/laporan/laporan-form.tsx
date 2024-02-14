@@ -222,7 +222,11 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                     <Button className="w-full" type="submit" disabled={isPending}>
                         {isPending ? "Sedang mengirim laporan..." : "Kirim Laporan"}
                     </Button>
-                    <Button className="w-full" variant="secondary" onClick={() => history.replace("/tabs/home")}>
+                    <Button
+                        className="w-full"
+                        variant="secondary"
+                        onClick={() => history.replace("/complain/tabs/form/tempat-sampah")}
+                    >
                         Kembali
                     </Button>
                 </div>

@@ -11,6 +11,9 @@ import {
     type Icon as LucideIcon,
     LayoutDashboard,
     Plus,
+    File,
+    FilePlus,
+    FileClock,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -27,4 +30,7 @@ export const Icons = {
     subTrashbin: Trash2,
     report: ClipboardSignature,
     back: ChevronLeft,
+    tambahakanLaporan: FilePlus,
+    dashboardLaporan: File,
+    riwayatLaporan: FileClock,
 };

@@ -42,7 +42,7 @@ export function PersonalDetailsForm() {
             phoneNo: values.no_telpon_wa.toString(),
         });
 
-        history.replace("/complain/dashboard");
+        history.replace("/complain/tabs/dashboard");
     }
 
     return (

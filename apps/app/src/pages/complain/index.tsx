@@ -14,7 +14,7 @@ export function ComplainIndex() {
             const nik = await getNik();
 
             if (nik) {
-                history.push("/complain/dashboard");
+                history.push("/complain/tabs/dashboard");
             } else {
                 history.push("/complain/form/personal-details");
             }

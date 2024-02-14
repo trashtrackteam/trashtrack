@@ -14,6 +14,8 @@ export * from "./ui/toaster";
 export * from "./ui/use-toast";
 export * from "./ui/textarea";
 export * from "./ui/sheet";
+export * from "./ui/seperator";
+export * from "./ui/skeleton";
 
 export * from "./complain/personal-details-form";
 export * from "./api/operator-context";

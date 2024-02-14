@@ -7,9 +7,11 @@ export function ComplainFormPersonalDetails() {
             <IonContent className="complain-form-personal-details ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
+                    <p className="text-xs text-left text-slate-600">
+                        Isi informasi pribadi anda untuk melanjutkan pelaporan sampah.
+                    </p>
                 </div>
                 <div className="flex flex-col pt-8 gap-4">
-                    <h1 className="font-bold text-lg">Personal Details</h1>
                     <PersonalDetailsForm />
                 </div>
             </IonContent>
