@@ -1,5 +1,15 @@
 {
     "translation": {
+        "tabs": {
+            "home": "Home",
+            "complain": "Complain",
+            "operator": "Operator",
+            "preferences": "Preferences",
+            "laporkan": "Report",
+            "riwayat": "History",
+            "report": "Laporan",
+            "back": "Back"
+        },
         "home": {
             "complain": {
                 "title": "Submit Complaint",

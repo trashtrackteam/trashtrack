@@ -6,8 +6,11 @@ import ComplainDashboard from "../pages/complain/dashboard";
 import ComplainReportHistory from "../pages/complain/form/report-history";
 import ComplainFormTempatSampah from "../pages/complain/form/tempat-sampah";
 import ComplainFormLaporan from "../pages/complain/form/laporan";
+import { useTranslation } from "react-i18next";
 
 const ComplainTabs: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <IonTabs>
             <IonRouterOutlet animated={false} mode="ios">
@@ -37,11 +40,11 @@ const ComplainTabs: React.FC = () => {
                 </IonTabButton>
                 <IonTabButton tab="laporanTabs" href="/complain/tabs/form/tempat-sampah">
                     <Icons.tambahakanLaporan strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Laporkan</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.laporkan")}</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="riwayatTabs" href="/complain/tabs/form/report-history">
                     <Icons.riwayatLaporan strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Riwayat</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.riwayat")}</IonLabel>
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>

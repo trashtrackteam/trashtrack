@@ -4,8 +4,11 @@ import { Icons } from "@trashtrack/ui";
 
 import Home from "../pages/home";
 import Preferences from "../pages/preferences";
+import { useTranslation } from "react-i18next";
 
 const Tabs: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <IonTabs>
             <IonRouterOutlet animated={false} mode="ios">
@@ -16,11 +19,11 @@ const Tabs: React.FC = () => {
             <IonTabBar slot="bottom" mode="ios" translucent className="pb-4">
                 <IonTabButton tab="homeTab" href="/tabs/home">
                     <Icons.home strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Home</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.home")}</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="preferencesTabs" href="/tabs/preferences">
                     <Icons.settings strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Preferences</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.preferences")}</IonLabel>
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>

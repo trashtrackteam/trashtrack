@@ -7,8 +7,11 @@ import OperatorSubTrashbinDisplay from "../pages/operator/trash-bin/subtrashbin/
 import OperatorReportActionDisplay from "../pages/operator/trash-bin/report/report-action";
 import OperatorFeedbackDisplay from "../pages/operator/trash-bin/report/feedback/feedback";
 import OperatorTrashDisplay from "../pages/operator/trash-bin/subtrashbin/trash/trash";
+import { useTranslation } from "react-i18next";
 
 const TrashbinTabs: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <IonTabs>
             <IonRouterOutlet animated={false} mode="ios">
@@ -27,7 +30,7 @@ const TrashbinTabs: React.FC = () => {
             <IonTabBar slot="bottom" mode="ios" translucent className="pb-4">
                 <IonTabButton tab="backTabs" href="/operator">
                     <Icons.back strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Back</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.back")}</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="trashbinTabs" href="/trash-bin/tabs/trashbin">
                     <Icons.trash strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
@@ -39,7 +42,7 @@ const TrashbinTabs: React.FC = () => {
                 </IonTabButton>
                 <IonTabButton tab="reportTabs" href="/trash-bin/tabs/report-action">
                     <Icons.report strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Report</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.report")}</IonLabel>
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>

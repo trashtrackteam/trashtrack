@@ -1,5 +1,15 @@
 {
     "translation": {
+        "tabs": {
+            "home": "Home",
+            "complain": "Keluhan",
+            "operator": "Operator",
+            "preferences": "Preferensi",
+            "laporkan": "Laporkan",
+            "riwayat": "Riwayat",
+            "report": "Laporan",
+            "back": "Kembali"
+        },
         "home": {
             "complain": {
                 "title": "Sampaikan Keluhan",
@@ -19,11 +29,11 @@
         "complain": {
             "dashboard": {
                 "title": "Selamat datang di pusat pelaporan sampah.",
-                "description": "Silakan pilih menu yang tersedia di bawah ini untuk melaporkan tempat sampah, atau melihat riwayat laporan sampah."
-            },
-            "button": {
-                "register": "Isi ulang informasi pribadi",
-                "cancel": "Kembali ke halaman utama"
+                "description": "Silakan pilih menu yang tersedia di bawah ini untuk melaporkan tempat sampah, atau melihat riwayat laporan sampah.",
+                "button": {
+                    "register": "Isi ulang informasi pribadi",
+                    "cancel": "Kembali ke halaman utama"
+                }
             },
             "form": {
                 "tempat-sampah": {
