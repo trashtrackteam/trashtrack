@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { FeedbackCreateDTO, FeedbackModel, FeedbackUpdateDTO } from "@trashtrack/common";
 
-import { BaseService } from "../global/base.service";
+import { BaseService } from "../../global/base.service";
 
 import { PrismaService } from "../../provider/prisma.service";
 

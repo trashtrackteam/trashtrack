@@ -3,7 +3,7 @@ import { Override, ResponseFormatInterface, TrashCreateDTO, TrashModel, TrashUpd
 
 import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
 
-import { BaseController } from "../global/base.controller";
+import { BaseController } from "../../global/base.controller";
 
 import { TrashService } from "./trash.service";
 

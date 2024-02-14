@@ -1,7 +1,7 @@
 import { Get, NotFoundException, Param, ParseIntPipe } from "@nestjs/common";
 import { ResponseFormatInterface } from "@trashtrack/common";
 
-import { formatResponse } from "../../interceptor/response-format.interceptor";
+import { formatResponse } from "../interceptor/response-format.interceptor";
 
 import { BaseController } from "./base.controller";
 import { ExtendService } from "./extend.service";

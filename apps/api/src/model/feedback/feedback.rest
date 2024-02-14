@@ -1,12 +1,15 @@
-GET http://localhost:3001/api/feedback
+@base_url = {{$dotenv URL}}/api
+@url={{base_url}}/feedback
+
+GET {{url}}
 
 ###
 
-GET http://localhost:3001/api/feedback/id/1
+GET {{url}}/id/1
 
 ###
 
-POST http://localhost:3001/api/feedback
+POST {{url}}
 Content-Type: application/json
 
 {
@@ -17,6 +20,6 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/feedback/1
+DELETE {{url}}/1
 
 ###

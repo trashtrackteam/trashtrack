@@ -3,7 +3,7 @@ import { FeedbackCreateDTO, FeedbackModel, FeedbackUpdateDTO, Override, Response
 
 import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
 
-import { BaseController } from "../global/base.controller";
+import { BaseController } from "../../global/base.controller";
 
 import { FeedbackService } from "./feedback.service";
 

@@ -1,20 +1,23 @@
-GET http://localhost:3001/api/sub-trash-bin
+@base_url = {{$dotenv URL}}/api
+@url={{base_url}}/sub-trash-bin
+
+GET {{url}}
 
 ###
 
-GET http://localhost:3001/api/sub-trash-bin/id/1
+GET {{url}}/id/1
 
 ###
 
-GET http://localhost:3001/api/sub-trash-bin/extend
+GET {{url}}/extend
 
 ###
 
-GET http://localhost:3001/api/sub-trash-bin/id/2/extend
+GET {{url}}/id/1/extend
 
 ###
 
-POST http://localhost:3001/api/sub-trash-bin
+POST {{url}}
 Content-Type: application/json
 
 {
@@ -24,7 +27,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/sub-trash-bin/2
+PUT {{url}}/1
 Content-Type: application/json
 
 {
@@ -33,6 +36,6 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/sub-trash-bin/1
+DELETE {{url}}/1
 
 ###

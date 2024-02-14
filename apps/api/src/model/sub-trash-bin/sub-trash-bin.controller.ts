@@ -3,7 +3,7 @@ import { SubTrashBinCreateDTO, SubTrashBinModel, SubTrashBinUpdateDTO } from "@t
 
 import { ResponseFormatInterceptor } from "../../interceptor/response-format.interceptor";
 
-import { ExtendController } from "../global/extend.controller";
+import { ExtendController } from "../../global/extend.controller";
 
 import { SubTrashBinService } from "./sub-trash-bin.service";
 

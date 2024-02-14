@@ -1,20 +1,23 @@
-GET http://localhost:3001/api/trash
+@base_url = {{$dotenv URL}}/api
+@url={{base_url}}/trash
+
+GET {{url}}
 
 ###
 
-GET http://localhost:3001/api/trash/id/1
+GET {{url}}/id/1
 
 ###
 
-POST http://localhost:3001/api/trash
+POST {{url}}
 Content-Type: application/json
 
 {
-    "subTrashBinId": 23
+    "subTrashBinId": 1
 }
 
 ###
 
-DELETE http://localhost:3001/api/trash/1
+DELETE {{url}}/1
 
 ###
