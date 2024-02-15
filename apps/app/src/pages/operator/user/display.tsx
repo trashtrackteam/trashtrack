@@ -4,8 +4,11 @@ import { useGetUsersQuery } from "../../../queries/get-users-query";
 import { IonFab, IonFabButton } from "@ionic/react";
 import { useState } from "react";
 import { UserCreationSheet, UserDeleteConfirmationDialog, UserDetailsSheet } from "@trashtrack/ui";
+import { useHistory } from "react-router-dom";
 
 export function OperatorUserDisplay() {
+    const history = useHistory();
+
     const { data, isLoading, refetch } = useGetUsersQuery();
     const [isUserCreationSheetOpen, setIsUserCreationSheetOpen] = useState(false);
     const [isUserDeleteConfirmationOpen, setIsUserDeleteConfirmationOpen] = useState(false);
@@ -26,16 +29,23 @@ export function OperatorUserDisplay() {
                             </CardContent>
                         </Card>
                     ) : (
-                        data.data?.map((user: { id: number; username: string; role: string }) => (
+                        data.data?.map((user: { id: number; username: string; role: string; active: boolean }) => (
                             <Card className="flex flex-row" key={user.username}>
                                 <CardHeader className="w-56">
                                     <div onClick={() => setIsUserDetailsSheetOpen(true)}>
                                         <h2 className="text-sm font-bold">Username: {user.username}</h2>
-                                        <p className="text-xs text-slate-600">Level: {user.role}</p>
+                                        <p className="text-xs text-slate-600">
+                                            Level: {user.role} <br />
+                                            Status: {user.active ? "Active" : "Inactive"}
+                                        </p>
                                     </div>
                                 </CardHeader>
                                 <CardContent className="pt-6 flex flex-col gap-2">
-                                    <Button variant="default" className="font-bold text-xs w-full">
+                                    <Button
+                                        onClick={() => history.push(`/operator/tabs/user/edit/${user.id}`)}
+                                        variant="default"
+                                        className="font-bold text-xs w-full"
+                                    >
                                         Edit
                                     </Button>
                                     <Button

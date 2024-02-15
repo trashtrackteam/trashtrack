@@ -5,6 +5,8 @@ import { Icons, OperatorContext } from "@trashtrack/ui";
 import OperatorDashboard from "../pages/operator/dashboard";
 import OperatorUserDisplay from "../pages/operator/user/display";
 import { useContext } from "react";
+import OperatorUserEdit from "../pages/operator/user/edit-user";
+import OperatorUserEditPassword from "../pages/operator/user/edit-password-user";
 
 const OperatorTabs: React.FC = () => {
     const operator = useContext(OperatorContext);
@@ -17,6 +19,12 @@ const OperatorTabs: React.FC = () => {
                 <Route path="/operator/tabs/dashboard" render={() => <OperatorDashboard />} exact={true} />
 
                 <Route path="/operator/tabs/user" render={() => <OperatorUserDisplay />} exact={true} />
+                <Route path="/operator/tabs/user/edit/:user_id" render={() => <OperatorUserEdit />} exact={true} />
+                <Route
+                    path="/operator/tabs/user/edit-password/:id"
+                    render={() => <OperatorUserEditPassword />}
+                    exact={true}
+                />
                 <Route path="/operator/tabs" render={() => <Redirect to="/operator/tabs/dashboard" />} exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom" mode="ios" translucent className="pb-4">
