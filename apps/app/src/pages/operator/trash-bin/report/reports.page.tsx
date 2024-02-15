@@ -38,6 +38,37 @@ export interface InterfaceTrashbin {
     updatedAt: string;
 }
 
+function ReportStatus({ status }: { status: EnumResponseStatus }) {
+    return (
+        <p className="text-left text-xs mt-8">
+            Status:{" "}
+            <span
+                className={`font-medium ${
+                    status === EnumResponseStatus.NOT_RESPONDED
+                        ? "text-red-500"
+                        : status === EnumResponseStatus.ACCEPTED
+                        ? "text-yellow-500"
+                        : status === EnumResponseStatus.REJECTED
+                        ? "text-red-500"
+                        : status === EnumResponseStatus.COMPLETED
+                        ? "text-green-500"
+                        : ""
+                }`}
+            >
+                {status === EnumResponseStatus.NOT_RESPONDED
+                    ? "Belum Ditanggapi"
+                    : status === EnumResponseStatus.ACCEPTED
+                    ? "Diterima"
+                    : status === EnumResponseStatus.REJECTED
+                    ? "Ditolak"
+                    : status === EnumResponseStatus.COMPLETED
+                    ? "Selesai"
+                    : ""}
+            </span>
+        </p>
+    );
+}
+
 function TrashBinDetails({ trashBinId, userId }: { trashBinId: number; userId: number }) {
     const queryClient = useQueryClient();
 
@@ -99,6 +130,7 @@ export function ReportsPage() {
                                           Laporan dari: <span className="font-medium">{report.name}</span>
                                       </p>
                                       <TrashBinDetails trashBinId={report.trashBinId} userId={report.id} />
+                                      <ReportStatus status={report.status} />
                                   </CardContent>
                               </Card>
                           ))}

@@ -70,12 +70,12 @@ export function DetailedReportPage() {
                         <Card className="flex flex-col mt-4">
                             <CardContent className="pt-4">
                                 <CardHeader>
-                                    <Skeleton className="h-4 w-20" />
+                                    <Skeleton className="h-4 w-40" />
                                 </CardHeader>
                                 <CardContent className="flex flex-col gap-2">
-                                    <Skeleton className="h-4 w-40" />
-                                    <Skeleton className="h-4 w-40" />
-                                    <Skeleton className="h-4 w-40" />
+                                    <Skeleton className="h-4 w-full" />
+                                    <Skeleton className="h-4 w-full" />
+                                    <Skeleton className="h-4 w-full" />
                                 </CardContent>
                             </CardContent>
                         </Card>
