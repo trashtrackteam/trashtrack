@@ -4,17 +4,53 @@ import { useHistory, useParams } from "react-router-dom";
 import { Button, Card, CardContent, CardHeader, Input, Label, Skeleton, Textarea, Separator } from "@trashtrack/ui";
 import { useEffect, useState } from "react";
 import { InterfaceReport, EnumResponseStatus } from "./reports.page";
+import { API_URL } from "@trashtrack/utils";
+import { CapacitorHttp } from "@capacitor/core";
+import { useMutation } from "@tanstack/react-query";
 
-function ReportStatusAction({ report }: { report: InterfaceReport | undefined }) {
+function ReportStatusAction({ report, refetch }: { report: InterfaceReport | undefined; refetch: () => void }) {
+    const { mutateAsync, isPending } = useMutation({
+        mutationKey: ["acceptReport", report?.id, report?.userId],
+        mutationFn: (formData: { status: EnumResponseStatus }) => {
+            return CapacitorHttp.put({
+                url: `${API_URL}/report/${report?.id}/status`,
+                method: "PUT",
+                data: {
+                    userId: report?.userId,
+                    status: formData.status,
+                },
+            }).then((res) => res.data);
+        },
+        onSuccess: () => {
+            refetch();
+        },
+    });
+
+    const handleAccept = async () => {
+        await mutateAsync({ status: EnumResponseStatus.ACCEPTED });
+    };
+
+    const handleReject = async () => {
+        await mutateAsync({ status: EnumResponseStatus.REJECTED });
+    };
+
+    const handleCancel = async () => {
+        await mutateAsync({ status: EnumResponseStatus.NOT_RESPONDED });
+    };
+
+    const handleComplete = async () => {
+        await mutateAsync({ status: EnumResponseStatus.COMPLETED });
+    };
+
     switch (report?.status) {
         case EnumResponseStatus.NOT_RESPONDED:
             return (
                 <>
-                    <Button className="w-full" variant={"default"}>
-                        Accept
+                    <Button className="w-full" variant={"default"} onClick={() => handleAccept()}>
+                        {isPending ? "Loading..." : "Accept"}
                     </Button>
-                    <Button className="w-full" variant={"destructive"}>
-                        Reject
+                    <Button className="w-full" variant={"destructive"} onClick={() => handleReject()}>
+                        {isPending ? "Loading..." : "Reject"}
                     </Button>
                 </>
             );
@@ -22,14 +58,14 @@ function ReportStatusAction({ report }: { report: InterfaceReport | undefined })
         case EnumResponseStatus.REJECTED:
         case EnumResponseStatus.COMPLETED:
             return (
-                <Button className="w-full" variant="secondary">
-                    Cancel
+                <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
+                    {isPending ? "Loading..." : "Cancel"}
                 </Button>
             );
-        case EnumResponseStatus.COMPLETED:
+        case EnumResponseStatus.ACCEPTED:
             return (
-                <Button className="w-full" variant="secondary">
-                    Complete
+                <Button className="w-full" variant={"default"} onClick={() => handleComplete()}>
+                    {isPending ? "Loading..." : "Complete"}
                 </Button>
             );
     }
@@ -38,7 +74,7 @@ function ReportStatusAction({ report }: { report: InterfaceReport | undefined })
 export function DetailedReportPage() {
     const history = useHistory();
     const { report_id } = useParams<{ report_id: string }>();
-    const { data: reportData, isError, error, isLoading } = useGetReportById(Number(report_id));
+    const { data: reportData, isError, error, isLoading, refetch } = useGetReportById(Number(report_id));
     const [imageUrl, setImageUrl] = useState<string>("");
     const report = !isLoading ? (reportData.data as InterfaceReport) : undefined;
 
@@ -107,7 +143,7 @@ export function DetailedReportPage() {
                                     </div>
                                     <Separator className="my-4" />
                                     <div className="mt-4 flex flex-row gap-2">
-                                        <ReportStatusAction report={report} />
+                                        <ReportStatusAction report={report} refetch={refetch} />
                                     </div>
                                 </div>
                             </CardContent>
