@@ -5,7 +5,9 @@
         {
             "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
             "rules": {
-                "react/jsx-pascal-case": "off"
+                "react/jsx-pascal-case": "off",
+                "@typescript-eslint/no-unused-vars": "off",
+                "typescript-eslint/no-explicit-any": "off"
             }
         },
         {

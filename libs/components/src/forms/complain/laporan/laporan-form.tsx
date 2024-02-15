@@ -207,7 +207,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                                         <img
                                             src={URL.createObjectURL(pickedImage)}
                                             alt="Picked"
-                                            className="w-full h- object-cover"
+                                            className="w-full h-object-cover"
                                         />
                                     )}
                                     <Input type="text" {...field} readOnly={!!pickedImage} />
