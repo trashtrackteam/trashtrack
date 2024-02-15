@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, Skeleton } from "@trashtrack/ui";
 import { useGetReports } from "./get-reports.query";
 import { useGetTrashBinById } from "./get-trash-bin.query";
 import { useHistory } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 export interface EnumResponseStatus {
     NOT_RESPONDED: "notResponded";
@@ -38,6 +39,12 @@ export interface InterfaceTrashbin {
 }
 
 function TrashBinDetails({ trashBinId, userId }: { trashBinId: number; userId: number }) {
+    const queryClient = useQueryClient();
+
+    queryClient.invalidateQueries({
+        queryKey: ["getTrashBinById", trashBinId, userId],
+    });
+
     const { data: trashBinData, isLoading, isError, error } = useGetTrashBinById(trashBinId, userId);
 
     return (
@@ -71,12 +78,12 @@ export function ReportsPage() {
                               <Card key={index} className="flex flex-col mt-4">
                                   <CardContent className="pt-4">
                                       <CardHeader>
-                                          <Skeleton className="h-4 w-20" />
+                                          <Skeleton className="h-4 w-40" />
                                       </CardHeader>
                                       <CardContent className="flex flex-col gap-2">
-                                          <Skeleton className="h-4 w-40" />
-                                          <Skeleton className="h-4 w-40" />
-                                          <Skeleton className="h-4 w-40" />
+                                          <Skeleton className="h-4 w-full" />
+                                          <Skeleton className="h-4 w-full" />
+                                          <Skeleton className="h-4 w-full" />
                                       </CardContent>
                                   </CardContent>
                               </Card>

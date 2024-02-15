@@ -2,7 +2,6 @@ import { IonContent, IonPage } from "@ionic/react";
 import { useGetReportById } from "./get-report.query";
 import { useHistory, useParams } from "react-router-dom";
 import { Button, Card, CardContent, CardHeader, Skeleton } from "@trashtrack/ui";
-import { InterfaceReport } from "./reports.page";
 import { useEffect, useState } from "react";
 
 export function DetailedReportPage() {
@@ -13,9 +12,11 @@ export function DetailedReportPage() {
 
     useEffect(() => {
         if (!isLoading && reportData) {
-            const uint8Array = new Uint8Array(reportData.data.imageData);
+            const uint8Array = new Uint8Array(reportData.data.imageData.data);
             const blob = new Blob([uint8Array], { type: "image/jpeg" });
-            setImageUrl(URL.createObjectURL(blob));
+            const file = new File([blob], reportData.data.imageName, { type: "image/jpeg" });
+
+            setImageUrl(URL.createObjectURL(file));
         }
     }, [isLoading, reportData]);
 
@@ -52,6 +53,7 @@ export function DetailedReportPage() {
                             <CardContent className="pt-4">
                                 <div className="flex flex-col gap-2">
                                     <p className="text-xs text-left">{reportData.data.name}</p>
+                                    <p className="text-xs text-left">{reportData.data.description}</p>
                                     <img
                                         src={imageUrl ? imageUrl : "https://via.placeholder.com/150"}
                                         className="w-full h-object-cover"
