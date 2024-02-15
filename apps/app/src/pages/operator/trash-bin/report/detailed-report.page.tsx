@@ -8,7 +8,15 @@ import { API_URL } from "@trashtrack/utils";
 import { CapacitorHttp } from "@capacitor/core";
 import { useMutation } from "@tanstack/react-query";
 
-function ReportStatusAction({ report, refetch }: { report: InterfaceReport | undefined; refetch: () => void }) {
+function ReportStatusAction({
+    report,
+    refetch,
+    isRefetching,
+}: {
+    report: InterfaceReport | undefined;
+    refetch: () => void;
+    isRefetching: boolean;
+}) {
     const { mutateAsync, isPending } = useMutation({
         mutationKey: ["acceptReport", report?.id, report?.userId],
         mutationFn: (formData: { status: EnumResponseStatus }) => {
@@ -44,7 +52,9 @@ function ReportStatusAction({ report, refetch }: { report: InterfaceReport | und
 
     switch (report?.status) {
         case EnumResponseStatus.NOT_RESPONDED:
-            return (
+            return isRefetching ? (
+                <Skeleton className="h-4 w-full" />
+            ) : (
                 <>
                     <Button className="w-full" variant={"default"} onClick={() => handleAccept()}>
                         {isPending ? "Loading..." : "Accept"}
@@ -54,16 +64,21 @@ function ReportStatusAction({ report, refetch }: { report: InterfaceReport | und
                     </Button>
                 </>
             );
+
         case EnumResponseStatus.ACCEPTED:
         case EnumResponseStatus.REJECTED:
         case EnumResponseStatus.COMPLETED:
-            return (
+            return isRefetching ? (
+                <Skeleton className="h-4 w-full" />
+            ) : (
                 <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
                     {isPending ? "Loading..." : "Cancel"}
                 </Button>
             );
         case EnumResponseStatus.ACCEPTED:
-            return (
+            return isRefetching ? (
+                <Skeleton className="h-4 w-full" />
+            ) : (
                 <Button className="w-full" variant={"default"} onClick={() => handleComplete()}>
                     {isPending ? "Loading..." : "Complete"}
                 </Button>
@@ -74,7 +89,7 @@ function ReportStatusAction({ report, refetch }: { report: InterfaceReport | und
 export function DetailedReportPage() {
     const history = useHistory();
     const { report_id } = useParams<{ report_id: string }>();
-    const { data: reportData, isError, error, isLoading, refetch } = useGetReportById(Number(report_id));
+    const { data: reportData, isError, error, isLoading, refetch, isRefetching } = useGetReportById(Number(report_id));
     const [imageUrl, setImageUrl] = useState<string>("");
     const report = !isLoading ? (reportData.data as InterfaceReport) : undefined;
 
@@ -143,7 +158,11 @@ export function DetailedReportPage() {
                                     </div>
                                     <Separator className="my-4" />
                                     <div className="mt-4 flex flex-row gap-2">
-                                        <ReportStatusAction report={report} refetch={refetch} />
+                                        <ReportStatusAction
+                                            report={report}
+                                            refetch={refetch}
+                                            isRefetching={isRefetching}
+                                        />
                                     </div>
                                 </div>
                             </CardContent>
