@@ -32,16 +32,17 @@ const OperatorTabs: React.FC = () => {
                     <Icons.dashboard strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Dashboard</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/trashbin">
+                <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/report-action">
+                    {/* <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/trashbin"> */}
                     <Icons.trash strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Trashbin</IonLabel>
                 </IonTabButton>
-                {isAdmin && (
+                {/* {isAdmin && (
                     <IonTabButton tab="userOperatorTab" href="/operator/tabs/user">
                         <Icons.user strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                         <IonLabel className="pt-2 pb-2">User</IonLabel>
                     </IonTabButton>
-                )}
+                )} */}
             </IonTabBar>
         </IonTabs>
     );

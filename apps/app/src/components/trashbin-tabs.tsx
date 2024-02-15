@@ -40,10 +40,10 @@ const TrashbinTabs: React.FC = () => {
                     <Icons.back strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">{t("tabs.back")}</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="trashbinTabs" href="/trash-bin/tabs/trashbin">
+                {/* <IonTabButton tab="trashbinTabs" href="/trash-bin/tabs/trashbin">
                     <Icons.trash strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Trashbin</IonLabel>
-                </IonTabButton>
+                </IonTabButton> */}
                 {/* <IonTabButton tab="subTrashbinTabs" href="/trash-bin/tabs/sub-trashbin">
                     <Icons.subTrashbin strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Sub Trashbin</IonLabel>
