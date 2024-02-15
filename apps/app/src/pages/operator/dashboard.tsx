@@ -25,13 +25,17 @@ export function OperatorDashboard() {
                     <Card className="flex flex-col mt-8">
                         <CardContent className="pt-6">
                             <Button
-                                className="font-bold text-xs w-full mb-2"
+                                className="font-semibold text-xs w-full mb-2"
                                 onClick={() => history.replace("/operator/form/login")}
                             >
                                 Kembali ke Login
                             </Button>
-                            <Button className="font-bold text-xs w-full" onClick={() => history.replace("/tabs/home")}>
-                                Kembali
+                            <Button
+                                variant="secondary"
+                                className="font-semibold text-xs w-full mb-2"
+                                onClick={() => history.replace("/tabs/home")}
+                            >
+                                Kembali ke Home
                             </Button>
                         </CardContent>
                     </Card>

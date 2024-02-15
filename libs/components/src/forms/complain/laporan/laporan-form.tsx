@@ -210,7 +210,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                                             className="w-full h-object-cover"
                                         />
                                     )}
-                                    <Input type="text" {...field} readOnly={!!pickedImage} />
+                                    <Input className="hidden" hidden type="text" {...field} readOnly={!!pickedImage} />
                                 </>
                             </FormControl>
                             <FormMessage />

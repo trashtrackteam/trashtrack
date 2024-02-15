@@ -73,11 +73,9 @@ export function ComplainFormTempatSampah() {
                     ) : (
                         filteredData.map((trashBin) => (
                             <Card className="flex flex-col" key={trashBin.id}>
-                                <CardHeader className="text-left">
-                                    <CardTitle className="text-lg">{trashBin.name}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="pt-2">
-                                    <p className="text-sm">{trashBin.description}</p>
+                                <CardContent className="pt-8">
+                                    <p className="text-left text-xs">{trashBin.name}</p> <br />
+                                    <p className="text-left text-xs">{trashBin.description}</p>
                                     <div className="mt-4">
                                         <Button
                                             className="font-bold text-xs w-full"

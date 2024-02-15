@@ -29,7 +29,7 @@
         "complain": {
             "dashboard": {
                 "title": "Welcome to the trash reporting center.",
-                "description": "Please select the menu provided below to report a rubbish bin, or view trash report history.",
+                "description": "Please select the menu provided below to report a trash bin, or view trash report history.",
                 "button": {
                     "register": "Refill personal information",
                     "cancel": "Return to main page"

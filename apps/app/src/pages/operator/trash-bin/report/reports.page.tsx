@@ -5,11 +5,11 @@ import { useGetTrashBinById } from "./get-trash-bin.query";
 import { useHistory } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
-export interface EnumResponseStatus {
-    NOT_RESPONDED: "notResponded";
-    ACCEPTED: "accepted";
-    REJECTED: "rejected";
-    COMPLETED: "completed";
+export enum EnumResponseStatus {
+    NOT_RESPONDED = "notResponded",
+    ACCEPTED = "accepted",
+    REJECTED = "rejected",
+    COMPLETED = "completed",
 }
 
 export interface InterfaceReport {
@@ -50,7 +50,7 @@ function TrashBinDetails({ trashBinId, userId }: { trashBinId: number; userId: n
     return (
         <div>
             {isLoading ? (
-                <Skeleton className="h-4 w-40" />
+                <Skeleton className="h-4 w-40 mt-2" />
             ) : (
                 <p className="text-left text-xs">
                     Untuk: <span className="font-medium">{trashBinData.data.name}</span>
