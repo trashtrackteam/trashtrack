@@ -18,12 +18,6 @@ export function OperatorDashboard() {
                 <div className="flex flex-col pt-8 gap-4">
                     <Card className="flex flex-col mt-8">
                         <CardContent className="pt-6">
-                            <p className="text-sm text-slate-700">Operator Login: {operator.operator}</p>
-                            <p className="text-sm text-slate-700">Operator Role: {operator.role}</p>
-                        </CardContent>
-                    </Card>
-                    <Card className="flex flex-col mt-8">
-                        <CardContent className="pt-6">
                             <Button
                                 className="font-semibold text-xs w-full mb-2"
                                 onClick={() => history.replace("/operator/form/login")}
