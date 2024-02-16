@@ -34,7 +34,7 @@ const TrashbinTabs: React.FC = () => {
                 <Route path="/trash-bin/tabs/trash" render={() => <OperatorTrashDisplay />} exact={true} />
                 <Route path="/trash-bin/tabs" render={() => <Redirect to="/trash-bin/tabs/trashbin" />} exact={true} />
             </IonRouterOutlet>
-            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 shadow-xl">
+            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 pt-4  shadow-xl border-t-2 border-t-black">
                 <IonTabButton tab="backTabs" href="/operator">
                     <Icons.back strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">{t("tabs.back")}</IonLabel>
