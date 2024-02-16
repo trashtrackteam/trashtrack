@@ -69,7 +69,7 @@ function ReportStatusAction({
     switch (report?.status) {
         case EnumResponseStatus.NOT_RESPONDED:
             return isRefetching ? (
-                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-8 w-full" />
             ) : (
                 <>
                     <Button className="w-full" variant={"default"} onClick={() => handleAccept()}>

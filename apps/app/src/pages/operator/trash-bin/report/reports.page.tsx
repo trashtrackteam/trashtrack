@@ -1,4 +1,11 @@
-import { IonContent, IonPage } from "@ionic/react";
+import {
+    IonContent,
+    IonPage,
+    IonRefresher,
+    IonRefresherContent,
+    RefresherEventDetail,
+    useIonViewDidEnter,
+} from "@ionic/react";
 import { Card, CardContent, CardHeader, Skeleton, Separator, Button } from "@trashtrack/ui";
 import { useGetReports } from "./get-reports.query";
 import { useGetTrashBinById } from "./get-trash-bin.query";
@@ -94,11 +101,35 @@ function TrashBinDetails({ trashBinId, userId }: { trashBinId: number; userId: n
 
 export function ReportsPage() {
     const history = useHistory();
-    const { data: reportsData, isLoading, isError, error } = useGetReports();
+    const queryClient = useQueryClient();
+
+    const { data: reportsData, isLoading, isFetching, isError, error, refetch } = useGetReports();
+
+    useIonViewDidEnter(() => {
+        queryClient.invalidateQueries({
+            queryKey: ["getReports"],
+        });
+
+        refetch();
+    });
+
+    function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
+        queryClient.invalidateQueries({
+            queryKey: ["getReports"],
+        });
+
+        refetch();
+        event.detail.complete();
+    }
 
     return (
         <IonPage>
             <IonContent className="operator-report-action-display ion-padding" fullscreen>
+                <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+                    <IonRefresherContent>
+                        <p className="text-xs text-center">Refreshing...</p>
+                    </IonRefresherContent>
+                </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                     <p className="text-xs text-left text-slate-600">Trashbin Management</p>
@@ -108,7 +139,7 @@ export function ReportsPage() {
                         Feedback
                     </Button>
                     <Separator className="my-4" />
-                    {isLoading
+                    {isLoading || isFetching
                         ? Array.from({ length: 5 }).map((_, index) => (
                               <Card key={index} className="flex flex-col mt-4">
                                   <CardContent className="pt-4">
