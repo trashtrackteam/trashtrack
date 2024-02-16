@@ -23,7 +23,9 @@
         "preferences": {
             "language": {
                 "title": "Ganti Bahasa",
-                "description": "Pilih bahasa yang ingin Anda gunakan untuk aplikasi."
+                "description": "Pilih bahasa yang ingin Anda gunakan untuk aplikasi.",
+                "input": "Bahasa",
+                "placeholder": "Pilih bahasa"
             }
         },
         "complain": {

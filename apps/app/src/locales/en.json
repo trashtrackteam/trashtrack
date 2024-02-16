@@ -23,7 +23,9 @@
         "preferences": {
             "language": {
                 "title": "Change Language",
-                "description": "Select the language you want to use for the application."
+                "description": "Select the language you want to use for the application.",
+                "input": "Language",
+                "placeholder": "Select language"
             }
         },
         "complain": {

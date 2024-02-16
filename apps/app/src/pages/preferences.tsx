@@ -45,7 +45,7 @@ export function Preferences() {
                                     <form>
                                         <div className="grid w-full items-center gap-4">
                                             <div className="flex flex-col space-y-1.5">
-                                                <Label htmlFor="language">Bahasa</Label>
+                                                <Label htmlFor="language"> {t("preferences.language.input")}</Label>
                                                 <Select
                                                     defaultValue={currentLanguage}
                                                     onValueChange={(value: string) => {
@@ -60,7 +60,7 @@ export function Preferences() {
                                                     >
                                                         <SelectValue
                                                             className="border-4 border-black"
-                                                            placeholder="Pilih bahasa"
+                                                            placeholder={t("preferences.language.input")}
                                                         />
                                                     </SelectTrigger>
                                                     <SelectContent position="popper">
