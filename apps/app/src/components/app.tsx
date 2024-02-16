@@ -28,6 +28,7 @@ setupIonicReact();
 const App: React.FC = () => {
     const [operator, setOperator] = useState(null);
     const [role, setRole] = useState(null);
+    const [id, setId] = useState("");
 
     return (
         <IonApp>
@@ -39,6 +40,8 @@ const App: React.FC = () => {
                             setOperator: setOperator,
                             role: role,
                             setRole: setRole,
+                            id: id,
+                            setId: setId,
                         }}
                     >
                         <Route path="/onboarding" render={() => <Onboarding />} exact={true} />

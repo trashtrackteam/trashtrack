@@ -1,8 +1,19 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { useGetReportById } from "./get-report.query";
 import { useHistory, useParams } from "react-router-dom";
-import { Button, Card, CardContent, CardHeader, Input, Label, Skeleton, Textarea, Separator } from "@trashtrack/ui";
-import { useEffect, useState } from "react";
+import {
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    Input,
+    Label,
+    Skeleton,
+    Textarea,
+    Separator,
+    OperatorContext,
+} from "@trashtrack/ui";
+import { useContext, useEffect, useState } from "react";
 import { InterfaceReport, EnumResponseStatus } from "./reports.page";
 import { API_URL } from "@trashtrack/utils";
 import { CapacitorHttp } from "@capacitor/core";
@@ -11,20 +22,25 @@ import { useMutation } from "@tanstack/react-query";
 function ReportStatusAction({
     report,
     refetch,
+    operatorId,
     isRefetching,
 }: {
     report: InterfaceReport | undefined;
     refetch: () => void;
+    operatorId: string;
     isRefetching: boolean;
 }) {
-    const { mutateAsync, isPending } = useMutation({
-        mutationKey: ["acceptReport", report?.id, report?.userId],
+    const { mutateAsync, isPending, isError } = useMutation({
+        mutationKey: ["acceptReport", report?.id, operatorId],
         mutationFn: (formData: { status: EnumResponseStatus }) => {
-            return CapacitorHttp.put({
+            return CapacitorHttp.request({
                 url: `${API_URL}/report/${report?.id}/status`,
                 method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 data: {
-                    userId: report?.userId,
+                    userId: Number(operatorId),
                     status: formData.status,
                 },
             }).then((res) => res.data);
@@ -88,6 +104,7 @@ function ReportStatusAction({
 
 export function DetailedReportPage() {
     const history = useHistory();
+    const operator = useContext(OperatorContext);
     const { report_id } = useParams<{ report_id: string }>();
     const { data: reportData, isError, error, isLoading, refetch, isRefetching } = useGetReportById(Number(report_id));
     const [imageUrl, setImageUrl] = useState<string>("");
@@ -147,6 +164,23 @@ export function DetailedReportPage() {
                                         <Textarea id="description" value={report?.description} />
                                     </div>
                                     <div>
+                                        <Label htmlFor="description" className="text-xs">
+                                            Status
+                                        </Label>
+                                        <Input
+                                            id="status"
+                                            value={
+                                                report?.status === EnumResponseStatus.ACCEPTED
+                                                    ? "Diterima"
+                                                    : report?.status === EnumResponseStatus.REJECTED
+                                                    ? "Ditolak"
+                                                    : report?.status === EnumResponseStatus.COMPLETED
+                                                    ? "Selesai"
+                                                    : "Belum Ditanggapi"
+                                            }
+                                        />
+                                    </div>
+                                    <div>
                                         <Label htmlFor="image" className="text-xs">
                                             Foto
                                         </Label>
@@ -158,11 +192,12 @@ export function DetailedReportPage() {
                                     </div>
                                     <Separator className="my-4" />
                                     <div className="mt-4">
-                                        <p className="text-center text-xs">Actions</p>
+                                        <p className="text-center text-xs mb-4">Actions</p>
                                         <div className="flex flex-row gap-2">
                                             <ReportStatusAction
                                                 report={report}
                                                 refetch={refetch}
+                                                operatorId={operator.id}
                                                 isRefetching={isRefetching}
                                             />
                                         </div>

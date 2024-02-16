@@ -54,7 +54,7 @@ const formSchema = z.object({
 
 export function LoginForm() {
     const history = useHistory();
-    const { setOperator, setRole } = useContext(OperatorContext);
+    const { setOperator, setRole, setId } = useContext(OperatorContext);
     const [isOpen, setIsOpen] = useState(false);
     const { t } = useTranslation();
 
@@ -89,6 +89,7 @@ export function LoginForm() {
             if (dataMutation.data === true) {
                 setOperator(form.getValues("username"));
                 setRole(data.data.role);
+                setId(data.data.id.toString());
 
                 history.replace("/operator/tabs/dashboard");
             } else {
@@ -100,6 +101,7 @@ export function LoginForm() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setOperator(null);
         setRole(null);
+        setId("");
 
         refetch();
         await mutateAsync({
