@@ -200,7 +200,12 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                             <FormLabel>Foto</FormLabel>
                             <FormControl>
                                 <>
-                                    <Button type="button" className="w-full" onClick={handlePickImage}>
+                                    <Button
+                                        type="button"
+                                        className="w-full"
+                                        onClick={handlePickImage}
+                                        disabled={isPending}
+                                    >
                                         Ambil Foto
                                     </Button>
                                     {pickedImage && (
@@ -218,7 +223,7 @@ export function ComplainLaporanForm({ tempah_sampah_id }: { tempah_sampah_id: st
                     )}
                 />
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mt-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
                         {isPending ? "Sedang mengirim laporan..." : "Kirim Laporan"}
                     </Button>

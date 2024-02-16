@@ -1,5 +1,5 @@
 import { IonContent, IonPage } from "@ionic/react";
-import { Card, CardContent, CardHeader, Skeleton } from "@trashtrack/ui";
+import { Card, CardContent, CardHeader, Skeleton, Separator, Button } from "@trashtrack/ui";
 import { useGetReports } from "./get-reports.query";
 import { useGetTrashBinById } from "./get-trash-bin.query";
 import { useHistory } from "react-router-dom";
@@ -104,6 +104,10 @@ export function ReportsPage() {
                     <p className="text-xs text-left text-slate-600">Trashbin Management</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
+                    <Button disabled className="w-full" onClick={() => history.push("/trash-bin/tabs/feedback")}>
+                        Feedback
+                    </Button>
+                    <Separator className="my-4" />
                     {isLoading
                         ? Array.from({ length: 5 }).map((_, index) => (
                               <Card key={index} className="flex flex-col mt-4">

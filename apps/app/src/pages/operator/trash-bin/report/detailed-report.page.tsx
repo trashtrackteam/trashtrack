@@ -157,12 +157,15 @@ export function DetailedReportPage() {
                                         />
                                     </div>
                                     <Separator className="my-4" />
-                                    <div className="mt-4 flex flex-row gap-2">
-                                        <ReportStatusAction
-                                            report={report}
-                                            refetch={refetch}
-                                            isRefetching={isRefetching}
-                                        />
+                                    <div className="mt-4">
+                                        <p className="text-center text-xs">Actions</p>
+                                        <div className="flex flex-row gap-2">
+                                            <ReportStatusAction
+                                                report={report}
+                                                refetch={refetch}
+                                                isRefetching={isRefetching}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </CardContent>

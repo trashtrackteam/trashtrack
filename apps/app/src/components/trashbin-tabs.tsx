@@ -4,8 +4,8 @@ import { Icons } from "@trashtrack/ui";
 
 import OperatorTrashbinDisplay from "../pages/operator/trash-bin/display";
 import OperatorSubTrashbinDisplay from "../pages/operator/trash-bin/subtrashbin/subtrash-bin";
-import OperatorReportActionDisplay, { ReportsPage } from "../pages/operator/trash-bin/report/reports.page";
-import OperatorFeedbackDisplay from "../pages/operator/trash-bin/report/feedback/feedback";
+import { ReportsPage } from "../pages/operator/trash-bin/report/reports.page";
+import OperatorFeedbackDisplay, { FeedbackPage } from "../pages/operator/trash-bin/report/feedback/feedback.page";
 import OperatorTrashDisplay from "../pages/operator/trash-bin/subtrashbin/trash/trash";
 import { useTranslation } from "react-i18next";
 import { DetailedReportPage } from "../pages/operator/trash-bin/report/detailed-report.page";
@@ -29,10 +29,9 @@ const TrashbinTabs: React.FC = () => {
                     render={() => <DetailedReportPage />}
                     exact={true}
                 />
+                <Route path="/trash-bin/tabs/feedback" render={() => <FeedbackPage />} exact={true} />
 
-                <Route path="/trash-bin/tabs/feedback" render={() => <OperatorFeedbackDisplay />} exact={true} />
                 <Route path="/trash-bin/tabs/trash" render={() => <OperatorTrashDisplay />} exact={true} />
-
                 <Route path="/trash-bin/tabs" render={() => <Redirect to="/trash-bin/tabs/trashbin" />} exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom" mode="ios" translucent className="pb-4">

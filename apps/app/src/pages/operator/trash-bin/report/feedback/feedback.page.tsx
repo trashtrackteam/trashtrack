@@ -1,10 +1,10 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { Card, CardContent } from "@trashtrack/ui";
 
-export function OperatorFeedbackDisplay() {
+export function FeedbackPage() {
     return (
         <IonPage>
-            <IonContent className="operator-display-display ion-padding" fullscreen>
+            <IonContent className="ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
                     <p className="text-xs text-left text-slate-600">Trashbin Management</p>
@@ -21,4 +21,4 @@ export function OperatorFeedbackDisplay() {
     );
 }
 
-export default OperatorFeedbackDisplay;
+export default FeedbackPage;
