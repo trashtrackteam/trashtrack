@@ -42,10 +42,10 @@ const ComplainTabs: React.FC = () => {
                     <Icons.tambahakanLaporan strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">{t("tabs.laporkan")}</IonLabel>
                 </IonTabButton>
-                {/* <IonTabButton tab="riwayatTabs" href="/complain/tabs/form/report-history">
+                <IonTabButton tab="riwayatTabs" href="/complain/tabs/form/report-history">
                     <Icons.riwayatLaporan strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">{t("tabs.riwayat")}</IonLabel>
-                </IonTabButton> */}
+                </IonTabButton>
             </IonTabBar>
         </IonTabs>
     );
