@@ -83,7 +83,10 @@ export function SubTrashbinPage() {
                         >
                             Back
                         </Button>
-                        <Button className="w-full" onClick={() => history.push(`/trash-bin/tabs/trashbin/create`)}>
+                        <Button
+                            className="w-full"
+                            onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}/create`)}
+                        >
                             Create a new subtrashbin
                         </Button>
                     </div>
