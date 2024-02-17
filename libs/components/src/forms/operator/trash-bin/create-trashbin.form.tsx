@@ -18,14 +18,9 @@ const formSchema = z.object({
     description: z.string().min(8, {
         message: "Description must be at least 8 characters long.",
     }),
-    latitude: z.coerce
-        .number()
-        .multipleOf(0.01)
-        .min(-90, "Latitude must be at least -90.")
-        .max(90, "Latitude must be at most 90."),
+    latitude: z.coerce.number().min(-90, "Latitude must be at least -90.").max(90, "Latitude must be at most 90."),
     longitude: z.coerce
         .number()
-        .multipleOf(0.01)
         .min(-180, "Longitude must be at least -180.")
         .max(180, "Longitude must be at most 180."),
 });
@@ -104,7 +99,7 @@ export function CreateTrashBinForm() {
                         <FormItem>
                             <FormLabel>Latitude</FormLabel>
                             <FormControl>
-                                <Input step={0.0001} type="number" disabled={isPending} placeholder="0.00" {...field} />
+                                <Input type="number" disabled={isPending} placeholder="0.00" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -117,7 +112,7 @@ export function CreateTrashBinForm() {
                         <FormItem>
                             <FormLabel>Latitude</FormLabel>
                             <FormControl>
-                                <Input step={0.0001} type="number" disabled={isPending} placeholder="0.00" {...field} />
+                                <Input type="number" disabled={isPending} placeholder="0.00" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

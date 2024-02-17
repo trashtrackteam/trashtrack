@@ -16,6 +16,7 @@ import ChangeTrashbinPage from "../pages/operator/trash-bin/trashbin/change-tras
 import CreateSubTrashbinPage from "../pages/operator/trash-bin/trashbin/sub-trashbin/create-subtrashbin.page";
 import DetailedSubTrashbinPage from "../pages/operator/trash-bin/trashbin/sub-trashbin/detailed-subtrashbin.page";
 import ChangeSubTrashbinPage from "../pages/operator/trash-bin/trashbin/sub-trashbin/change-subtrashbin.page";
+import { DetailedTrashPage } from "../pages/operator/trash-bin/trashbin/detailed-trashbin.page";
 
 const TrashbinTabs: React.FC = () => {
     const { t } = useTranslation();
@@ -28,7 +29,7 @@ const TrashbinTabs: React.FC = () => {
                 <Route path="/trash-bin/tabs/trashbin/create" render={() => <CreateTrashbinPage />} exact={true} />
                 <Route
                     path="/trash-bin/tabs/trashbin/details/:trashbin_id"
-                    render={() => <DetailedReportPage />}
+                    render={() => <DetailedTrashPage />}
                     exact={true}
                 />
                 <Route

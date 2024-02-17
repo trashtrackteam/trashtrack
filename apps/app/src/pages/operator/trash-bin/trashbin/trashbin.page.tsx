@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Fuse from "fuse.js";
 
-interface InterfaceTrashbin {
+export interface InterfaceTrashbin {
     id: number;
     name: string;
     latitude: number;
@@ -116,8 +116,7 @@ export function TrashBinPage() {
                             <Card key={trashbin.id} className="flex flex-col mt-4">
                                 <CardContent className="pt-4">
                                     <div className="flex flex-col gap-2">
-                                        <p className="text-xs text-left">Tempah Sampah: {trashbin.name}</p>
-                                        <p className="text-xs text-left">{trashbin.description}</p>
+                                        <p className="text-xs text-left">{trashbin.name}</p>
                                         <div className="flex flex-col gap-2 mt-4">
                                             <Button
                                                 className="w-full"
