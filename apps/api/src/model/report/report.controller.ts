@@ -89,6 +89,35 @@ export class ReportController
         }
     }
 
+    @Get("no-image")
+    public async findAllButNotWithImage(): Promise<ResponseFormatInterface<Omit<ReportModel, "imageData">[]>> {
+        try {
+            const data: ReportModel[] = await this.modelService.find();
+
+            const simplifiedReportModels = data.map((report) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { imageData, ...simplifiedReport } = report;
+                return simplifiedReport;
+            });
+
+            const response: ResponseFormatInterface<Omit<ReportModel, "imageData">[]> = formatResponse<
+                Omit<ReportModel, "imageData">[]
+            >(true, 200, "Found", simplifiedReportModels);
+
+            this.loggerService.log(`Find All But Not With Image: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find All But Not With Image: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Find All But Not With Image: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
     @Override
     public async change(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
