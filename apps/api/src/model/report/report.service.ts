@@ -13,6 +13,21 @@ export class ReportService
     extends ExtendService<ReportModel, ReportCreateDTO, ReportUpdateDTO>
     implements ReportServiceInterface
 {
+    private readonly noImageSelect = {
+        id: true,
+        trashBinId: true,
+        userId: true,
+        nik: true,
+        name: true,
+        phoneNumber: true,
+        imageName: true,
+        imageData: false,
+        description: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+    };
+
     constructor(prismaService: PrismaService) {
         super(ReportService.name, prismaService, {
             trashBin: true,
@@ -21,9 +36,19 @@ export class ReportService
         });
     }
 
-    public async findNIK(nik: string): Promise<ReportModel[]> {
+    public async findNIK(nik: string, page: number = 0, count: number = 0): Promise<ReportModel[]> {
         try {
-            const models: ReportModel[] = await this.prismaService[this.modelName].findMany({ where: { nik } });
+            let models: ReportModel[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    skip: (page - 1) * count,
+                    take: count,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({ where: { nik } });
+            }
 
             this.loggerService.log(`Find NIK: ${JSON.stringify(models)}`);
 
@@ -39,12 +64,23 @@ export class ReportService
         }
     }
 
-    public async findNIKExtend(nik: string): Promise<ReportModel[]> {
+    public async findNIKExtend(nik: string, page: number = 0, count: number = 0): Promise<ReportModel[]> {
         try {
-            const models: ReportModel[] = await this.prismaService[this.modelName].findMany({
-                where: { nik },
-                include: this.extend,
-            });
+            let models: ReportModel[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    skip: (page - 1) * count,
+                    take: count,
+                    include: this.extend,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    include: this.extend,
+                });
+            }
 
             this.loggerService.log(`Find NIK Extend: ${JSON.stringify(models)}`);
 
@@ -56,6 +92,61 @@ export class ReportService
             }
 
             this.loggerService.error(`Find NIK Extend: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
+    public async findNoImage(page: number = 0, count: number = 0): Promise<ReportModel[]> {
+        try {
+            let models: ReportModel[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    select: this.noImageSelect,
+                    skip: (page - 1) * count,
+                    take: count,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({
+                    select: this.noImageSelect,
+                });
+            }
+
+            this.loggerService.log(`Find No Image: ${JSON.stringify(models)}`);
+
+            return models;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find No Image: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Find No Image: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
+    public async findNoImageId(id: number): Promise<ReportModel> {
+        try {
+            const model: ReportModel = await this.prismaService[this.modelName].findUnique({
+                select: this.noImageSelect,
+                where: { id },
+            });
+
+            if (!model) {
+                throw new NotFoundException(`Id ${id} Not Found`);
+            }
+
+            this.loggerService.log(`Find No Image Id: ${JSON.stringify(model)}`);
+
+            return model;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find No Image Id: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Find No Image Id: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }

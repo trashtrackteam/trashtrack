@@ -5,6 +5,10 @@ GET {{url}}
 
 ###
 
+GET {{url}}?page=1&count=1
+
+###
+
 GET {{url}}/id/1
 
 ###
@@ -13,7 +17,23 @@ GET {{url}}/nik/64711092301923
 
 ###
 
+GET {{url}}/nik/64711092301923?page=1&count=5
+
+###
+
+GET {{url}}/no-image
+
+###
+
+GET {{url}}/no-image/id/1
+
+###
+
 GET {{url}}/extend
+
+###
+
+GET {{url}}/extend?page=1&count=5
 
 ###
 
@@ -22,6 +42,10 @@ GET {{url}}/id/2/extend
 ###
 
 GET {{url}}/nik/64711092301923/extend
+
+###
+
+GET {{url}}/nik/64711092301923/extend?page=1&count=5
 
 ###
 

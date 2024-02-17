@@ -5,11 +5,19 @@ GET {{url}}
 
 ###
 
+GET {{url}}?page=1&count=5
+
+###
+
 GET {{url}}/id/1
 
 ###
 
 GET {{url}}/extend
+
+###
+
+GET {{url}}/extend?page=1&count=5
 
 ###
 
