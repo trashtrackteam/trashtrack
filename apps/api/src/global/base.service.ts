@@ -15,9 +15,15 @@ export class BaseService<ModelType, ModelCreateDTO, ModelUpdateDTO> {
         this.modelName = rawServiceName.charAt(0).toLowerCase() + rawServiceName.slice(1);
     }
 
-    public async find(): Promise<ModelType[]> {
+    public async find(page: number = 0, count: number = 0): Promise<ModelType[]> {
         try {
-            const models: ModelType[] = await this.prismaService[this.modelName].findMany();
+            let models: ModelType[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({ skip: (page - 1) * count, take: count });
+            } else {
+                models = await this.prismaService[this.modelName].findMany();
+            }
 
             this.loggerService.log(`Find: ${JSON.stringify(models)}`);
 

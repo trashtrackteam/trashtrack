@@ -5,6 +5,10 @@ GET {{url}}
 
 ###
 
+GET {{url}}?page=1&count=5
+
+###
+
 GET {{url}}/id/1
 
 ###

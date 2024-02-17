@@ -8,6 +8,7 @@ import {
     ParseIntPipe,
     Post,
     Put,
+    Query,
 } from "@nestjs/common";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { ResponseFormatInterface } from "@trashtrack/common";
@@ -31,13 +32,16 @@ export class BaseController<
     }
 
     @Get()
-    public async find(): Promise<ResponseFormatInterface<ModelType[]>> {
+    public async find(
+        @Query("page") page: string = "0",
+        @Query("count") count: string = "0"
+    ): Promise<ResponseFormatInterface<ModelType[]>> {
         try {
             const response: ResponseFormatInterface<ModelType[]> = formatResponse<ModelType[]>(
                 true,
                 200,
                 "Found",
-                await this.modelService.find()
+                await this.modelService.find(parseInt(page), parseInt(count))
             );
 
             this.loggerService.log(`Find: ${JSON.stringify(response)}`);
