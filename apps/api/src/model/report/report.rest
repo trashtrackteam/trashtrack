@@ -25,6 +25,10 @@ GET {{url}}/extend
 
 ###
 
+GET {{url}}/extend?page=1&count=5
+
+###
+
 GET {{url}}/id/2/extend
 
 ###

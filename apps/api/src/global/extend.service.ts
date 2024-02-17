@@ -21,9 +21,19 @@ export class ExtendService<ModelType, ModelCreateDTO, ModelUpdateDTO> extends Ba
         this.extend = extend;
     }
 
-    public async findExtend(): Promise<ModelType[]> {
+    public async findExtend(page: number = 0, count: number = 0): Promise<ModelType[]> {
         try {
-            const models: ModelType[] = await this.prismaService[this.modelName].findMany({ include: this.extend });
+            let models: ModelType[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    skip: (page - 1) * count,
+                    take: count,
+                    include: this.extend,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({ include: this.extend });
+            }
 
             this.loggerService.log(`Find Extend: ${JSON.stringify(models)}`);
 

@@ -1,4 +1,4 @@
-import { Get, NotFoundException, Param, ParseIntPipe } from "@nestjs/common";
+import { Get, NotFoundException, Param, ParseIntPipe, Query } from "@nestjs/common";
 import { ResponseFormatInterface } from "@trashtrack/common";
 
 import { formatResponse } from "../interceptor/response-format.interceptor";
@@ -17,13 +17,16 @@ export class ExtendController<
     }
 
     @Get("extend")
-    public async findExtend(): Promise<ResponseFormatInterface<ModelType[]>> {
+    public async findExtend(
+        @Query("page") page: string = "0",
+        @Query("count") count: string = "0"
+    ): Promise<ResponseFormatInterface<ModelType[]>> {
         try {
             const response: ResponseFormatInterface<ModelType[]> = formatResponse<ModelType[]>(
                 true,
                 200,
                 "Extend Found",
-                await this.modelService.findExtend()
+                await this.modelService.findExtend(parseInt(page), parseInt(count))
             );
 
             this.loggerService.log(`Find Extend: ${JSON.stringify(response)}`);
