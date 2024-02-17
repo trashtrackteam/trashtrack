@@ -72,7 +72,7 @@ export function SubTrashbinPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Trashbins</p>
+                    <p className="text-xs text-left text-slate-600">Sub Trashbins</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">

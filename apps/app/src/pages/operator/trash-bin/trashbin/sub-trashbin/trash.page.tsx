@@ -74,7 +74,7 @@ export function TrashPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Trashbins</p>
+                    <p className="text-xs text-left text-slate-600">Trash</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
@@ -115,7 +115,10 @@ export function TrashPage() {
                               <Card key={subtrashbin.id} className="flex flex-col mt-4">
                                   <CardContent className="pt-4">
                                       <div className="flex flex-col gap-2">
-                                          <p className="text-xs text-left">{subtrashbin.createdAt}</p>
+                                          <p className="text-xs text-left">
+                                              {dayjs(subtrashbin.createdAt).format("YYYY-MM-DD HH:mm:ss")} (
+                                              {subtrashbin.createdAt})
+                                          </p>
                                       </div>
                                   </CardContent>
                               </Card>
