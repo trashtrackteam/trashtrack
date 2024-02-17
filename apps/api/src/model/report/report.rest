@@ -5,7 +5,7 @@ GET {{url}}
 
 ###
 
-GET {{url}}?page=1&count=5
+GET {{url}}?page=1&count=1
 
 ###
 
@@ -18,6 +18,14 @@ GET {{url}}/nik/64711092301923
 ###
 
 GET {{url}}/nik/64711092301923?page=1&count=5
+
+###
+
+GET {{url}}/no-image
+
+###
+
+GET {{url}}/no-image/id/1
 
 ###
 

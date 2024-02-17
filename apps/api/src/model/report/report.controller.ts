@@ -99,30 +99,52 @@ export class ReportController
     }
 
     @Get("no-image")
-    public async findAllButNotWithImage(): Promise<ResponseFormatInterface<Omit<ReportModel, "imageData">[]>> {
+    public async findNoImage(
+        @Query("page") page: string = "0",
+        @Query("count") count: string = "0"
+    ): Promise<ResponseFormatInterface<ReportModel[]>> {
         try {
-            const data: ReportModel[] = await this.modelService.find();
+            const response: ResponseFormatInterface<ReportModel[]> = formatResponse<ReportModel[]>(
+                true,
+                200,
+                "No Image Found",
+                await this.modelService.findNoImage(parseInt(page), parseInt(count))
+            );
 
-            const simplifiedReportModels = data.map((report) => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const { imageData, ...simplifiedReport } = report;
-                return simplifiedReport;
-            });
-
-            const response: ResponseFormatInterface<Omit<ReportModel, "imageData">[]> = formatResponse<
-                Omit<ReportModel, "imageData">[]
-            >(true, 200, "Found", simplifiedReportModels);
-
-            this.loggerService.log(`Find All But Not With Image: ${JSON.stringify(response)}`);
+            this.loggerService.log(`Find No Image: ${JSON.stringify(response)}`);
 
             return response;
         } catch (error) {
             if (error instanceof NotFoundException) {
-                this.loggerService.error(`Find All But Not With Image: ${error.message}`);
+                this.loggerService.error(`Find No Image: ${error.message}`);
                 return formatResponse<null>(false, 404, error.message, null);
             }
 
-            this.loggerService.error(`Find All But Not With Image: ${error.message}`);
+            this.loggerService.error(`Find No Image: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
+    @Get("no-image/id/:id")
+    public async findNoImageId(@Param("id", ParseIntPipe) id: number): Promise<ResponseFormatInterface<ReportModel>> {
+        try {
+            const response: ResponseFormatInterface<ReportModel> = formatResponse<ReportModel>(
+                true,
+                200,
+                "Id No Image Found",
+                await this.modelService.findNoImageId(id)
+            );
+
+            this.loggerService.log(`Find No Image Id: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find No Image Id: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Find No Image Id: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }
