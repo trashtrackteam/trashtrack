@@ -8,6 +8,7 @@ import {
     Param,
     ParseIntPipe,
     Put,
+    Query,
     UseInterceptors,
 } from "@nestjs/common";
 import "multer";
@@ -40,7 +41,11 @@ export class ReportController
     }
 
     @Get("nik/:nik")
-    public async findNIK(@Param("nik") nik: string): Promise<ResponseFormatInterface<ReportModel[]>> {
+    public async findNIK(
+        @Param("nik") nik: string,
+        @Query("page") page: string = "0",
+        @Query("count") count: string = "0"
+    ): Promise<ResponseFormatInterface<ReportModel[]>> {
         this.loggerService.log(`NIK: ${nik}`);
 
         try {
@@ -48,7 +53,7 @@ export class ReportController
                 true,
                 200,
                 "NIK Found",
-                await this.modelService.findNIK(nik)
+                await this.modelService.findNIK(nik, parseInt(page), parseInt(count))
             );
 
             this.loggerService.log(`Find NIK: ${JSON.stringify(response)}`);
@@ -66,13 +71,17 @@ export class ReportController
     }
 
     @Get("nik/:nik/extend")
-    public async findNIKExtend(@Param("nik") nik: string): Promise<ResponseFormatInterface<ReportModel[]>> {
+    public async findNIKExtend(
+        @Param("nik") nik: string,
+        @Query("page") page: string = "0",
+        @Query("count") count: string = "0"
+    ): Promise<ResponseFormatInterface<ReportModel[]>> {
         try {
             const response: ResponseFormatInterface<ReportModel[]> = formatResponse<ReportModel[]>(
                 true,
                 200,
                 "Extend NIK Found",
-                await this.modelService.findNIKExtend(nik)
+                await this.modelService.findNIKExtend(nik, parseInt(page), parseInt(count))
             );
 
             this.loggerService.log(`Find NIK Extend: ${JSON.stringify(response)}`);

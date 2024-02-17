@@ -21,9 +21,19 @@ export class ReportService
         });
     }
 
-    public async findNIK(nik: string): Promise<ReportModel[]> {
+    public async findNIK(nik: string, page: number = 0, count: number = 0): Promise<ReportModel[]> {
         try {
-            const models: ReportModel[] = await this.prismaService[this.modelName].findMany({ where: { nik } });
+            let models: ReportModel[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    skip: (page - 1) * count,
+                    take: count,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({ where: { nik } });
+            }
 
             this.loggerService.log(`Find NIK: ${JSON.stringify(models)}`);
 
@@ -39,12 +49,23 @@ export class ReportService
         }
     }
 
-    public async findNIKExtend(nik: string): Promise<ReportModel[]> {
+    public async findNIKExtend(nik: string, page: number = 0, count: number = 0): Promise<ReportModel[]> {
         try {
-            const models: ReportModel[] = await this.prismaService[this.modelName].findMany({
-                where: { nik },
-                include: this.extend,
-            });
+            let models: ReportModel[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    skip: (page - 1) * count,
+                    take: count,
+                    include: this.extend,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    include: this.extend,
+                });
+            }
 
             this.loggerService.log(`Find NIK Extend: ${JSON.stringify(models)}`);
 
