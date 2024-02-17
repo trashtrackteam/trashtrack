@@ -5,10 +5,11 @@ import { Icons } from "@trashtrack/ui";
 import OperatorTrashbinDisplay from "../pages/operator/trash-bin/display";
 import OperatorSubTrashbinDisplay from "../pages/operator/trash-bin/subtrashbin/subtrash-bin";
 import { ReportsPage } from "../pages/operator/trash-bin/report/reports.page";
-import OperatorFeedbackDisplay, { FeedbackPage } from "../pages/operator/trash-bin/report/feedback/feedback.page";
 import OperatorTrashDisplay from "../pages/operator/trash-bin/subtrashbin/trash/trash";
 import { useTranslation } from "react-i18next";
 import { DetailedReportPage } from "../pages/operator/trash-bin/report/detailed-report.page";
+import FeedbackPage from "../pages/operator/trash-bin/report/report-feedback/feedback.page";
+import CreateFeedbackPage from "../pages/operator/trash-bin/report/report-feedback/create-feedback.page";
 
 const TrashbinTabs: React.FC = () => {
     const { t } = useTranslation();
@@ -16,25 +17,33 @@ const TrashbinTabs: React.FC = () => {
     return (
         <IonTabs>
             <IonRouterOutlet animated={false} mode="ios">
+                {/* Trash Bin */}
                 <Route path="/trash-bin/tabs/trashbin" render={() => <OperatorTrashbinDisplay />} exact={true} />
-                <Route
-                    path="/trash-bin/tabs/sub-trashbin/:trash_bin_id"
-                    render={() => <OperatorSubTrashbinDisplay />}
-                    exact={true}
-                />
 
+                {/* Report */}
                 <Route path="/trash-bin/tabs/report-action" render={() => <ReportsPage />} exact={true} />
                 <Route
                     path="/trash-bin/tabs/report-action/detail/:report_id"
                     render={() => <DetailedReportPage />}
                     exact={true}
                 />
-                <Route path="/trash-bin/tabs/feedback" render={() => <FeedbackPage />} exact={true} />
+                {/* Report Feedback */}
+                <Route path="/trash-bin/tabs/feedback/:report_id" render={() => <FeedbackPage />} exact={true} />
+                <Route
+                    path="/trash-bin/tabs/feedback/:report_id/create"
+                    render={() => <CreateFeedbackPage />}
+                    exact={true}
+                />
 
-                <Route path="/trash-bin/tabs/trash" render={() => <OperatorTrashDisplay />} exact={true} />
+                {/* Index */}
                 <Route path="/trash-bin/tabs" render={() => <Redirect to="/trash-bin/tabs/trashbin" />} exact={true} />
             </IonRouterOutlet>
-            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 pt-4  shadow-xl border-t-2 border-t-black">
+            <IonTabBar
+                slot="bottom"
+                mode="ios"
+                translucent
+                className="pb-4 pt-4  shadow-xl border-t border-t-slate-800"
+            >
                 <IonTabButton tab="backTabs" href="/operator">
                     <Icons.back strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">{t("tabs.back")}</IonLabel>

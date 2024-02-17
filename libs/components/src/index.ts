@@ -28,3 +28,5 @@ export * from "./forms/operator/user/user-edit";
 export * from "./forms/sheets/user-creation";
 export * from "./forms/sheets/user-details";
 export * from "./forms/sheets/delete-confirmation";
+
+export * from "./forms/operator/trash-bin/create-feedback.form";

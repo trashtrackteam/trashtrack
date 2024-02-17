@@ -193,6 +193,13 @@ export function DetailedReportPage() {
                                     <Separator className="my-4" />
                                     <div className="mt-4">
                                         <p className="text-center text-xs mb-4">Actions</p>
+                                        <Button
+                                            className="w-full mb-4"
+                                            disabled={report?.status !== EnumResponseStatus.ACCEPTED}
+                                            onClick={() => history.push(`/trash-bin/tabs/feedback/${report?.id}`)}
+                                        >
+                                            Submit Feedback
+                                        </Button>
                                         <div className="flex flex-row gap-2">
                                             <ReportStatusAction
                                                 report={report}

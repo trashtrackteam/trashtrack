@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "@trashtrack/utils";
 import { CapacitorHttp } from "@capacitor/core";
 
-export const useGetReports = () => {
+export const useGetFeedbacks = () => {
     return useQuery({
-        queryKey: ["getReports"],
+        queryKey: ["getFeedbacks"],
         queryFn: () =>
             CapacitorHttp.request({
-                url: API_URL + `/report/no-image`,
+                url: API_URL + `/feedback`,
                 method: "GET",
             }).then((res) => res.data),
     });

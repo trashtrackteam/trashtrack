@@ -1,4 +1,5 @@
 import { Preferences } from "@capacitor/preferences";
+import dayjs from "dayjs";
 
 export const setIsUserOnboarded = async (isUserOnboarded: boolean) => {
     const stringValue = isUserOnboarded.toString();
@@ -29,3 +30,32 @@ export const getPelaporObject: {
     const { value } = await Preferences.get({ key: "pelaporObject" });
     return value ? JSON.parse(value) : undefined;
 };
+
+export function formatDateTimeAgo(dateTime: dayjs.Dayjs): string {
+    const now = dayjs();
+    const diff = now.diff(dateTime, "seconds");
+
+    if (diff < 60) {
+        // Less than a minute
+        return `${diff} seconds ago`;
+    } else if (diff < 3600) {
+        // Less than an hour
+        const minutes = Math.floor(diff / 60);
+        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+    } else if (diff < 86400) {
+        // Less than a day
+        const hours = Math.floor(diff / 3600);
+        return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+    } else if (diff < 2592000) {
+        // Less than a month
+        const days = Math.floor(diff / 86400);
+        return `${days} day${days > 1 ? "s" : ""} ago`;
+    } else if (diff < 31536000) {
+        // Less than a year
+        const months = Math.floor(diff / 2592000);
+        return `${months} month${months > 1 ? "s" : ""} ago`;
+    } else {
+        // More than a year
+        return dayjs(dateTime).format("MMMM D, YYYY"); // Full date format
+    }
+}
