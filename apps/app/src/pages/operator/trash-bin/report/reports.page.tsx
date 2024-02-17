@@ -132,7 +132,7 @@ export function ReportsPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Trashbin Management</p>
+                    <p className="text-xs text-left text-slate-600">Reports</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     {isLoading || isFetching
