@@ -26,7 +26,7 @@ export default defineConfig({
 
     // Uncomment this if you are using workers.
     // worker: {
-    //  plugins: [ nxViteTsPaths() ],
+    //     plugins: [nxViteTsPaths()],
     // },
 
     build: {

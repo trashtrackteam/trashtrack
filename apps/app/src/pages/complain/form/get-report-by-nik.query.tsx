@@ -7,7 +7,7 @@ export const useGetReportByNik = (nik: string) => {
         queryKey: ["getReportByNik", nik],
         queryFn: () =>
             CapacitorHttp.request({
-                url: API_URL + `/report/nik/${nik}`,
+                url: API_URL + `/report/no-image/nik/${nik}`,
                 method: "GET",
             }).then((res) => res.data),
     });

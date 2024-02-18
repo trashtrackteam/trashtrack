@@ -16,7 +16,7 @@ export const pickImage = async () => {
 
     try {
         const result = await Camera.getPhoto({
-            quality: 90,
+            quality: 75,
             allowEditing: false,
             // resultType: CameraResultType.Uri,
             resultType: CameraResultType.Base64,
