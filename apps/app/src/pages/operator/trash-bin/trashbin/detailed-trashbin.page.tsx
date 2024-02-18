@@ -147,6 +147,12 @@ export function DetailedTrashPage() {
                                         <Textarea id="description" value={trashbin?.description} />
                                     </div>
                                     <div>
+                                        <Label htmlFor="openCount" className="text-xs">
+                                            Open Count
+                                        </Label>
+                                        <Textarea id="openCount" value={trashbin?.openCount} />
+                                    </div>
+                                    <div>
                                         <Label htmlFor="latlang" className="text-xs">
                                             Location
                                         </Label>
