@@ -42,7 +42,7 @@ model TrashBin {
 model SubTrashBin {
   id              Int       @id @default(autoincrement())
   trashBinId      Int
-  trashBin        TrashBin? @relation(fields: [trashBinId], references: [id])
+  trashBin        TrashBin? @relation(fields: [trashBinId], references: [id], onDelete: Cascade)
   name            String
   maxCapacity     Float     @default(0)
   currentCapacity Float     @default(0)
@@ -55,14 +55,14 @@ model SubTrashBin {
 model Trash {
   id            Int          @id @default(autoincrement())
   subTrashBinId Int
-  subTrashBin   SubTrashBin? @relation(fields: [subTrashBinId], references: [id])
+  subTrashBin   SubTrashBin? @relation(fields: [subTrashBinId], references: [id], onDelete: Cascade)
   createdAt     DateTime     @default(now())
 }
 
 model History {
   id              Int          @id @default(autoincrement())
   subTrashBinId   Int
-  subTrashBin     SubTrashBin? @relation(fields: [subTrashBinId], references: [id])
+  subTrashBin     SubTrashBin? @relation(fields: [subTrashBinId], references: [id], onDelete: Cascade)
   maxCapacity     Float
   currentCapacity Float
   createdAt       DateTime     @default(now())
@@ -71,9 +71,9 @@ model History {
 model Report {
   id          Int        @id @default(autoincrement())
   trashBinId  Int
-  trashBin    TrashBin?  @relation(fields: [trashBinId], references: [id])
+  trashBin    TrashBin?  @relation(fields: [trashBinId], references: [id], onDelete: Cascade)
   userId      Int?
-  user        User?      @relation(fields: [userId], references: [id])
+  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
   nik         String
   name        String
   phoneNumber String
@@ -96,7 +96,7 @@ enum Status {
 model Feedback {
   id          Int      @id @default(autoincrement())
   reportId    Int
-  report      Report?  @relation(fields: [reportId], references: [id])
+  report      Report?  @relation(fields: [reportId], references: [id], onDelete: Cascade)
   title       String
   description String
   createdAt   DateTime @default(now())

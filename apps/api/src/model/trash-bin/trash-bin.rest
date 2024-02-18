@@ -1,5 +1,5 @@
 @base_url = {{$dotenv URL}}/api
-@url={{base_url}}/trash
+@url={{base_url}}/trash-bin
 
 GET {{url}}
 
