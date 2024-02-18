@@ -146,19 +146,19 @@ export function DetailedTrashPage() {
                                         <Label htmlFor="name" className="text-xs">
                                             Name
                                         </Label>
-                                        <Input id="name" value={trashbin?.name} />
+                                        <Input readOnly id="name" value={trashbin?.name} />
                                     </div>
                                     <div>
                                         <Label htmlFor="description" className="text-xs">
                                             Description
                                         </Label>
-                                        <Textarea id="description" value={trashbin?.description} />
+                                        <Textarea readOnly id="description" value={trashbin?.description} />
                                     </div>
                                     <div>
                                         <Label htmlFor="openCount" className="text-xs">
                                             Open Count
                                         </Label>
-                                        <Input type="number" id="openCount" value={trashbin?.openCount} />
+                                        <Input readOnly type="number" id="openCount" value={trashbin?.openCount} />
                                     </div>
                                     <div>
                                         <Label htmlFor="latlang" className="text-xs">

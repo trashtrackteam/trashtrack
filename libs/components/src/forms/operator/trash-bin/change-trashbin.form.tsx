@@ -26,8 +26,8 @@ export const useGetTrashBinById = (trashBinId: number) => {
 };
 
 const formSchema = z.object({
-    name: z.string().min(8, {
-        message: "Name must be at least 8 characters long.",
+    name: z.string().min(4, {
+        message: "Name must be at least 4 characters long.",
     }),
     description: z.string().min(8, {
         message: "Description CreateTrashBinFormmust be at least 8 characters long.",
@@ -207,7 +207,7 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                     <Button
                         className="w-full"
                         variant="secondary"
-                        onClick={() => history.replace(`/trash-bin/tabs/trashbin`)}
+                        onClick={() => history.replace(`/trash-bin/tabs/trashbin/details/${trashBinId}`)}
                         disabled={isPending}
                     >
                         Cancel

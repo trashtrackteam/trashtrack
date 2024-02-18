@@ -1,4 +1,3 @@
-import { CapacitorHttp } from "@capacitor/core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { API_URL } from "@trashtrack/utils";
@@ -9,6 +8,22 @@ import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
 import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
+import { Textarea } from "../../../ui/textarea";
+
+import { CapacitorHttp } from "@capacitor/core";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo } from "react";
+
+export const useGetSubTrashBinById = (subtrashBinId: number) => {
+    return useQuery({
+        queryKey: ["useGetSubTrashBinByIdForm", subtrashBinId],
+        queryFn: () =>
+            CapacitorHttp.request({
+                url: API_URL + `/sub-trash-bin/id/${subtrashBinId}`,
+                method: "GET",
+            }).then((res) => res.data),
+    });
+};
 
 const formSchema = z.object({
     name: z.string().min(4, {
@@ -16,21 +31,47 @@ const formSchema = z.object({
     }),
 });
 
-export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
+interface InterfaceSubTrashbin {
+    id: number;
+    trashBinId: number;
+    name: string;
+    maxCapacity: number;
+    currentCapacity: number;
+}
+
+export function ChangeSubTrashbinForm({ trashBinId, subTrashBinId }: { trashBinId: string; subTrashBinId: string }) {
     const history = useHistory();
+
+    const { data: reportData, error, isLoading, refetch, isRefetching } = useGetSubTrashBinById(Number(subTrashBinId));
+    const subtrashbin = !isLoading ? (reportData.data as InterfaceSubTrashbin) : undefined;
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-        },
+        defaultValues: useMemo(() => {
+            return {
+                name: "",
+            };
+        }, []),
     });
 
-    const { mutateAsync, isPending, isError } = useMutation({
-        mutationKey: ["createSubTrashbin"],
-        mutationFn: (values: { name: string; trashBinId: number }) => {
-            return CapacitorHttp.post({
-                url: API_URL + `/sub-trash-bin`,
+    useEffect(() => {
+        if (subtrashbin) {
+            form.reset({
+                name: subtrashbin.name,
+            });
+        }
+    }, [form, subtrashbin]);
+
+    const {
+        mutateAsync,
+        isPending,
+        isError,
+        reset: resetMutation,
+    } = useMutation({
+        mutationKey: ["updateSubTrashbin", subTrashBinId],
+        mutationFn: (values: { name: string }) => {
+            return CapacitorHttp.put({
+                url: API_URL + `/sub-trash-bin/${subTrashBinId}`,
                 data: JSON.stringify(values),
                 headers: {
                     "Content-Type": "application/json",
@@ -38,18 +79,24 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
             }).then((res) => res.data);
         },
         onSuccess: () => {
-            history.replace(`/trash-bin/tabs/trashbin/subtrashbin/${trashBinId}`);
+            history.replace(`/trash-bin/tabs/trashbin/subtrashbin/${trashBinId}/details/${subTrashBinId}`);
         },
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        form.reset();
+        resetMutation();
+
         await mutateAsync({
             name: values.name,
-            trashBinId: Number(trashBinId),
         });
     }
 
-    return (
+    return isLoading || isPending ? (
+        <div>Loading...</div>
+    ) : isError ? (
+        <div>Error: {JSON.stringify(error)}</div>
+    ) : (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
@@ -59,12 +106,7 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input
-                                    disabled={isPending}
-                                    type="text"
-                                    placeholder="Name of the sub trashbin"
-                                    {...field}
-                                />
+                                <Input disabled={isPending} type="text" placeholder="Name of the trashbin" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -73,7 +115,7 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
 
                 <div className="flex flex-col gap-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        Submit Sub Trashbin
+                        Update Sub Trashbin
                     </Button>
                     {isError && (
                         <p className="text-xs text-center">
@@ -83,7 +125,11 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
                     <Button
                         className="w-full"
                         variant="secondary"
-                        onClick={() => history.replace(`/trash-bin/tabs/trashbin/subtrashbin/${trashBinId}`)}
+                        onClick={() =>
+                            history.replace(
+                                `/trash-bin/tabs/trashbin/subtrashbin/${trashBinId}/details/${subTrashBinId}`
+                            )
+                        }
                         disabled={isPending}
                     >
                         Cancel

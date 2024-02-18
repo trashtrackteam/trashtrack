@@ -155,19 +155,20 @@ export function DetailedReportPage() {
                                         <Label htmlFor="name" className="text-xs">
                                             Pelapor
                                         </Label>
-                                        <Input id="name" value={report?.name} />
+                                        <Input readOnly id="name" value={report?.name} />
                                     </div>
                                     <div>
                                         <Label htmlFor="description" className="text-xs">
                                             Deskripsi Laporan
                                         </Label>
-                                        <Textarea id="description" value={report?.description} />
+                                        <Textarea readOnly id="description" value={report?.description} />
                                     </div>
                                     <div>
                                         <Label htmlFor="description" className="text-xs">
                                             Status
                                         </Label>
                                         <Input
+                                            readOnly
                                             id="status"
                                             value={
                                                 report?.status === EnumResponseStatus.ACCEPTED

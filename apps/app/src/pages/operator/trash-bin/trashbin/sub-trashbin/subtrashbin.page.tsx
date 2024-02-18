@@ -13,7 +13,7 @@ import { useState } from "react";
 import Fuse from "fuse.js";
 import { useGetSubTrashbins } from "./get-subtrashbins.query";
 
-interface InterfaceSubTrashbin {
+export interface InterfaceSubTrashbin {
     id: number;
     trashBinId: number;
     name: string;
@@ -137,7 +137,7 @@ export function SubTrashbinPage() {
                                                 className="w-full"
                                                 onClick={() =>
                                                     history.push(
-                                                        `/trash-bin/tabs/trashbin/details/${trashbin_id}/${subtrashbin.id}`
+                                                        `/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}/details/${subtrashbin.id}`
                                                     )
                                                 }
                                             >

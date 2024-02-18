@@ -12,8 +12,8 @@ import { Input } from "../../../ui/input";
 import { Textarea } from "../../../ui/textarea";
 
 const formSchema = z.object({
-    name: z.string().min(8, {
-        message: "Name must be at least 8 characters long.",
+    name: z.string().min(4, {
+        message: "Name must be at least 4 characters long.",
     }),
     description: z.string().min(8, {
         message: "Description must be at least 8 characters long.",
