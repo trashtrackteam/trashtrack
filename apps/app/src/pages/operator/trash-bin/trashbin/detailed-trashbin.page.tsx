@@ -1,4 +1,4 @@
-import { IonContent, IonPage } from "@ionic/react";
+import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import {
     Button,
@@ -103,6 +103,14 @@ export function DetailedTrashPage() {
     } = useGetTrashBinById(Number(trashbin_id));
     const trashbin = !isLoading ? (reportData.data as InterfaceTrashbin) : undefined;
 
+    useIonViewDidEnter(() => {
+        queryClient.invalidateQueries({
+            queryKey: ["useGetTrashBinById", trashbin_id],
+        });
+
+        refetch();
+    });
+
     return (
         <IonPage>
             <IonContent className="ion-padding" fullscreen>
@@ -150,7 +158,7 @@ export function DetailedTrashPage() {
                                         <Label htmlFor="openCount" className="text-xs">
                                             Open Count
                                         </Label>
-                                        <Textarea id="openCount" value={trashbin?.openCount} />
+                                        <Input type="number" id="openCount" value={trashbin?.openCount} />
                                     </div>
                                     <div>
                                         <Label htmlFor="latlang" className="text-xs">
@@ -177,7 +185,13 @@ export function DetailedTrashPage() {
                                             >
                                                 Delete
                                             </Button>
-                                            <Button className="w-full" variant="secondary">
+                                            <Button
+                                                className="w-full"
+                                                variant="secondary"
+                                                onClick={() =>
+                                                    history.push(`/trash-bin/tabs/trashbin/update/${trashbin_id}`)
+                                                }
+                                            >
                                                 Update
                                             </Button>
                                             <DeleteConfirmationDialog

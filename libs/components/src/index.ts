@@ -32,3 +32,4 @@ export * from "./forms/sheets/delete-confirmation";
 export * from "./forms/operator/trash-bin/create-feedback.form";
 export * from "./forms/operator/trash-bin/create-trashbin.form";
 export * from "./forms/operator/trash-bin/create-subtrashbin.form";
+export * from "./forms/operator/trash-bin/change-trashbin.form";
