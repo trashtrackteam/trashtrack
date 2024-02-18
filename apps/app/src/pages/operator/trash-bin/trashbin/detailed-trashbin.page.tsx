@@ -62,17 +62,17 @@ export function DeleteConfirmationDialog({
                     This action is irreversible.
                 </AlertDialogDescription>
                 <AlertDialogFooter>
-                    <Button
-                        onClick={() => {
-                            mutateAsync();
-                        }}
-                        disabled={isPending}
-                        variant="destructive"
-                        className="my-4"
-                    >
-                        {isPending ? "Deleting..." : "Delete"}
-                    </Button>
-                    <AlertDialogCancel>
+                    <div className="flex flex-row gap-2">
+                        <Button
+                            onClick={() => {
+                                mutateAsync();
+                            }}
+                            disabled={isPending}
+                            variant="destructive"
+                            className="w-full"
+                        >
+                            {isPending ? "Deleting..." : "Delete"}
+                        </Button>
                         <Button
                             className="w-full"
                             onClick={() => {
@@ -81,7 +81,7 @@ export function DeleteConfirmationDialog({
                         >
                             Cancel
                         </Button>
-                    </AlertDialogCancel>
+                    </div>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
@@ -153,12 +153,6 @@ export function DetailedTrashPage() {
                                             Description
                                         </Label>
                                         <Textarea readOnly id="description" value={trashbin?.description} />
-                                    </div>
-                                    <div>
-                                        <Label htmlFor="openCount" className="text-xs">
-                                            Open Count
-                                        </Label>
-                                        <Input readOnly type="number" id="openCount" value={trashbin?.openCount} />
                                     </div>
                                     <div>
                                         <Label htmlFor="latlang" className="text-xs">

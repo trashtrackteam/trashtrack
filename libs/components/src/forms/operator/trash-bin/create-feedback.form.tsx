@@ -81,7 +81,7 @@ export function CreateFeedbackForm({ reportId }: { reportId: string }) {
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>Description</FormLabel>
                             <FormControl>
                                 <Textarea disabled={isPending} placeholder="Description of the feedback" {...field} />
                             </FormControl>

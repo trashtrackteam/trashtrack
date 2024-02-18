@@ -77,17 +77,17 @@ export function SubTrashbinPage() {
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
                         <Button
+                            className="w-full"
+                            onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}/create`)}
+                        >
+                            Create a new subtrashbin
+                        </Button>
+                        <Button
                             variant="secondary"
                             className="w-full"
                             onClick={() => history.push(`/trash-bin/tabs/trashbin`)}
                         >
                             Back
-                        </Button>
-                        <Button
-                            className="w-full"
-                            onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}/create`)}
-                        >
-                            Create a new subtrashbin
                         </Button>
                     </div>
                     <Separator className="my-4" />

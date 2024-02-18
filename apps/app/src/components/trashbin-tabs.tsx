@@ -97,7 +97,7 @@ const TrashbinTabs: React.FC = () => {
                 slot="bottom"
                 mode="ios"
                 translucent
-                className="pb-4 pt-4  shadow-xl border-t border-t-slate-800"
+                className="pb-4 pt-4  shadow-xl border-t border-t-slate-500"
             >
                 <IonTabButton tab="backTabs" href="/operator">
                     <Icons.back strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />

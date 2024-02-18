@@ -61,17 +61,17 @@ export function DeleteConfirmationDialog({
                     This action is irreversible.
                 </AlertDialogDescription>
                 <AlertDialogFooter>
-                    <Button
-                        onClick={() => {
-                            mutateAsync();
-                        }}
-                        disabled={isPending}
-                        variant="destructive"
-                        className="my-4"
-                    >
-                        {isPending ? "Deleting..." : "Delete"}
-                    </Button>
-                    <AlertDialogCancel>
+                    <div className="flex flex-row gap-2">
+                        <Button
+                            onClick={() => {
+                                mutateAsync();
+                            }}
+                            disabled={isPending}
+                            variant="destructive"
+                            className="w-full"
+                        >
+                            {isPending ? "Deleting..." : "Delete"}
+                        </Button>
                         <Button
                             className="w-full"
                             onClick={() => {
@@ -80,7 +80,7 @@ export function DeleteConfirmationDialog({
                         >
                             Cancel
                         </Button>
-                    </AlertDialogCancel>
+                    </div>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

@@ -32,7 +32,6 @@ const formSchema = z.object({
     description: z.string().min(8, {
         message: "Description CreateTrashBinFormmust be at least 8 characters long.",
     }),
-    openCount: z.coerce.number().int().min(0, "Open count must be at least 0."),
     latitude: z.coerce.number().min(-90, "Latitude must be at least -90.").max(90, "Latitude must be at most 90."),
     longitude: z.coerce
         .number()
@@ -75,7 +74,6 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
             form.reset({
                 name: trashbin.name,
                 description: trashbin.description,
-                openCount: trashbin.openCount,
                 latitude: trashbin.latitude,
                 longitude: trashbin.longitude,
             });
@@ -89,13 +87,7 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
         reset: resetMutation,
     } = useMutation({
         mutationKey: ["updateTrashbin", trashBinId],
-        mutationFn: (values: {
-            description: string;
-            name: string;
-            latitude: number;
-            longitude: number;
-            openCount: number;
-        }) => {
+        mutationFn: (values: { description: string; name: string; latitude: number; longitude: number }) => {
             return CapacitorHttp.put({
                 url: API_URL + `/trash-bin/${trashBinId}`,
                 data: JSON.stringify(values),
@@ -118,7 +110,6 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
             description: values.description,
             latitude: values.latitude,
             longitude: values.longitude,
-            openCount: values.openCount,
         });
     }
 
@@ -147,22 +138,9 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>Description</FormLabel>
                             <FormControl>
                                 <Textarea disabled={isPending} placeholder="Description of the trashbin" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="openCount"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Open Count</FormLabel>
-                            <FormControl>
-                                <Input type="number" disabled={isPending} placeholder="0" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

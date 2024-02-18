@@ -18,7 +18,6 @@ const formSchema = z.object({
     description: z.string().min(8, {
         message: "Description must be at least 8 characters long.",
     }),
-    openCount: z.coerce.number().int().min(0, "Open count must be at least 0."),
     latitude: z.coerce.number().min(-90, "Latitude must be at least -90.").max(90, "Latitude must be at most 90."),
     longitude: z.coerce
         .number()
@@ -36,7 +35,6 @@ export function CreateTrashBinForm() {
             description: "",
             latitude: 0.0,
             longitude: 0.0,
-            openCount: 0,
         },
     });
 
@@ -89,19 +87,6 @@ export function CreateTrashBinForm() {
                             <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Textarea disabled={isPending} placeholder="Description of the trashbin" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="openCount"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Open Count</FormLabel>
-                            <FormControl>
-                                <Input type="number" disabled={isPending} placeholder="0" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

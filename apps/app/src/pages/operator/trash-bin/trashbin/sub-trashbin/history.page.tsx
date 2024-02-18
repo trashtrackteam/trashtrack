@@ -80,13 +80,6 @@ export function TrashPage() {
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
-                        <Button
-                            variant="secondary"
-                            className="w-full"
-                            onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}`)}
-                        >
-                            Back
-                        </Button>
                         <div className="flex flex-row gap-2">
                             <Button variant="secondary" className="w-full" onClick={() => handleFilterClick("latest")}>
                                 Filter by Latest
@@ -95,6 +88,13 @@ export function TrashPage() {
                                 Filter by Oldest
                             </Button>
                         </div>
+                        <Button
+                            variant="secondary"
+                            className="w-full"
+                            onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}`)}
+                        >
+                            Back
+                        </Button>
                     </div>
                     <Separator className="my-4" />
 

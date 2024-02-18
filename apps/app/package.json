@@ -6,6 +6,7 @@
         "@capacitor/preferences": "../../node_modules/@capacitor/preferences",
         "@capacitor/network": "../../node_modules/@capacitor/network",
         "@capacitor/camera": "../../node_modules/@capacitor/camera",
-        "@capacitor/app": "../../node_modules/@capacitor/app"
+        "@capacitor/app": "../../node_modules/@capacitor/app",
+        "@capacitor/assets": "../../node_modules/@capacitor/assets"
     }
 }
