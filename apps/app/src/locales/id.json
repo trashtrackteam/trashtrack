@@ -38,6 +38,12 @@
                 }
             },
             "form": {
+                "laporan": {
+                    "subtitle": "Laporkan sampah yang ada di tempat sampah ini",
+                    "loading": "Mengirim laporan...",
+                    "sent": "Kirim Laporan",
+                    "back": "Kembali"
+                },
                 "tempat-sampah": {
                     "title": "Pilih tempat sampah",
                     "search": "Cari tempat sampah",
@@ -59,6 +65,56 @@
                         "title": "Operator Login",
                         "description": "Username atau password salah, silakan coba lagi.",
                         "cancel": "Batal"
+                    }
+                }
+            },
+            "reports": {
+                "subtitle": "Laporan",
+                "from": "Laporan dari: ",
+                "for": "Untuk: ",
+                "notResponded": "Belum Ditanggapi",
+                "accepted": "Diterima",
+                "rejected": "Ditolak",
+                "completed": "Selesai",
+                "detailed": {
+                    "subtitle": "Tampilan laporan secara detail.",
+                    "input": {
+                        "name": "Pelapor",
+                        "description": "Deskripsi Laporan",
+                        "status": "Status Laporan",
+                        "photo": "Foto Laporan",
+                        "submitFeedback": "Bikin Tanggapan",
+                        "actions": {
+                            "loading": "Loading...",
+                            "accept": "Terima",
+                            "reject": "Tolak",
+                            "cancel": "Batalkan",
+                            "complete": "Selesai"
+                        }
+                    }
+                },
+                "feedback": {
+                    "delete": {
+                        "warning": {
+                            "title": "Apakah Anda yakin ingin menghapus tanggapan ini?",
+                            "subtitle": "Tindakan ini tidak dapat diubah.",
+                            "pending": "Pending...",
+                            "delete": "Hapus",
+                            "cancel": "Batalkan"
+                        },
+                        "subtitle": "Tanggapan",
+                        "create": "Buat tanggapan baru",
+                        "back": "Kembali",
+                        "noResults": "Tidak ada masukan yang ditemukan untuk laporan ini.",
+                        "created": "Dibuat: ",
+                        "delete": "Hapus",
+                        "createFeedback": {
+                            "subtitle": "Buat Tanggapan",
+                            "title": "Judul",
+                            "description": "Deskripsi",
+                            "submit": "Submit Tanggapan",
+                            "cancel": "Batalkan"
+                        }
                     }
                 }
             }

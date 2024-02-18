@@ -80,6 +80,8 @@ export class BaseController<
     @Post()
     public async add(@Body() payload: ModelCreateDTO): Promise<ResponseFormatInterface<ModelType>> {
         try {
+            this.loggerService.debug(`Add: ${JSON.stringify(payload)}`);
+
             const response: ResponseFormatInterface<ModelType> = formatResponse<ModelType>(
                 true,
                 201,

@@ -7,7 +7,7 @@ export const useGetReports = () => {
         queryKey: ["getReports"],
         queryFn: () =>
             CapacitorHttp.request({
-                url: API_URL + `/report`,
+                url: API_URL + `/report/no-image`,
                 method: "GET",
             }).then((res) => res.data),
     });

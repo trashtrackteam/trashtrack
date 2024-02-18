@@ -125,6 +125,7 @@ export function DetailedReportPage() {
             <IonContent className="ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
+                    <p className="text-xs text-left text-slate-600">Detailed view of the report.</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     {isError && (
@@ -155,19 +156,20 @@ export function DetailedReportPage() {
                                         <Label htmlFor="name" className="text-xs">
                                             Pelapor
                                         </Label>
-                                        <Input id="name" value={report?.name} />
+                                        <Input readOnly id="name" value={report?.name} />
                                     </div>
                                     <div>
                                         <Label htmlFor="description" className="text-xs">
                                             Deskripsi Laporan
                                         </Label>
-                                        <Textarea id="description" value={report?.description} />
+                                        <Textarea readOnly id="description" value={report?.description} />
                                     </div>
                                     <div>
                                         <Label htmlFor="description" className="text-xs">
                                             Status
                                         </Label>
                                         <Input
+                                            readOnly
                                             id="status"
                                             value={
                                                 report?.status === EnumResponseStatus.ACCEPTED
@@ -193,6 +195,13 @@ export function DetailedReportPage() {
                                     <Separator className="my-4" />
                                     <div className="mt-4">
                                         <p className="text-center text-xs mb-4">Actions</p>
+                                        <Button
+                                            className="w-full mb-4"
+                                            disabled={report?.status !== EnumResponseStatus.ACCEPTED}
+                                            onClick={() => history.push(`/trash-bin/tabs/feedback/${report?.id}`)}
+                                        >
+                                            Submit Feedback
+                                        </Button>
                                         <div className="flex flex-row gap-2">
                                             <ReportStatusAction
                                                 report={report}

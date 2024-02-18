@@ -27,13 +27,17 @@ const OperatorTabs: React.FC = () => {
                 />
                 <Route path="/operator/tabs" render={() => <Redirect to="/operator/tabs/dashboard" />} exact={true} />
             </IonRouterOutlet>
-            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 pt-4  shadow-xl border-t-2 border-t-black">
+            <IonTabBar
+                slot="bottom"
+                mode="ios"
+                translucent
+                className="pb-4 pt-4  shadow-xl border-t border-t-slate-800"
+            >
                 <IonTabButton tab="dashboardOperatorTab" href="/operator/tabs/dashboard">
                     <Icons.dashboard strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Dashboard</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/report-action">
-                    {/* <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/trashbin"> */}
+                <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/trashbin">
                     <Icons.trash strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Trashbin</IonLabel>
                 </IonTabButton>
