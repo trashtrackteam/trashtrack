@@ -11,16 +11,88 @@ import {
     Textarea,
     Separator,
     OperatorContext,
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogCancel,
 } from "@trashtrack/ui";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { InterfaceTrashbin } from "./trashbin.page";
 import { useGetTrashBinById } from "./get-trashbin-id.query";
 import { OpenLayersMap } from "./openlayers-map.component";
+import { CapacitorHttp } from "@capacitor/core";
+import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
+import { API_URL } from "@trashtrack/utils";
+
+export function DeleteConfirmationDialog({
+    trashbinId,
+    isOpen,
+    setIsOpen,
+    queryClient,
+}: {
+    trashbinId: string;
+    isOpen: boolean;
+    setIsOpen: (value: boolean) => void;
+    queryClient: QueryClient;
+}) {
+    const history = useHistory();
+
+    const { mutateAsync, isPending } = useMutation({
+        mutationKey: ["deleteTrashbin", trashbinId],
+        mutationFn: () => {
+            return CapacitorHttp.delete({
+                url: API_URL + `/trash-bin/${trashbinId}`,
+            }).then((res) => res.data);
+        },
+        onSuccess: () => {
+            setIsOpen(false);
+            history.goBack();
+        },
+    });
+
+    return (
+        <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+            <AlertDialogContent className="min-w-full container">
+                <AlertDialogHeader className="text-sm text-center">
+                    Are you sure you want to delete this trashbin?
+                </AlertDialogHeader>
+                <AlertDialogDescription className="text-xs text-center">
+                    This action is irreversible.
+                </AlertDialogDescription>
+                <AlertDialogFooter>
+                    <Button
+                        onClick={() => {
+                            mutateAsync();
+                        }}
+                        disabled={isPending}
+                        variant="destructive"
+                        className="my-4"
+                    >
+                        {isPending ? "Deleting..." : "Delete"}
+                    </Button>
+                    <AlertDialogCancel>
+                        <Button
+                            className="w-full"
+                            onClick={() => {
+                                setIsOpen(false);
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                    </AlertDialogCancel>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+    );
+}
 
 export function DetailedTrashPage() {
     const history = useHistory();
-    const operator = useContext(OperatorContext);
     const { trashbin_id } = useParams<{ trashbin_id: string }>();
+    const [isOpen, setIsOpen] = useState(false);
+    const queryClient = useQueryClient();
     const {
         data: reportData,
         isError,
@@ -92,12 +164,22 @@ export function DetailedTrashPage() {
                                     <div className="mt-4">
                                         <p className="text-center text-xs mb-4">Actions</p>
                                         <div className="flex flex-row gap-2">
-                                            <Button className="w-full" variant="destructive">
+                                            <Button
+                                                onClick={() => setIsOpen(true)}
+                                                className="w-full"
+                                                variant="destructive"
+                                            >
                                                 Delete
                                             </Button>
                                             <Button className="w-full" variant="secondary">
                                                 Update
                                             </Button>
+                                            <DeleteConfirmationDialog
+                                                trashbinId={trashbin_id}
+                                                isOpen={isOpen}
+                                                setIsOpen={setIsOpen}
+                                                queryClient={queryClient}
+                                            />
                                         </div>
                                     </div>
                                 </div>
