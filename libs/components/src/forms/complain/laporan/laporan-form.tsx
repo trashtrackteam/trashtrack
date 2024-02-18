@@ -78,7 +78,7 @@ function OnSubmitModal({
                             history.goBack();
                         }}
                     >
-                        Cancel
+                        Close
                     </AlertDialogCancel>
                 </AlertDialogFooter>
             </AlertDialogContent>

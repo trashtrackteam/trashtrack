@@ -93,12 +93,7 @@ const TrashbinTabs: React.FC = () => {
                 {/* Index */}
                 <Route path="/trash-bin/tabs" render={() => <Redirect to="/trash-bin/tabs/trashbin" />} exact={true} />
             </IonRouterOutlet>
-            <IonTabBar
-                slot="bottom"
-                mode="ios"
-                translucent
-                className="pb-4 pt-4  shadow-xl border-t border-t-slate-500"
-            >
+            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 pt-4 border-t bg-card shadow-sm">
                 <IonTabButton tab="backTabs" href="/operator">
                     <Icons.back strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">{t("tabs.back")}</IonLabel>

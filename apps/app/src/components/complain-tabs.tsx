@@ -33,7 +33,7 @@ const ComplainTabs: React.FC = () => {
 
                 <Route path="/complain/tabs" render={() => <Redirect to="/complain/tabs/dashboard" />} exact={true} />
             </IonRouterOutlet>
-            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 pt-4  border-t border-t-slate-500">
+            <IonTabBar slot="bottom" mode="ios" translucent className="pb-4 pt-4 border-t bg-card shadow-sm">
                 <IonTabButton tab="dashboardTabsComplain" href="/complain/tabs/dashboard">
                     <Icons.dashboardLaporan strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
                     <IonLabel className="pt-2 pb-2">Dashboard</IonLabel>
