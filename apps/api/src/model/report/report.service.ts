@@ -151,6 +151,38 @@ export class ReportService
         }
     }
 
+    public async findNoImageNIK(nik: string, page: number = 0, count: number = 0): Promise<ReportModel[]> {
+        try {
+            let models: ReportModel[];
+
+            if (page !== 0 && count !== 0) {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    skip: (page - 1) * count,
+                    take: count,
+                    select: this.noImageSelect,
+                });
+            } else {
+                models = await this.prismaService[this.modelName].findMany({
+                    where: { nik },
+                    select: this.noImageSelect,
+                });
+            }
+
+            this.loggerService.log(`Find No Image NIK: ${JSON.stringify(models)}`);
+
+            return models;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find No Image NIK: ${error.message}`);
+                throw error;
+            }
+
+            this.loggerService.error(`Find No Image NIK: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
     @Override
     public async add(payload: ReportCreateDTO): Promise<ReportModel> {
         try {

@@ -29,6 +29,10 @@ GET {{url}}/no-image/id/1
 
 ###
 
+GET {{url}}/no-image/nik/64711092301923
+
+###
+
 GET {{url}}/extend
 
 ###

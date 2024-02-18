@@ -149,6 +149,34 @@ export class ReportController
         }
     }
 
+    @Get("no-image/nik/:nik")
+    public async findNoImageNIK(
+        @Param("nik") nik: string,
+        @Query("page") page: string = "0",
+        @Query("count") count: string = "0"
+    ): Promise<ResponseFormatInterface<ReportModel[]>> {
+        try {
+            const response: ResponseFormatInterface<ReportModel[]> = formatResponse<ReportModel[]>(
+                true,
+                200,
+                "NIK No Image Found",
+                await this.modelService.findNoImageNIK(nik, parseInt(page), parseInt(count))
+            );
+
+            this.loggerService.log(`Find No Image NIK: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                this.loggerService.error(`Find No Image NIK: ${error.message}`);
+                return formatResponse<null>(false, 404, error.message, null);
+            }
+
+            this.loggerService.error(`Find No Image NIK: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
     @Override
     public async change(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
