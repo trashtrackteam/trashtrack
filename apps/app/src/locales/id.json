@@ -105,7 +105,7 @@
                         "warning": {
                             "title": "Apakah Anda yakin ingin menghapus tanggapan ini?",
                             "subtitle": "Tindakan ini tidak dapat dibatalkan.",
-                            "pending": "Pending...",
+                            "pending": "Memproses...",
                             "delete": "Hapus",
                             "cancel": "Batalkan"
                         },
@@ -135,7 +135,22 @@
                 "search": "Cari tempat sampah",
                 "noResults": "Tidak ada tempah sampah ditemukan.",
                 "view_trashbin": "Lihat Tempat Sampah",
-                "view_subtrashbin": "Lihat Sub Tempat Sampah"
+                "view_subtrashbin": "Lihat Sub Tempat Sampah",
+                "detailed": {
+                    "name": "Nama",
+                    "description": "Deskripsi",
+                    "location": "Lokasi",
+                    "edit": "Edit",
+                    "delete": "Hapus",
+                    "back": "Kembali",
+                    "dialog_delete": {
+                        "title": "Apakah Anda yakin ingin menghapus tempat sampah ini?",
+                        "subtitle": "Tindakan ini tidak dapat dibatalkan.",
+                        "pending": "Memproses...",
+                        "delete": "Hapus",
+                        "cancel": "Batalkan"
+                    }
+                }
             }
         }
     }

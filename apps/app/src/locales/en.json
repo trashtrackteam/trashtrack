@@ -135,7 +135,22 @@
                 "search": "Search Trashbin",
                 "noResults": "No trashbin found for the search.",
                 "view_trashbin": "View Trashbin",
-                "view_subtrashbin": "View Subtrashbin"
+                "view_subtrashbin": "View Subtrashbin",
+                "detailed": {
+                    "name": "Name",
+                    "description": "Description",
+                    "location": "Location",
+                    "edit": "Edit",
+                    "delete": "Delete",
+                    "back": "Back",
+                    "dialog_delete": {
+                        "title": "Are you sure you want to delete this trash bin?",
+                        "subtitle": "This action cannot be undone.",
+                        "pending": "Pending...",
+                        "delete": "Delete",
+                        "cancel": "Cancel"
+                    }
+                }
             }
         }
     }

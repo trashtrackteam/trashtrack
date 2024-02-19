@@ -25,6 +25,7 @@ import { OpenLayersMap } from "./openlayers-map.component";
 import { CapacitorHttp } from "@capacitor/core";
 import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 import { API_URL } from "@trashtrack/utils";
+import { useTranslation } from "react-i18next";
 
 export function DeleteConfirmationDialog({
     trashbinId,
@@ -38,6 +39,7 @@ export function DeleteConfirmationDialog({
     queryClient: QueryClient;
 }) {
     const history = useHistory();
+    const { t } = useTranslation();
 
     const { mutateAsync, isPending } = useMutation({
         mutationKey: ["deleteTrashbin", trashbinId],
@@ -56,10 +58,10 @@ export function DeleteConfirmationDialog({
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent className="min-w-full container">
                 <AlertDialogHeader className="text-sm text-center">
-                    Are you sure you want to delete this trashbin?
+                    {t("operator.trashbin.detailed.dialog_delete.title")}
                 </AlertDialogHeader>
                 <AlertDialogDescription className="text-xs text-center">
-                    This action is irreversible.
+                    {t("operator.trashbin.detailed.dialog_delete.subtitle")}
                 </AlertDialogDescription>
                 <AlertDialogFooter>
                     <div className="flex flex-row gap-2">
@@ -71,7 +73,9 @@ export function DeleteConfirmationDialog({
                             variant="destructive"
                             className="w-full"
                         >
-                            {isPending ? "Deleting..." : "Delete"}
+                            {isPending
+                                ? t("operator.trashbin.detailed.dialog_delete.pending")
+                                : t("operator.trashbin.detailed.dialog_delete.delete")}
                         </Button>
                         <Button
                             className="w-full"
@@ -79,7 +83,7 @@ export function DeleteConfirmationDialog({
                                 setIsOpen(false);
                             }}
                         >
-                            Cancel
+                            {t("operator.trashbin.detailed.dialog_delete.cancel")}
                         </Button>
                     </div>
                 </AlertDialogFooter>
@@ -90,6 +94,7 @@ export function DeleteConfirmationDialog({
 
 export function DetailedTrashPage() {
     const history = useHistory();
+    const { t } = useTranslation();
     const { trashbin_id } = useParams<{ trashbin_id: string }>();
     const [isOpen, setIsOpen] = useState(false);
     const queryClient = useQueryClient();
@@ -144,19 +149,19 @@ export function DetailedTrashPage() {
                                 <div className="flex flex-col gap-2">
                                     <div>
                                         <Label htmlFor="name" className="text-xs">
-                                            Name
+                                            {t("operator.trashbin.detailed.name")}
                                         </Label>
                                         <Input readOnly id="name" value={trashbin?.name} />
                                     </div>
                                     <div>
                                         <Label htmlFor="description" className="text-xs">
-                                            Description
+                                            {t("operator.trashbin.detailed.description")}
                                         </Label>
                                         <Textarea readOnly id="description" value={trashbin?.description} />
                                     </div>
                                     <div>
                                         <Label htmlFor="latlang" className="text-xs">
-                                            Location
+                                            {t("operator.trashbin.detailed.location")}
                                         </Label>
                                         <Input
                                             id="latlang"
@@ -177,7 +182,7 @@ export function DetailedTrashPage() {
                                                 className="w-full"
                                                 variant="destructive"
                                             >
-                                                Delete
+                                                {t("operator.trashbin.detailed.delete")}
                                             </Button>
                                             <Button
                                                 className="w-full"
@@ -186,7 +191,7 @@ export function DetailedTrashPage() {
                                                     history.push(`/trash-bin/tabs/trashbin/update/${trashbin_id}`)
                                                 }
                                             >
-                                                Update
+                                                {t("operator.trashbin.detailed.edit")}
                                             </Button>
                                             <DeleteConfirmationDialog
                                                 trashbinId={trashbin_id}
@@ -203,7 +208,7 @@ export function DetailedTrashPage() {
                     <Card className="flex flex-col mt-4">
                         <CardContent className="pt-4">
                             <Button className="w-full" variant="secondary" onClick={() => history.goBack()}>
-                                Back
+                                {t("operator.trashbin.detailed.back")}
                             </Button>
                         </CardContent>
                     </Card>
