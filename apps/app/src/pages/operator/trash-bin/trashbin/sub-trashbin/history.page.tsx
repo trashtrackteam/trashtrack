@@ -12,6 +12,7 @@ import { useHistory, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useGetHistories } from "./get-history.query";
+import { useTranslation } from "react-i18next";
 
 interface InterfaceHistory {
     id: number;
@@ -36,6 +37,7 @@ export function TrashPage() {
 
         refetch();
     });
+    const { t } = useTranslation();
 
     const filteredDataForId = !isLoading
         ? historyData.data.filter((trash: InterfaceHistory) => trash.subTrashBinId === Number(subtrashbin_id))
@@ -82,10 +84,10 @@ export function TrashPage() {
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row gap-2">
                             <Button variant="secondary" className="w-full" onClick={() => handleFilterClick("latest")}>
-                                Filter by Latest
+                                {t("operator.subtrashbin.history.filter_newest")}
                             </Button>
                             <Button variant="secondary" className="w-full" onClick={() => handleFilterClick("oldest")}>
-                                Filter by Oldest
+                                {t("operator.subtrashbin.history.filter_oldest")}
                             </Button>
                         </div>
                         <Button
@@ -93,7 +95,7 @@ export function TrashPage() {
                             className="w-full"
                             onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}`)}
                         >
-                            Back
+                            {t("operator.subtrashbin.history.back")}
                         </Button>
                     </div>
                     <Separator className="my-4" />

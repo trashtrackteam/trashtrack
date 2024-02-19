@@ -12,6 +12,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useState } from "react";
 import Fuse from "fuse.js";
 import { useGetSubTrashbins } from "./get-subtrashbins.query";
+import { useTranslation } from "react-i18next";
 
 export interface InterfaceSubTrashbin {
     id: number;
@@ -26,6 +27,7 @@ export function SubTrashbinPage() {
     const queryClient = useQueryClient();
     const { trashbin_id } = useParams<{ trashbin_id: string }>();
     const [searchTerm, setSearchTerm] = useState("");
+    const { t } = useTranslation();
 
     const { data: subtrashBinData, isLoading, isFetching, isError, error, refetch } = useGetSubTrashbins();
 
@@ -72,7 +74,7 @@ export function SubTrashbinPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Sub Trashbins</p>
+                    <p className="text-xs text-left text-slate-600">{t("operator.subtrashbin.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
@@ -80,25 +82,26 @@ export function SubTrashbinPage() {
                             className="w-full"
                             onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}/create`)}
                         >
-                            Create a new subtrashbin
+                            {/* @ts-expect-error - no idea error */}
+                            {t("operator.subtrashbin.")}
                         </Button>
                         <Button
                             variant="secondary"
                             className="w-full"
                             onClick={() => history.push(`/trash-bin/tabs/trashbin`)}
                         >
-                            Back
+                            {t("operator.subtrashbin.back")}
                         </Button>
                     </div>
                     <Separator className="my-4" />
                     <div className="flex flex-col">
                         <Label className="mb-2" htmlFor="search">
-                            Search Sub Trashbin
+                            {t("operator.subtrashbin.search")}
                         </Label>
                         <Input
                             id="search"
                             type="text"
-                            placeholder={"Search Sub Trashbin"}
+                            placeholder={t("operator.subtrashbin.search")}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -121,9 +124,7 @@ export function SubTrashbinPage() {
                     ) : filteredData.length === 0 && searchTerm !== "" ? (
                         <Card className="flex flex-col">
                             <CardHeader>
-                                <p className="text-xs text-center">
-                                    No sub trashbin found with that name. Please try another name.
-                                </p>
+                                <p className="text-xs text-center">{t("operator.subtrashbin.noResults")}</p>
                             </CardHeader>
                         </Card>
                     ) : (
@@ -141,7 +142,7 @@ export function SubTrashbinPage() {
                                                     )
                                                 }
                                             >
-                                                View Sub Trashbin
+                                                {t("operator.subtrashbin.view_subtrashbin")}
                                             </Button>
                                             <div className="flex flex-row gap-2">
                                                 <Button
@@ -153,7 +154,7 @@ export function SubTrashbinPage() {
                                                         )
                                                     }
                                                 >
-                                                    View Trash
+                                                    {t("operator.subtrashbin.view_trash")}
                                                 </Button>
                                                 <Button
                                                     className="w-full"
@@ -164,7 +165,7 @@ export function SubTrashbinPage() {
                                                         )
                                                     }
                                                 >
-                                                    View History
+                                                    {t("operator.subtrashbin.view_history")}
                                                 </Button>
                                             </div>
                                         </div>

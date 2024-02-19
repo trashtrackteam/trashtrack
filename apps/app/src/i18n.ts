@@ -6,18 +6,29 @@ import idJSON from "./locales/id.json";
 
 export const resources = {
     en: {
-        ...enJSON,
+        translation: {
+            ...enJSON,
+        },
     },
     id: {
-        ...idJSON,
+        // ...idJSON,
+        translation: {
+            ...idJSON,
+        },
     },
 } as const;
 
 i18n.use(initReactI18next).init({
     lng: "en",
     fallbackLng: "en",
+    keySeparator: ".",
+    ns: ["translation"],
+    defaultNS: "translation",
     resources,
     interpolation: {
         escapeValue: false,
     },
+    compatibilityJSON: "v3",
 });
+
+const t = i18n.t.bind(i18n);

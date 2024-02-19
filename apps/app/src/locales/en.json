@@ -80,7 +80,7 @@
                 "completed": "Completed",
                 "no_reports": "No reports found.",
                 "detailed": {
-                    "subtitle": "Detailed view of the report.",
+                    "subtitle": "detailed view of the report.",
                     "input": {
                         "reporter": "Reporter Identity",
                         "name": "Reporter",
@@ -191,6 +191,60 @@
                             "min": "Longitude must be at least -180.",
                             "max": "Longitude must be at most 180."
                         }
+                    }
+                }
+            },
+            "subtrashbin": {
+                "subtitle": "Sub trashbins",
+                "create": "Create a new sub trashbin",
+                "search": "Search sub trashbin",
+                "back": "Back",
+                "noResults": "No sub trashbin found for the search.",
+                "view_subtrashbin": "View Subtrashbin",
+                "view_trash": "View Trash",
+                "view_history": "View History",
+                "trash": {
+                    "subtitle": "Trash",
+                    "filter_oldest": "Filter by Oldest",
+                    "filter_newest": "Filter by Newest",
+                    "back": "Back"
+                },
+                "history": {
+                    "subtitle": "History",
+                    "filter_oldest": "Filter by Oldest",
+                    "filter_newest": "Filter by Newest",
+                    "back": "Back"
+                },
+                "detailed": {
+                    "name": "Name",
+                    "capacity": "Capacity",
+                    "edit": "Edit",
+                    "delete": "Delete",
+                    "back": "Back",
+                    "dialog_delete": {
+                        "title": "Are you sure you want to delete this sub trash bin?",
+                        "subtitle": "This action cannot be undone.",
+                        "pending": "Pending...",
+                        "delete": "Delete",
+                        "cancel": "Cancel"
+                    }
+                },
+                "create_subtrashbin": {
+                    "subtitle": "Create Sub trashbin",
+                    "name": "Name",
+                    "submit": "Create Sub trashbin",
+                    "back": "Back",
+                    "validation": {
+                        "name": "Name must be at least 8 characters long."
+                    }
+                },
+                "update_subtrashbin": {
+                    "subtitle": "Update Sub trashbin",
+                    "name": "Name",
+                    "submit": "Update Sub trashbin",
+                    "back": "Back",
+                    "validation": {
+                        "name": "Name must be at least 8 characters long."
                     }
                 }
             }

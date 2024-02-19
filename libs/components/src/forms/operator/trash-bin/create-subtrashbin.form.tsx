@@ -9,15 +9,17 @@ import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
 import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
-
-const formSchema = z.object({
-    name: z.string().min(4, {
-        message: "Name must be at least 4 characters long.",
-    }),
-});
+import { useTranslation } from "react-i18next";
 
 export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
     const history = useHistory();
+    const { t } = useTranslation();
+
+    const formSchema = z.object({
+        name: z.string().min(4, {
+            message: t("operator.subtrashbin.create_subtrashbin.validation.name"),
+        }),
+    });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,12 +59,12 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>{t("operator.subtrashbin.create_subtrashbin.name")}</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
                                     type="text"
-                                    placeholder="Name of the sub trashbin"
+                                    placeholder={t("operator.subtrashbin.create_subtrashbin.name")}
                                     {...field}
                                 />
                             </FormControl>
@@ -73,7 +75,7 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
 
                 <div className="flex flex-col gap-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        Submit Sub Trashbin
+                        {t("operator.subtrashbin.create_subtrashbin.submit")}
                     </Button>
                     {isError && (
                         <p className="text-xs text-center">
@@ -86,7 +88,7 @@ export function CreateSubTrashBinForm({ trashBinId }: { trashBinId: string }) {
                         onClick={() => history.replace(`/trash-bin/tabs/trashbin/subtrashbin/${trashBinId}`)}
                         disabled={isPending}
                     >
-                        Cancel
+                        {t("operator.subtrashbin.create_subtrashbin.back")}
                     </Button>
                 </div>
             </form>

@@ -13,6 +13,7 @@ import { Textarea } from "../../../ui/textarea";
 import { CapacitorHttp } from "@capacitor/core";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export const useGetSubTrashBinById = (subtrashBinId: number) => {
     return useQuery({
@@ -25,12 +26,6 @@ export const useGetSubTrashBinById = (subtrashBinId: number) => {
     });
 };
 
-const formSchema = z.object({
-    name: z.string().min(4, {
-        message: "Name must be at least 4 characters long.",
-    }),
-});
-
 interface InterfaceSubTrashbin {
     id: number;
     trashBinId: number;
@@ -41,6 +36,14 @@ interface InterfaceSubTrashbin {
 
 export function ChangeSubTrashbinForm({ trashBinId, subTrashBinId }: { trashBinId: string; subTrashBinId: string }) {
     const history = useHistory();
+
+    const { t } = useTranslation();
+
+    const formSchema = z.object({
+        name: z.string().min(4, {
+            message: t("operator.subtrashbin.update_subtrashbin.validation.name"),
+        }),
+    });
 
     const { data: reportData, error, isLoading, refetch, isRefetching } = useGetSubTrashBinById(Number(subTrashBinId));
     const subtrashbin = !isLoading ? (reportData.data as InterfaceSubTrashbin) : undefined;
@@ -104,9 +107,14 @@ export function ChangeSubTrashbinForm({ trashBinId, subTrashBinId }: { trashBinI
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>{t("operator.subtrashbin.update_subtrashbin.name")}</FormLabel>
                             <FormControl>
-                                <Input disabled={isPending} type="text" placeholder="Name of the trashbin" {...field} />
+                                <Input
+                                    disabled={isPending}
+                                    type="text"
+                                    placeholder={t("operator.subtrashbin.update_subtrashbin.name")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -115,7 +123,7 @@ export function ChangeSubTrashbinForm({ trashBinId, subTrashBinId }: { trashBinI
 
                 <div className="flex flex-col gap-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        Update Sub Trashbin
+                        {t("operator.subtrashbin.update_subtrashbin.submit")}
                     </Button>
                     {isError && (
                         <p className="text-xs text-center">
@@ -132,7 +140,7 @@ export function ChangeSubTrashbinForm({ trashBinId, subTrashBinId }: { trashBinI
                         }
                         disabled={isPending}
                     >
-                        Cancel
+                        {t("operator.subtrashbin.update_subtrashbin.back")}
                     </Button>
                 </div>
             </form>

@@ -24,6 +24,7 @@ import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
 import { API_URL } from "@trashtrack/utils";
 import { useGetSubTrashBinById } from "./get-subtrashbin-id.query";
 import { InterfaceSubTrashbin } from "./subtrashbin.page";
+import { useTranslation } from "react-i18next";
 
 export function DeleteConfirmationDialog({
     subtrashbinId,
@@ -51,14 +52,16 @@ export function DeleteConfirmationDialog({
         },
     });
 
+    const { t } = useTranslation();
+
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent className="min-w-full container">
                 <AlertDialogHeader className="text-sm text-center">
-                    Are you sure you want to delete this sub trashbin?
+                    {t("operator.subtrashbin.detailed.dialog_delete.title")}
                 </AlertDialogHeader>
                 <AlertDialogDescription className="text-xs text-center">
-                    This action is irreversible.
+                    {t("operator.subtrashbin.detailed.dialog_delete.subtitle")}
                 </AlertDialogDescription>
                 <AlertDialogFooter>
                     <div className="flex flex-row gap-2">
@@ -70,7 +73,9 @@ export function DeleteConfirmationDialog({
                             variant="destructive"
                             className="w-full"
                         >
-                            {isPending ? "Deleting..." : "Delete"}
+                            {isPending
+                                ? t("operator.subtrashbin.detailed.dialog_delete.pending")
+                                : t("operator.subtrashbin.detailed.dialog_delete.delete")}
                         </Button>
                         <Button
                             className="w-full"
@@ -78,7 +83,7 @@ export function DeleteConfirmationDialog({
                                 setIsOpen(false);
                             }}
                         >
-                            Cancel
+                            {t("operator.subtrashbin.detailed.dialog_delete.cancel")}
                         </Button>
                     </div>
                 </AlertDialogFooter>
@@ -109,6 +114,8 @@ export function DetailedSubTrashbinPage() {
 
         refetch();
     });
+
+    const { t } = useTranslation();
 
     return (
         <IonPage>
@@ -144,13 +151,13 @@ export function DetailedSubTrashbinPage() {
                                     <div>
                                         <div>
                                             <Label htmlFor="name" className="text-xs">
-                                                Name
+                                                {t("operator.subtrashbin.detailed.name")}
                                             </Label>
                                             <Input readOnly id="name" value={subtrashbin?.name} />
                                         </div>
                                         <div>
                                             <Label htmlFor="openCount" className="text-xs">
-                                                Capacity
+                                                {t("operator.subtrashbin.detailed.capacity")}
                                             </Label>
                                             <Input
                                                 readOnly
@@ -169,7 +176,7 @@ export function DetailedSubTrashbinPage() {
                                                 className="w-full"
                                                 variant="destructive"
                                             >
-                                                Delete
+                                                {t("operator.subtrashbin.detailed.delete")}
                                             </Button>
                                             <Button
                                                 className="w-full"
@@ -180,7 +187,7 @@ export function DetailedSubTrashbinPage() {
                                                     )
                                                 }
                                             >
-                                                Update
+                                                {t("operator.subtrashbin.detailed.edit")}
                                             </Button>
                                             <DeleteConfirmationDialog
                                                 subtrashbinId={subtrashbin_id}
@@ -197,7 +204,7 @@ export function DetailedSubTrashbinPage() {
                     <Card className="flex flex-col mt-4">
                         <CardContent className="pt-4">
                             <Button className="w-full" variant="secondary" onClick={() => history.goBack()}>
-                                Back
+                                {t("operator.subtrashbin.detailed.back")}
                             </Button>
                         </CardContent>
                     </Card>

@@ -12,6 +12,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useGetTrashes } from "./get-trash.query";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface InterfaceTrash {
     id: number;
@@ -24,6 +25,7 @@ export function TrashPage() {
     const queryClient = useQueryClient();
     const { trashbin_id, subtrashbin_id } = useParams<{ trashbin_id: string; subtrashbin_id: string }>();
     const [filterType, setFilterType] = useState<"latest" | "oldest" | "none">("none");
+    const { t } = useTranslation();
 
     const { data: trashData, isLoading, isFetching, isError, error, refetch } = useGetTrashes();
 
@@ -74,16 +76,16 @@ export function TrashPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Trash</p>
+                    <p className="text-xs text-left text-slate-600">{t("operator.subtrashbin.trash.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row gap-2">
                             <Button variant="secondary" className="w-full" onClick={() => handleFilterClick("latest")}>
-                                Filter by Latest
+                                {t("operator.subtrashbin.trash.filter_newest")}
                             </Button>
                             <Button variant="secondary" className="w-full" onClick={() => handleFilterClick("oldest")}>
-                                Filter by Oldest
+                                {t("operator.subtrashbin.trash.filter_oldest")}
                             </Button>
                         </div>
                         <Button
@@ -91,7 +93,7 @@ export function TrashPage() {
                             className="w-full"
                             onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}`)}
                         >
-                            Back
+                            {t("operator.subtrashbin.trash.back")}
                         </Button>
                     </div>
                     <Separator className="my-4" />

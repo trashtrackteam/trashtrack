@@ -196,6 +196,60 @@
                         }
                     }
                 }
+            },
+            "subtrashbin": {
+                "subtitle": "Tempat Sampah",
+                "create": "Buat Tempat Sampah Baru",
+                "search": "Cari Tempat Sampah",
+                "back": "Kembali",
+                "noResults": "Tidak ada tempat sampah yang ditemukan untuk pencarian ini.",
+                "view_subtrashbin": "Lihat Subtempatsampah",
+                "view_trash": "Lihat Tempat Sampah",
+                "view_history": "Lihat Riwayat",
+                "trash": {
+                    "subtitle": "Tempat Sampah",
+                    "filter_oldest": "Filter dari yang Terlama",
+                    "filter_newest": "Filter dari yang Terbaru",
+                    "back": "Kembali"
+                },
+                "history": {
+                    "subtitle": "Riwayat",
+                    "filter_oldest": "Filter dari yang Terlama",
+                    "filter_newest": "Filter dari yang Terbaru",
+                    "back": "Kembali"
+                },
+                "detailed": {
+                    "name": "Nama",
+                    "capacity": "Kapasitas",
+                    "edit": "Edit",
+                    "delete": "Hapus",
+                    "back": "Kembali",
+                    "dialog_delete": {
+                        "title": "Apakah Anda yakin ingin menghapus sub tempat sampah ini?",
+                        "subtitle": "Tindakan ini tidak dapat dibatalkan.",
+                        "pending": "Menunggu...",
+                        "delete": "Hapus",
+                        "cancel": "Batal"
+                    }
+                },
+                "create_subtrashbin": {
+                    "subtitle": "Buat Sub tempat sampah",
+                    "name": "Nama",
+                    "submit": "Buat Sub tempat sampah",
+                    "back": "Kembali",
+                    "validation": {
+                        "name": "Nama harus minimal 8 karakter."
+                    }
+                },
+                "update_subtrashbin": {
+                    "subtitle": "Perbarui Sub tempat sampah",
+                    "name": "Nama",
+                    "submit": "Perbarui Sub tempat sampah",
+                    "back": "Kembali",
+                    "validation": {
+                        "name": "Nama harus minimal 8 karakter."
+                    }
+                }
             }
         }
     }
