@@ -71,21 +71,27 @@
             },
             "reports": {
                 "subtitle": "Laporan",
+                "search": "Cari tempat sampah",
                 "from": "Laporan dari: ",
                 "for": "Untuk: ",
                 "notResponded": "Belum Ditanggapi",
                 "accepted": "Diterima",
                 "rejected": "Ditolak",
                 "completed": "Selesai",
+                "no_reports": "Tidak ada laporan ditemukan.",
                 "detailed": {
                     "subtitle": "Tampilan laporan secara detail.",
                     "input": {
+                        "reporter": "Identitas Pelaporan",
                         "name": "Pelapor",
+                        "no": "Nomor Telepon",
+                        "info": "Informasi Laporan",
                         "description": "Deskripsi Laporan",
                         "status": "Status Laporan",
                         "photo": "Foto Laporan",
                         "submitFeedback": "Kirim Tanggapan",
                         "actions": {
+                            "title": "Tindakan Laporan",
                             "loading": "Loading...",
                             "accept": "Terima",
                             "reject": "Tolak",
@@ -114,7 +120,11 @@
                             "title": "Judul",
                             "description": "Deskripsi",
                             "submit": "Submit Tanggapan",
-                            "cancel": "Batalkan"
+                            "cancel": "Batalkan",
+                            "validation": {
+                                "title": "Panjang judul minimal harus 8 karakter.",
+                                "subtitle": "Panjang deskripsi minimal harus 8 karakter."
+                            }
                         }
                     }
                 }

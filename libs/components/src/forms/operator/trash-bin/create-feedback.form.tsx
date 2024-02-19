@@ -10,18 +10,20 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
 import { Textarea } from "../../../ui/textarea";
-
-const formSchema = z.object({
-    title: z.string().min(8, {
-        message: "Title must be at least 8 characters long.",
-    }),
-    description: z.string().min(8, {
-        message: "Description must be at least 8 characters long.",
-    }),
-});
+import { useTranslation } from "react-i18next";
 
 export function CreateFeedbackForm({ reportId }: { reportId: string }) {
     const history = useHistory();
+    const { t } = useTranslation();
+
+    const formSchema = z.object({
+        title: z.string().min(8, {
+            message: t("operator.reports.feedback.delete.createFeedback.validation.title"),
+        }),
+        description: z.string().min(8, {
+            message: t("operator.reports.feedback.delete.createFeedback.validation.subtitle"),
+        }),
+    });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -63,12 +65,12 @@ export function CreateFeedbackForm({ reportId }: { reportId: string }) {
                     name="title"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Title</FormLabel>
+                            <FormLabel>{t("operator.reports.feedback.delete.createFeedback.title")}</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
                                     type="text"
-                                    placeholder="Title of the feedback"
+                                    placeholder={t("operator.reports.feedback.delete.createFeedback.title")}
                                     {...field}
                                 />
                             </FormControl>
@@ -81,9 +83,13 @@ export function CreateFeedbackForm({ reportId }: { reportId: string }) {
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("operator.reports.feedback.delete.createFeedback.description")}</FormLabel>
                             <FormControl>
-                                <Textarea disabled={isPending} placeholder="Description of the feedback" {...field} />
+                                <Textarea
+                                    disabled={isPending}
+                                    placeholder={t("operator.reports.feedback.delete.createFeedback.description")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -92,7 +98,7 @@ export function CreateFeedbackForm({ reportId }: { reportId: string }) {
 
                 <div className="flex flex-col gap-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        Submit Feedback
+                        {t("operator.reports.feedback.delete.createFeedback.submit")}
                     </Button>
                     {isError && (
                         <p className="text-xs text-center">
@@ -105,7 +111,7 @@ export function CreateFeedbackForm({ reportId }: { reportId: string }) {
                         onClick={() => history.replace(`/trash-bin/tabs/feedback/${reportId}`)}
                         disabled={isPending}
                     >
-                        Cancel
+                        {t("operator.reports.feedback.delete.createFeedback.cancel")}
                     </Button>
                 </div>
             </form>

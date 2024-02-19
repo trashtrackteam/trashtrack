@@ -10,6 +10,7 @@ import { useGetTrashBinById } from "./get-trash-bin.query";
 import { useState } from "react";
 import { InterfaceResult, useGetReportsWithTrashBins } from "./get-trash-and-report.query";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 export enum EnumResponseStatus {
     NOT_RESPONDED = "notResponded",
@@ -45,6 +46,8 @@ export interface InterfaceTrashbin {
 }
 
 function ReportStatus({ status }: { status: EnumResponseStatus }) {
+    const { t } = useTranslation();
+
     return (
         <p className="text-left text-xs mt-8">
             Status:{" "}
@@ -62,13 +65,13 @@ function ReportStatus({ status }: { status: EnumResponseStatus }) {
                 }`}
             >
                 {status === EnumResponseStatus.NOT_RESPONDED
-                    ? "Belum Ditanggapi"
+                    ? t("operator.reports.notResponded")
                     : status === EnumResponseStatus.ACCEPTED
-                    ? "Diterima"
+                    ? t("operator.reports.accepted")
                     : status === EnumResponseStatus.REJECTED
-                    ? "Ditolak"
+                    ? t("operator.reports.rejected")
                     : status === EnumResponseStatus.COMPLETED
-                    ? "Selesai"
+                    ? t("operator.reports.completed")
                     : ""}
             </span>
         </p>
@@ -79,12 +82,23 @@ export function ReportsPage() {
     const history = useHistory();
     const queryClient = useQueryClient();
     const [searchTerm, setSearchTerm] = useState("");
+    const { t } = useTranslation();
 
     const { reports, trashBins, isReportsLoading, isTrashBinsLoading } = useGetReportsWithTrashBins();
 
     const handleRefresh = (event: CustomEvent<RefresherEventDetail>) => {
+        queryClient.invalidateQueries({
+            queryKey: ["getReports", "getTrashBins"],
+        });
+
         event.detail.complete();
     };
+
+    useIonViewDidEnter(() => {
+        queryClient.invalidateQueries({
+            queryKey: ["getReports", "getTrashBins"],
+        });
+    });
 
     const fuseOptions = {
         keys: ["trashBinName"],
@@ -120,19 +134,19 @@ export function ReportsPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Reports</p>
+                    <p className="text-xs text-left text-slate-600">{t("operator.reports.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col">
                         <Separator className="my-4" />
                         <div className="flex flex-col">
                             <Label className="mb-2" htmlFor="search">
-                                Search Trashbin
+                                {t("operator.reports.search")}
                             </Label>
                             <Input
                                 id="search"
                                 type="text"
-                                placeholder={"Search Trashbin"}
+                                placeholder={t("operator.reports.search")}
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
@@ -155,9 +169,7 @@ export function ReportsPage() {
                         ) : filteredData.length === 0 && searchTerm !== "" ? (
                             <Card className="flex flex-col mt-4">
                                 <CardHeader>
-                                    <p className="text-xs text-center">
-                                        No trashbin found with that name. Please try another name.
-                                    </p>
+                                    <p className="text-xs text-center">{t("operator.reports.no_reports")}</p>
                                 </CardHeader>
                             </Card>
                         ) : (
@@ -170,8 +182,12 @@ export function ReportsPage() {
                                     <CardContent className="pt-4">
                                         <CardHeader></CardHeader>
                                         <CardContent className="flex flex-col gap-2">
-                                            <p className="text-xs text-left">Laporan dari: {re.name}</p>
-                                            <p className="text-xs text-left mb-2">Untuk: {re.trashBinName}</p>
+                                            <p className="text-xs text-left">
+                                                {t("operator.reports.from")} {re.name}
+                                            </p>
+                                            <p className="text-xs text-left mb-2">
+                                                {t("operator.reports.for")} {re.trashBinName}
+                                            </p>
                                             <ReportStatus status={re.status} />
                                         </CardContent>
                                     </CardContent>

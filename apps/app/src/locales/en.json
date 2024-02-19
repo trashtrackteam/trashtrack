@@ -71,21 +71,27 @@
             },
             "reports": {
                 "subtitle": "Reports",
+                "search": "Search Trashbin",
                 "from": "Report from: ",
                 "for": "For: ",
                 "notResponded": "Not Responded",
                 "accepted": "Accepted",
                 "rejected": "Rejected",
                 "completed": "Completed",
+                "no_reports": "No reports found.",
                 "detailed": {
                     "subtitle": "Detailed view of the report.",
                     "input": {
+                        "reporter": "Reporter Identity",
                         "name": "Reporter",
+                        "no": "Telephone Number",
+                        "info": "Report Information",
                         "description": "Report Description",
                         "status": "Report Status",
                         "photo": "Report Photo",
                         "submitFeedback": "Submit Feedback",
                         "actions": {
+                            "title": "Report Actions",
                             "loading": "Loading...",
                             "accept": "Accept",
                             "reject": "Reject",
@@ -114,7 +120,11 @@
                             "title": "Title",
                             "description": "Description",
                             "submit": "Submit Feedback",
-                            "cancel": "Cancel"
+                            "cancel": "Cancel",
+                            "validation": {
+                                "title": "Title must be at least 8 characters long.",
+                                "subtitle": "Description must be at least 8 characters long."
+                            }
                         }
                     }
                 }

@@ -19,6 +19,7 @@ import { InterfaceReport, EnumResponseStatus } from "./reports.page";
 import { API_URL } from "@trashtrack/utils";
 import { CapacitorHttp } from "@capacitor/core";
 import { useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 function ReportStatusAction({
     report,
@@ -31,6 +32,7 @@ function ReportStatusAction({
     operatorId: string;
     isRefetching: boolean;
 }) {
+    const { t } = useTranslation();
     const { mutateAsync, isPending } = useMutation({
         mutationKey: ["acceptReport", report?.id, operatorId],
         mutationFn: (formData: { status: EnumResponseStatus }) => {
@@ -80,10 +82,14 @@ function ReportStatusAction({
         ) : (
             <>
                 <Button className="w-full" variant={"default"} onClick={() => handleAccept()}>
-                    {isPending ? "Loading..." : "Accept"}
+                    {isPending
+                        ? t("operator.reports.detailed.input.actions.loading")
+                        : t("operator.reports.detailed.input.actions.accept")}
                 </Button>
                 <Button className="w-full" variant={"destructive"} onClick={() => handleReject()}>
-                    {isPending ? "Loading..." : "Reject"}
+                    {isPending
+                        ? t("operator.reports.detailed.input.actions.loading")
+                        : t("operator.reports.detailed.input.actions.reject")}
                 </Button>
             </>
         );
@@ -94,7 +100,9 @@ function ReportStatusAction({
             <Skeleton className="h-12 w-full" />
         ) : (
             <Button className="w-full" variant={"default"} onClick={() => handleComplete()}>
-                {isPending ? "Loading..." : "Complete"}
+                {isPending
+                    ? t("operator.reports.detailed.input.actions.loading")
+                    : t("operator.reports.detailed.input.actions.complete")}
             </Button>
         );
     }
@@ -104,7 +112,9 @@ function ReportStatusAction({
             <Skeleton className="h-12 w-full" />
         ) : (
             <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
-                {isPending ? "Loading..." : "Cancel"}
+                {isPending
+                    ? t("operator.reports.detailed.input.actions.loading")
+                    : t("operator.reports.detailed.input.actions.cancel")}
             </Button>
         );
     }
@@ -114,7 +124,9 @@ function ReportStatusAction({
             <Skeleton className="h-12 w-full" />
         ) : (
             <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
-                {isPending ? "Loading..." : "Cancel"}
+                {isPending
+                    ? t("operator.reports.detailed.input.actions.loading")
+                    : t("operator.reports.detailed.input.actions.cancel")}
             </Button>
         );
     }
@@ -128,7 +140,9 @@ function ReportStatusAction({
             <Skeleton className="h-12 w-full" />
         ) : (
             <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
-                {isPending ? "Loading..." : "Cancel"}
+                {isPending
+                    ? t("operator.reports.detailed.input.actions.loading")
+                    : t("operator.reports.detailed.input.actions.cancel")}
             </Button>
         );
     }
@@ -141,6 +155,7 @@ export function DetailedReportPage() {
     const { data: reportData, isError, error, isLoading, refetch, isRefetching } = useGetReportById(Number(report_id));
     const [imageUrl, setImageUrl] = useState<string>("");
     const report = !isLoading ? (reportData.data as InterfaceReport) : undefined;
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!isLoading && reportData) {
@@ -157,7 +172,7 @@ export function DetailedReportPage() {
             <IonContent className="ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Detailed view of the report.</p>
+                    <p className="text-xs text-left text-slate-600">{t("operator.reports.detailed.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     {isError && (
@@ -184,13 +199,13 @@ export function DetailedReportPage() {
                         <div>
                             <Card className="flex flex-col mt-4">
                                 <CardHeader className="pt-4">
-                                    <p className="font-bold text-lg">Identitas Pelaporan</p>
+                                    <p className="font-bold text-lg">{t("operator.reports.detailed.input.reporter")}</p>
                                 </CardHeader>
-                                <CardDescription>
+                                <CardContent className="pt-4">
                                     <div className="flex flex-col gap-2">
                                         <div>
                                             <Label htmlFor="name" className="text-xs">
-                                                Pelapor
+                                                {t("operator.reports.detailed.input.name")}
                                             </Label>
                                             <Input readOnly id="name" value={report?.name} />
                                         </div>
@@ -202,46 +217,46 @@ export function DetailedReportPage() {
                                         </div>
                                         <div>
                                             <Label htmlFor="name" className="text-xs">
-                                                Nomor Telepon
+                                                {t("operator.reports.detailed.input.no")}
                                             </Label>
                                             <Input readOnly id="name" value={report?.phoneNumber} />
                                         </div>
                                     </div>
-                                </CardDescription>
+                                </CardContent>
                             </Card>
                             <Card className="flex flex-col mt-4">
                                 <CardHeader className="pt-4">
-                                    <p className="font-bold text-lg">Informasi Laporan</p>
+                                    <p className="font-bold text-lg">{t("operator.reports.detailed.input.info")}</p>
                                 </CardHeader>
                                 <CardContent className="pt-4">
                                     <div className="flex flex-col gap-2">
                                         <div>
                                             <Label htmlFor="description" className="text-xs">
-                                                Deskripsi Laporan
+                                                {t("operator.reports.detailed.input.description")}
                                             </Label>
                                             <Textarea readOnly id="description" value={report?.description} />
                                         </div>
                                         <div>
                                             <Label htmlFor="description" className="text-xs">
-                                                Status
+                                                {t("operator.reports.detailed.input.status")}
                                             </Label>
                                             <Input
                                                 readOnly
                                                 id="status"
                                                 value={
                                                     report?.status === EnumResponseStatus.ACCEPTED
-                                                        ? "Diterima"
+                                                        ? t("operator.reports.accepted")
                                                         : report?.status === EnumResponseStatus.REJECTED
-                                                        ? "Ditolak"
+                                                        ? t("operator.reports.rejected")
                                                         : report?.status === EnumResponseStatus.COMPLETED
-                                                        ? "Selesai"
-                                                        : "Belum Ditanggapi"
+                                                        ? t("operator.reports.completed")
+                                                        : t("operator.reports.notResponded")
                                                 }
                                             />
                                         </div>
                                         <div>
                                             <Label htmlFor="image" className="text-xs">
-                                                Foto
+                                                {t("operator.reports.detailed.input.photo")}
                                             </Label>
                                             <img
                                                 src={imageUrl ? imageUrl : "https://via.placeholder.com/150"}
@@ -255,7 +270,9 @@ export function DetailedReportPage() {
                             </Card>
                             <Card className="flex flex-col mt-4">
                                 <CardHeader className="pt-4">
-                                    <p className="font-bold text-lg">Tindakan Laporan</p>
+                                    <p className="font-bold text-lg">
+                                        {t("operator.reports.detailed.input.actions.title")}
+                                    </p>
                                 </CardHeader>
                                 <CardDescription>
                                     <div className="flex flex-col gap-2">
@@ -265,7 +282,7 @@ export function DetailedReportPage() {
                                                 disabled={report?.status !== EnumResponseStatus.ACCEPTED}
                                                 onClick={() => history.push(`/trash-bin/tabs/feedback/${report?.id}`)}
                                             >
-                                                Submit Feedback
+                                                {t("operator.reports.detailed.input.submitFeedback")}
                                             </Button>
                                             <div className="flex flex-row gap-2">
                                                 <ReportStatusAction

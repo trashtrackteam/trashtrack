@@ -16,6 +16,7 @@ import dayjs from "dayjs";
 import { CapacitorHttp } from "@capacitor/core";
 import { queryClient } from "../../../../../main";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface InterfaceFeedback {
     id: number;
@@ -36,6 +37,8 @@ export function DeleteConfirmationDialog({
     setIsOpen: (value: boolean) => void;
     queryClient: QueryClient;
 }) {
+    const { t } = useTranslation();
+
     const { mutateAsync, isPending } = useMutation({
         mutationKey: ["deleteFeedback"],
         mutationFn: () => {
@@ -55,10 +58,10 @@ export function DeleteConfirmationDialog({
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent className="min-w-full container">
                 <AlertDialogHeader className="text-sm text-center">
-                    Are you sure you want to delete this feedback?
+                    {t("operator.reports.feedback.delete.warning.title")}
                 </AlertDialogHeader>
                 <AlertDialogDescription className="text-xs text-center">
-                    This action is irreversible.
+                    {t("operator.reports.feedback.delete.warning.subtitle")}
                 </AlertDialogDescription>
                 <AlertDialogFooter>
                     <div className="flex flex-row gap-2">
@@ -70,7 +73,9 @@ export function DeleteConfirmationDialog({
                             variant="destructive"
                             className="w-full"
                         >
-                            {isPending ? "Deleting..." : "Delete"}
+                            {isPending
+                                ? t("operator.reports.feedback.delete.warning.pending")
+                                : t("operator.reports.feedback.delete.warning.delete")}
                         </Button>
                         <Button
                             className="w-full"
@@ -78,7 +83,7 @@ export function DeleteConfirmationDialog({
                                 setIsOpen(false);
                             }}
                         >
-                            Cancel
+                            {t("operator.reports.feedback.delete.warning.cancel")}
                         </Button>
                     </div>
                 </AlertDialogFooter>
@@ -92,6 +97,7 @@ export function FeedbackPage() {
     const { report_id } = useParams<{ report_id: string }>();
     const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
+    const { t } = useTranslation();
 
     const { data: feedbackData, isError, error, isLoading, refetch, isRefetching } = useGetFeedbacks();
     const filteredData = !isLoading
@@ -111,7 +117,7 @@ export function FeedbackPage() {
             <IonContent className="ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Feedback</p>
+                    <p className="text-xs text-left text-slate-600">{t("operator.reports.feedback.delete.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
@@ -119,14 +125,14 @@ export function FeedbackPage() {
                             className="w-full"
                             onClick={() => history.push(`/trash-bin/tabs/feedback/${report_id}/create`)}
                         >
-                            Create a new feedback
+                            {t("operator.reports.feedback.delete.create")}
                         </Button>
                         <Button
                             className="w-full"
                             variant="secondary"
                             onClick={() => history.replace(`/trash-bin/tabs/report-action/detail/${report_id}`)}
                         >
-                            Back
+                            {t("operator.reports.feedback.delete.back")}
                         </Button>
                     </div>
                     <Separator className="my-4" />
@@ -154,14 +160,17 @@ export function FeedbackPage() {
                         <Card className="flex flex-col mt-4">
                             <CardContent className="pt-4">
                                 {filteredData.length === 0 ? (
-                                    <p className="text-center text-xs">No feedbacks</p>
+                                    <p className="text-center text-xs">
+                                        {t("operator.reports.feedback.delete.noResults")}
+                                    </p>
                                 ) : (
                                     filteredData.map((feedback: InterfaceFeedback) => (
                                         <div key={feedback.id} className="flex flex-col gap-2">
                                             <p className="text-xs">{feedback.title}</p>
                                             <p className="text-xs">{feedback.description}</p>
                                             <p className="text-xs">
-                                                Created: {formatDateTimeAgo(dayjs(feedback.createdAt))}
+                                                {t("operator.reports.feedback.delete.created")}{" "}
+                                                {formatDateTimeAgo(dayjs(feedback.createdAt))}
                                             </p>
                                             <Button
                                                 className="w-full mt-4"
@@ -170,7 +179,7 @@ export function FeedbackPage() {
                                                     setIsOpen(true);
                                                 }}
                                             >
-                                                Delete
+                                                {t("operator.reports.feedback.delete.delete")}
                                             </Button>
                                             <DeleteConfirmationDialog
                                                 feedbackId={feedback.id.toString()}
