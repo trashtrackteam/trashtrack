@@ -42,7 +42,8 @@
                     "subtitle": "Kirim sebuah laporan untuk tempat sampah ini",
                     "loading": "Mengirim laporan...",
                     "sent": "Kirim Laporan",
-                    "back": "Kembali"
+                    "back": "Kembali",
+                    "no_history": "Tidak ada riwayat laporan ditemukan."
                 },
                 "tempat-sampah": {
                     "title": "Pilih tempat sampah",

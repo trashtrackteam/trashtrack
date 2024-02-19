@@ -42,7 +42,8 @@
                     "subtitle": "Submit a report for this trash bin",
                     "loading": "Sending report...",
                     "sent": "Sent Report",
-                    "back": "Back"
+                    "back": "Back",
+                    "no_history": "No history found for this trash bin."
                 },
                 "tempat-sampah": {
                     "title": "Select trash bin",

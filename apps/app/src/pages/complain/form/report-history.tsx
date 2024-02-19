@@ -14,6 +14,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, Skeleton, Separator, Button } from "@trashtrack/ui";
 import { EnumResponseStatus, InterfaceReport } from "../../operator/trash-bin/report/reports.page";
 import { useGetTrashBinById } from "../../operator/trash-bin/report/get-trash-bin.query";
+import { useTranslation } from "react-i18next";
 
 function ReportStatus({ status }: { status: EnumResponseStatus }) {
     return (
@@ -73,6 +74,7 @@ export function ComplainReportHistory() {
     const [nik, setNik] = useState<number | undefined>(0);
     const queryClient = useQueryClient();
     const history = useHistory();
+    const { t } = useTranslation();
 
     useEffect(() => {
         async function getNik() {
@@ -128,35 +130,41 @@ export function ComplainReportHistory() {
                         Feedback
                     </Button>
                     <Separator className="my-4" /> */}
-                    {isLoading || isFetching
-                        ? Array.from({ length: 5 }).map((_, index) => (
-                              <Card key={index} className="flex flex-col mt-4">
-                                  <CardContent className="pt-4">
-                                      <CardHeader>
-                                          <Skeleton className="h-4 w-40" />
-                                      </CardHeader>
-                                      <CardContent className="flex flex-col gap-2">
-                                          <Skeleton className="h-4 w-full" />
-                                          <Skeleton className="h-4 w-full" />
-                                          <Skeleton className="h-4 w-full" />
-                                      </CardContent>
-                                  </CardContent>
-                              </Card>
-                          ))
-                        : reportData.data.map((report: InterfaceReport) => (
-                              <Card
-                                  onClick={() =>
-                                      history.push(`/complain/tabs/form/report-history/feedback/${report.id}`)
-                                  }
-                                  key={report.id}
-                                  className="flex flex-col mt-4"
-                              >
-                                  <CardContent className="pt-4">
-                                      <TrashBinDetails trashBinId={report.trashBinId} userId={report.id} />
-                                      <ReportStatus status={report.status} />
-                                  </CardContent>
-                              </Card>
-                          ))}
+                    {isLoading || isFetching ? (
+                        Array.from({ length: 5 }).map((_, index) => (
+                            <Card key={index} className="flex flex-col mt-4">
+                                <CardContent className="pt-4">
+                                    <CardHeader>
+                                        <Skeleton className="h-4 w-40" />
+                                    </CardHeader>
+                                    <CardContent className="flex flex-col gap-2">
+                                        <Skeleton className="h-4 w-full" />
+                                        <Skeleton className="h-4 w-full" />
+                                        <Skeleton className="h-4 w-full" />
+                                    </CardContent>
+                                </CardContent>
+                            </Card>
+                        ))
+                    ) : reportData.data.length === 0 ? (
+                        <Card className="flex flex-col mt-4">
+                            <CardHeader>
+                                <p className="text-xs text-center">{t("complain.form.laporan.no_history")}</p>
+                            </CardHeader>
+                        </Card>
+                    ) : (
+                        reportData.data.map((report: InterfaceReport) => (
+                            <Card
+                                onClick={() => history.push(`/complain/tabs/form/report-history/feedback/${report.id}`)}
+                                key={report.id}
+                                className="flex flex-col mt-4"
+                            >
+                                <CardContent className="pt-4">
+                                    <TrashBinDetails trashBinId={report.trashBinId} userId={report.id} />
+                                    <ReportStatus status={report.status} />
+                                </CardContent>
+                            </Card>
+                        ))
+                    )}
                     {isError && (
                         <Card className="flex flex-col mt-4">
                             <CardContent className="pt-4">
