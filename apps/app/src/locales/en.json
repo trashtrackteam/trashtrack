@@ -150,6 +150,27 @@
                         "delete": "Delete",
                         "cancel": "Cancel"
                     }
+                },
+                "create_trashbin": {
+                    "subtitle": "Create Trashbin",
+                    "name": "Name",
+                    "description": "Description",
+                    "latitude": "Latitude",
+                    "longitude": "Longitude",
+                    "submit": "Create Trashbin",
+                    "back": "Back",
+                    "validation": {
+                        "name": "Name must be at least 8 characters long.",
+                        "description": "Description must be at least 8 characters long.",
+                        "latitude": {
+                            "min": "Latitude must be at least -90.",
+                            "max": "Latitude must be at most 90."
+                        },
+                        "longitude": {
+                            "min": "Longitude must be at least -180.",
+                            "max": "Longitude must be at most 180."
+                        }
+                    }
                 }
             }
         }

@@ -133,7 +133,7 @@
                 "subtitle": "Tempat Sampah",
                 "create": "Buat tempat sampah baru",
                 "search": "Cari tempat sampah",
-                "noResults": "Tidak ada tempah sampah ditemukan.",
+                "noResults": "Tidak ada tempat sampah ditemukan.",
                 "view_trashbin": "Lihat Tempat Sampah",
                 "view_subtrashbin": "Lihat Sub Tempat Sampah",
                 "detailed": {
@@ -149,6 +149,30 @@
                         "pending": "Memproses...",
                         "delete": "Hapus",
                         "cancel": "Batalkan"
+                    }
+                },
+                "create_trashbin": {
+                    "subtitle": "Buat Tempat Sampah",
+                    "validation": {
+                        "subtitle": "Buat Tempat Sampah",
+                        "name": "Nama",
+                        "description": "Deskripsi",
+                        "latitude": "Lintang",
+                        "longitude": "Bujur",
+                        "submit": "Buat Tempat Sampah",
+                        "back": "Kembali",
+                        "validation": {
+                            "name": "Nama harus minimal 8 karakter.",
+                            "description": "Deskripsi harus minimal 8 karakter.",
+                            "latitude": {
+                                "min": "Lintang harus minimal -90.",
+                                "max": "Lintang harus maksimal 90."
+                            },
+                            "longitude": {
+                                "min": "Bujur harus minimal -180.",
+                                "max": "Bujur harus maksimal 180."
+                            }
+                        }
                     }
                 }
             }

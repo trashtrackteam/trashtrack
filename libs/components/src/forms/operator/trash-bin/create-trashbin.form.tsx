@@ -10,23 +10,28 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
 import { Textarea } from "../../../ui/textarea";
-
-const formSchema = z.object({
-    name: z.string().min(4, {
-        message: "Name must be at least 4 characters long.",
-    }),
-    description: z.string().min(8, {
-        message: "Description must be at least 8 characters long.",
-    }),
-    latitude: z.coerce.number().min(-90, "Latitude must be at least -90.").max(90, "Latitude must be at most 90."),
-    longitude: z.coerce
-        .number()
-        .min(-180, "Longitude must be at least -180.")
-        .max(180, "Longitude must be at most 180."),
-});
+import { useTranslation } from "react-i18next";
 
 export function CreateTrashBinForm() {
     const history = useHistory();
+    const { t } = useTranslation();
+
+    const formSchema = z.object({
+        name: z.string().min(4, {
+            message: t("operator.trashbin.create_trashbin.validation.name"),
+        }),
+        description: z.string().min(8, {
+            message: t("operator.trashbin.create_trashbin.validation.description"),
+        }),
+        latitude: z.coerce
+            .number()
+            .min(-90, t("operator.trashbin.create_trashbin.validation.latitude.min"))
+            .max(90, t("operator.trashbin.create_trashbin.validation.latitude.max")),
+        longitude: z.coerce
+            .number()
+            .min(-180, t("operator.trashbin.create_trashbin.validation.longitude.min"))
+            .max(180, t("operator.trashbin.create_trashbin.validation.longitude.max")),
+    });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -71,9 +76,14 @@ export function CreateTrashBinForm() {
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>{t("operator.trashbin.create_trashbin.name")}</FormLabel>
                             <FormControl>
-                                <Input disabled={isPending} type="text" placeholder="Name of the trashbin" {...field} />
+                                <Input
+                                    disabled={isPending}
+                                    type="text"
+                                    placeholder={t("operator.trashbin.create_trashbin.name")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -84,9 +94,13 @@ export function CreateTrashBinForm() {
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>{t("operator.trashbin.create_trashbin.description")}</FormLabel>
                             <FormControl>
-                                <Textarea disabled={isPending} placeholder="Description of the trashbin" {...field} />
+                                <Textarea
+                                    disabled={isPending}
+                                    placeholder={t("operator.trashbin.create_trashbin.description")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -97,7 +111,7 @@ export function CreateTrashBinForm() {
                     name="latitude"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Latitude</FormLabel>
+                            <FormLabel>{t("operator.trashbin.create_trashbin.latitude")}</FormLabel>
                             <FormControl>
                                 <Input type="number" disabled={isPending} placeholder="0.00" {...field} />
                             </FormControl>
@@ -110,7 +124,7 @@ export function CreateTrashBinForm() {
                     name="longitude"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Longitude</FormLabel>
+                            <FormLabel>{t("operator.trashbin.create_trashbin.longitude")}</FormLabel>
                             <FormControl>
                                 <Input type="number" disabled={isPending} placeholder="0.00" {...field} />
                             </FormControl>
@@ -121,7 +135,7 @@ export function CreateTrashBinForm() {
 
                 <div className="flex flex-col gap-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        Submit Trashbin
+                        {t("operator.trashbin.create_trashbin.submit")}
                     </Button>
                     {isError && (
                         <p className="text-xs text-center">
@@ -134,7 +148,7 @@ export function CreateTrashBinForm() {
                         onClick={() => history.replace(`/trash-bin/tabs/trashbin`)}
                         disabled={isPending}
                     >
-                        Cancel
+                        {t("operator.trashbin.create_trashbin.back")}
                     </Button>
                 </div>
             </form>
