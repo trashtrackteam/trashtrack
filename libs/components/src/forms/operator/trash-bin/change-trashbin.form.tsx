@@ -13,6 +13,7 @@ import { Textarea } from "../../../ui/textarea";
 import { CapacitorHttp } from "@capacitor/core";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export const useGetTrashBinById = (trashBinId: number) => {
     return useQuery({
@@ -24,20 +25,6 @@ export const useGetTrashBinById = (trashBinId: number) => {
             }).then((res) => res.data),
     });
 };
-
-const formSchema = z.object({
-    name: z.string().min(4, {
-        message: "Name must be at least 4 characters long.",
-    }),
-    description: z.string().min(8, {
-        message: "Description CreateTrashBinFormmust be at least 8 characters long.",
-    }),
-    latitude: z.coerce.number().min(-90, "Latitude must be at least -90.").max(90, "Latitude must be at most 90."),
-    longitude: z.coerce
-        .number()
-        .min(-180, "Longitude must be at least -180.")
-        .max(180, "Longitude must be at most 180."),
-});
 
 interface InterfaceTrashbin {
     id: number;
@@ -52,6 +39,24 @@ interface InterfaceTrashbin {
 
 export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
     const history = useHistory();
+    const { t } = useTranslation();
+
+    const formSchema = z.object({
+        name: z.string().min(4, {
+            message: t("operator.trashbin.change_trashbin.validation.name"),
+        }),
+        description: z.string().min(8, {
+            message: t("operator.trashbin.change_trashbin.validation.description"),
+        }),
+        latitude: z.coerce
+            .number()
+            .min(-90, t("operator.trashbin.change_trashbin.validation.latitude.min"))
+            .max(90, t("operator.trashbin.change_trashbin.validation.latitude.max")),
+        longitude: z.coerce
+            .number()
+            .min(-180, t("operator.trashbin.change_trashbin.validation.longitude.min"))
+            .max(180, t("operator.trashbin.change_trashbin.validation.longitude.max")),
+    });
 
     const { data: reportData, error, isLoading, refetch, isRefetching } = useGetTrashBinById(Number(trashBinId));
     const trashbin = !isLoading ? (reportData.data as InterfaceTrashbin) : undefined;
@@ -62,7 +67,6 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
             return {
                 name: "",
                 description: "",
-                openCount: 0,
                 latitude: 0.0,
                 longitude: 0.0,
             };
@@ -125,9 +129,14 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>{t("operator.trashbin.change_trashbin.name")}</FormLabel>
                             <FormControl>
-                                <Input disabled={isPending} type="text" placeholder="Name of the trashbin" {...field} />
+                                <Input
+                                    disabled={isPending}
+                                    type="text"
+                                    placeholder={t("operator.trashbin.change_trashbin.name")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -138,9 +147,13 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("operator.trashbin.change_trashbin.description")}</FormLabel>
                             <FormControl>
-                                <Textarea disabled={isPending} placeholder="Description of the trashbin" {...field} />
+                                <Textarea
+                                    disabled={isPending}
+                                    placeholder={t("operator.trashbin.change_trashbin.description")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -151,7 +164,7 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                     name="latitude"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Latitude</FormLabel>
+                            <FormLabel>{t("operator.trashbin.change_trashbin.latitude")}</FormLabel>
                             <FormControl>
                                 <Input type="number" disabled={isPending} placeholder="0.00" {...field} />
                             </FormControl>
@@ -164,7 +177,7 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                     name="longitude"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Longitude</FormLabel>
+                            <FormLabel>{t("operator.trashbin.change_trashbin.longitude")}</FormLabel>
                             <FormControl>
                                 <Input type="number" disabled={isPending} placeholder="0.00" {...field} />
                             </FormControl>
@@ -175,7 +188,7 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
 
                 <div className="flex flex-col gap-4">
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        Update Trashbin
+                        {t("operator.trashbin.change_trashbin.submit")}
                     </Button>
                     {isError && (
                         <p className="text-xs text-center">
@@ -188,7 +201,7 @@ export function ChangeTrashbinForm({ trashBinId }: { trashBinId: string }) {
                         onClick={() => history.replace(`/trash-bin/tabs/trashbin/details/${trashBinId}`)}
                         disabled={isPending}
                     >
-                        Cancel
+                        {t("operator.trashbin.change_trashbin.back")}
                     </Button>
                 </div>
             </form>
