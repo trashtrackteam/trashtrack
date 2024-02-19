@@ -128,6 +128,14 @@
                         }
                     }
                 }
+            },
+            "trashbin": {
+                "subtitle": "Tempat Sampah",
+                "create": "Buat tempat sampah baru",
+                "search": "Cari tempat sampah",
+                "noResults": "Tidak ada tempah sampah ditemukan.",
+                "view_trashbin": "Lihat Tempat Sampah",
+                "view_subtrashbin": "Lihat Sub Tempat Sampah"
             }
         }
     }

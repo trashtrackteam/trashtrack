@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 export interface InterfaceTrashbin {
     id: number;
@@ -28,6 +29,7 @@ export function TrashBinPage() {
     const history = useHistory();
     const queryClient = useQueryClient();
     const [searchTerm, setSearchTerm] = useState("");
+    const { t } = useTranslation();
 
     const { data: trashBinData, isLoading, isFetching, isError, error, refetch } = useGetTrashBins();
 
@@ -67,23 +69,23 @@ export function TrashBinPage() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Trashbins</p>
+                    <p className="text-xs text-left text-slate-600">{t("operator.trashbin.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
                         <Button className="w-full" onClick={() => history.push(`/trash-bin/tabs/trashbin/create`)}>
-                            Create a new trashbin
+                            {t("operator.trashbin.create")}
                         </Button>
                     </div>
                     <Separator className="my-4" />
                     <div className="flex flex-col">
                         <Label className="mb-2" htmlFor="search">
-                            Search Trashbin
+                            {t("operator.trashbin.search")}
                         </Label>
                         <Input
                             id="search"
                             type="text"
-                            placeholder={"Search Trashbin"}
+                            placeholder={t("operator.trashbin.search")}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -106,9 +108,7 @@ export function TrashBinPage() {
                     ) : filteredData.length === 0 && searchTerm !== "" ? (
                         <Card className="flex flex-col">
                             <CardHeader>
-                                <p className="text-xs text-center">
-                                    No trashbin found with that name. Please try another name.
-                                </p>
+                                <p className="text-xs text-center">{t("operator.trashbin.noResults")}</p>
                             </CardHeader>
                         </Card>
                     ) : (
@@ -124,7 +124,7 @@ export function TrashBinPage() {
                                                     history.push(`/trash-bin/tabs/trashbin/details/${trashbin.id}`)
                                                 }
                                             >
-                                                View Trashbin
+                                                {t("operator.trashbin.view_trashbin")}
                                             </Button>
                                             <Button
                                                 className="w-full"
@@ -133,7 +133,7 @@ export function TrashBinPage() {
                                                     history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin.id}`)
                                                 }
                                             >
-                                                View Sub Trashbins
+                                                {t("operator.trashbin.view_subtrashbin")}
                                             </Button>
                                         </div>
                                     </div>
