@@ -1,16 +1,15 @@
-import {
-    IonContent,
-    IonPage,
-    IonRefresher,
-    IonRefresherContent,
-    RefresherEventDetail,
-    useIonViewDidEnter,
-} from "@ionic/react";
-import { Card, CardContent, CardHeader, Skeleton, Separator, Button } from "@trashtrack/ui";
+import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
+import { IonRefresher, IonRefresherContent, RefresherEventDetail } from "@ionic/react";
+import { useHistory } from "react-router-dom";
+
+import { Card, CardContent, CardHeader, Input, Label, Separator, Skeleton } from "@trashtrack/ui";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
+
 import { useGetReports } from "./get-reports.query";
 import { useGetTrashBinById } from "./get-trash-bin.query";
-import { useHistory } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { InterfaceResult, useGetReportsWithTrashBins } from "./get-trash-and-report.query";
+import Fuse from "fuse.js";
 
 export enum EnumResponseStatus {
     NOT_RESPONDED = "notResponded",
@@ -76,51 +75,40 @@ function ReportStatus({ status }: { status: EnumResponseStatus }) {
     );
 }
 
-function TrashBinDetails({ trashBinId, userId }: { trashBinId: number; userId: number }) {
-    const queryClient = useQueryClient();
-
-    queryClient.invalidateQueries({
-        queryKey: ["getTrashBinById", trashBinId, userId],
-    });
-
-    const { data: trashBinData, isLoading, isError, error } = useGetTrashBinById(trashBinId, userId);
-
-    return (
-        <div>
-            {isLoading ? (
-                <Skeleton className="h-4 w-40 mt-2" />
-            ) : (
-                <p className="text-left text-xs">
-                    Untuk: <span className="font-medium">{trashBinData.data.name}</span>
-                </p>
-            )}
-            {isError ?? <p className="text-left text-xs">{JSON.stringify(error)}</p>}
-        </div>
-    );
-}
-
 export function ReportsPage() {
     const history = useHistory();
     const queryClient = useQueryClient();
+    const [searchTerm, setSearchTerm] = useState("");
 
-    const { data: reportsData, isLoading, isFetching, isError, error, refetch } = useGetReports();
+    const { reports, trashBins, isReportsLoading, isTrashBinsLoading } = useGetReportsWithTrashBins();
 
-    useIonViewDidEnter(() => {
-        queryClient.invalidateQueries({
-            queryKey: ["getReports"],
-        });
-
-        refetch();
-    });
-
-    function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
-        queryClient.invalidateQueries({
-            queryKey: ["getReports"],
-        });
-
-        refetch();
+    const handleRefresh = (event: CustomEvent<RefresherEventDetail>) => {
         event.detail.complete();
+    };
+
+    const fuseOptions = {
+        keys: ["trashBinName"],
+        threshold: 0.4,
+    };
+
+    let data: InterfaceResult[] = [];
+    const fuse = new Fuse(data, fuseOptions);
+
+    if (isReportsLoading || isTrashBinsLoading) {
+        console.log("Loading...");
+    } else {
+        data = reports.data.map((re: InterfaceReport) => {
+            const trashBin = trashBins.data.find((tb: InterfaceTrashbin) => tb.id === re.trashBinId);
+            return {
+                ...re,
+                trashBinName: trashBin?.name,
+            };
+        });
+        fuse.setCollection(data);
     }
+
+    const filteredData: InterfaceResult[] =
+        searchTerm === "" ? data : fuse.search(searchTerm).map((result) => result.item);
 
     return (
         <IonPage>
@@ -135,43 +123,62 @@ export function ReportsPage() {
                     <p className="text-xs text-left text-slate-600">Reports</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
-                    {isLoading || isFetching
-                        ? Array.from({ length: 5 }).map((_, index) => (
-                              <Card key={index} className="flex flex-col mt-4">
-                                  <CardContent className="pt-4">
-                                      <CardHeader>
-                                          <Skeleton className="h-4 w-40" />
-                                      </CardHeader>
-                                      <CardContent className="flex flex-col gap-2">
-                                          <Skeleton className="h-4 w-full" />
-                                          <Skeleton className="h-4 w-full" />
-                                          <Skeleton className="h-4 w-full" />
-                                      </CardContent>
-                                  </CardContent>
-                              </Card>
-                          ))
-                        : reportsData.data.map((report: InterfaceReport) => (
-                              <Card
-                                  key={report.id}
-                                  className="flex flex-col mt-4"
-                                  onClick={() => history.push(`/trash-bin/tabs/report-action/detail/${report.id}`)}
-                              >
-                                  <CardContent className="pt-4">
-                                      <p className="text-left text-xs">
-                                          Laporan dari: <span className="font-medium">{report.name}</span>
-                                      </p>
-                                      <TrashBinDetails trashBinId={report.trashBinId} userId={report.id} />
-                                      <ReportStatus status={report.status} />
-                                  </CardContent>
-                              </Card>
-                          ))}
-                    {isError && (
-                        <Card className="flex flex-col mt-4">
-                            <CardContent className="pt-4">
-                                <p className="text-center text-xs">{JSON.stringify(error)}</p>
-                            </CardContent>
-                        </Card>
-                    )}
+                    <div className="flex flex-col">
+                        <Separator className="my-4" />
+                        <div className="flex flex-col">
+                            <Label className="mb-2" htmlFor="search">
+                                Search Trashbin
+                            </Label>
+                            <Input
+                                id="search"
+                                type="text"
+                                placeholder={"Search Trashbin"}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                        {isReportsLoading || isTrashBinsLoading ? (
+                            Array.from({ length: 5 }).map((_, index) => (
+                                <Card key={index} className="flex flex-col mt-4">
+                                    <CardContent className="pt-4">
+                                        <CardHeader>
+                                            <Skeleton className="h-4 w-40" />
+                                        </CardHeader>
+                                        <CardContent className="flex flex-col gap-2">
+                                            <Skeleton className="h-4 w-full" />
+                                            <Skeleton className="h-4 w-full" />
+                                            <Skeleton className="h-4 w-full" />
+                                        </CardContent>
+                                    </CardContent>
+                                </Card>
+                            ))
+                        ) : filteredData.length === 0 && searchTerm !== "" ? (
+                            <Card className="flex flex-col mt-4">
+                                <CardHeader>
+                                    <p className="text-xs text-center">
+                                        No trashbin found with that name. Please try another name.
+                                    </p>
+                                </CardHeader>
+                            </Card>
+                        ) : (
+                            filteredData.map((re: InterfaceResult) => (
+                                <Card
+                                    key={re.id}
+                                    className="flex flex-col mt-4"
+                                    onClick={() => history.push(`/trash-bin/tabs/report-action/detail/${re.id}`)}
+                                >
+                                    <CardContent className="pt-4">
+                                        <CardHeader></CardHeader>
+                                        <CardContent className="flex flex-col gap-2">
+                                            <p className="text-xs text-left">Laporan dari: {re.name}</p>
+                                            <p className="text-xs text-left mb-2">Untuk: {re.trashBinName}</p>
+                                            <ReportStatus status={re.status} />
+                                        </CardContent>
+                                    </CardContent>
+                                </Card>
+                            ))
+                        )}
+                    </div>
                 </div>
             </IonContent>
         </IonPage>

@@ -7,6 +7,7 @@ import ComplainReportHistory from "../pages/complain/form/report-history";
 import ComplainFormTempatSampah from "../pages/complain/form/tempat-sampah";
 import ComplainFormLaporan from "../pages/complain/form/laporan";
 import { useTranslation } from "react-i18next";
+import ComplainReportFeedback from "../pages/complain/form/report-feedback";
 
 const ComplainTabs: React.FC = () => {
     const { t } = useTranslation();
@@ -18,6 +19,11 @@ const ComplainTabs: React.FC = () => {
                 <Route
                     path="/complain/tabs/form/report-history"
                     render={() => <ComplainReportHistory />}
+                    exact={true}
+                />
+                <Route
+                    path="/complain/tabs/form/report-history/feedback/:report_id"
+                    render={() => <ComplainReportFeedback />}
                     exact={true}
                 />
                 <Route

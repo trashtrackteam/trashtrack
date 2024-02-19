@@ -144,7 +144,13 @@ export function ComplainReportHistory() {
                               </Card>
                           ))
                         : reportData.data.map((report: InterfaceReport) => (
-                              <Card key={report.id} className="flex flex-col mt-4">
+                              <Card
+                                  onClick={() =>
+                                      history.push(`/complain/tabs/form/report-history/feedback/${report.id}`)
+                                  }
+                                  key={report.id}
+                                  className="flex flex-col mt-4"
+                              >
                                   <CardContent className="pt-4">
                                       <TrashBinDetails trashBinId={report.trashBinId} userId={report.id} />
                                       <ReportStatus status={report.status} />

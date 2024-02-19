@@ -1,6 +1,6 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { Card, CardHeader, CardContent, CardTitle, Button, CardDescription } from "@trashtrack/ui";
-import { getUserNIK } from "@trashtrack/utils";
+import { getPelaporObject, getUserNIK } from "@trashtrack/utils";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -8,24 +8,28 @@ import { useHistory } from "react-router-dom";
 export function ComplainDashboard() {
     const history = useHistory();
     const { t } = useTranslation();
-    const [nik, setNik] = useState<number | undefined>(0);
+    const [personalDetails, setPersonalDetails] = useState<{
+        nik: string;
+        name: string;
+        phoneNo: string;
+    }>();
 
     useEffect(() => {
-        async function getNik() {
-            return await getUserNIK();
+        async function getPersonalDetails() {
+            return await getPelaporObject();
         }
 
-        const fetchNik = async () => {
-            const nikFetch = await getNik();
+        const fetchPersonalDetails = async () => {
+            const localPersonalDetails = await getPersonalDetails();
 
-            if (!nikFetch) {
+            if (!localPersonalDetails?.nik) {
                 history.push("/complain/form/personal-details");
             }
 
-            setNik(nikFetch);
+            setPersonalDetails(localPersonalDetails);
         };
 
-        fetchNik();
+        fetchPersonalDetails();
     }, [history]);
 
     return (
@@ -43,10 +47,9 @@ export function ComplainDashboard() {
                         </CardHeader>
                         <CardContent>
                             <p className="text-sm">
-                                NIK:{" "}
-                                <span className="font-bold">{`${String(nik).substring(0, 3)}***${String(nik).substring(
-                                    6
-                                )}`}</span>
+                                NAMA: <span className="font-semibold">{personalDetails?.name}</span> <br />
+                                NIK: <span className="font-semibold">{personalDetails?.nik}</span> <br />
+                                NO. TELEPON: <span className="font-semibold">{personalDetails?.phoneNo}</span>
                             </p>
                             <div className="flex flex-col gap-2 mt-8">
                                 <Button

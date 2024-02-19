@@ -12,6 +12,7 @@ import {
     Textarea,
     Separator,
     OperatorContext,
+    CardDescription,
 } from "@trashtrack/ui";
 import { useContext, useEffect, useState } from "react";
 import { InterfaceReport, EnumResponseStatus } from "./reports.page";
@@ -30,7 +31,7 @@ function ReportStatusAction({
     operatorId: string;
     isRefetching: boolean;
 }) {
-    const { mutateAsync, isPending, isError } = useMutation({
+    const { mutateAsync, isPending } = useMutation({
         mutationKey: ["acceptReport", report?.id, operatorId],
         mutationFn: (formData: { status: EnumResponseStatus }) => {
             return CapacitorHttp.request({
@@ -50,6 +51,13 @@ function ReportStatusAction({
         },
     });
 
+    /**
+     * ! WARNING !
+     * The following code is not optimized and should be refactored for better readability and maintainability.
+     * Right now, it's just a quick and dirty solution to make the code work, and getting the job done.
+     * - @elizielx
+     * */
+
     const handleAccept = async () => {
         await mutateAsync({ status: EnumResponseStatus.ACCEPTED });
     };
@@ -66,39 +74,63 @@ function ReportStatusAction({
         await mutateAsync({ status: EnumResponseStatus.COMPLETED });
     };
 
-    switch (report?.status) {
-        case EnumResponseStatus.NOT_RESPONDED:
-            return isRefetching ? (
-                <Skeleton className="h-8 w-full" />
-            ) : (
-                <>
-                    <Button className="w-full" variant={"default"} onClick={() => handleAccept()}>
-                        {isPending ? "Loading..." : "Accept"}
-                    </Button>
-                    <Button className="w-full" variant={"destructive"} onClick={() => handleReject()}>
-                        {isPending ? "Loading..." : "Reject"}
-                    </Button>
-                </>
-            );
+    if (report?.status === EnumResponseStatus.NOT_RESPONDED) {
+        return isRefetching ? (
+            <Skeleton className="h-12 w-full" />
+        ) : (
+            <>
+                <Button className="w-full" variant={"default"} onClick={() => handleAccept()}>
+                    {isPending ? "Loading..." : "Accept"}
+                </Button>
+                <Button className="w-full" variant={"destructive"} onClick={() => handleReject()}>
+                    {isPending ? "Loading..." : "Reject"}
+                </Button>
+            </>
+        );
+    }
 
-        case EnumResponseStatus.ACCEPTED:
-        case EnumResponseStatus.REJECTED:
-        case EnumResponseStatus.COMPLETED:
-            return isRefetching ? (
-                <Skeleton className="h-4 w-full" />
-            ) : (
-                <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
-                    {isPending ? "Loading..." : "Cancel"}
-                </Button>
-            );
-        case EnumResponseStatus.ACCEPTED:
-            return isRefetching ? (
-                <Skeleton className="h-4 w-full" />
-            ) : (
-                <Button className="w-full" variant={"default"} onClick={() => handleComplete()}>
-                    {isPending ? "Loading..." : "Complete"}
-                </Button>
-            );
+    if (report?.status === EnumResponseStatus.ACCEPTED) {
+        return isRefetching ? (
+            <Skeleton className="h-12 w-full" />
+        ) : (
+            <Button className="w-full" variant={"default"} onClick={() => handleComplete()}>
+                {isPending ? "Loading..." : "Complete"}
+            </Button>
+        );
+    }
+
+    if (report?.status === EnumResponseStatus.REJECTED) {
+        return isRefetching ? (
+            <Skeleton className="h-12 w-full" />
+        ) : (
+            <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
+                {isPending ? "Loading..." : "Cancel"}
+            </Button>
+        );
+    }
+
+    if (report?.status === EnumResponseStatus.COMPLETED) {
+        return isRefetching ? (
+            <Skeleton className="h-12 w-full" />
+        ) : (
+            <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
+                {isPending ? "Loading..." : "Cancel"}
+            </Button>
+        );
+    }
+
+    if (
+        report?.status === EnumResponseStatus.ACCEPTED ||
+        report?.status === EnumResponseStatus.REJECTED ||
+        report?.status === EnumResponseStatus.COMPLETED
+    ) {
+        return isRefetching ? (
+            <Skeleton className="h-12 w-full" />
+        ) : (
+            <Button className="w-full" variant={"default"} onClick={() => handleCancel()}>
+                {isPending ? "Loading..." : "Cancel"}
+            </Button>
+        );
     }
 }
 
@@ -149,71 +181,105 @@ export function DetailedReportPage() {
                             </CardContent>
                         </Card>
                     ) : (
-                        <Card className="flex flex-col mt-4">
-                            <CardContent className="pt-4">
-                                <div className="flex flex-col gap-2">
-                                    <div>
-                                        <Label htmlFor="name" className="text-xs">
-                                            Pelapor
-                                        </Label>
-                                        <Input readOnly id="name" value={report?.name} />
-                                    </div>
-                                    <div>
-                                        <Label htmlFor="description" className="text-xs">
-                                            Deskripsi Laporan
-                                        </Label>
-                                        <Textarea readOnly id="description" value={report?.description} />
-                                    </div>
-                                    <div>
-                                        <Label htmlFor="description" className="text-xs">
-                                            Status
-                                        </Label>
-                                        <Input
-                                            readOnly
-                                            id="status"
-                                            value={
-                                                report?.status === EnumResponseStatus.ACCEPTED
-                                                    ? "Diterima"
-                                                    : report?.status === EnumResponseStatus.REJECTED
-                                                    ? "Ditolak"
-                                                    : report?.status === EnumResponseStatus.COMPLETED
-                                                    ? "Selesai"
-                                                    : "Belum Ditanggapi"
-                                            }
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label htmlFor="image" className="text-xs">
-                                            Foto
-                                        </Label>
-                                        <img
-                                            src={imageUrl ? imageUrl : "https://via.placeholder.com/150"}
-                                            className="w-full h-object-cover"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <Separator className="my-4" />
-                                    <div className="mt-4">
-                                        <p className="text-center text-xs mb-4">Actions</p>
-                                        <Button
-                                            className="w-full mb-4"
-                                            disabled={report?.status !== EnumResponseStatus.ACCEPTED}
-                                            onClick={() => history.push(`/trash-bin/tabs/feedback/${report?.id}`)}
-                                        >
-                                            Submit Feedback
-                                        </Button>
-                                        <div className="flex flex-row gap-2">
-                                            <ReportStatusAction
-                                                report={report}
-                                                refetch={refetch}
-                                                operatorId={operator.id}
-                                                isRefetching={isRefetching}
-                                            />
+                        <div>
+                            <Card className="flex flex-col mt-4">
+                                <CardHeader className="pt-4">
+                                    <p className="font-bold text-lg">Identitas Pelaporan</p>
+                                </CardHeader>
+                                <CardDescription>
+                                    <div className="flex flex-col gap-2">
+                                        <div>
+                                            <Label htmlFor="name" className="text-xs">
+                                                Pelapor
+                                            </Label>
+                                            <Input readOnly id="name" value={report?.name} />
+                                        </div>
+                                        <div>
+                                            <Label htmlFor="name" className="text-xs">
+                                                NIK
+                                            </Label>
+                                            <Input readOnly id="name" value={report?.nik} />
+                                        </div>
+                                        <div>
+                                            <Label htmlFor="name" className="text-xs">
+                                                Nomor Telepon
+                                            </Label>
+                                            <Input readOnly id="name" value={report?.phoneNumber} />
                                         </div>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardDescription>
+                            </Card>
+                            <Card className="flex flex-col mt-4">
+                                <CardHeader className="pt-4">
+                                    <p className="font-bold text-lg">Informasi Laporan</p>
+                                </CardHeader>
+                                <CardContent className="pt-4">
+                                    <div className="flex flex-col gap-2">
+                                        <div>
+                                            <Label htmlFor="description" className="text-xs">
+                                                Deskripsi Laporan
+                                            </Label>
+                                            <Textarea readOnly id="description" value={report?.description} />
+                                        </div>
+                                        <div>
+                                            <Label htmlFor="description" className="text-xs">
+                                                Status
+                                            </Label>
+                                            <Input
+                                                readOnly
+                                                id="status"
+                                                value={
+                                                    report?.status === EnumResponseStatus.ACCEPTED
+                                                        ? "Diterima"
+                                                        : report?.status === EnumResponseStatus.REJECTED
+                                                        ? "Ditolak"
+                                                        : report?.status === EnumResponseStatus.COMPLETED
+                                                        ? "Selesai"
+                                                        : "Belum Ditanggapi"
+                                                }
+                                            />
+                                        </div>
+                                        <div>
+                                            <Label htmlFor="image" className="text-xs">
+                                                Foto
+                                            </Label>
+                                            <img
+                                                src={imageUrl ? imageUrl : "https://via.placeholder.com/150"}
+                                                className="w-full h-object-cover"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <Separator className="my-4" />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                            <Card className="flex flex-col mt-4">
+                                <CardHeader className="pt-4">
+                                    <p className="font-bold text-lg">Tindakan Laporan</p>
+                                </CardHeader>
+                                <CardDescription>
+                                    <div className="flex flex-col gap-2">
+                                        <div>
+                                            <Button
+                                                className="w-full mb-2"
+                                                disabled={report?.status !== EnumResponseStatus.ACCEPTED}
+                                                onClick={() => history.push(`/trash-bin/tabs/feedback/${report?.id}`)}
+                                            >
+                                                Submit Feedback
+                                            </Button>
+                                            <div className="flex flex-row gap-2">
+                                                <ReportStatusAction
+                                                    report={report}
+                                                    refetch={refetch}
+                                                    operatorId={operator.id}
+                                                    isRefetching={isRefetching}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CardDescription>
+                            </Card>
+                        </div>
                     )}
                     <Card className="flex flex-col mt-4">
                         <CardContent className="pt-4">

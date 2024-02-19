@@ -10,6 +10,12 @@ async function bootstrap(): Promise<void> {
     const configService: ConfigService = app.get(ConfigService);
     const globalPrefix: string = "api";
 
+    app.enableCors({
+        allowedHeaders: "*",
+        origin: "*",
+        methods: "*",
+    });
+
     app.use(
         bodyparser.json({
             limit: "50mb",
