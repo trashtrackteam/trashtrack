@@ -7,17 +7,17 @@
             "preferences": "Preferences",
             "laporkan": "Report",
             "riwayat": "History",
-            "report": "Laporan",
+            "report": "Report",
             "back": "Back"
         },
         "home": {
             "complain": {
                 "title": "Submit Complaint",
-                "description": "Submit a complaint about full, broken, or missing trash cans."
+                "description": "Submit a complaint about full, broken, or missing trash bins."
             },
             "operator": {
                 "title": "Operator Login",
-                "description": "Operators can log in to view complaints and resolutions."
+                "description": "Operators can log in to view complaints and responses."
             }
         },
         "preferences": {
@@ -30,8 +30,8 @@
         },
         "complain": {
             "dashboard": {
-                "title": "Welcome to the trash reporting center.",
-                "description": "Please select the menu provided below to report a trash bin, or view trash report history.",
+                "title": "Welcome to the trash bin complaint center.",
+                "description": "Please select the menu provided below to report a trash bin, or view trash bin report's history.",
                 "button": {
                     "register": "Refill personal information",
                     "cancel": "Return to main page"
@@ -39,7 +39,7 @@
             },
             "form": {
                 "laporan": {
-                    "subtitle": "Report any trash in this bin",
+                    "subtitle": "Submit a report for this trash bin",
                     "loading": "Sending report...",
                     "sent": "Sent Report",
                     "back": "Back"
@@ -48,7 +48,7 @@
                     "title": "Select trash bin",
                     "search": "Search trash bin",
                     "search-input": "Enter the name of the trash bin",
-                    "no-results": "No trash cans found for the search term",
+                    "no-results": "No trash bin found for the search",
                     "button": {
                         "report": "Report"
                     }

@@ -13,11 +13,11 @@
         "home": {
             "complain": {
                 "title": "Sampaikan Keluhan",
-                "description": "Submit keluhan mengenai tempat sampah yang penuh, rusak, atau tidak ada."
+                "description": "Sampaikan keluhan mengenai tempat sampah yang penuh, rusak, atau hilang."
             },
             "operator": {
                 "title": "Operator Login",
-                "description": "Operator dapat login untuk melihat keluhan dan menyelesaikannya."
+                "description": "Operator dapat login untuk melihat keluhan dan tanggapan."
             }
         },
         "preferences": {
@@ -30,8 +30,8 @@
         },
         "complain": {
             "dashboard": {
-                "title": "Selamat datang di pusat pelaporan sampah.",
-                "description": "Silakan pilih menu yang tersedia di bawah ini untuk melaporkan tempat sampah, atau melihat riwayat laporan sampah.",
+                "title": "Selamat datang di pusat pelaporan tempat sampah.",
+                "description": "Silahkan pilih menu yang tersedia di bawah ini untuk melaporkan tempat sampah, atau melihat riwayat laporan tempat sampah.",
                 "button": {
                     "register": "Isi ulang informasi pribadi",
                     "cancel": "Kembali ke halaman utama"
@@ -39,7 +39,7 @@
             },
             "form": {
                 "laporan": {
-                    "subtitle": "Laporkan sampah yang ada di tempat sampah ini",
+                    "subtitle": "Kirim sebuah laporan untuk tempat sampah ini",
                     "loading": "Mengirim laporan...",
                     "sent": "Kirim Laporan",
                     "back": "Kembali"
@@ -48,7 +48,7 @@
                     "title": "Pilih tempat sampah",
                     "search": "Cari tempat sampah",
                     "search-input": "Masukkan nama tempat sampah",
-                    "no-results": "Tidak ada tong sampah yang ditemukan untuk istilah pencarian itu",
+                    "no-results": "Tidak ada tempat sampah yang ditemukan untuk pencarian itu",
                     "button": {
                         "report": "Laporkan"
                     }
@@ -83,7 +83,7 @@
                         "description": "Deskripsi Laporan",
                         "status": "Status Laporan",
                         "photo": "Foto Laporan",
-                        "submitFeedback": "Bikin Tanggapan",
+                        "submitFeedback": "Kirim Tanggapan",
                         "actions": {
                             "loading": "Loading...",
                             "accept": "Terima",
@@ -97,7 +97,7 @@
                     "delete": {
                         "warning": {
                             "title": "Apakah Anda yakin ingin menghapus tanggapan ini?",
-                            "subtitle": "Tindakan ini tidak dapat diubah.",
+                            "subtitle": "Tindakan ini tidak dapat dibatalkan.",
                             "pending": "Pending...",
                             "delete": "Hapus",
                             "cancel": "Batalkan"
@@ -105,7 +105,7 @@
                         "subtitle": "Tanggapan",
                         "create": "Buat tanggapan baru",
                         "back": "Kembali",
-                        "noResults": "Tidak ada masukan yang ditemukan untuk laporan ini.",
+                        "noResults": "Tidak ada tanggapan ditemukan untuk laporan ini.",
                         "created": "Dibuat: ",
                         "delete": "Hapus",
                         "createFeedback": {
