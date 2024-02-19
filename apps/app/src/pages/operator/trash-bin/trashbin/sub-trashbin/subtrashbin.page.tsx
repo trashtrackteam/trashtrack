@@ -83,7 +83,7 @@ export function SubTrashbinPage() {
                             onClick={() => history.push(`/trash-bin/tabs/trashbin/subtrashbin/${trashbin_id}/create`)}
                         >
                             {/* @ts-expect-error - no idea error */}
-                            {t("operator.subtrashbin.")}
+                            {t("operator.subtrashbin.create")}
                         </Button>
                         <Button
                             variant="secondary"

@@ -6,15 +6,15 @@ import idJSON from "./locales/id.json";
 
 export const resources = {
     en: {
-        translation: {
-            ...enJSON,
-        },
+        // translation: {
+        ...enJSON,
+        // },
     },
     id: {
         // ...idJSON,
-        translation: {
-            ...idJSON,
-        },
+        // translation: {
+        ...idJSON,
+        // },
     },
 } as const;
 

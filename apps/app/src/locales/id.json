@@ -173,26 +173,26 @@
                                 "max": "Bujur harus maksimal 180."
                             }
                         }
-                    },
-                    "change_trashbin": {
-                        "subtitle": "Ganti Trashbin",
-                        "name": "Nama",
-                        "description": "Deskripsi",
-                        "latitude": "Lintang",
-                        "longitude": "Bujur",
-                        "submit": "Ubah Tempat Sampah",
-                        "back": "Kembali",
-                        "validation": {
-                            "name": "Nama harus minimal 8 karakter.",
-                            "description": "Deskripsi harus minimal 8 karakter.",
-                            "latitude": {
-                                "min": "Lintang harus minimal -90.",
-                                "max": "Lintang harus maksimal 90."
-                            },
-                            "longitude": {
-                                "min": "Bujur harus minimal -180.",
-                                "max": "Bujur harus maksimal 180."
-                            }
+                    }
+                },
+                "change_trashbin": {
+                    "subtitle": "Ganti Trashbin",
+                    "name": "Nama",
+                    "description": "Deskripsi",
+                    "latitude": "Lintang",
+                    "longitude": "Bujur",
+                    "submit": "Ubah Tempat Sampah",
+                    "back": "Kembali",
+                    "validation": {
+                        "name": "Nama harus minimal 8 karakter.",
+                        "description": "Deskripsi harus minimal 8 karakter.",
+                        "latitude": {
+                            "min": "Lintang harus minimal -90.",
+                            "max": "Lintang harus maksimal 90."
+                        },
+                        "longitude": {
+                            "min": "Bujur harus minimal -180.",
+                            "max": "Bujur harus maksimal 180."
                         }
                     }
                 }
