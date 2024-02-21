@@ -89,7 +89,7 @@
             },
             "trashbin": {
                 "subtitle": "Tempat Sampah",
-                "create": "Buat tempat sampah baru",
+                "create": "Buat Tempat Sampah",
                 "search": "Cari tempat sampah",
                 "noResults": "Tidak ada tempat sampah ditemukan.",
                 "view_trashbin": "Lihat Tempat Sampah",
@@ -155,8 +155,8 @@
             },
             "subtrashbin": {
                 "subtitle": "Sub Tempat Sampah",
-                "create": "Buat Tempat Sampah Baru",
-                "search": "Cari Tempat Sampah",
+                "create": "Buat Sub Tempat Sampah",
+                "search": "Cari Sub Tempat Sampah",
                 "back": "Kembali",
                 "noResults": "Tidak ada tempat sampah yang ditemukan untuk pencarian ini.",
                 "view_subtrashbin": "Lihat Sub Tempat Sampah",
