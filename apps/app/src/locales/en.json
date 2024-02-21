@@ -57,7 +57,7 @@
                 }
             },
             "history": {
-                "for" : "Report for:",
+                "for": "Report for:",
                 "notResponded": "Not Responded",
                 "accepted": "Accepted",
                 "rejected": "Rejected",
@@ -65,7 +65,7 @@
             },
             "feedback": {
                 "subtitle": "Feedback",
-                "back":  "Back",
+                "back": "Back",
                 "noFeedback": "No feedbacks",
                 "createdAt": "Created:"
             }
@@ -101,6 +101,7 @@
                     "edit": "Change",
                     "delete": "Delete",
                     "back": "Back",
+                    "action": "Actions",
                     "dialog_delete": {
                         "title": "Are you sure you want to delete this trash bin?",
                         "subtitle": "This action cannot be undone.",
@@ -109,7 +110,7 @@
                         "cancel": "Cancel"
                     }
                 },
-                "create_trashbin": {
+                "createTrashbin": {
                     "subtitle": "Create Trash Bin",
                     "name": "Name",
                     "description": "Description",
@@ -179,6 +180,7 @@
                     "edit": "Change",
                     "delete": "Delete",
                     "back": "Back",
+                    "action": "Actions",
                     "dialog_delete": {
                         "title": "Are you sure you want to delete this sub trash bin?",
                         "subtitle": "This action cannot be undone.",
@@ -227,6 +229,7 @@
                         "status": "Report Status",
                         "photo": "Report Photo",
                         "submitFeedback": "Submit Feedback",
+                        "action": "Actions",
                         "actions": {
                             "title": "Report Actions",
                             "loading": "Loading...",

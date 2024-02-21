@@ -169,7 +169,9 @@ export function DetailedSubTrashbinPage() {
                                     </div>
                                     <Separator className="my-4" />
                                     <div className="mt-4">
-                                        <p className="text-center text-xs mb-4">Actions</p>
+                                        <p className="text-center text-xs mb-4">
+                                            {t("operator.subtrashbin.detailed.action")}
+                                        </p>
                                         <div className="flex flex-row gap-2">
                                             <Button
                                                 onClick={() => setIsOpen(true)}
