@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, Skeleton, Separator, Button } from "@tra
 import { EnumResponseStatus, InterfaceReport } from "../../operator/trash-bin/report/reports.page";
 import { useGetTrashBinById } from "../../operator/trash-bin/report/get-trash-bin.query";
 import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 function ReportStatus({ status }: { status: EnumResponseStatus }) {
     return (
@@ -34,13 +35,13 @@ function ReportStatus({ status }: { status: EnumResponseStatus }) {
                 }`}
             >
                 {status === EnumResponseStatus.NOT_RESPONDED
-                    ? "Belum Ditanggapi"
+                    ? t("complain.history.notResponded")
                     : status === EnumResponseStatus.ACCEPTED
-                    ? "Diterima"
+                    ? t("complain.history.accepted")
                     : status === EnumResponseStatus.REJECTED
-                    ? "Ditolak"
+                    ? t("complain.history.rejected")
                     : status === EnumResponseStatus.COMPLETED
-                    ? "Selesai"
+                    ? t("complain.history.completed")
                     : ""}
             </span>
         </p>
@@ -62,7 +63,7 @@ function TrashBinDetails({ trashBinId, userId }: { trashBinId: number; userId: n
                 <Skeleton className="h-4 w-40 mt-2" />
             ) : (
                 <p className="text-left text-xs">
-                    Laporan untuk: <span className="font-medium">{trashBinData.data.name}</span>
+                    {t("complain.history.for")} <span className="font-medium">{trashBinData.data.name}</span>
                 </p>
             )}
             {isError ?? <p className="text-left text-xs">{JSON.stringify(error)}</p>}
@@ -123,7 +124,7 @@ export function ComplainReportHistory() {
                 </IonRefresher>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Riwayat</p>
+                    <p className="text-xs text-left text-slate-600">{t("tabs.riwayat")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     {/* <Button disabled className="w-full" onClick={() => history.push("/trash-bin/tabs/feedback")}>

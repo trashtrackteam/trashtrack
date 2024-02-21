@@ -1,4 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
+import { t } from "i18next";
 import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel } from "@ionic/react";
 import { Icons, OperatorContext } from "@trashtrack/ui";
 
@@ -34,7 +35,7 @@ const OperatorTabs: React.FC = () => {
                 </IonTabButton>
                 <IonTabButton tab="trashbinTab" href="/trash-bin/tabs/trashbin">
                     <Icons.trash strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                    <IonLabel className="pt-2 pb-2">Trashbin</IonLabel>
+                    <IonLabel className="pt-2 pb-2">{t("tabs.trashbin")}</IonLabel>
                 </IonTabButton>
                 {/* {isAdmin && (
                     <IonTabButton tab="userOperatorTab" href="/operator/tabs/user">

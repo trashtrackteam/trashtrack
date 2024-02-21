@@ -7,6 +7,7 @@
             "preferences": "Preferensi",
             "laporkan": "Laporan",
             "riwayat": "Riwayat",
+            "trashbin": "Tempat Sampah",
             "report": "Laporan",
             "back": "Kembali"
         },
@@ -54,6 +55,19 @@
                         "report": "Laporkan"
                     }
                 }
+            },
+            "history": {
+                "for" : "Laporan untuk:",
+                "notResponded": "Belum Ditanggapi",
+                "accepted": "Diterima",
+                "rejected": "Ditolak",
+                "completed": "Selesai"
+            },
+            "feedback": {
+                "subtitle": "Tanggapan",
+                "back":  "Kembali",
+                "noFeedback": "Tidak ada tanggapan",
+                "createdAt": "Dibuat:"
             }
         },
         "operator": {
@@ -66,6 +80,132 @@
                         "title": "Operator Login",
                         "description": "Username atau password salah, silakan coba lagi.",
                         "cancel": "Batal"
+                    }
+                }
+            },
+            "dashboard": {
+                "login": "Kembali ke Login",
+                "home": "Kembali ke Home"
+            },
+            "trashbin": {
+                "subtitle": "Tempat Sampah",
+                "create": "Buat tempat sampah baru",
+                "search": "Cari tempat sampah",
+                "noResults": "Tidak ada tempat sampah ditemukan.",
+                "view_trashbin": "Lihat Tempat Sampah",
+                "view_subtrashbin": "Lihat Sub Tempat Sampah",
+                "detailed": {
+                    "name": "Nama",
+                    "description": "Deskripsi",
+                    "location": "Lokasi",
+                    "edit": "Edit",
+                    "delete": "Hapus",
+                    "back": "Kembali",
+                    "dialog_delete": {
+                        "title": "Apakah Anda yakin ingin menghapus tempat sampah ini?",
+                        "subtitle": "Tindakan ini tidak dapat dibatalkan.",
+                        "pending": "Memproses...",
+                        "delete": "Hapus",
+                        "cancel": "Batalkan"
+                    }
+                },
+                "create_trashbin": {
+                    "subtitle": "Buat Tempat Sampah",
+                    "validation": {
+                        "subtitle": "Buat Tempat Sampah",
+                        "name": "Nama",
+                        "description": "Deskripsi",
+                        "latitude": "Lintang",
+                        "longitude": "Bujur",
+                        "submit": "Buat Tempat Sampah",
+                        "back": "Kembali",
+                        "validation": {
+                            "name": "Nama harus minimal 8 karakter.",
+                            "description": "Deskripsi harus minimal 8 karakter.",
+                            "latitude": {
+                                "min": "Lintang harus minimal -90.",
+                                "max": "Lintang harus maksimal 90."
+                            },
+                            "longitude": {
+                                "min": "Bujur harus minimal -180.",
+                                "max": "Bujur harus maksimal 180."
+                            }
+                        }
+                    }
+                },
+                "change_trashbin": {
+                    "subtitle": "Ganti Tempat Sampah",
+                    "name": "Nama",
+                    "description": "Deskripsi",
+                    "latitude": "Lintang",
+                    "longitude": "Bujur",
+                    "submit": "Ubah Tempat Sampah",
+                    "back": "Kembali",
+                    "validation": {
+                        "name": "Nama harus minimal 8 karakter.",
+                        "description": "Deskripsi harus minimal 8 karakter.",
+                        "latitude": {
+                            "min": "Lintang harus minimal -90.",
+                            "max": "Lintang harus maksimal 90."
+                        },
+                        "longitude": {
+                            "min": "Bujur harus minimal -180.",
+                            "max": "Bujur harus maksimal 180."
+                        }
+                    }
+                }
+            },
+            "subtrashbin": {
+                "subtitle": "Tempat Sampah",
+                "create": "Buat Tempat Sampah Baru",
+                "search": "Cari Tempat Sampah",
+                "back": "Kembali",
+                "noResults": "Tidak ada tempat sampah yang ditemukan untuk pencarian ini.",
+                "view_subtrashbin": "Lihat Sub Tempat Sampah",
+                "view_trash": "Lihat Tempat Sampah",
+                "view_history": "Lihat Riwayat",
+                "trash": {
+                    "subtitle": "Tempat Sampah",
+                    "filter_oldest": "Filter dari yang Terlama",
+                    "filter_newest": "Filter dari yang Terbaru",
+                    "back": "Kembali"
+                },
+                "history": {
+                    "subtitle": "Riwayat",
+                    "filter_oldest": "Filter dari yang Terlama",
+                    "filter_newest": "Filter dari yang Terbaru",
+                    "back": "Kembali"
+                },
+                "detailed": {
+                    "name": "Nama",
+                    "capacity": "Kapasitas",
+                    "edit": "Edit",
+                    "delete": "Hapus",
+                    "back": "Kembali",
+                    "dialog_delete": {
+                        "title": "Apakah Anda yakin ingin menghapus sub tempat sampah ini?",
+                        "subtitle": "Tindakan ini tidak dapat dibatalkan.",
+                        "pending": "Menunggu...",
+                        "delete": "Hapus",
+                        "cancel": "Batal"
+                    }
+                },
+                "create_subtrashbin": {
+                    "subtitle": "Buat Sub Tempat Sampah",
+                    "name": "Nama",
+                    "submit": "Buat Sub Tempat Sampah",
+                    "back": "Kembali",
+                    "validation": {
+                        "name": "Nama harus minimal 8 karakter."
+                    }
+                },
+                "update_subtrashbin": {
+                    "subtitle": "Perbarui Sub Tempat Sampah",
+                    "name": "Nama",
+                    "submit": "Perbarui Sub Tempat Sampah",
+                    "back": "Kembali",
+                    "validation": {
+                        "name": "Nama harus minimal 8 karakter."
                     }
                 }
             },
@@ -126,128 +266,6 @@
                                 "subtitle": "Panjang deskripsi minimal harus 8 karakter."
                             }
                         }
-                    }
-                }
-            },
-            "trashbin": {
-                "subtitle": "Tempat Sampah",
-                "create": "Buat tempat sampah baru",
-                "search": "Cari tempat sampah",
-                "noResults": "Tidak ada tempat sampah ditemukan.",
-                "view_trashbin": "Lihat Tempat Sampah",
-                "view_subtrashbin": "Lihat Sub Tempat Sampah",
-                "detailed": {
-                    "name": "Nama",
-                    "description": "Deskripsi",
-                    "location": "Lokasi",
-                    "edit": "Edit",
-                    "delete": "Hapus",
-                    "back": "Kembali",
-                    "dialog_delete": {
-                        "title": "Apakah Anda yakin ingin menghapus tempat sampah ini?",
-                        "subtitle": "Tindakan ini tidak dapat dibatalkan.",
-                        "pending": "Memproses...",
-                        "delete": "Hapus",
-                        "cancel": "Batalkan"
-                    }
-                },
-                "create_trashbin": {
-                    "subtitle": "Buat Tempat Sampah",
-                    "validation": {
-                        "subtitle": "Buat Tempat Sampah",
-                        "name": "Nama",
-                        "description": "Deskripsi",
-                        "latitude": "Lintang",
-                        "longitude": "Bujur",
-                        "submit": "Buat Tempat Sampah",
-                        "back": "Kembali",
-                        "validation": {
-                            "name": "Nama harus minimal 8 karakter.",
-                            "description": "Deskripsi harus minimal 8 karakter.",
-                            "latitude": {
-                                "min": "Lintang harus minimal -90.",
-                                "max": "Lintang harus maksimal 90."
-                            },
-                            "longitude": {
-                                "min": "Bujur harus minimal -180.",
-                                "max": "Bujur harus maksimal 180."
-                            }
-                        }
-                    }
-                },
-                "change_trashbin": {
-                    "subtitle": "Ganti Trashbin",
-                    "name": "Nama",
-                    "description": "Deskripsi",
-                    "latitude": "Lintang",
-                    "longitude": "Bujur",
-                    "submit": "Ubah Tempat Sampah",
-                    "back": "Kembali",
-                    "validation": {
-                        "name": "Nama harus minimal 8 karakter.",
-                        "description": "Deskripsi harus minimal 8 karakter.",
-                        "latitude": {
-                            "min": "Lintang harus minimal -90.",
-                            "max": "Lintang harus maksimal 90."
-                        },
-                        "longitude": {
-                            "min": "Bujur harus minimal -180.",
-                            "max": "Bujur harus maksimal 180."
-                        }
-                    }
-                }
-            },
-            "subtrashbin": {
-                "subtitle": "Tempat Sampah",
-                "create": "Buat Tempat Sampah Baru",
-                "search": "Cari Tempat Sampah",
-                "back": "Kembali",
-                "noResults": "Tidak ada tempat sampah yang ditemukan untuk pencarian ini.",
-                "view_subtrashbin": "Lihat Subtempatsampah",
-                "view_trash": "Lihat Tempat Sampah",
-                "view_history": "Lihat Riwayat",
-                "trash": {
-                    "subtitle": "Tempat Sampah",
-                    "filter_oldest": "Filter dari yang Terlama",
-                    "filter_newest": "Filter dari yang Terbaru",
-                    "back": "Kembali"
-                },
-                "history": {
-                    "subtitle": "Riwayat",
-                    "filter_oldest": "Filter dari yang Terlama",
-                    "filter_newest": "Filter dari yang Terbaru",
-                    "back": "Kembali"
-                },
-                "detailed": {
-                    "name": "Nama",
-                    "capacity": "Kapasitas",
-                    "edit": "Edit",
-                    "delete": "Hapus",
-                    "back": "Kembali",
-                    "dialog_delete": {
-                        "title": "Apakah Anda yakin ingin menghapus sub tempat sampah ini?",
-                        "subtitle": "Tindakan ini tidak dapat dibatalkan.",
-                        "pending": "Menunggu...",
-                        "delete": "Hapus",
-                        "cancel": "Batal"
-                    }
-                },
-                "create_subtrashbin": {
-                    "subtitle": "Buat Sub tempat sampah",
-                    "name": "Nama",
-                    "submit": "Buat Sub tempat sampah",
-                    "back": "Kembali",
-                    "validation": {
-                        "name": "Nama harus minimal 8 karakter."
-                    }
-                },
-                "update_subtrashbin": {
-                    "subtitle": "Perbarui Sub tempat sampah",
-                    "name": "Nama",
-                    "submit": "Perbarui Sub tempat sampah",
-                    "back": "Kembali",
-                    "validation": {
-                        "name": "Nama harus minimal 8 karakter."
                     }
                 }
             }

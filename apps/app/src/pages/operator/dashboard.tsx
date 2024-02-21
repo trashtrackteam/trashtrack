@@ -1,6 +1,7 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { Card, CardContent, Button } from "@trashtrack/ui";
 import { OperatorContext } from "@trashtrack/ui";
+import { t } from "i18next";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -22,14 +23,14 @@ export function OperatorDashboard() {
                                 className="font-semibold text-xs w-full mb-2"
                                 onClick={() => history.replace("/operator/form/login")}
                             >
-                                Kembali ke Login
+                                {t("operator.dashboard.login")}
                             </Button>
                             <Button
                                 variant="secondary"
                                 className="font-semibold text-xs w-full mb-2"
                                 onClick={() => history.replace("/tabs/home")}
                             >
-                                Kembali ke Home
+                                {t("operator.dashboard.home")}
                             </Button>
                         </CardContent>
                     </Card>

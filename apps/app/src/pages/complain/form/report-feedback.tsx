@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import { CapacitorHttp } from "@capacitor/core";
 import { useState } from "react";
 import { useGetFeedbacks } from "../../operator/trash-bin/report/report-feedback/get-feedbacks.query";
+import { t } from "i18next";
 
 export interface InterfaceFeedback {
     id: number;
@@ -110,7 +111,7 @@ export function ComplainReportFeedback() {
             <IonContent className="ion-padding" fullscreen>
                 <div className="pt-12">
                     <h1 className="font-bold text-left text-xl">TrashTrack</h1>
-                    <p className="text-xs text-left text-slate-600">Feedback</p>
+                    <p className="text-xs text-left text-slate-600">{t("complain.feedback.subtitle")}</p>
                 </div>
                 <div className="flex flex-col pt-8 gap-2">
                     <div className="flex flex-col gap-2">
@@ -119,7 +120,7 @@ export function ComplainReportFeedback() {
                             variant="secondary"
                             onClick={() => history.replace(`/complain/tabs/form/report-history`)}
                         >
-                            Back
+                            {t("complain.feedback.back")}
                         </Button>
                     </div>
                     <Separator className="my-4" />
@@ -147,14 +148,14 @@ export function ComplainReportFeedback() {
                         <Card className="flex flex-col mt-4">
                             <CardContent className="pt-4">
                                 {filteredData.length === 0 ? (
-                                    <p className="text-center text-xs">No feedbacks</p>
+                                    <p className="text-center text-xs">{t("complain.feedback.noFeedback")}</p>
                                 ) : (
                                     filteredData.map((feedback: InterfaceFeedback) => (
                                         <div key={feedback.id} className="flex flex-col gap-2">
                                             <p className="text-xs">{feedback.title}</p>
                                             <p className="text-xs">{feedback.description}</p>
                                             <p className="text-xs">
-                                                Created: {formatDateTimeAgo(dayjs(feedback.createdAt))}
+                                                {t("complain.feedback.createdAt")} {formatDateTimeAgo(dayjs(feedback.createdAt))}
                                             </p>
                                         </div>
                                     ))
