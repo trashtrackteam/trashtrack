@@ -98,7 +98,7 @@
                     "name": "Nama",
                     "description": "Deskripsi",
                     "location": "Lokasi",
-                    "edit": "Edit",
+                    "edit": "Ubah",
                     "delete": "Hapus",
                     "back": "Kembali",
                     "dialog_delete": {
@@ -179,7 +179,7 @@
                 "detailed": {
                     "name": "Nama",
                     "capacity": "Kapasitas",
-                    "edit": "Edit",
+                    "edit": "Ubah",
                     "delete": "Hapus",
                     "back": "Kembali",
                     "dialog_delete": {

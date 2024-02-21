@@ -98,7 +98,7 @@
                     "name": "Name",
                     "description": "Description",
                     "location": "Location",
-                    "edit": "Edit",
+                    "edit": "Change",
                     "delete": "Delete",
                     "back": "Back",
                     "dialog_delete": {
@@ -176,7 +176,7 @@
                 "detailed": {
                     "name": "Name",
                     "capacity": "Capacity",
-                    "edit": "Edit",
+                    "edit": "Change",
                     "delete": "Delete",
                     "back": "Back",
                     "dialog_delete": {
