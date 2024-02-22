@@ -19,8 +19,8 @@ export const resources = {
 } as const;
 
 i18n.use(initReactI18next).init({
-    lng: "en",
-    fallbackLng: "en",
+    lng: "id",
+    fallbackLng: "id",
     keySeparator: ".",
     ns: ["translation"],
     defaultNS: "translation",
