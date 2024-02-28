@@ -6,9 +6,9 @@ import { Icons, OperatorContext } from "@trashtrack/ui";
 import OperatorDashboard from "../pages/operator/dashboard";
 import { useContext } from "react";
 import { UsersPage } from "../pages/operator/user/users.page";
-import { DetailedUserPage } from "../pages/operator/user/detailed-user.page";
 import { ChangeUserPage } from "../pages/operator/user/change-user.page";
 import { CreateUserPage } from "../pages/operator/user/create-user.page";
+import { DetailedUserPage } from "../pages/operator/user/detailed-user.page";
 
 const OperatorTabs: React.FC = () => {
     const operator = useContext(OperatorContext);
@@ -22,8 +22,13 @@ const OperatorTabs: React.FC = () => {
 
                 <Route path="/operator/tabs/user" render={() => <UsersPage />} exact={true} />
                 <Route path="/operator/tabs/user/create" render={() => <CreateUserPage />} exact={true} />
-                <Route path="/operator/tabs/user/details/:user-id" render={() => <DetailedUserPage />} exact={true} />
-                <Route path="/operator/tabs/user/update/:user-id" render={() => <ChangeUserPage />} exact={true} />
+                <Route path="/operator/tabs/user/details/:user_id" render={() => <DetailedUserPage />} exact={true} />
+                <Route path="/operator/tabs/user/update/:user_id" render={() => <ChangeUserPage />} exact={true} />
+                <Route
+                    path="/operator/tabs/user/change-password/:user_id"
+                    render={() => <ChangeUserPage />}
+                    exact={true}
+                />
 
                 <Route path="/operator/tabs" render={() => <Redirect to="/operator/tabs/dashboard" />} exact={true} />
             </IonRouterOutlet>

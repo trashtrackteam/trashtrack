@@ -112,7 +112,7 @@ export function UsersPage() {
                     ) : filteredData.length === 0 && searchTerm !== "" ? (
                         <Card className="flex flex-col">
                             <CardHeader>
-                                <p className="text-xs text-center">{t("operator.trashbin.noResults")}</p>
+                                <p className="text-xs text-center">{t("operator.user.noResults")}</p>
                             </CardHeader>
                         </Card>
                     ) : (
@@ -127,9 +127,7 @@ export function UsersPage() {
                                         <div className="flex flex-col gap-2 mt-4">
                                             <Button
                                                 className="w-full"
-                                                onClick={() =>
-                                                    history.push(`/operator/tabs/user/details/details/${user.id}`)
-                                                }
+                                                onClick={() => history.push(`/operator/tabs/user/details/${user.id}`)}
                                             >
                                                 {t("operator.user.view_details")}
                                             </Button>
