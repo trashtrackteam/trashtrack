@@ -87,6 +87,80 @@
                 "login": "Back to Login",
                 "home": "Back to Home"
             },
+            "user": {
+                "subtitle": "User",
+                "search": "Search User",
+                "create": "Create a new user",
+                "noResults": "No user found for the search.",
+                "view_details": "View Details",
+                "not_active": "Not Active",
+                "is_active": "Active",
+                "detailed": {
+                    "name": "Name",
+                    "username": "Username",
+                    "phoneNumber": "Phone Number",
+                    "role": "Role",
+                    "active": "Active",
+                    "description": "Description",
+                    "edit": "Change",
+                    "change_password": "Change Password",
+                    "delete": "Delete",
+                    "back": "Back",
+                    "action": "Actions",
+                    "dialog_delete": {
+                        "title": "Are you sure you want to delete this user?",
+                        "subtitle": "This action cannot be undone.",
+                        "pending": "Pending...",
+                        "delete": "Delete",
+                        "cancel": "Cancel"
+                    }
+                },
+                "create_user": {
+                    "subtitle": "Create User",
+                    "name": "Name",
+                    "password": "Password",
+                    "username": "Username",
+                    "phoneNumber": "Phone Number",
+                    "description": "Description",
+                    "role": "Role",
+                    "submit": "Create User",
+                    "back": "Back",
+                    "validation": {
+                        "name": "Name must be at least 8 characters long.",
+                        "username": "Username must be at least 8 characters long.",
+                        "phoneNumber": "Phone number must be at least 8 characters long.",
+                        "description": "Description must be at least 8 characters long."
+                    }
+                },
+                "change_user": {
+                    "subtitle": "Change User",
+                    "name": "Name",
+                    "username": "Username",
+                    "phoneNumber": "Phone Number",
+                    "description": "Description",
+                    "role": "Role",
+                    "active": "Active",
+                    "submit": "Update User",
+                    "back": "Back",
+                    "validation": {
+                        "name": "Name must be at least 8 characters long.",
+                        "username": "Username must be at least 8 characters long.",
+                        "phoneNumber": "Phone number must be at least 8 characters long.",
+                        "description": "Description must be at least 8 characters long."
+                    }
+                },
+                "change_password": {
+                    "subtitle": "Change Password",
+                    "oldPassword": "Old Password",
+                    "newPassword": "New Password",
+                    "submit": "Change Password",
+                    "back": "Back",
+                    "validation": {
+                        "old_password": "Old password must be at least 8 characters long.",
+                        "new_password": "New password must be at least 8 characters long."
+                    }
+                }
+            },
             "trashbin": {
                 "subtitle": "Trash Bin",
                 "create": "Create a new trash bin",
