@@ -45,7 +45,7 @@ const OperatorTabs: React.FC = () => {
                 {isAdmin && (
                     <IonTabButton tab="userOperatorTab" href="/operator/tabs/user">
                         <Icons.user strokeWidth={1} className="pt-2 w-[32px] h-[30px]" />
-                        <IonLabel className="pt-2 pb-2">User</IonLabel>
+                        <IonLabel className="pt-2 pb-2">{t("tabs.user")}</IonLabel>
                     </IonTabButton>
                 )}
             </IonTabBar>
