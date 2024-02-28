@@ -49,7 +49,7 @@ export function DeleteConfirmationDialog({
         },
         onSuccess: () => {
             setIsOpen(false);
-            history.goBack();
+            history.replace("/operator/tabs/user");
         },
     });
 
