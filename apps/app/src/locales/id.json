@@ -122,7 +122,10 @@
                     "username": "Username",
                     "phoneNumber": "Nomor Telepon",
                     "description": "Deskripsi",
+                    "active": "Status Aktif",
+                    "select_active": "Pilih Status Aktif",
                     "role": "Role",
+                    "role_select": "Pilih Role",
                     "submit": "Buat Pengguna",
                     "back": "Kembali",
                     "validation": {

@@ -122,12 +122,16 @@
                     "username": "Username",
                     "phoneNumber": "Phone Number",
                     "description": "Description",
+                    "active": "Active",
+                    "active_select": "Select Active",
                     "role": "Role",
+                    "role_select": "Select Role",
                     "submit": "Create User",
                     "back": "Back",
                     "validation": {
-                        "name": "Name must be at least 8 characters long.",
-                        "username": "Username must be at least 8 characters long.",
+                        "name": "Name must be at least 4 characters long.",
+                        "username": "Username must be at least 4 characters long.",
+                        "password": "Password must be at least 8 characters long.",
                         "phoneNumber": "Phone number must be at least 8 characters long.",
                         "description": "Description must be at least 8 characters long."
                     }

@@ -40,3 +40,6 @@ note.txt
 Thumbs.db
 
 .nx/cache
+
+# to be removed later
+libs/utils/src/app-constants.ts
