@@ -156,12 +156,14 @@
                 "change_password": {
                     "subtitle": "Change Password",
                     "oldPassword": "Old Password",
+                    "confirmPassword": "Confirm Password",
                     "newPassword": "New Password",
                     "submit": "Change Password",
                     "back": "Back",
                     "validation": {
                         "old_password": "Old password must be at least 8 characters long.",
-                        "new_password": "New password must be at least 8 characters long."
+                        "new_password": "New password must be at least 8 characters long.",
+                        "confirm_password": "Confirm password must be at least 8 characters long."
                     }
                 }
             },

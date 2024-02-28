@@ -157,11 +157,13 @@
                     "subtitle": "Ubah Kata Sandi",
                     "oldPassword": "Kata Sandi Lama",
                     "newPassword": "Kata Sandi Baru",
+                    "confirmPassword": "Konfirmasi Kata Sandi",
                     "submit": "Ubah Kata Sandi",
                     "back": "Kembali",
                     "validation": {
                         "old_password": "Kata sandi lama harus memiliki setidaknya 8 karakter.",
-                        "new_password": "Kata sandi baru harus memiliki setidaknya 8 karakter."
+                        "new_password": "Kata sandi baru harus memiliki setidaknya 8 karakter.",
+                        "confirm_password": "Konfirmasi kata sandi harus sama dengan kata sandi baru."
                     }
                 }
             },

@@ -9,6 +9,7 @@ import { UsersPage } from "../pages/operator/user/users.page";
 import { ChangeUserPage } from "../pages/operator/user/change-user.page";
 import { CreateUserPage } from "../pages/operator/user/create-user.page";
 import { DetailedUserPage } from "../pages/operator/user/detailed-user.page";
+import ChangePasswordPage from "../pages/operator/user/change-password.page";
 
 const OperatorTabs: React.FC = () => {
     const operator = useContext(OperatorContext);
@@ -26,7 +27,7 @@ const OperatorTabs: React.FC = () => {
                 <Route path="/operator/tabs/user/update/:user_id" render={() => <ChangeUserPage />} exact={true} />
                 <Route
                     path="/operator/tabs/user/change-password/:user_id"
-                    render={() => <ChangeUserPage />}
+                    render={() => <ChangePasswordPage />}
                     exact={true}
                 />
 
