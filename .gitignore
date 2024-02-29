@@ -4,7 +4,7 @@
 dist
 tmp
 /out-tsc
-apps/iot/build
+apps/iot/**/build
 
 # dependencies
 node_modules
