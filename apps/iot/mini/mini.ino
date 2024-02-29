@@ -14,7 +14,7 @@ const String url = server + "/api/sub-trash-bin/" + String(subTrashBinId) + "/ca
 const int sensorTriggerPin = 5;
 const int sensorEchoPin = 16;
 
-const int updateDelay = 1000;
+const int updateDelay = 5000;
 
 float maxCapacity;
 float previousCapacity = 0;
