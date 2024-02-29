@@ -12,3 +12,11 @@ export class SubTrashBinUpdateDTO {
     @IsString()
     name: string;
 }
+
+export class SubTrashBinUpdateCapacityDTO {
+    @IsNumber()
+    maxCapacity: number;
+
+    @IsNumber()
+    currentCapacity: number;
+}
