@@ -143,28 +143,32 @@ export function FeedbackPage() {
                             </CardContent>
                         </Card>
                     )}
-                    {isLoading ? (
-                        <Card className="flex flex-col mt-4">
-                            <CardContent className="pt-4">
-                                <CardHeader>
-                                    <Skeleton className="h-4 w-40" />
-                                </CardHeader>
-                                <CardContent className="flex flex-col gap-2">
-                                    <Skeleton className="h-4 w-full" />
-                                    <Skeleton className="h-4 w-full" />
-                                    <Skeleton className="h-4 w-full" />
+                    <div className="flex flex-col gap-4">
+                        {isLoading ? (
+                            <Card className="flex flex-col mt-4">
+                                <CardContent className="pt-4">
+                                    <CardHeader>
+                                        <Skeleton className="h-4 w-40" />
+                                    </CardHeader>
+                                    <CardContent className="flex flex-col gap-2">
+                                        <Skeleton className="h-4 w-full" />
+                                        <Skeleton className="h-4 w-full" />
+                                        <Skeleton className="h-4 w-full" />
+                                    </CardContent>
                                 </CardContent>
-                            </CardContent>
-                        </Card>
-                    ) : (
-                        <Card className="flex flex-col mt-4">
-                            <CardContent className="pt-4">
-                                {filteredData.length === 0 ? (
+                            </Card>
+                        ) : filteredData.length === 0 ? (
+                            <Card className="flex flex-col mt-4">
+                                <CardContent className="pt-4">
                                     <p className="text-center text-xs">
                                         {t("operator.reports.feedback.delete.noResults")}
                                     </p>
-                                ) : (
-                                    filteredData.map((feedback: InterfaceFeedback) => (
+                                </CardContent>
+                            </Card>
+                        ) : (
+                            filteredData.map((feedback: InterfaceFeedback) => (
+                                <Card className="flex flex-col mt-4">
+                                    <CardContent className="pt-4">
                                         <div key={feedback.id} className="flex flex-col gap-2">
                                             <p className="text-xs">{feedback.title}</p>
                                             <p className="text-xs">{feedback.description}</p>
@@ -188,11 +192,11 @@ export function FeedbackPage() {
                                                 queryClient={queryClient}
                                             />
                                         </div>
-                                    ))
-                                )}
-                            </CardContent>
-                        </Card>
-                    )}
+                                    </CardContent>
+                                </Card>
+                            ))
+                        )}
+                    </div>
                 </div>
             </IonContent>
         </IonPage>
