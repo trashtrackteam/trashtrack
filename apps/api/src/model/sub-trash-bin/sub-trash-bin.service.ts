@@ -26,7 +26,7 @@ export class SubTrashBinService
         try {
             const model: SubTrashBinModel = await this.prismaService[this.modelName].update({
                 where: { id },
-                data: { payload },
+                data: payload,
             });
 
             if (!model) {
