@@ -28,15 +28,15 @@ export class TrashBinController
             const response: ResponseFormatInterface<number> = formatResponse<number>(
                 true,
                 200,
-                "Chart Found",
+                "Card Chart Total Found",
                 await this.modelService.findCardChartTotal()
             );
 
-            this.loggerService.log(`Find Chart: ${JSON.stringify(response)}`);
+            this.loggerService.log(`Find Card Chart Total: ${JSON.stringify(response)}`);
 
             return response;
         } catch (error) {
-            this.loggerService.error(`Find Chart: ${error.message}`);
+            this.loggerService.error(`Find Card Chart Total: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }

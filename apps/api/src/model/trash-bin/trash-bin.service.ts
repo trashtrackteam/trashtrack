@@ -26,11 +26,11 @@ export class TrashBinService
         try {
             const data: number = await this.prismaService[this.modelName].count();
 
-            this.loggerService.log(`Find Chart: ${JSON.stringify(data)}`);
+            this.loggerService.log(`Find Card Chart Total: ${JSON.stringify(data)}`);
 
             return data;
         } catch (error) {
-            this.loggerService.error(`Find Chart: ${error.message}`);
+            this.loggerService.error(`Find Card Chart Total: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }
