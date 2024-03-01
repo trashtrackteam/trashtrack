@@ -9,6 +9,7 @@
             "riwayat": "History",
             "trashbin": "Trash Bin",
             "report": "Report",
+            "user": "User",
             "back": "Back"
         },
         "home": {
@@ -122,12 +123,16 @@
                     "username": "Username",
                     "phoneNumber": "Phone Number",
                     "description": "Description",
+                    "active": "Active",
+                    "active_select": "Select Active",
                     "role": "Role",
+                    "role_select": "Select Role",
                     "submit": "Create User",
                     "back": "Back",
                     "validation": {
-                        "name": "Name must be at least 8 characters long.",
-                        "username": "Username must be at least 8 characters long.",
+                        "name": "Name must be at least 4 characters long.",
+                        "username": "Username must be at least 4 characters long.",
+                        "password": "Password must be at least 8 characters long.",
                         "phoneNumber": "Phone number must be at least 8 characters long.",
                         "description": "Description must be at least 8 characters long."
                     }
@@ -152,12 +157,14 @@
                 "change_password": {
                     "subtitle": "Change Password",
                     "oldPassword": "Old Password",
+                    "confirmPassword": "Confirm Password",
                     "newPassword": "New Password",
                     "submit": "Change Password",
                     "back": "Back",
                     "validation": {
                         "old_password": "Old password must be at least 8 characters long.",
-                        "new_password": "New password must be at least 8 characters long."
+                        "new_password": "New password must be at least 8 characters long.",
+                        "confirm_password": "Confirm password must be at least 8 characters long."
                     }
                 }
             },

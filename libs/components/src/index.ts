@@ -25,6 +25,7 @@ export * from "./forms/operator/auth/login-form";
 export * from "./forms/complain/laporan/laporan-form";
 export * from "./forms/operator/user/create-user.form";
 export * from "./forms/operator/user/change-user.form";
+export * from "./forms/operator/user/change-password.form";
 
 export * from "./forms/sheets/delete-confirmation";
 

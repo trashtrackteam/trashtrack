@@ -168,6 +168,8 @@ export class UserService extends BaseService<UserModel, UserCreateDTO, UserUpdat
                 throw new BadRequestException(`New Password Does Not Match Confirmation Password`);
             }
 
+            payload.newPassword = await encryption.hash(payload.newPassword);
+
             const model: UserModel = await this.prismaService[this.modelName].update({
                 where: { id },
                 data: { password: payload.newPassword },
