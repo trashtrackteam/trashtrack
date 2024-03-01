@@ -45,7 +45,7 @@ GET {{url}}/id/2/extend
 
 ###
 
-GET {{url}}/chart-pie-chart-status
+GET {{url}}/pie-chart-status
 
 ###
 

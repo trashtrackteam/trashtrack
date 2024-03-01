@@ -212,11 +212,11 @@ export class ReportService
                 },
             ];
 
-            this.loggerService.log(`Find Chart: ${JSON.stringify(data)}`);
+            this.loggerService.log(`Find Pie Chart Status: ${JSON.stringify(data)}`);
 
             return data;
         } catch (error) {
-            this.loggerService.error(`Find Chart: ${error.message}`);
+            this.loggerService.error(`Find Pie Chart Status: ${error.message}`);
             throw new InternalServerErrorException("Internal Server Error");
         }
     }
