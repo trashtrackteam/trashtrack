@@ -22,7 +22,7 @@ export class TrashBinService
         });
     }
 
-    public async getChart(): Promise<number> {
+    public async findChart(): Promise<number> {
         try {
             const data: number = await this.prismaService[this.modelName].count();
 

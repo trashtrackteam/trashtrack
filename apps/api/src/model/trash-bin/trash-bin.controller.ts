@@ -23,13 +23,13 @@ export class TrashBinController
     }
 
     @Get("chart")
-    public async getChart(): Promise<ResponseFormatInterface<number>> {
+    public async findChart(): Promise<ResponseFormatInterface<number>> {
         try {
             const response: ResponseFormatInterface<number> = formatResponse<number>(
                 true,
                 200,
                 "Chart Found",
-                await this.modelService.getChart()
+                await this.modelService.findChart()
             );
 
             this.loggerService.log(`Chart: ${JSON.stringify(response)}`);
