@@ -25,6 +25,10 @@ GET {{url}}/id/1/extend
 
 ###
 
+GET {{url}}/chart
+
+###
+
 POST {{url}}
 Content-Type: application/json
 
