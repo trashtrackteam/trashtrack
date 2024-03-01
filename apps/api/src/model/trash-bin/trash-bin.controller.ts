@@ -32,11 +32,11 @@ export class TrashBinController
                 await this.modelService.findChart()
             );
 
-            this.loggerService.log(`Chart: ${JSON.stringify(response)}`);
+            this.loggerService.log(`Find Chart: ${JSON.stringify(response)}`);
 
             return response;
         } catch (error) {
-            this.loggerService.error(`Chart: ${error.message}`);
+            this.loggerService.error(`Find Chart: ${error.message}`);
             return formatResponse<null>(false, 500, error.message, null);
         }
     }
