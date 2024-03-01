@@ -1,4 +1,4 @@
-import { Controller, NotFoundException, Param, ParseIntPipe, Put, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param, ParseIntPipe, Put, UseInterceptors } from "@nestjs/common";
 import { ResponseFormatInterface, TrashBinCreateDTO, TrashBinModel, TrashBinUpdateDTO } from "@trashtrack/common";
 
 import { ResponseFormatInterceptor, formatResponse } from "../../interceptor/response-format.interceptor";
@@ -20,6 +20,25 @@ export class TrashBinController
 {
     constructor(modelService: TrashBinService) {
         super(TrashBinController.name, modelService);
+    }
+
+    @Get("chart")
+    public async getChart(): Promise<ResponseFormatInterface<number>> {
+        try {
+            const response: ResponseFormatInterface<number> = formatResponse<number>(
+                true,
+                200,
+                "Chart Found",
+                await this.modelService.getChart()
+            );
+
+            this.loggerService.log(`Chart: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            this.loggerService.error(`Chart: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
     }
 
     @Put(":id/open-count/increase")

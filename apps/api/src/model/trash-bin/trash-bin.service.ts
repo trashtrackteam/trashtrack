@@ -22,6 +22,19 @@ export class TrashBinService
         });
     }
 
+    public async getChart(): Promise<number> {
+        try {
+            const data: number = await this.prismaService[this.modelName].count();
+
+            this.loggerService.log(`Chart: ${JSON.stringify(data)}`);
+
+            return data;
+        } catch (error) {
+            this.loggerService.error(`Chart: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
     public async increaseOpenCount(id: number): Promise<TrashBinModel> {
         try {
             const dataModel: { openCount: number } = await this.prismaService[this.modelName].findUnique({
