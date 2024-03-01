@@ -45,6 +45,10 @@ GET {{url}}/id/2/extend
 
 ###
 
+GET {{url}}/chart-pie-chart-status
+
+###
+
 GET {{url}}/nik/64711092301923/extend
 
 ###

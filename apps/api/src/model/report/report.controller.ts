@@ -177,6 +177,22 @@ export class ReportController
         }
     }
 
+    @Get("chart-pie-chart-status")
+    public async findPieChartStatus(): Promise<ResponseFormatInterface<{ name: string; value: number }[]>> {
+        try {
+            const response: ResponseFormatInterface<{ name: string; value: number }[]> = formatResponse<
+                { name: string; value: number }[]
+            >(true, 200, "Chart Found", await this.modelService.findPieChartStatus());
+
+            this.loggerService.log(`Find Chart: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            this.loggerService.error(`Find Chart: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
     @Override
     public async change(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -183,6 +183,44 @@ export class ReportService
         }
     }
 
+    public async findPieChartStatus(): Promise<{ name: string; value: number }[]> {
+        try {
+            const data: { name: string; value: number }[] = [
+                {
+                    name: "notResponded",
+                    value: await this.prismaService[this.modelName].count({
+                        where: { status: "notResponded" },
+                    }),
+                },
+                {
+                    name: "rejected",
+                    value: await this.prismaService[this.modelName].count({
+                        where: { status: "rejected" },
+                    }),
+                },
+                {
+                    name: "accepted",
+                    value: await this.prismaService[this.modelName].count({
+                        where: { status: "accepted" },
+                    }),
+                },
+                {
+                    name: "completed",
+                    value: await this.prismaService[this.modelName].count({
+                        where: { status: "completed" },
+                    }),
+                },
+            ];
+
+            this.loggerService.log(`Find Chart: ${JSON.stringify(data)}`);
+
+            return data;
+        } catch (error) {
+            this.loggerService.error(`Find Chart: ${error.message}`);
+            throw new InternalServerErrorException("Internal Server Error");
+        }
+    }
+
     @Override
     public async add(payload: ReportCreateDTO): Promise<ReportModel> {
         try {
