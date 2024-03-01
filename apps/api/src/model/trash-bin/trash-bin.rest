@@ -25,7 +25,7 @@ GET {{url}}/id/1/extend
 
 ###
 
-GET {{url}}/chart
+GET {{url}}/card-chart-total
 
 ###
 
