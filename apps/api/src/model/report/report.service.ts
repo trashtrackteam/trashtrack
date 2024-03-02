@@ -225,7 +225,7 @@ export class ReportService
         try {
             const today: Date = new Date();
             const data: { name: string; total: number }[] = await Promise.all(
-                [0, 1, 2, 3, 4, 5, 6].map(async (value: number): Promise<{ name: string; total: number }> => {
+                [6, 5, 4, 3, 2, 1, 0].map(async (value: number): Promise<{ name: string; total: number }> => {
                     const ltDate: Date = new Date(today);
                     ltDate.setDate(today.getDate() - value);
 
