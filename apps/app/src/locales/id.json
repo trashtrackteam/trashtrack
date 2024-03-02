@@ -22,6 +22,21 @@
                 "description": "Operator dapat login untuk melihat keluhan dan tanggapan."
             }
         },
+        "onboarding": {
+            "first": {
+                "title": "Analisis Sampah",
+                "subtitle": "TrashTrack mengubah data mentah menjadi wawasan yang dapat diimplementasikan, mendorong pendekatan pembuangan sampah yang lebih berkelanjutan dan bertanggung jawab."
+            },
+            "second": {
+                "title": "Manajemen Sampah",
+                "subtitle": "TrashTrack menyediakan solusi manajemen sampah yang komprehensif."
+            },
+            "third": {
+                "title": "Pemantauan Sampah",
+                "subtitle": "TrashTrack memberikan pemantauan real-time pada tempat sampah, memungkinkan pengumpulan dan pembuangan sampah yang lebih efisien."
+            },
+            "continue": "Lanjut Sekarang"
+        },
         "preferences": {
             "language": {
                 "title": "Ganti Bahasa",

@@ -22,6 +22,21 @@
                 "description": "Operators can log in to view complaints and responses."
             }
         },
+        "onboarding": {
+            "first": {
+                "title": "Waste Analytics",
+                "subtitle": "TrashTrack transforms raw data into actionable insights, fostering a more sustainable and responsible approach to trash disposal."
+            },
+            "second": {
+                "title": "Waste Management",
+                "subtitle": "TrashTrack provides a comprehensive trash management solution, like monitoring fill levels."
+            },
+            "third": {
+                "title": "Waste Monitoring",
+                "subtitle": "TrashTrack provides real-time monitoring of trash bins, allowing for more efficient trash collection and disposal."
+            },
+            "continue": "Continue Now"
+        },
         "preferences": {
             "language": {
                 "title": "Change Language",

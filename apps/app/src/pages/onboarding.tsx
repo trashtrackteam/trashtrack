@@ -2,10 +2,12 @@ import { IonPage, IonContent } from "@ionic/react";
 import { Button, Carousel, CarouselContent, CarouselItem } from "@trashtrack/ui";
 import { useHistory } from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay";
+import { useTranslation } from "react-i18next";
 import IMAGES from "../assets";
 
 export function Onboarding() {
     const history = useHistory();
+    const { t } = useTranslation();
 
     return (
         <IonPage>
@@ -32,11 +34,8 @@ export function Onboarding() {
                                     alt="Onboarding Icon"
                                 />
                                 <div className="text-center pt-7 px-11">
-                                    <h2 className="pb-3 font-semibold text-xl">Waste Analytics</h2>
-                                    <p className="text-slate-600 text-[10px]">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ducimus in
-                                        odio quasi tempora? Dolorum nobis molestias ut.
-                                    </p>
+                                    <h2 className="pb-3 font-semibold text-xl">{t("onboarding.first.title")}</h2>
+                                    <p className="text-slate-600 text-[10px]">{t("onboarding.first.subtitle")}</p>
                                 </div>
                             </div>
                         </CarouselItem>
@@ -48,11 +47,8 @@ export function Onboarding() {
                                     alt="Onboarding Icon"
                                 />
                                 <div className="text-center pt-7 px-11">
-                                    <h2 className="pb-3 font-semibold text-xl">Waste Management</h2>
-                                    <p className="text-slate-600 text-[10px]">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ducimus in
-                                        odio quasi tempora? Dolorum nobis molestias ut.
-                                    </p>
+                                    <h2 className="pb-3 font-semibold text-xl">{t("onboarding.second.title")}</h2>
+                                    <p className="text-slate-600 text-[10px]">{t("onboarding.second.subtitle")}</p>
                                 </div>
                             </div>
                         </CarouselItem>
@@ -64,11 +60,8 @@ export function Onboarding() {
                                     alt="Onboarding Icon"
                                 />
                                 <div className="text-center pt-7 px-11">
-                                    <h2 className="pb-3 font-semibold text-xl">Waste Monitoring</h2>
-                                    <p className="text-slate-600 text-[10px]">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ducimus in
-                                        odio quasi tempora? Dolorum nobis molestias ut.
-                                    </p>
+                                    <h2 className="pb-3 font-semibold text-xl">{t("onboarding.third.title")}</h2>
+                                    <p className="text-slate-600 text-[10px]">{t("onboarding.third.subtitle")}</p>
                                 </div>
                             </div>
                         </CarouselItem>
@@ -77,7 +70,7 @@ export function Onboarding() {
 
                 <div className="flex flex-col justify-center items-center px-12">
                     <Button className="w-full h-[46px] font-bold text-xs" onClick={() => history.push("/tabs/home")}>
-                        Lanjut Sekarang
+                        {t("onboarding.continue")}
                     </Button>
                 </div>
             </IonContent>
