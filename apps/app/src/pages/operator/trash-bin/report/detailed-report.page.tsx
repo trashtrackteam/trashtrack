@@ -279,10 +279,11 @@ export function DetailedReportPage() {
                                         <div>
                                             <Button
                                                 className="w-full mb-2"
-                                                disabled={report?.status !== EnumResponseStatus.ACCEPTED}
                                                 onClick={() => history.push(`/trash-bin/tabs/feedback/${report?.id}`)}
                                             >
-                                                {t("operator.reports.detailed.input.submitFeedback")}
+                                                {report?.status === EnumResponseStatus.COMPLETED
+                                                    ? t("operator.reports.detailed.input.view_feedback")
+                                                    : t("operator.reports.detailed.input.submitFeedback")}
                                             </Button>
                                             <div className="flex flex-row gap-2">
                                                 <ReportStatusAction

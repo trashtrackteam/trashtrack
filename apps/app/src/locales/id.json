@@ -86,7 +86,13 @@
             },
             "dashboard": {
                 "login": "Kembali ke Login",
-                "home": "Kembali ke Home"
+                "home": "Kembali ke Home",
+                "chart": {
+                    "total_trash": "Total Sampah",
+                    "total_report": "Total Laporan",
+                    "report_status": "Status Laporan",
+                    "total_trash_bin": "Total Tempat Sampah"
+                }
             },
             "user": {
                 "subtitle": "Pengguna",
@@ -243,6 +249,7 @@
                 "view_subtrashbin": "Lihat Sub Tempat Sampah",
                 "view_trash": "Lihat Sampah",
                 "view_history": "Lihat Riwayat",
+                "capacity": "Kapasitas",
                 "trash": {
                     "subtitle": "Sampah",
                     "filter_oldest": "Filter Terlama",
@@ -310,6 +317,7 @@
                         "status": "Status Laporan",
                         "photo": "Foto Laporan",
                         "submitFeedback": "Kirim Tanggapan",
+                        "view_feedback": "Tanggapan",
                         "actions": {
                             "title": "Tindakan Laporan",
                             "loading": "Loading...",
