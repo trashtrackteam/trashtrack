@@ -13,6 +13,7 @@ import { useState } from "react";
 import Fuse from "fuse.js";
 import { useGetSubTrashbins } from "./get-subtrashbins.query";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 export interface InterfaceSubTrashbin {
     id: number;
@@ -20,6 +21,7 @@ export interface InterfaceSubTrashbin {
     name: string;
     maxCapacity: number;
     currentCapacity: number;
+    createdAt: string;
 }
 
 export function SubTrashbinPage() {
@@ -44,13 +46,22 @@ export function SubTrashbinPage() {
         threshold: 0.4,
     };
 
+    function filterAndSortLatest(data: InterfaceSubTrashbin[]) {
+        return data
+            .filter((subtrashbin) => dayjs(subtrashbin.createdAt))
+            .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    }
+
     const filteredDataForId = !isLoading
         ? subtrashBinData.data.filter(
               (subtrashbin: InterfaceSubTrashbin) => subtrashbin.trashBinId === Number(trashbin_id)
           )
         : [];
 
-    const fuse = new Fuse(!isLoading ? (filteredDataForId as InterfaceSubTrashbin[]) : [], fuseOptions);
+    const fuse = new Fuse(
+        !isLoading ? (filterAndSortLatest(filteredDataForId) as InterfaceSubTrashbin[]) : [],
+        fuseOptions
+    );
 
     const filteredData: InterfaceSubTrashbin[] =
         !isLoading && searchTerm === "" ? filteredDataForId : fuse.search(searchTerm).map((result) => result.item);
