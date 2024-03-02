@@ -117,8 +117,9 @@ export function DetailedSubTrashbinPage() {
 
     const capacity =
         subtrashbin?.currentCapacity === 0
-            ? 0
-            : 100 - (((subtrashbin?.currentCapacity as number) / (subtrashbin?.maxCapacity ?? 0)) as number) * 100;
+            ? "0.00% / 100%"
+            : (100 - ((subtrashbin?.currentCapacity as number) / (subtrashbin?.maxCapacity ?? 0)) * 100).toFixed(2) +
+              "% / 100%";
 
     console.log("capacity", capacity);
     console.log("max capacity", subtrashbin?.maxCapacity);
@@ -168,7 +169,7 @@ export function DetailedSubTrashbinPage() {
                                             <Label htmlFor="openCount" className="text-xs">
                                                 {t("operator.subtrashbin.detailed.capacity")}
                                             </Label>
-                                            <Input readOnly type="text" id="openCount" value={`${capacity}% / 100%`} />
+                                            <Input readOnly type="text" id="openCount" value={`${capacity}`} />
                                         </div>
                                     </div>
                                     <Separator className="my-4" />

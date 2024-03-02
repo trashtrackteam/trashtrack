@@ -120,7 +120,14 @@ export function TrashPage() {
                                   <CardContent className="pt-4">
                                       <div className="flex flex-col gap-2">
                                           <p className="text-xs text-left">
-                                              {subtrashbin.currentCapacity} / {subtrashbin.maxCapacity}
+                                              {subtrashbin?.currentCapacity === 0
+                                                  ? "0.00% / 100%"
+                                                  : (
+                                                        100 -
+                                                        ((subtrashbin?.currentCapacity as number) /
+                                                            (subtrashbin?.maxCapacity ?? 0)) *
+                                                            100
+                                                    ).toFixed(2) + "% / 100%"}
                                           </p>
                                           <p className="text-xs text-left">
                                               {dayjs(subtrashbin.createdAt).format("YYYY-MM-DD HH:mm:ss")}

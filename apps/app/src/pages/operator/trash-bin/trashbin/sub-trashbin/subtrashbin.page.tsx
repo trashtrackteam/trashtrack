@@ -147,12 +147,13 @@ export function SubTrashbinPage() {
                                         <p className="text-xs text-left mb-2">
                                             {t("operator.subtrashbin.capacity")}:{" "}
                                             {subtrashbin?.currentCapacity === 0
-                                                ? 0
-                                                : 100 -
-                                                  (((subtrashbin?.currentCapacity as number) /
-                                                      (subtrashbin?.maxCapacity ?? 0)) as number) *
-                                                      100}
-                                            % / 100%
+                                                ? "0.00% / 100%"
+                                                : (
+                                                      100 -
+                                                      ((subtrashbin?.currentCapacity as number) /
+                                                          (subtrashbin?.maxCapacity ?? 0)) *
+                                                          100
+                                                  ).toFixed(2) + "% / 100%"}
                                         </p>
                                         <div className="flex flex-col gap-4">
                                             <Button
