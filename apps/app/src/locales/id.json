@@ -77,6 +77,10 @@
                     "title": "Selamat datang, silakan login",
                     "submit": "Login",
                     "back": "Kembali",
+                    "placeholder": {
+                        "username": "Username",
+                        "password": "Kata Sandi"
+                    },
                     "error": {
                         "title": "Operator Login",
                         "description": "Username atau password salah, silakan coba lagi.",

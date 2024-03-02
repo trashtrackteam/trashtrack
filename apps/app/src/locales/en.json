@@ -77,6 +77,10 @@
                     "title": "Welcome, please log in",
                     "submit": "Login",
                     "back": "Back",
+                    "placeholder": {
+                        "username": "Username",
+                        "password": "Password"
+                    },
                     "error": {
                         "title": "Operator Login",
                         "description": "Invalid username or password, please try again.",

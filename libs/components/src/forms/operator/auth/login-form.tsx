@@ -123,7 +123,7 @@ export function LoginForm() {
                                 <Input
                                     disabled={isPending}
                                     type="text"
-                                    placeholder="totallynotaopeator123"
+                                    placeholder={t("operator.form.login.placeholder.username")}
                                     {...field}
                                 />
                             </FormControl>
@@ -141,7 +141,7 @@ export function LoginForm() {
                                 <Input
                                     disabled={isPending}
                                     type="password"
-                                    placeholder="totallynotapassword123"
+                                    placeholder={t("operator.form.login.placeholder.password")}
                                     {...field}
                                 />
                             </FormControl>
