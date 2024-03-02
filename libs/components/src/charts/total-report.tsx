@@ -29,18 +29,8 @@ export function AreaChartTotalReport() {
     }
 
     return (
-        <ResponsiveContainer width="100%" height={600}>
-            <AreaChart
-                width={500}
-                height={400}
-                data={chartData.data}
-                margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                }}
-            >
+        <ResponsiveContainer className="p-2 m-0" width="100%" height={200}>
+            <AreaChart data={chartData.data}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
