@@ -84,7 +84,13 @@ const renderActiveShape = (props) => {
             />
             <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
             <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-            <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${name}`}</text>
+            <text
+                x={ex + (cos >= 0 ? 1 : -1) * 12}
+                y={ey}
+                fontSize={10}
+                textAnchor={textAnchor}
+                fill="#333"
+            >{`${name}`}</text>
         </g>
     );
 };
@@ -129,18 +135,9 @@ export function PieChartReportStatus() {
     console.log("chartData", chartData.data);
 
     return (
-        <ResponsiveContainer width="100%" height={600}>
-            <PieChart
-                width={500}
-                height={400}
-                margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                }}
-            >
-                <Legend layout="horizontal" verticalAlign="top" align="center" />
+        <ResponsiveContainer className="p-2 m-0" width="100%" height={400}>
+            <PieChart>
+                <Legend layout="horizontal" fontSize={12} verticalAlign="top" align="center" />
                 <Pie
                     activeIndex={activeIndex}
                     activeShape={renderActiveShape}
@@ -148,6 +145,7 @@ export function PieChartReportStatus() {
                     label
                     data={chartData.data}
                     dataKey="value"
+                    fontSize={10}
                     cx="50%"
                     cy="50%"
                     outerRadius={60}

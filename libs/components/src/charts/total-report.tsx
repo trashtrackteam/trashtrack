@@ -32,7 +32,7 @@ export function AreaChartTotalReport() {
         <ResponsiveContainer className="p-2 m-0" width="100%" height={200}>
             <AreaChart data={chartData.data}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis fontSize={10} dataKey="name" />
                 <YAxis />
                 <Tooltip />
                 <Area type="monotone" dataKey="total" stroke="#8884d8" fill="#8884d8" />
