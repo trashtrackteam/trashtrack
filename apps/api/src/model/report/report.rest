@@ -49,6 +49,10 @@ GET {{url}}/pie-chart-status
 
 ###
 
+GET {{url}}/area-chart-total
+
+###
+
 GET {{url}}/nik/64711092301923/extend
 
 ###

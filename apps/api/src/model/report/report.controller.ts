@@ -193,6 +193,25 @@ export class ReportController
         }
     }
 
+    @Get("area-chart-total")
+    public async findAreaChartTotal(): Promise<ResponseFormatInterface<{ name: string; total: number }[]>> {
+        try {
+            const response: ResponseFormatInterface<{ name: string; total: number }[]> = formatResponse<
+                {
+                    name: string;
+                    total: number;
+                }[]
+            >(true, 200, "Area Chart Total Found", await this.modelService.findAreaChartTotal());
+
+            this.loggerService.log(`Find Area Chart Total: ${JSON.stringify(response)}`);
+
+            return response;
+        } catch (error) {
+            this.loggerService.error(`Find Area Chart Total: ${error.message}`);
+            return formatResponse<null>(false, 500, error.message, null);
+        }
+    }
+
     @Override
     public async change(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
