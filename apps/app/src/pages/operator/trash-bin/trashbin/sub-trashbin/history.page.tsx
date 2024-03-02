@@ -26,7 +26,7 @@ export function TrashPage() {
     const history = useHistory();
     const queryClient = useQueryClient();
     const { trashbin_id, subtrashbin_id } = useParams<{ trashbin_id: string; subtrashbin_id: string }>();
-    const [filterType, setFilterType] = useState<"latest" | "oldest" | "none">("none");
+    const [filterType, setFilterType] = useState<"latest" | "oldest" | "none">("latest");
 
     const { data: historyData, isLoading, isFetching, isError, error, refetch } = useGetHistories();
 
