@@ -1,5 +1,5 @@
 import React from "react";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Sector } from "recharts";
 import { CapacitorHttp } from "@capacitor/core";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "@trashtrack/utils";
@@ -27,24 +27,6 @@ export function AreaChartTotalReport() {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-
-    // const appendDummyData = () => {
-    //     const data = chartData.data;
-    //     const today = dayjs(); // DD-M-YYYY
-    //     const days = 30;
-    //     const dummyData = [];
-    //     for (let i = 0; i < days; i++) {
-    //         const date = today.subtract(i, "day").format("DD-M-YYYY");
-    //         if (!data.find((d) => d.name === date)) {
-    //             dummyData.push({ name: date, total: Math.floor(Math.random() * 19) + 1 });
-    //         }
-    //     }
-    //     return [...data, ...dummyData];
-    // };
-
-    // if (chartData.data.length < 30) {
-    //     chartData.data = appendDummyData();
-    // }
 
     return (
         <ResponsiveContainer width="100%" height={600}>

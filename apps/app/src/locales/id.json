@@ -89,7 +89,9 @@
                 "home": "Kembali ke Home",
                 "chart": {
                     "total_trash": "Total Sampah",
-                    "total_report": "Total Laporan"
+                    "total_report": "Total Laporan",
+                    "report_status": "Status Laporan",
+                    "total_trash_bin": "Total Tempat Sampah"
                 }
             },
             "user": {

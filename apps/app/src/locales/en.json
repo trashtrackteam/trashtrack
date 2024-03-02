@@ -89,7 +89,9 @@
                 "home": "Back to Home",
                 "chart": {
                     "total_trash": "Total Trash",
-                    "total_report": "Total Report"
+                    "total_report": "Total Report",
+                    "report_status": "Report Status",
+                    "total_trash_bin": "Total Trash Bin"
                 }
             },
             "user": {

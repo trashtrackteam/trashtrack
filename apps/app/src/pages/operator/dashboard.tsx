@@ -1,5 +1,12 @@
 import { IonContent, IonPage } from "@ionic/react";
-import { Card, CardContent, Button, AreaChartTotalTrash, AreaChartTotalReport } from "@trashtrack/ui";
+import {
+    Card,
+    CardContent,
+    Button,
+    AreaChartTotalTrash,
+    AreaChartTotalReport,
+    PieChartReportStatus,
+} from "@trashtrack/ui";
 import { OperatorContext } from "@trashtrack/ui";
 import { t } from "i18next";
 import { useContext } from "react";
@@ -21,14 +28,20 @@ export function OperatorDashboard() {
                 <div className="flex flex-col pt-8 gap-4">
                     <Card>
                         <CardContent className="pt-2 pb-2 pl-0 pr-0">
-                            <p className="pl-6 pt-4 mb-4 text-base">{t("operator.dashboard.chart.total_report")}</p>
-                            <AreaChartTotalReport />
+                            <p className="pl-6 pt-4 mb-4 text-base">{t("operator.dashboard.chart.total_trash")}</p>
+                            <AreaChartTotalTrash />
                         </CardContent>
                     </Card>
                     <Card>
                         <CardContent className="pt-2 pb-2 pl-0 pr-0">
-                            <p className="pl-6 pt-4 mb-4 text-base">{t("operator.dashboard.chart.total_trash")}</p>
-                            <AreaChartTotalTrash />
+                            <p className="pl-6 pt-4 mb-4 text-base">{t("operator.dashboard.chart.report_status")}</p>
+                            <PieChartReportStatus />
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardContent className="pt-2 pb-2 pl-0 pr-0">
+                            <p className="pl-6 pt-4 mb-4 text-base">{t("operator.dashboard.chart.total_report")}</p>
+                            <AreaChartTotalReport />
                         </CardContent>
                     </Card>
 

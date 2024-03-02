@@ -39,3 +39,4 @@ export * from "./charts/chart";
 
 export * from "./charts/total-trash";
 export * from "./charts/total-report";
+export * from "./charts/report-status";
