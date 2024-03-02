@@ -13,11 +13,15 @@ GET {{url}}/id/1
 
 ###
 
+GET {{url}}/area-chart-total
+
+###
+
 POST {{url}}
 Content-Type: application/json
 
 {
-    "subTrashBinId": 1
+    "subTrashBinId": 4
 }
 
 ###
