@@ -17,6 +17,8 @@ import { CapacitorHttp } from "@capacitor/core";
 import { queryClient } from "../../../../../main";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { EnumResponseStatus, InterfaceReport } from "../reports.page";
+import { useGetReportsWithTrashBins } from "../get-trash-and-report.query";
 
 export interface InterfaceFeedback {
     id: number;
@@ -99,6 +101,17 @@ export function FeedbackPage() {
     const [isOpen, setIsOpen] = useState(false);
     const { t } = useTranslation();
 
+    const { reports, trashBins, isReportsLoading, isTrashBinsLoading } = useGetReportsWithTrashBins();
+    let filter_report: InterfaceReport = !isReportsLoading
+        ? reports.data.find((report: InterfaceReport) => report.id === Number(report_id))
+        : { id: 0, trashBinId: 0, status: "", createdAt: "" };
+
+    if (isReportsLoading || isTrashBinsLoading) {
+        console.log("Loading...");
+    } else {
+        filter_report = reports.data.find((report: InterfaceReport) => report.id === Number(report_id));
+    }
+
     const { data: feedbackData, isError, error, isLoading, refetch, isRefetching } = useGetFeedbacks();
     const filteredData = !isLoading
         ? feedbackData.data.filter((feedback: InterfaceFeedback) => feedback.reportId === Number(report_id))
@@ -123,6 +136,7 @@ export function FeedbackPage() {
                     <div className="flex flex-col gap-2">
                         <Button
                             className="w-full"
+                            disabled={filter_report?.status === EnumResponseStatus.COMPLETED ? true : false}
                             onClick={() => history.push(`/trash-bin/tabs/feedback/${report_id}/create`)}
                         >
                             {t("operator.reports.feedback.delete.create")}
@@ -179,6 +193,11 @@ export function FeedbackPage() {
                                             <Button
                                                 className="w-full mt-4"
                                                 variant="destructive"
+                                                disabled={
+                                                    filter_report?.status === EnumResponseStatus.COMPLETED
+                                                        ? true
+                                                        : false
+                                                }
                                                 onClick={() => {
                                                     setIsOpen(true);
                                                 }}
