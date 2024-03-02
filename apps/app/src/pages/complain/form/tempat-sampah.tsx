@@ -6,6 +6,7 @@ import Fuse from "fuse.js";
 
 import { useTrashBinQuery } from "../../../queries/get-trash-bin-query";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 interface TrashBin {
     id: number;
@@ -13,6 +14,7 @@ interface TrashBin {
     description: string;
     latitude: number;
     longitude: number;
+    createdAt: string;
 }
 
 export function ComplainFormTempatSampah() {
@@ -26,11 +28,19 @@ export function ComplainFormTempatSampah() {
         threshold: 0.4,
     };
 
-    const fuse = new Fuse(!isLoading ? (data.data as TrashBin[]) : [], fuseOptions);
+    function filterAndSortLatest(data: TrashBin[]) {
+        return data
+            .filter((trashbin) => dayjs(trashbin.createdAt))
+            .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    }
+
+    const fuse = new Fuse(!isLoading ? (filterAndSortLatest(data.data) as TrashBin[]) : [], fuseOptions);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filteredData: any[] =
-        !isLoading && searchTerm === "" ? data.data : fuse.search(searchTerm).map((result) => result.item);
+        !isLoading && searchTerm === ""
+            ? filterAndSortLatest(data.data)
+            : fuse.search(searchTerm).map((result) => result.item);
 
     return (
         <IonPage>

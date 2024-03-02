@@ -13,6 +13,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Fuse from "fuse.js";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 export interface InterfaceTrashbin {
     id: number;
@@ -41,14 +42,25 @@ export function TrashBinPage() {
         refetch();
     });
 
+    function filterAndSortLatest(data: InterfaceTrashbin[]) {
+        return data
+            .filter((trashbin) => dayjs(trashbin.createdAt))
+            .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    }
+
     const fuseOptions = {
         keys: ["name"],
         threshold: 0.4,
     };
-    const fuse = new Fuse(!isLoading ? (trashBinData.data as InterfaceTrashbin[]) : [], fuseOptions);
+    const fuse = new Fuse(
+        !isLoading ? (filterAndSortLatest(trashBinData.data) as InterfaceTrashbin[]) : [],
+        fuseOptions
+    );
 
     const filteredData: InterfaceTrashbin[] =
-        !isLoading && searchTerm === "" ? trashBinData.data : fuse.search(searchTerm).map((result) => result.item);
+        !isLoading && searchTerm === ""
+            ? filterAndSortLatest(trashBinData.data)
+            : fuse.search(searchTerm).map((result) => result.item);
 
     function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
         queryClient.invalidateQueries({

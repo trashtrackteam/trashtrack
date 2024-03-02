@@ -86,7 +86,13 @@
             },
             "dashboard": {
                 "login": "Back to Login",
-                "home": "Back to Home"
+                "home": "Back to Home",
+                "chart": {
+                    "total_trash": "Total Trash",
+                    "total_report": "Total Report",
+                    "report_status": "Report Status",
+                    "total_trash_bin": "Total Trash Bin"
+                }
             },
             "user": {
                 "subtitle": "User",
@@ -243,6 +249,7 @@
                 "view_subtrashbin": "View Sub Trash Bin",
                 "view_trash": "View Trash",
                 "view_history": "View History",
+                "capacity": "Capacity",
                 "trash": {
                     "subtitle": "Trash",
                     "filter_oldest": "Filter by Oldest",
@@ -310,6 +317,7 @@
                         "status": "Report Status",
                         "photo": "Report Photo",
                         "submitFeedback": "Submit Feedback",
+                        "view_feedback": "Feedback",
                         "action": "Actions",
                         "actions": {
                             "title": "Report Actions",
