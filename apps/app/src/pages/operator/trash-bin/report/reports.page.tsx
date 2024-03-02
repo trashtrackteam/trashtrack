@@ -11,6 +11,7 @@ import { useState } from "react";
 import { InterfaceResult, useGetReportsWithTrashBins } from "./get-trash-and-report.query";
 import Fuse from "fuse.js";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 export enum EnumResponseStatus {
     NOT_RESPONDED = "notResponded",
@@ -105,13 +106,21 @@ export function ReportsPage() {
         threshold: 0.4,
     };
 
+    function filterAndSortLatest(data: InterfaceReport[]) {
+        return data
+            .filter((report) => dayjs(report.createdAt))
+            .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    }
+
     let data: InterfaceResult[] = [];
     const fuse = new Fuse(data, fuseOptions);
 
     if (isReportsLoading || isTrashBinsLoading) {
         console.log("Loading...");
     } else {
-        data = reports.data.map((re: InterfaceReport) => {
+        const filter_by_latest_first = filterAndSortLatest(reports.data);
+
+        data = filter_by_latest_first.map((re: InterfaceReport) => {
             const trashBin = trashBins.data.find((tb: InterfaceTrashbin) => tb.id === re.trashBinId);
             return {
                 ...re,
