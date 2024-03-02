@@ -310,6 +310,7 @@
                         "status": "Report Status",
                         "photo": "Report Photo",
                         "submitFeedback": "Submit Feedback",
+                        "view_feedback": "Feedback",
                         "action": "Actions",
                         "actions": {
                             "title": "Report Actions",

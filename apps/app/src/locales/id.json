@@ -310,6 +310,7 @@
                         "status": "Status Laporan",
                         "photo": "Foto Laporan",
                         "submitFeedback": "Kirim Tanggapan",
+                        "view_feedback": "Tanggapan",
                         "actions": {
                             "title": "Tindakan Laporan",
                             "loading": "Loading...",
