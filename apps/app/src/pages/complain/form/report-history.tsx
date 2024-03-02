@@ -16,6 +16,7 @@ import { EnumResponseStatus, InterfaceReport } from "../../operator/trash-bin/re
 import { useGetTrashBinById } from "../../operator/trash-bin/report/get-trash-bin.query";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
+import dayjs from "dayjs";
 
 function ReportStatus({ status }: { status: EnumResponseStatus }) {
     return (
@@ -105,6 +106,12 @@ export function ComplainReportHistory() {
         refetch();
     });
 
+    function filterAndSortLatest(data: InterfaceReport[]) {
+        return data
+            .filter((report) => dayjs(report.createdAt))
+            .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    }
+
     function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
         queryClient.invalidateQueries({
             queryKey: ["getRepgetReportByNikorts", String(nik)],
@@ -113,6 +120,8 @@ export function ComplainReportHistory() {
         refetch();
         event.detail.complete();
     }
+
+    const sortedData = reportData ? filterAndSortLatest(reportData.data) : [];
 
     return (
         <IonPage>
@@ -153,7 +162,7 @@ export function ComplainReportHistory() {
                             </CardHeader>
                         </Card>
                     ) : (
-                        reportData.data.map((report: InterfaceReport) => (
+                        sortedData.map((report: InterfaceReport) => (
                             <Card
                                 onClick={() => history.push(`/complain/tabs/form/report-history/feedback/${report.id}`)}
                                 key={report.id}
