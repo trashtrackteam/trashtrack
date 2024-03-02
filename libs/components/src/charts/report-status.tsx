@@ -137,7 +137,14 @@ export function PieChartReportStatus() {
     return (
         <ResponsiveContainer className="p-2 m-0" width="100%" height={400}>
             <PieChart>
-                <Legend layout="horizontal" fontSize={12} verticalAlign="top" align="center" />
+                <Legend
+                    layout="horizontal"
+                    wrapperStyle={{
+                        fontSize: 8,
+                    }}
+                    verticalAlign="top"
+                    align="center"
+                />
                 <Pie
                     activeIndex={activeIndex}
                     activeShape={renderActiveShape}
@@ -145,7 +152,7 @@ export function PieChartReportStatus() {
                     label
                     data={chartData.data}
                     dataKey="value"
-                    fontSize={10}
+                    fontSize={8}
                     cx="50%"
                     cy="50%"
                     outerRadius={60}
