@@ -86,7 +86,11 @@
             },
             "dashboard": {
                 "login": "Kembali ke Login",
-                "home": "Kembali ke Home"
+                "home": "Kembali ke Home",
+                "chart": {
+                    "total_trash": "Total Sampah",
+                    "total_report": "Total Laporan"
+                }
             },
             "user": {
                 "subtitle": "Pengguna",

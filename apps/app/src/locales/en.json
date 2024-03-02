@@ -86,7 +86,11 @@
             },
             "dashboard": {
                 "login": "Back to Login",
-                "home": "Back to Home"
+                "home": "Back to Home",
+                "chart": {
+                    "total_trash": "Total Trash",
+                    "total_report": "Total Report"
+                }
             },
             "user": {
                 "subtitle": "User",

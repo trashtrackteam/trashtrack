@@ -36,3 +36,6 @@ export * from "./forms/operator/trash-bin/change-trashbin.form";
 export * from "./forms/operator/trash-bin/change-subtrashbin.form";
 
 export * from "./charts/chart";
+
+export * from "./charts/total-trash";
+export * from "./charts/total-report";
