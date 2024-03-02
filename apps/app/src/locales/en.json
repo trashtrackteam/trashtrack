@@ -243,6 +243,7 @@
                 "view_subtrashbin": "View Sub Trash Bin",
                 "view_trash": "View Trash",
                 "view_history": "View History",
+                "capacity": "Capacity",
                 "trash": {
                     "subtitle": "Trash",
                     "filter_oldest": "Filter by Oldest",

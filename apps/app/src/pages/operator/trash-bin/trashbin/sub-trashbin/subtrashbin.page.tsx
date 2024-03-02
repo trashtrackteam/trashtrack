@@ -143,7 +143,17 @@ export function SubTrashbinPage() {
                             <Card key={subtrashbin.id} className="flex flex-col mt-4">
                                 <CardContent className="pt-4">
                                     <div className="flex flex-col gap-2">
-                                        <p className="text-xs text-left">{subtrashbin.name}</p>
+                                        <p className="text-sm text-left">{subtrashbin.name}</p>
+                                        <p className="text-xs text-left mb-2">
+                                            {t("operator.subtrashbin.capacity")}:{" "}
+                                            {subtrashbin?.currentCapacity === 0
+                                                ? 0
+                                                : 100 -
+                                                  (((subtrashbin?.currentCapacity as number) /
+                                                      (subtrashbin?.maxCapacity ?? 0)) as number) *
+                                                      100}
+                                            % / 100%
+                                        </p>
                                         <div className="flex flex-col gap-4">
                                             <Button
                                                 className="w-full"
