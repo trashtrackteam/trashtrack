@@ -140,6 +140,7 @@ export function PieChartReportStatus() {
                     bottom: 0,
                 }}
             >
+                <Legend layout="horizontal" verticalAlign="top" align="center" />
                 <Pie
                     activeIndex={activeIndex}
                     activeShape={renderActiveShape}
