@@ -34,7 +34,7 @@ Berikut adalah tech stack yang digunakan dalam proyek ini:
 - **Frontend**: <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB"> <img src="https://img.shields.io/badge/Ionic-%233880FF.svg?style=flat&logo=Ionic&logoColor=white"> <img src="https://img.shields.io/badge/shadcn/ui-%23000000.svg?style=flat&logo=shadcnui&logoColor=white"> <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white">
 - **Backend**: <img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white"> <img src="https://img.shields.io/badge/prisma-3982CE?style=flat&logo=Prisma&logoColor=white"> <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white">
 - **Language**: <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white"> <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=f&logo=c%2B%2B&logoColor=white"> <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=f&logo=openjdk&logoColor=white">
-- **IoT**: <img src="https://img.shields.io/badge/espressif-E7352C.svg?style=flat&logo=espressif&logoColor=white">
+- **Internet of Thing**: <img src="https://img.shields.io/badge/espressif-E7352C.svg?style=flat&logo=espressif&logoColor=white">
 
 ## Lisensi
 
