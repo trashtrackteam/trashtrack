@@ -22,11 +22,22 @@
 
 > Terhitung mulai **Juli 2024**, TrashTrack telah tidak lagi aktif dan tidak menerima kontribusi baru. Repositori ini tetap terbuka untuk umum dan dapat digunakan sebagai referensi atau proyek turunan.
 
-Lihat **[CONTRIBUTING.md](CONTRIBUTING.md)** untuk informasi lebih lanjut tentang cara berkontribusi pada proyek ini, atau cara menjalankan proyek ini di lokal Anda, tersedia juga panduan untuk pengembangan dan kontribusi.
+Lihat **[CONTRIBUTING.md](CONTRIBUTING.md)** untuk informasi lebih lanjut tentang cara berkontribusi pada proyek ini, atau cara menjalankan proyek ini di lokal Anda. Tersedia juga canary build untuk aplikasi mobile TrashTrack yang dapat diunduh di **[Releases](https://github.com/trashtrackteam/trashtrack/releases)** untuk pengujian dan evaluasi.
 
 ## Arsitektur
 
-Repositori ini distrukturkan menggunakan strategi monorepo, yang berarti semua kode dan konfigurasi proyek ditempatkan dalam satu repositori, menggunakan [Nx](https://nx.dev/) sebagai alat manajemen monorepo.
+Repositori ini distrukturkan menggunakan strategi monorepo menggunakan [Nx](https://nx.dev/) sebagai alat manajemen monorepo. Struktur repositori ini terdiri dari beberapa package yang memiliki tanggung jawab dan peran yang berbeda. Berikut adalah struktur repositori TrashTrack:
+
+```bash
+apps
+├── api # Restful API server menggunakan NestJS
+├── app # Web aplikasi menggunakan React dan Capacitor sebagai mobile runtime
+└── iot # C++ codebase untuk berinteraksi dengan sensor dan perangkat IoT
+libs
+├── common # Utilitas dan tipedata yang digunakan bersama
+├── components # Komponen UI yang digunakan di aplikasi
+├── utils # Utilitas dan fungsi bantuan
+```
 
 Berikut adalah tech stack yang digunakan dalam proyek ini:
 
@@ -35,6 +46,7 @@ Berikut adalah tech stack yang digunakan dalam proyek ini:
 - **Backend**: <img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white"> <img src="https://img.shields.io/badge/prisma-3982CE?style=flat&logo=Prisma&logoColor=white"> <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white">
 - **Language**: <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white"> <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=f&logo=c%2B%2B&logoColor=white"> <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=f&logo=openjdk&logoColor=white">
 - **Internet of Thing**: <img src="https://img.shields.io/badge/espressif-E7352C.svg?style=flat&logo=espressif&logoColor=white">
+
 
 ## Lisensi
 
