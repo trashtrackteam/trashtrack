@@ -1,35 +1,44 @@
-[![Build Android](https://github.com/trashtrack-team/trashtrack/actions/workflows/release-android.yml/badge.svg)](https://github.com/trashtrack-team/trashtrack/actions/workflows/release-android.yml)
+<div align="center">
 
-## TrashTrack
+<img src=".github/assets/TrashTrack.png" align="center" width="120px" height="120px">
 
-> TrashTrack sedang dalam pengembangan aktif sebagai minimum viable product (MVP) untuk lomba "IoT & Analytic Data Smart City" oleh Diskominfo Kota Balikpapan dan bukan aplikasi produksi.
+<h3>TrashTrack</h3>
+<p>Sistem pembuangan sampah pintar dengan IoT dan data analisis.<p>
 
-TrashTrack adalah sistem tempat pembuangan sampah pintar yang menggunakan teknologi Internet of Things (IoT) dan analisis data untuk memonitor dan memilah sampah secara efisien dan real-time.
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/trashtrackteam/trashtrack/release-android.yml?style=flat&logo=android&label=Canary%20Build)
+![GitHub deployments](https://img.shields.io/github/deployments/trashtrackteam/trashtrack/production?style=flat&logo=railway&label=Production%20API)
 
-TrashTrack memungkinkan pengguna untuk menyampaikan keluhan dan masukan terkait tempat pembuangan sampah, serta jika sebagai operator dapat memantau dan mengelola keluhan dan masukan tersebut dan melihat analisis data sampah yang terkumpul melalui dashboard. TrashTrack tidak tersedia di Google Play Store. Anda dapat mengunduh dan menginstal aplikasi ini secara manual melalui file APK yang tersedia di riwayat rilis di **[sini](https://github.com/trashtrack-team/trashtrack/releases/latest)**.
+</div>
 
-Lihat **[CONTRIBUTING.md](CONTRIBUTING.md)** untuk informasi lebih lanjut tentang menjalankan proyek ini secara lokal dan berkontribusi jika anda mau.
+---
 
-## Arsitektur dan Teknologi
+**TrashTrack** adalah sistem tempat pembuangan sampah pintar yang menggunakan teknologi Internet of Things (IoT) dan analisis data untuk memonitor dan memilah sampah secara efisien dan real-time. Melalui aplikasi mobile, pengguna dapat melihat informasi tempat pembuangan sampah terdekat, melaporkan keluhan terkait tempat pembuangan sampah, dan melihat analisis data sampah yang terkumpul.
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+**TrashTrack** memungkinkan pengguna untuk menyampaikan keluhan dan masukan terkait tempat pembuangan sampah, serta jika sebagai operator dapat memantau dan mengelola keluhan dan masukan tersebut dan melihat analisis data sampah yang terkumpul melalui dashboard.
 
-![Espressif](https://img.shields.io/badge/espressif-E7352C.svg?style=for-the-badge&logo=espressif&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Capacitor](https://img.shields.io/badge/Capacitor-black.svg?style=for-the-badge&logo=capacitor&logoColor=01bdfe)
-![Ionic](https://img.shields.io/badge/Ionic-%233880FF.svg?style=for-the-badge&logo=Ionic&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
-![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-![Nx](https://img.shields.io/badge/nx-143055?style=for-the-badge&logo=nx&logoColor=white)
-![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+---
+
+## Kontribusi
+
+> Terhitung mulai **Juli 2024**, TrashTrack telah tidak lagi aktif dan tidak menerima kontribusi baru. Repositori ini tetap terbuka untuk umum dan dapat digunakan sebagai referensi atau proyek turunan.
+
+Lihat **[CONTRIBUTING.md](CONTRIBUTING.md)** untuk informasi lebih lanjut tentang cara berkontribusi pada proyek ini, atau cara menjalankan proyek ini di lokal Anda, tersedia juga panduan untuk pengembangan dan kontribusi.
+
+## Arsitektur
+
+Repositori ini distrukturkan menggunakan strategi monorepo, yang berarti semua kode dan konfigurasi proyek ditempatkan dalam satu repositori, menggunakan [Nx](https://nx.dev/) sebagai alat manajemen monorepo.
+
+Berikut adalah tech stack yang digunakan dalam proyek ini:
+
+- **Mobile**: <img src="https://img.shields.io/badge/capacitor-black.svg?style=flat&logo=capacitor&logoColor=01bdfe">
+- **Frontend**: <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB"> <img src="https://img.shields.io/badge/Ionic-%233880FF.svg?style=flat&logo=Ionic&logoColor=white"> <img src="https://img.shields.io/badge/shadcn/ui-%23000000.svg?style=flat&logo=shadcnui&logoColor=white"> <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white">
+- **Backend**: <img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white"> <img src="https://img.shields.io/badge/prisma-3982CE?style=flat&logo=Prisma&logoColor=white"> <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white">
+- **Language**: <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white"> <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=f&logo=c%2B%2B&logoColor=white"> <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=f&logo=openjdk&logoColor=white">
+- **IoT**: <img src="https://img.shields.io/badge/espressif-E7352C.svg?style=flat&logo=espressif&logoColor=white">
 
 ## Lisensi
 
-Basis kode sumber ini dilisensikan di bawah MIT License, lihat **[LICENSE](LICENSE)** untuk informasi lebih lanjut.
+Basis kode dalam repositori ini dirilis di bawah lisensi MIT. Lihat **[LICENSE.md](LICENSE)** untuk informasi lebih lanjut. Proyek ini juga menggunakan beberapa package pihak ketiga yang mungkin memiliki lisensi yang berbeda. Semua hak cipta dilindungi oleh masing-masing pemiliknya.
+
+
+Copyright (c) 2024 TrashTrack Team and/or contributors. All rights reserved.
